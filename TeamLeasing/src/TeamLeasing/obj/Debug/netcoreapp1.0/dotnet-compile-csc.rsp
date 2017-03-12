@@ -195,4 +195,5 @@
 -resource:"D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\obj\Debug\netcoreapp1.0\TeamLeasingdotnet-compile.deps.json",TeamLeasing.deps.json
 "D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Program.cs"
 "D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Startup.cs"
+"D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Controllers\ContactController.cs"
 "D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Controllers\HomeController.cs"
