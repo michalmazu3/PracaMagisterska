@@ -80,5 +80,64 @@ color: white;
 #banner img{
   margin: 0 auto;
 }
-#search-jobs{
-padding: 30px;}
+.search-jobs{
+padding: 30px;
+}
+#sidebar h4{
+	text-align: center;
+}
+#job-item{
+	border-bottom: groove;
+	 
+}
+#job-item #title {
+	width: 80%;
+	float: left;
+	padding: 10px 0 20px 30px;
+ }
+#job-item #price {
+	width: 20%;
+	float: left;
+	padding: 10px 30px 0 0;
+	text-align: right;
+ }
+#job-item p{
+	width: 80%;
+	padding: 00px 0px 0 30px;
+}
+
+#content #title {
+	width: 80%;
+	float: left;
+	padding: 10px 0 20px 30px;
+ }
+#content #price {
+	width: 20%;
+	float: left;
+	padding: 10px 30px 0 0;
+	text-align: right;
+ }
+#header-container{
+	height: 90px;
+	border-bottom: solid;
+}
+
+#job-description{
+border-bottom: solid;
+	padding-bottom: 20px;
+} 
+#job-detail{
+	border-bottom: solid;
+}
+
+#job-detail   td{
+	padding: 5px;
+}
+
+#aplly-button{
+	padding: 20px 0;
+	text-align:center;
+}
+#aplly-button button{
+	padding: 20px 50px;
+}
