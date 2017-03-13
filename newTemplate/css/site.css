@@ -1,0 +1,84 @@
+body {
+	 width: 1280px;
+	margin: 0 auto;
+}
+.starter-template {
+  padding: 0px 15px;
+  text-align: center;
+}
+
+.image-container{
+	margin: 0 auto;
+	background-image: url(../image/home_photo.jpg);
+	width: auto;
+	height: 853px;
+	background-repeat: no-repeat;
+     background-position: center; 
+
+}
+.image-container .job-header{
+	padding:300px 0px 0px 200px;
+	float: left;
+	/*! clear: both; */
+}
+
+.image-container .profile-header{
+	padding:300px 00px 0px 300px;
+	 float: left;
+}
+
+
+.image-container h1{
+color: white;
+}
+.image-container .job{
+	clear: both;
+	float: left;
+	margin: 100px 0 0 300px;
+}
+.image-container .profile{
+ 
+	float: left;
+	margin: 100px 0 0 600px;
+}
+
+#footer{
+	clear: both;
+ padding: 10px;
+	background-color: black;
+}
+#footer p{
+color: white;
+	text-align: center;
+}
+
+ #banner{	 	
+	 margin: 0 auto;		
+	 background: whitesmoke;
+	 
+}
+#content{
+	width: 1280px;
+	margin: 0 auto;
+	 
+} 
+#sidebar{ 
+	margin: 20px 10px 20px 0;
+	clear: both;
+	float: left;
+	width: 300px;
+	background: whitesmoke;
+	min-height:400px;
+}
+ #container{
+	 float: left;
+	 min-height:400px;
+	 margin: 20px 0px 20px 20px;
+   width: 950px;
+	background: whitesmoke;
+}
+#banner img{
+  margin: 0 auto;
+}
+#search-jobs{
+padding: 30px;}
