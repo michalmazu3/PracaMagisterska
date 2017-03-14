@@ -105,13 +105,15 @@ padding: 30px;
 	width: 80%;
 	padding: 00px 0px 0 30px;
 }
-
-#content #title {
+.content{
+	background: whitesmoke;
+}
+.content #title {
 	width: 80%;
 	float: left;
 	padding: 10px 0 20px 30px;
  }
-#content #price {
+.content #price {
 	width: 20%;
 	float: left;
 	padding: 10px 30px 0 0;
@@ -141,3 +143,47 @@ border-bottom: solid;
 #aplly-button button{
 	padding: 20px 50px;
 }
+#content-contact{
+			background: whitesmoke;
+	min-height: 800px;
+}
+#send-message {
+	width: 50%;
+		padding: 70px 20px 0px 20px;
+	min-height: 400px;
+	float : left;
+
+
+}
+#send-message h1 {
+	text-align: center;
+}
+#send-message form{
+	padding: 50px;
+}
+#map{
+		padding: 70px 20px 0px 20px;
+	width: 50%;
+	float: left;
+	min-height: 500px;
+ 	text-align: center;
+
+ }
+#content-contact h2{
+	padding: 50px 0 0 0;
+	text-align: center;
+	
+}
+
+#content-contact .register{
+	padding: 20px 200px 50px 200px;
+	text-align: center;
+	
+}
+.tab-content form{
+	padding: 20px 200px 50px 200px;	
+	
+}
+
+
+

@@ -5,8 +5,10 @@
     <meta charset="utf-8">
 
 
-    <title>Home Page</title>
+       <title>Home Page</title>
 
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/site.css" rel="stylesheet">
@@ -18,12 +20,6 @@
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
           <a class="navbar-brand" href="#">TeamLeasing</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse navbar-right">
@@ -32,18 +28,32 @@
             <li><a href="#developer-profile">Profile programistów</a></li>
             <li><a href="#contact">Kontact</a></li>
             <li><a href="#login">Zaloguj</a></li>
-            <li><a href="#developers-account">Moje Konto Programista</a></li>
-            <li><a href="#employee-account">Moje Konto Pracodawca</a></li>
+            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Moje Konto Programista <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                 <li><a href="#">Edycja konta</a></li>
+                <li><a href="#">Aplikacje</a></li>
+                <li><a href="#">Przychodzące oderty</a></li>
+              </ul>
+            </li>
+            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Moje Konto Pracodawca <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                 <li><a href="#">Edycja konta</a></li>
+                <li><a href="#">Twoje oferty</a></li>
+                <li><a href="#">Utwórz oferte</a></li>
+                <li><a href="#">Wysłane propozycje</a></li>
+              </ul>
+            </li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
     </nav>
+
     
    
       <div id="banner">
         <img src="image/banner.jpg" alt="">
       </div>
-      <div id="content">
+      <div class="content">
         <div id="header-container">
          <h2 id="title">Programista Javascript</h2>
          <h2 id="price">4000 zł</h2>            
