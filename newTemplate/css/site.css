@@ -181,9 +181,31 @@ border-bottom: solid;
 	
 }
 .tab-content form{
-	padding: 20px 200px 50px 200px;	
+	padding: 20px 200px 100px 200px;	
 	
 }
-
-
-
+#content-contact{
+  margin: auto 0;
+}
+#content-contact #login{
+	padding: 40px 400px 50px 400px;
+	text-align: center;
+	
+}
+#login form{
+	padding: 0 0 20px 0;
+}
+.profile-item{
+	height: 300px;
+	padding: 20px;
+	border-bottom: solid 2px;
+}
+.profile-item img{
+	float:left;
+}
+.profile-item div{
+	padding: 0px 0 0 250px;
+}
+table, th, td {
+   padding: 5px 0 0 0;
+}
