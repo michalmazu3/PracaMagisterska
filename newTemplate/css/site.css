@@ -192,13 +192,17 @@ border-bottom: solid;
 	text-align: center;
 	
 }
+
 #login form{
-	padding: 0 0 20px 0;
+	padding: 0 0 10px 0;
 }
 .profile-item{
 	height: 300px;
 	padding: 20px;
 	border-bottom: solid 2px;
+}
+#login form input,textarea,select{
+margin-left: 60px;
 }
 .profile-item img{
 	float:left;
@@ -208,4 +212,29 @@ border-bottom: solid;
 }
 table, th, td {
    padding: 5px 0 0 0;
+}
+#container-developer{
+	background: whitesmoke;
+	padding-top: 100px;
+	width: inherit;
+	 
+}
+#container-developer img{
+	float:  left;
+	padding: 20px 20px 0 20px;
+}
+
+#container-developer p{
+	padding: 20px 20px 0  0 ;
+	margin-left: 410px;
+}
+#container-developer #buttons {
+	padding-left: 340px;
+	height: 200px;
+}
+#container-developer #buttons button{
+  margin: 40px 0 40px 100px;
+	width: 150px;
+	height: 120px;
+	float:  left;
 }
