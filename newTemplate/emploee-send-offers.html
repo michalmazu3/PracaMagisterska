@@ -47,24 +47,52 @@
         </div><!--/.nav-collapse -->
       </div>
     </nav>
- 
+   
+<!--       <div id="banner">
+        <img src="image/banner.jpg" alt="">
+      </div> -->
+      <div id="application">
+      	<h2>Wysłane propozycje pracy</h2>
+      	<table class="table">
+      		<thead>
+      			<tr>      			
+      				<th>Programista</th>
+      				<th>Wynagrodzenie</th>
+              <th>Technologia</th>
+              <th>Rodzaj stanowiska</th>
+      				<th>Status</th>
+      				<th></th>
+              <th></th>
+      			</tr>
+      		</thead>
+      		<tr>      			
+      			<td>jan Kowalski</td>
+      			<td>4000zł</td>
+            <td>JacaScript</td>
+            <td>Senior</td>
+      			<td>Oczekujące</td>
+      			<td><button class="btn-danger">Wycofaj</button></td>          
 
-  <div class="image-container" >
-     <h1 class="job-header">Szukasz pracy w IT ?</h1>
-    <h1 class="profile-header">Potrzebujesz specjalistów?</h1>
-    <button type="button" class="job btn-success btn-lg ">Oferty pracy</button>
-    <button type="button" class="profile btn-success btn-lg ">Profile programistów</button>
+
+      	</table>
+      </div>
+
+
+  <div id="footer">
+    <p>TeamLeasing.pl</p>
   </div>
-
-
-<div id="footer">
-  <p>TeamLeasing.pl</p>
-</div>
 
 
 
      
 
+<script>
+$(document).ready(function(){
+    $(".nav-tabs a").click(function(){
+        $(this).tab('show');
+    });
+});
+</script>
 
 
   </body>

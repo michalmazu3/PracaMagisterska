@@ -238,3 +238,34 @@ table, th, td {
 	height: 120px;
 	float:  left;
 }
+ 
+#application h2{
+	text-align: center;
+	padding: 50px 0 50px 0;
+}
+#application{
+	background: whitesmoke;
+	padding: 100px 100px 100px 100px;
+	min-height: 800px;
+	overflow:hidden;
+	
+}
+#application-item{
+	display: table;
+	margin: 0 auto;
+	width: 100%;
+	border-bottom: solid 2px;
+}
+#application-item #application-left{
+	display: table-cell;
+	width: 45%;
+	float: left;
+}
+#application-item #application-right{
+	display: table-cell;
+	width: 45%;
+	float: right;
+}
+#application-item h4{
+	padding-bottom: 20px;
+}
