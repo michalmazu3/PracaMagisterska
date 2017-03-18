@@ -1,0 +1,5 @@
+﻿{
+  "ConnectionStrings": {
+    "TeamLeasingConnectionString": "Data Source=DESKTOP-K9TOQB7;Initial Catalog=TeamLeasing;Integrated Security=True"
+  } 
+}

@@ -1,0 +1,221 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+
+      <title>Home Page</title>
+
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/site.css" rel="stylesheet">
+
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">TeamLeasing</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse navbar-right">
+          <ul class="nav navbar-nav">            
+            <li><a href="job-offer.html">Oferty pracy</a></li>
+            <li><a href="developer-profile.html">Profile programistów</a></li>
+            <li><a href="contact.html">Kontact</a></li>
+            <li><a href="login.html">Zaloguj</a></li>
+            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Moje Konto Programista <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                 <li><a href="developer-account.html">Edycja konta</a></li>
+                <li><a href="developer-applications.html">Aplikacje</a></li>
+                <li><a href="developer-offers.html">Przychodzące oderty</a></li>
+              </ul>
+            </li>
+            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Moje Konto Pracodawca <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                 <li><a href="employee-account.html">Edycja konta</a></li>
+                <li><a href="employee-job-offers.html">Twoje oferty</a></li>
+                <li><a href="#">Utwórz oferte</a></li>
+                <li><a href="employee-send-offers.html">Wysłane propozycje</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    
+   
+      <div id="banner">
+        <img src="image/banner.jpg" alt="">
+      </div>
+      <div id="content">
+        <div id="sidebar">              
+                <form class="form-horizontal search-jobs">
+                <h4>Wynagrodzenie</h4>
+                  <div class="form-group">
+                    <label class="control-label col-sm-2" for="email">Od:</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="email" placeholder="kwota min">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-sm-2" for="pwd">Do:</label>
+                    <div class="col-sm-10"> 
+                      <input type="text" class="form-control" id="pwd" placeholder="kwota max">
+                    </div>
+                  </div>
+                  <h4>Województwo</h4>
+                  <div class="form-group">                     
+                    <div class="col-sm-offset-2 col-sm-10">
+                      <div class="checkbox">
+                        <label><input type="checkbox"> dolnośląskie</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-offset-2 col-sm-10">
+                      <div class="checkbox">
+                        <label><input type="checkbox"> kujawsko-pomorskie</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-offset-2 col-sm-10">
+                      <div class="checkbox">
+                        <label><input type="checkbox"> lubelskie</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-offset-2 col-sm-10">
+                      <div class="checkbox">
+                        <label><input type="checkbox"> łódzkie</label>
+                      </div>
+                    </div>
+                     <div class="col-sm-offset-2 col-sm-10">
+                      <div class="checkbox">
+                        <label><input type="checkbox"> małopolskie</label>
+                      </div>
+                    </div>
+                     <div class="col-sm-offset-2 col-sm-10">
+                      <div class="checkbox">
+                        <label><input type="checkbox"> mazowieckie</label>
+                      </div>
+                    </div>
+                     <div class="col-sm-offset-2 col-sm-10">
+                      <div class="checkbox">
+                        <label><input type="checkbox"> opolskie</label>
+                      </div>
+                    </div>
+                     <div class="col-sm-offset-2 col-sm-10">
+                      <div class="checkbox">
+                        <label><input type="checkbox"> podkarpackie</label>
+                      </div>
+                    </div>
+                     <div class="col-sm-offset-2 col-sm-10">
+                      <div class="checkbox">
+                        <label><input type="checkbox"> pomorskie</label>
+                      </div>
+                    </div>
+                     <div class="col-sm-offset-2 col-sm-10">
+                      <div class="checkbox">
+                        <label><input type="checkbox"> podlaskie</label>
+                      </div>
+                    </div>
+                     <div class="col-sm-offset-2 col-sm-10">
+                      <div class="checkbox">
+                        <label><input type="checkbox"> świętokrzyskie</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-offset-2 col-sm-10">
+                      <div class="checkbox">
+                        <label><input type="checkbox"> śląskie</label>
+                      </div>
+                    </div>
+                  </div>
+                  <h4>Poziom</h4>
+                  <div class="form-group">                     
+                    <div class="col-sm-offset-2 col-sm-10">
+                      <div class="checkbox">
+                        <label><input type="checkbox">junior</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-offset-2 col-sm-10">
+                      <div class="checkbox">
+                        <label><input type="checkbox">regular</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-offset-2 col-sm-10">
+                      <div class="checkbox">
+                        <label><input type="checkbox">senior</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group"> 
+                    <div class="col-sm-offset-2 col-sm-10">
+                      <button type="submit" class="btn btn-default">Wyślij</button>
+                    </div>
+                  </div>
+                </form>
+        </div>
+        <div id="container">
+        <table>
+          <tr>
+            <div id="job-item">
+               <h2 id="title">Programista Javascript</h2>
+               <h2 id="price">4000 zł</h2>
+               <p>
+                 Nowoczesne programowanie frontendowe. Wykorzystujemy takie technologie jak, angularJS, jQuerry czy HTML5 i CSS3. Bardzo atrakcyjne wynagrodzenie i mozliwości rozwoju w firmie. Dodatkowo każdy pracownik może liczyć na darmowe karnety.
+               </p>
+               <p class="lead">Vive Textile Tecycling
+               </p>
+               <p class="small">Kielce, Świętokrzyskie
+               </p>
+            </div>
+          </tr>
+          <tr>
+            <div id="job-item">
+              <a href="job-offer.html">
+               <h2 id="title">Programista Javascript</h2>
+              </a> 
+               <h2 id="price">4000 zł</h2>
+               <p>
+                 Nowoczesne programowanie frontendowe. Wykorzystujemy takie technologie jak, angularJS, jQuerry czy HTML5 i CSS3. Bardzo atrakcyjne wynagrodzenie i mozliwości rozwoju w firmie. Dodatkowo każdy pracownik może liczyć na darmowe karnety.
+               </p>
+               <p class="lead">Vive Textile Tecycling
+               </p>
+               <p class="small">Kielce, Świętokrzyskie
+               </p>
+            </div>
+          </tr>
+          <tr>
+            <div id="job-item">
+               <h2 id="title">Programista Javascript</h2>
+               <h2 id="price">4000 zł</h2>
+               <p>
+                 Nowoczesne programowanie frontendowe. Wykorzystujemy takie technologie jak, angularJS, jQuerry czy HTML5 i CSS3. Bardzo atrakcyjne wynagrodzenie i mozliwości rozwoju w firmie. Dodatkowo każdy pracownik może liczyć na darmowe karnety.
+               </p>
+               <p class="lead">Vive Textile Tecycling
+               </p>
+               <p class="small">Kielce, Świętokrzyskie
+               </p>
+            </div>
+          </tr>
+        </table>   
+        </div>
+      </div>
+
+   
+
+
+<div id="footer">
+  <p>TeamLeasing.pl</p>
+</div>
+
+
+
+     
+
+
+
+  </body>
+</html>

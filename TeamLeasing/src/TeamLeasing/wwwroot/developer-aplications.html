@@ -1,0 +1,131 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+
+    <title>Home Page</title>
+
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/site.css" rel="stylesheet">
+
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">TeamLeasing</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse navbar-right">
+          <ul class="nav navbar-nav">            
+            <li><a href="job-offer.html">Oferty pracy</a></li>
+            <li><a href="developer-profile.html">Profile programistów</a></li>
+            <li><a href="contact.html">Kontact</a></li>
+            <li><a href="login.html">Zaloguj</a></li>
+            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Moje Konto Programista <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                 <li><a href="developer-account.html">Edycja konta</a></li>
+                <li><a href="developer-applications.html">Aplikacje</a></li>
+                <li><a href="developer-offers.html">Przychodzące oderty</a></li>
+              </ul>
+            </li>
+            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Moje Konto Pracodawca <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                 <li><a href="employee-account.html">Edycja konta</a></li>
+                <li><a href="employee-job-offers.html">Twoje oferty</a></li>
+                <li><a href="#">Utwórz oferte</a></li>
+                <li><a href="employee-send-offers.html">Wysłane propozycje</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+    
+   
+<!--       <div id="banner">
+        <img src="image/banner.jpg" alt="">
+      </div> -->
+      <div id="application">
+      	<h2>Aktualnie aplikujesz</h2>
+      	<table class="table">
+      		<thead>
+      			<tr>
+      				<th>Oferta</th>
+      				<th>Firma</th>
+      				<th>Wynagrodzenie</th>
+      				<th>Status</th>
+      				<th></th>
+      			</tr>
+      		</thead>
+      		<tr>
+      			<td>Programista JavaScript</td>
+      			<td>Vive Textile Recycling</td>
+      			<td>4000zł</td>
+      			<td>Aplikujesz</td>
+      			<td><button class="btn-danger">Wycofaj aplikacje</button></td>
+      		</tr>
+      		<tr>
+      			<td>Programista JavaScript</td>
+      			<td>Vive Textile Recycling</td>
+      			<td>4000zł</td>
+      			<td>Aplikujesz</td>
+      			<td><button class="btn-danger">Wycofaj aplikacje</button></td>
+      		</tr>
+      		<tr>
+      			<td>Programista JavaScript</td>
+      			<td>Vive Textile Recycling</td>
+      			<td>4000zł</td>
+      			<td>Aplikujesz</td>
+      			<td><button class="btn-danger">Wycofaj aplikacje</button></td>
+      		</tr>
+      		<tr>
+      			<td>Programista JavaScript</td>
+      			<td>Vive Textile Recycling</td>
+      			<td>4000zł</td>
+      			<td>Aplikujesz</td>
+      			<td><button class="btn-danger">Wycofaj aplikacje</button></td>
+      		</tr>
+      		<tr>
+      			<td>Programista JavaScript</td>
+      			<td>Vive Textile Recycling</td>
+      			<td>4000zł</td>
+      			<td>Aplikujesz</td>
+      			<td><button class="btn-danger">Wycofaj aplikacje</button></td>
+      		</tr>
+      		<tr>
+      			<td>Programista JavaScript</td>
+      			<td>Vive Textile Recycling</td>
+      			<td>4000zł</td>
+      			<td>Aplikujesz</td>
+      			<td><button class="btn-danger">Wycofaj aplikacje</button></td>
+      		</tr>
+      	</table>
+      </div>
+
+
+  <div id="footer">
+    <p>TeamLeasing.pl</p>
+  </div>
+
+
+
+     
+
+<script>
+$(document).ready(function(){
+    $(".nav-tabs a").click(function(){
+        $(this).tab('show');
+    });
+});
+</script>
+
+
+  </body>
+</html>
