@@ -18,7 +18,6 @@ namespace TeamLeasing.Models
         [Display(Name = "Status")]
         public string Status { get; set; }
 
-        public virtual Developer Developer { get; set; }
-        public  virtual Employee Employee { get; set; }
+       
     }
 }

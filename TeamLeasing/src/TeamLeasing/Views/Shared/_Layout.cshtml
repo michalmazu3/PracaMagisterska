@@ -13,7 +13,7 @@
 </head>
 
 <body>
-   
+
 
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
@@ -24,7 +24,7 @@
                 <ul class="nav navbar-nav">
                     <li><a href="job-offer.html">Oferty pracy</a></li>
                     <li><a href="developer-profile.html">Profile programistów</a></li>
-                    <li><a asp-controller="Contact" asp-action="GetContact">Kontact</a></li>
+                    <li><a asp-controller="Contact" asp-action="Contact">Kontact</a></li>
                     <li><a href="login.html">Zaloguj</a></li>
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Moje Konto Programista <span class="caret"></span></a>
@@ -53,8 +53,9 @@
     <div id="footer">
         <p>TeamLeasing.pl</p>
     </div>
-    
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    @RenderSection("scripts", true)
 </body>
 </html>
