@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using TeamLeasing.DAL;
 using Microsoft.DotNet.Cli.Utils;
+using TeamLeasing.Services;
 
 namespace TeamLeasing
 {
@@ -33,6 +34,10 @@ namespace TeamLeasing
             services.AddDbContext<TeamLeasingContext>();
             services.AddSingleton(_configuration);
             services.AddTransient<TeamLeasingSeedData>();
+            services.AddTransient<IMessage,MessageModel>();
+            services.AddTransient<ISendEmail, SendEmail>();
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

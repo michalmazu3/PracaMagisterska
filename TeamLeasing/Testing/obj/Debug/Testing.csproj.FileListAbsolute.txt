@@ -1,0 +1,5 @@
+D:\repozutorium\Praca Magisterska\TeamLeasing\Testing\bin\Debug\Testing.dll
+D:\repozutorium\Praca Magisterska\TeamLeasing\Testing\bin\Debug\Testing.pdb
+D:\repozutorium\Praca Magisterska\TeamLeasing\Testing\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+D:\repozutorium\Praca Magisterska\TeamLeasing\Testing\obj\Debug\Testing.dll
+D:\repozutorium\Praca Magisterska\TeamLeasing\Testing\obj\Debug\Testing.pdb

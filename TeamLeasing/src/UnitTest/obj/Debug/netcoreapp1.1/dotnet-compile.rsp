@@ -1,5 +1,5 @@
---temp-output:D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\obj\Debug\netcoreapp1.1\
---out:D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\bin\Debug\netcoreapp1.1\TeamLeasing.dll
+--temp-output:D:\repozutorium\Praca Magisterska\TeamLeasing\src\UnitTest\obj\Debug\netcoreapp1.1\
+--out:D:\repozutorium\Praca Magisterska\TeamLeasing\src\UnitTest\bin\Debug\netcoreapp1.1\UnitTest.dll
 --define:DEBUG
 --define:TRACE
 --define:NETCOREAPP1_1
@@ -7,12 +7,12 @@
 --suppress-warning:CS1702
 --suppress-warning:CS1705
 --optimize:False
---emit-entry-point:True
---output-name:TeamLeasing
---file-version:1.0.0.0
---version:1.0.0.0
---informational-version:1.0.0
+--output-name:UnitTest
+--file-version:1.1.1.0
+--version:1.1.1.0
+--informational-version:1.1.1
 --target-framework:.NETCoreApp,Version=v1.1
+--reference:C:\Users\Koks\.nuget\packages\dotnet-test-mstest\1.1.2-preview\lib\netcoreapp1.0\dotnet-test-mstest.dll
 --reference:C:\Users\Koks\.nuget\packages\MailKit\1.12.0\lib\netstandard1.3\MailKit.dll
 --reference:C:\Users\Koks\.nuget\packages\Microsoft.ApplicationInsights\2.2.0\lib\netstandard1.5\Microsoft.ApplicationInsights.dll
 --reference:C:\Users\Koks\.nuget\packages\Microsoft.ApplicationInsights.AspNetCore\2.0.0\lib\netstandard1.6\Microsoft.ApplicationInsights.AspNetCore.dll
@@ -48,9 +48,7 @@
 --reference:C:\Users\Koks\.nuget\packages\Microsoft.AspNetCore.Mvc.TagHelpers\1.1.1\lib\netstandard1.6\Microsoft.AspNetCore.Mvc.TagHelpers.dll
 --reference:C:\Users\Koks\.nuget\packages\Microsoft.AspNetCore.Mvc.ViewFeatures\1.1.1\lib\netstandard1.6\Microsoft.AspNetCore.Mvc.ViewFeatures.dll
 --reference:C:\Users\Koks\.nuget\packages\Microsoft.AspNetCore.Razor\1.1.0\lib\netstandard1.3\Microsoft.AspNetCore.Razor.dll
---reference:C:\Users\Koks\.nuget\packages\Microsoft.AspNetCore.Razor.Design\1.1.0-preview4-final\lib\netcoreapp1.0\Microsoft.AspNetCore.Razor.Design.dll
 --reference:C:\Users\Koks\.nuget\packages\Microsoft.AspNetCore.Razor.Runtime\1.1.0\lib\netstandard1.5\Microsoft.AspNetCore.Razor.Runtime.dll
---reference:C:\Users\Koks\.nuget\packages\Microsoft.AspNetCore.Razor.Tools\1.1.0-preview4-final\lib\netcoreapp1.0\dotnet-razor-tooling.dll
 --reference:C:\Users\Koks\.nuget\packages\Microsoft.AspNetCore.ResponseCaching.Abstractions\1.1.0\lib\netstandard1.3\Microsoft.AspNetCore.ResponseCaching.Abstractions.dll
 --reference:C:\Users\Koks\.nuget\packages\Microsoft.AspNetCore.Routing\1.1.1\lib\netstandard1.3\Microsoft.AspNetCore.Routing.dll
 --reference:C:\Users\Koks\.nuget\packages\Microsoft.AspNetCore.Routing.Abstractions\1.1.1\lib\netstandard1.3\Microsoft.AspNetCore.Routing.Abstractions.dll
@@ -61,10 +59,9 @@
 --reference:C:\Users\Koks\.nuget\packages\Microsoft.CodeAnalysis.Common\1.3.0\lib\netstandard1.3\Microsoft.CodeAnalysis.dll
 --reference:C:\Users\Koks\.nuget\packages\Microsoft.CodeAnalysis.CSharp\1.3.0\lib\netstandard1.3\Microsoft.CodeAnalysis.CSharp.dll
 --reference:C:\Users\Koks\.nuget\packages\Microsoft.CSharp\4.3.0\ref\netstandard1.0\Microsoft.CSharp.dll
---reference:C:\Users\Koks\.nuget\packages\Microsoft.DotNet.Cli.Utils\1.0.0-preview2-003121\lib\netstandard1.6\Microsoft.DotNet.Cli.Utils.dll
+--reference:C:\Users\Koks\.nuget\packages\Microsoft.DiaSymReader\1.0.8\lib\netstandard1.1\Microsoft.DiaSymReader.dll
 --reference:C:\Users\Koks\.nuget\packages\Microsoft.DotNet.PlatformAbstractions\1.1.0\lib\netstandard1.3\Microsoft.DotNet.PlatformAbstractions.dll
 --reference:C:\Users\Koks\.nuget\packages\Microsoft.DotNet.ProjectModel\1.0.0-rc3-003121\lib\netstandard1.6\Microsoft.DotNet.ProjectModel.dll
---reference:C:\Users\Koks\.nuget\packages\Microsoft.DotNet.ProjectModel.Loader\1.0.0-preview2-003121\lib\netstandard1.6\Microsoft.DotNet.ProjectModel.Loader.dll
 --reference:C:\Users\Koks\.nuget\packages\Microsoft.EntityFrameworkCore\1.1.1\lib\netstandard1.3\Microsoft.EntityFrameworkCore.dll
 --reference:C:\Users\Koks\.nuget\packages\Microsoft.EntityFrameworkCore.Design\1.1.1\lib\netstandard1.3\Microsoft.EntityFrameworkCore.Design.dll
 --reference:C:\Users\Koks\.nuget\packages\Microsoft.EntityFrameworkCore.Relational\1.1.1\lib\netstandard1.3\Microsoft.EntityFrameworkCore.Relational.dll
@@ -72,7 +69,6 @@
 --reference:C:\Users\Koks\.nuget\packages\Microsoft.EntityFrameworkCore.SqlServer\1.1.1\lib\netstandard1.3\Microsoft.EntityFrameworkCore.SqlServer.dll
 --reference:C:\Users\Koks\.nuget\packages\Microsoft.Extensions.Caching.Abstractions\1.1.1\lib\netstandard1.0\Microsoft.Extensions.Caching.Abstractions.dll
 --reference:C:\Users\Koks\.nuget\packages\Microsoft.Extensions.Caching.Memory\1.1.1\lib\netstandard1.3\Microsoft.Extensions.Caching.Memory.dll
---reference:C:\Users\Koks\.nuget\packages\Microsoft.Extensions.CommandLineUtils\1.0.0\lib\netstandard1.3\Microsoft.Extensions.CommandLineUtils.dll
 --reference:C:\Users\Koks\.nuget\packages\Microsoft.Extensions.Configuration\1.1.1\lib\netstandard1.1\Microsoft.Extensions.Configuration.dll
 --reference:C:\Users\Koks\.nuget\packages\Microsoft.Extensions.Configuration.Abstractions\1.1.1\lib\netstandard1.0\Microsoft.Extensions.Configuration.Abstractions.dll
 --reference:C:\Users\Koks\.nuget\packages\Microsoft.Extensions.Configuration.Binder\1.1.1\lib\netstandard1.1\Microsoft.Extensions.Configuration.Binder.dll
@@ -99,25 +95,25 @@
 --reference:C:\Users\Koks\.nuget\packages\Microsoft.Extensions.Options.ConfigurationExtensions\1.1.1\lib\netstandard1.1\Microsoft.Extensions.Options.ConfigurationExtensions.dll
 --reference:C:\Users\Koks\.nuget\packages\Microsoft.Extensions.PlatformAbstractions\1.1.0\lib\netstandard1.3\Microsoft.Extensions.PlatformAbstractions.dll
 --reference:C:\Users\Koks\.nuget\packages\Microsoft.Extensions.Primitives\1.1.0\lib\netstandard1.0\Microsoft.Extensions.Primitives.dll
+--reference:C:\Users\Koks\.nuget\packages\Microsoft.Extensions.Testing.Abstractions\1.0.0-preview2-003121\lib\netstandard1.6\Microsoft.Extensions.Testing.Abstractions.dll
 --reference:C:\Users\Koks\.nuget\packages\Microsoft.Extensions.WebEncoders\1.1.1\lib\netstandard1.0\Microsoft.Extensions.WebEncoders.dll
 --reference:C:\Users\Koks\.nuget\packages\Microsoft.Net.Http.Headers\1.1.1\lib\netstandard1.1\Microsoft.Net.Http.Headers.dll
 --reference:C:\Users\Koks\.nuget\packages\Microsoft.VisualBasic\10.1.0\ref\netstandard1.1\Microsoft.VisualBasic.dll
 --reference:C:\Users\Koks\.nuget\packages\Microsoft.Win32.Primitives\4.3.0\ref\netstandard1.3\Microsoft.Win32.Primitives.dll
 --reference:C:\Users\Koks\.nuget\packages\Microsoft.Win32.Registry\4.3.0\ref\netstandard1.3\Microsoft.Win32.Registry.dll
 --reference:C:\Users\Koks\.nuget\packages\MimeKit\1.12.0\lib\netstandard1.3\MimeKit.dll
+--reference:C:\Users\Koks\.nuget\packages\MSTest.ObjectModel\1.0.1-preview\lib\dotnet\Microsoft.VisualStudio.TestPlatform.ObjectModel.dll
+--reference:C:\Users\Koks\.nuget\packages\MSTest.TestAdapter.Dotnet\1.1.5-preview\lib\dotnet\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+--reference:C:\Users\Koks\.nuget\packages\MSTest.TestAdapter.Dotnet\1.1.5-preview\lib\dotnet\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+--reference:C:\Users\Koks\.nuget\packages\MSTest.TestAdapter.Dotnet\1.1.5-preview\lib\dotnet\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+--reference:C:\Users\Koks\.nuget\packages\MSTest.TestFramework\1.1.11\lib\netcoreapp1.0\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll
+--reference:C:\Users\Koks\.nuget\packages\MSTest.TestFramework\1.1.11\lib\netcoreapp1.0\Microsoft.VisualStudio.TestPlatform.TestFramework.dll
 --reference:C:\Users\Koks\.nuget\packages\Newtonsoft.Json\9.0.1\lib\netstandard1.0\Newtonsoft.Json.dll
 --reference:C:\Users\Koks\.nuget\packages\NuGet.Common\3.5.0-beta2-1484\lib\netstandard1.3\NuGet.Common.dll
---reference:C:\Users\Koks\.nuget\packages\NuGet.Configuration\3.5.0-beta2-1484\lib\netstandard1.3\NuGet.Configuration.dll
---reference:C:\Users\Koks\.nuget\packages\NuGet.DependencyResolver.Core\3.5.0-beta2-1484\lib\netstandard1.3\NuGet.DependencyResolver.Core.dll
 --reference:C:\Users\Koks\.nuget\packages\NuGet.Frameworks\3.5.0-beta2-1484\lib\netstandard1.3\NuGet.Frameworks.dll
---reference:C:\Users\Koks\.nuget\packages\NuGet.LibraryModel\3.5.0-beta2-1484\lib\netstandard1.3\NuGet.LibraryModel.dll
 --reference:C:\Users\Koks\.nuget\packages\NuGet.Packaging\3.5.0-beta2-1484\lib\netstandard1.3\NuGet.Packaging.dll
 --reference:C:\Users\Koks\.nuget\packages\NuGet.Packaging.Core\3.5.0-beta2-1484\lib\netstandard1.3\NuGet.Packaging.Core.dll
 --reference:C:\Users\Koks\.nuget\packages\NuGet.Packaging.Core.Types\3.5.0-beta2-1484\lib\netstandard1.3\NuGet.Packaging.Core.Types.dll
---reference:C:\Users\Koks\.nuget\packages\NuGet.ProjectModel\3.5.0-beta2-1484\lib\netstandard1.3\NuGet.ProjectModel.dll
---reference:C:\Users\Koks\.nuget\packages\NuGet.Protocol.Core.Types\3.5.0-beta2-1484\lib\netstandard1.3\NuGet.Protocol.Core.Types.dll
---reference:C:\Users\Koks\.nuget\packages\NuGet.Protocol.Core.v3\3.5.0-beta2-1484\lib\netstandard1.3\NuGet.Protocol.Core.v3.dll
---reference:C:\Users\Koks\.nuget\packages\NuGet.Repositories\3.5.0-beta2-1484\lib\netstandard1.3\NuGet.Repositories.dll
 --reference:C:\Users\Koks\.nuget\packages\NuGet.RuntimeModel\3.5.0-beta2-1484\lib\netstandard1.3\NuGet.RuntimeModel.dll
 --reference:C:\Users\Koks\.nuget\packages\NuGet.Versioning\3.5.0-beta2-1484\lib\netstandard1.0\NuGet.Versioning.dll
 --reference:C:\Users\Koks\.nuget\packages\Portable.BouncyCastle\1.8.1.1\lib\netstandard1.3\crypto.dll
@@ -212,26 +208,7 @@
 --reference:C:\Users\Koks\.nuget\packages\System.Threading.Timer\4.3.0\ref\netstandard1.2\System.Threading.Timer.dll
 --reference:C:\Users\Koks\.nuget\packages\System.Xml.ReaderWriter\4.3.0\ref\netstandard1.3\System.Xml.ReaderWriter.dll
 --reference:C:\Users\Koks\.nuget\packages\System.Xml.XDocument\4.3.0\ref\netstandard1.3\System.Xml.XDocument.dll
---resource:"D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\obj\Debug\netcoreapp1.1\TeamLeasingdotnet-compile.deps.json",TeamLeasing.deps.json
-D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Program.cs
-D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Startup.cs
-D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Controllers\ContactController.cs
-D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Controllers\HomeController.cs
-D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\DAL\TeamLeasingContext.cs
-D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\DAL\TeamLeasingSeedData.cs
-D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Migrations\20170319180104_Initialdatabase.cs
-D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Migrations\20170319180104_Initialdatabase.Designer.cs
-D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Migrations\20170319180725_1.cs
-D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Migrations\20170319180725_1.Designer.cs
-D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Migrations\TeamLeasingContextModelSnapshot.cs
-D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Models\Developer.cs
-D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Models\Employee.cs
-D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Models\Job.cs
-D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Models\Message.cs
-D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Models\Offer.cs
-D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Models\Technology.cs
-D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Services\Mail\IMailConfiguration.cs
-D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Services\Mail\IMessage.cs
-D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Services\Mail\ISendEmail.cs
-D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Services\Mail\MessageModel.cs
-D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Services\Mail\SendEmail.cs
+--reference:D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\bin\Debug\netcoreapp1.1\TeamLeasing.dll
+D:\repozutorium\Praca Magisterska\TeamLeasing\src\UnitTest\Class1.cs
+D:\repozutorium\Praca Magisterska\TeamLeasing\src\UnitTest\Constans.cs
+D:\repozutorium\Praca Magisterska\TeamLeasing\src\UnitTest\Properties\AssemblyInfo.cs
