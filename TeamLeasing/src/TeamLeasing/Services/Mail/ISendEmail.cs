@@ -1,7 +1,4 @@
-﻿using System.Threading.Tasks;
-using MimeKit;
-
-namespace TeamLeasing.Services
+﻿namespace TeamLeasing.Services.Mail
 {
     public interface ISendEmail : IMailConfiguration
     {

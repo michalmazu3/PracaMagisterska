@@ -202,7 +202,7 @@ border-bottom: solid;
 	border-bottom: solid 2px;
 }
 #login form input,textarea,select{
-margin-left: 60px;
+margin-left: 0px;
 }
 .profile-item img{
 	float:left;

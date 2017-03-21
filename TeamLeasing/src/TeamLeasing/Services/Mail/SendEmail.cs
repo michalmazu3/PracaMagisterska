@@ -1,11 +1,8 @@
-﻿using System;
-using System.Threading.Tasks;
-using MailKit.Net.Smtp;
+﻿using MailKit.Net.Smtp;
 using MailKit.Security;
 using MimeKit;
 
-
-namespace TeamLeasing.Services
+namespace TeamLeasing.Services.Mail
 {
     public class SendEmail : ISendEmail
     {

@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using TeamLeasing.DAL;
 using Microsoft.DotNet.Cli.Utils;
 using TeamLeasing.Services;
+using TeamLeasing.Services.Mail;
 
 namespace TeamLeasing
 {
@@ -53,7 +54,7 @@ namespace TeamLeasing
                 routes.MapRoute(
                     name: "default",
                     template: "{controller}/{action}/{id?}",
-                    defaults:  new {Controller = "Home",Action = "Index"}
+                    defaults:  new {Controller = "Home",Action ="Index"}
                 );
            
             });

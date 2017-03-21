@@ -1,6 +1,6 @@
 ﻿using MimeKit;
 
-namespace TeamLeasing.Services
+namespace TeamLeasing.Services.Mail
 {
     public class MessageModel : IMessage
     {

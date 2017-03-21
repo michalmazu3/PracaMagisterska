@@ -5,17 +5,17 @@ namespace TeamLeasing.Models
     public class Message
     {
         public int Id { get; set; }
-        [Required]
-        [EmailAddress]
+        [Required(ErrorMessage = "Pole email jest wymagane!")]
+        [EmailAddress(ErrorMessage = "Podaj poprawny adres email!")]
         public string Email { get; set; }
-        [Required]
-        [StringLength(500, MinimumLength = 50, ErrorMessage = "Zle")]
+        [Required(ErrorMessage = "Pole wiadomość jest wymagane!")]
+        [StringLength(500, MinimumLength = 50, ErrorMessage = "Wiadomość ma mieśc od 50 do 500 znaków!")]
         [Display(Name = "Wiadomość")]
          public string Content { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Pole imię jest wymagane!")]
         [Display(Name = "Imię")]
-        public string Name { get; set; }
-        [Required]
+         public string Name { get; set; }
+        [Required(ErrorMessage = "Pole nazwisko jest wymagane!")]
         [Display(Name = "Nazwisko")]
         public string Surname { get; set; }
 
