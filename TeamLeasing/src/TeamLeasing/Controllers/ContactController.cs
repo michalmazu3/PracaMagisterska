@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using TeamLeasing.DAL;
 using TeamLeasing.Models;
 using TeamLeasing.Services;
+using TeamLeasing.Services.Helpers;
 using TeamLeasing.Services.Mail;
 
 namespace TeamLeasing.Controllers
@@ -19,13 +20,21 @@ namespace TeamLeasing.Controllers
             _context = context;
             _sendEmail = sendEmail;
         }
-        public IActionResult Contact()
+        public IActionResult Index()
         {
             return View("Contact");
 
         }
+
+        [HttpGet]
+        public IActionResult SendMessage()
+        {
+           // var s = ViewBag.Name.ToString();
+            return View("SendMessage");
+        }
+
         [HttpPost]
-        public IActionResult Contact(Message message)
+        public IActionResult SendMessage(Message message)
         {
             if (ModelState.IsValid)
             {
@@ -33,7 +42,8 @@ namespace TeamLeasing.Controllers
                 _context.SaveChanges();
                 _sendEmail.EmailMessage = _sendEmail.CreateMessage(message.Email, message.Content);
                 _sendEmail.Send(_sendEmail.EmailMessage);
-                return View("Contact");
+                ViewBag.Name = message.Name;
+                return RedirectToAction("SendMessage");
             }
             else
             {

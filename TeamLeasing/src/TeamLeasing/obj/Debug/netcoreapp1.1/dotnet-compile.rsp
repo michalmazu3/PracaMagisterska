@@ -56,6 +56,7 @@
 --reference:C:\Users\Koks\.nuget\packages\Microsoft.AspNetCore.Routing.Abstractions\1.1.1\lib\netstandard1.3\Microsoft.AspNetCore.Routing.Abstractions.dll
 --reference:C:\Users\Koks\.nuget\packages\Microsoft.AspNetCore.Server.IISIntegration\1.1.1\lib\netstandard1.3\Microsoft.AspNetCore.Server.IISIntegration.dll
 --reference:C:\Users\Koks\.nuget\packages\Microsoft.AspNetCore.Server.Kestrel\1.1.1\lib\netstandard1.3\Microsoft.AspNetCore.Server.Kestrel.dll
+--reference:C:\Users\Koks\.nuget\packages\Microsoft.AspNetCore.Session\1.0.0\lib\netstandard1.3\Microsoft.AspNetCore.Session.dll
 --reference:C:\Users\Koks\.nuget\packages\Microsoft.AspNetCore.StaticFiles\1.1.1\lib\netstandard1.3\Microsoft.AspNetCore.StaticFiles.dll
 --reference:C:\Users\Koks\.nuget\packages\Microsoft.AspNetCore.WebUtilities\1.1.1\lib\netstandard1.3\Microsoft.AspNetCore.WebUtilities.dll
 --reference:C:\Users\Koks\.nuget\packages\Microsoft.CodeAnalysis.Common\1.3.0\lib\netstandard1.3\Microsoft.CodeAnalysis.dll
@@ -216,13 +217,19 @@
 D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Program.cs
 D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Startup.cs
 D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Controllers\ContactController.cs
+D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Controllers\DeveloperController.cs
 D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Controllers\HomeController.cs
+D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Controllers\JobController.cs
 D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\DAL\TeamLeasingContext.cs
 D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\DAL\TeamLeasingSeedData.cs
 D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Migrations\20170319180104_Initialdatabase.cs
 D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Migrations\20170319180104_Initialdatabase.Designer.cs
 D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Migrations\20170319180725_1.cs
 D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Migrations\20170319180725_1.Designer.cs
+D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Migrations\20170325161514_enums.cs
+D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Migrations\20170325161514_enums.Designer.cs
+D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Migrations\20170325165747_addtitle.cs
+D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Migrations\20170325165747_addtitle.Designer.cs
 D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Migrations\TeamLeasingContextModelSnapshot.cs
 D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Models\Developer.cs
 D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Models\Employee.cs
@@ -230,8 +237,11 @@ D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Models\Job.cs
 D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Models\Message.cs
 D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Models\Offer.cs
 D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Models\Technology.cs
+D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Services\Helpers\TempDataExtensions.cs
 D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Services\Mail\IMailConfiguration.cs
 D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Services\Mail\IMessage.cs
 D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Services\Mail\ISendEmail.cs
 D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Services\Mail\MessageModel.cs
 D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Services\Mail\SendEmail.cs
+D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\ViewComponents\SearchDeveloperViewComponent.cs
+D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\ViewModels\SearchDeveloperViewModel.cs

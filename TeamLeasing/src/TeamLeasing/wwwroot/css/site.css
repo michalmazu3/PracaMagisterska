@@ -211,7 +211,7 @@ margin-left: 0px;
 	padding: 0px 0 0 250px;
 }
 table, th, td {
-   padding: 5px 0 0 0;
+   padding: 5px 20px 0 20px;
 }
 #container-developer{
 	background: whitesmoke;
@@ -221,6 +221,8 @@ table, th, td {
 }
 #container-developer img{
 	float:  left;
+	width: 370px;
+	height: 370px;
 	padding: 20px 20px 0 20px;
 }
 
@@ -268,4 +270,15 @@ table, th, td {
 }
 #application-item h4{
 	padding-bottom: 20px;
+}
+#show-case
+{
+    box-shadow:1px 1px 5px 2px #0d456d;
+    border-radius: 10px;
+    height:300px;
+    margin:10px auto;
+    width:600px;
+}
+.img {
+    
 }

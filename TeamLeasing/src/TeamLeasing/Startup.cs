@@ -31,6 +31,11 @@ namespace TeamLeasing
         
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromDays(7);
+                options.CookieName = ".FileSystem";
+            });
             services.AddMvc();
             services.AddDbContext<TeamLeasingContext>();
             services.AddSingleton(_configuration);
@@ -38,6 +43,7 @@ namespace TeamLeasing
             services.AddTransient<IMessage,MessageModel>();
             services.AddTransient<ISendEmail, SendEmail>();
 
+            services.AddLogging();
 
         }
 
@@ -47,18 +53,29 @@ namespace TeamLeasing
             ILoggerFactory loggerFactory,
             TeamLeasingSeedData seeder)
         {
+            loggerFactory.AddConsole();
+            
+            if (env.IsEnvironment("Development"))
+            {
+                app.UseDeveloperExceptionPage();
+                loggerFactory.AddConsole(LogLevel.Information);
+                loggerFactory.AddDebug(LogLevel.Information);
+
+            }
+            else
+            {
+                app.UseExceptionHandler("/error");
+            }
             app.UseStaticFiles();
 
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller}/{action}/{id?}",
-                    defaults:  new {Controller = "Home",Action ="Index"}
-                );
-           
+                    template: "{controller=Home}/{action=Index}/{id?}");
             });
-            seeder.Seed();
+
+            //seeder.Seed();
         }
     }
 }

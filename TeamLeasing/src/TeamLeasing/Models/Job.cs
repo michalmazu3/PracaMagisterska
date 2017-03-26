@@ -10,11 +10,24 @@ namespace TeamLeasing.Models
         [Range(0,100000, ErrorMessage = "Podaj cene z zakresu 0 - 100000")]
         public int Price { get; set; }
         [Required]
+        [Display(Name = "Tytuł")]
+        [Range(5,100)]
+        public string Title { get; set; }
+        [Required]
         [Display(Name = "Opis")]
         public string Descritpion { get; set; }
+        public bool IsHidden { get; set; }
         [Display(Name = "Status")]
-        public string Status { get; set; }
-        [Display(Name = "Technologia")]
-        public string Technology { get; set; }
+        public JobStatus Status { get; set; }
+        
+        public virtual Technology Technology { get; set; }
+    }
+
+    public enum JobStatus
+    {
+        NoApplications,
+        InProgress,
+        Rejected,
+        Accepted
     }
 }

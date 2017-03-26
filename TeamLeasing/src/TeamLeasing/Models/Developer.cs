@@ -37,7 +37,7 @@ namespace TeamLeasing.Models
         [Range(0,20,ErrorMessage = "Podaj wartość z zakreu 0 - 20")]
         public int Experience { get; set; }
         [Display(Name = "Poziom")]
-        public string Level { get; set; }
+        public Level Level { get; set; }
         [Display(Name = "Zdjęcie")]
         public string Photo { get; set; }
         [Display(Name = "Cv")]
@@ -45,5 +45,12 @@ namespace TeamLeasing.Models
 
         public virtual  Technology Technology { get; set; }
         public ICollection<Offer> Offers { get; set; }
+    }
+
+    public enum Level
+    {
+        Junior,
+        Regular,
+        Senior
     }
 }

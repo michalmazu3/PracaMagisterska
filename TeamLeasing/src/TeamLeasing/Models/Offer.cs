@@ -8,16 +8,25 @@ namespace TeamLeasing.Models
         [Required]
         [Display(Name = "Wynagrodzenie")]
         public decimal Price { get; set; }
-        [Required]
-        [Display(Name = "Technologia")]
-        public string Technology { get; set; }
+    
+
         [Required]
         [Display(Name = "Poziom")]
-        public string Level { get; set; }
+        public Level Level { get; set; }
+        public bool IsHidden { get; set; }
         [Required]
         [Display(Name = "Status")]
-        public string Status { get; set; }
+        public string OfferStatus { get; set; }
 
-       
+        [Required]
+        [Display(Name = "Technologia")]
+        public virtual Technology Technology { get; set; }
+    }
+
+    public enum OfferStatus
+    {
+        InProgress,
+        Rejected,
+        Accepted
     }
 }

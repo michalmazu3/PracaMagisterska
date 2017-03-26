@@ -2,13 +2,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
 
 
     <title>@ViewData["Title"]</title>
 
-    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="~/css/site.css" rel="stylesheet">
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/css/site.css" rel="stylesheet" />
 
 </head>
 
@@ -18,13 +19,13 @@
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">TeamLeasing</a>
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index">TeamLeasing</a>
             </div>
             <div id="navbar" class="collapse navbar-collapse navbar-right">
                 <ul class="nav navbar-nav">
-                    <li><a href="job-offer.html">Oferty pracy</a></li>
-                    <li><a href="developer-profile.html">Profile programistów</a></li>
-                    <li><a asp-controller="Contact" asp-action="Contact">Kontact</a></li>
+                    <li><a asp-controller="Job" asp-action="Search">Oferty pracy</a></li>
+                    <li><a asp-controller="Developer" asp-action="Search">Profile programistów</a></li>
+                    <li><a asp-controller="Contact" asp-action="Index">Kontact</a></li>
                     <li><a href="login.html">Zaloguj</a></li>
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Moje Konto Programista <span class="caret"></span></a>
@@ -56,6 +57,6 @@
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
-    @RenderSection("scripts", true)
+    @RenderSection("scripts", false)
 </body>
 </html>

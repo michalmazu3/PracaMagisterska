@@ -11,5 +11,7 @@ namespace TeamLeasing.Models
         public string Name { get; set; }
 
         public ICollection<Developer> Developers { get; set; }
+        public ICollection<Job> Jobs { get; set; }
+
     }
 }

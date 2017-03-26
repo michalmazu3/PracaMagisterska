@@ -13,7 +13,7 @@
 <div id="content-contact">
     <div id="send-message">
         <h1>Masz pytanie ? Napisz do nas</h1>
-        <form id="contact-form" method="post">
+        <form id="contact-form" method="post" asp-controller="Contact"  asp-action="SendMessage">
             <div class="form-group ">
                 <label for="exampleInputEmail1" asp-for="Email">  </label>
                 <input asp-for="Email" type="text" class="form-control" id="exampleInputEmail1" placeholder="Email">

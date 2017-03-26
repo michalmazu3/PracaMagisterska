@@ -9,9 +9,10 @@ using TeamLeasing.Models;
 namespace TeamLeasing.Migrations
 {
     [DbContext(typeof(TeamLeasingContext))]
-    partial class TeamLeasingContextModelSnapshot : ModelSnapshot
+    [Migration("20170325161514_enums")]
+    partial class enums
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.1")
@@ -110,9 +111,6 @@ namespace TeamLeasing.Migrations
                     b.Property<int>("Status");
 
                     b.Property<int?>("TechnologyId");
-
-                    b.Property<string>("Title")
-                        .IsRequired();
 
                     b.HasKey("Id");
 
