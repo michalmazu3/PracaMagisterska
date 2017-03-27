@@ -7,6 +7,7 @@ using TeamLeasing.DAL;
 using TeamLeasing.Models;
 using System.Collections;
 using Microsoft.EntityFrameworkCore;
+using Org.BouncyCastle.Crypto.Tls;
 using TeamLeasing.ViewModels;
 
 namespace TeamLeasing.ViewComponents
@@ -22,11 +23,52 @@ namespace TeamLeasing.ViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            Task<SearchDeveloperViewModel> task = Task.Run(()=>new SearchDeveloperViewModel(_teamLeasingContext));
-            return View(await task);
+            SearchDeveloperViewModel model = new SearchDeveloperViewModel();
+            await Task.Run(() =>
+            {
+                model.UniversityNameValuePairs = CheckAvailableUniversity();
+                model.TechnologyNameValuePairs = CheckAvailableTechnology().Result;
+                model.LevelNameValuePairs = CheckAvailableLevel().Result;
+
+            });
+            return View(model);
         }
 
+        private async Task<List<LevelNameValuePair>> CheckAvailableLevel()
+        {
+            return await Task.Run(() =>
+            {
+                List<LevelNameValuePair> list = new List<LevelNameValuePair>()
+                {
+                    new LevelNameValuePair() { Name = Level.Junior, Value = true},
+                    new LevelNameValuePair() { Name = Level.Regular, Value = false},
+                    new LevelNameValuePair() { Name = Level.Senior, Value = false},
+                };
 
+                return list;
+            });
+        }
+
+        private async Task<List<TechnologyNameValuePair>> CheckAvailableTechnology()
+        {
+            List<TechnologyNameValuePair> list = new List<TechnologyNameValuePair>();
+            await _teamLeasingContext.Technologies.ForEachAsync(s => list.Add(new TechnologyNameValuePair()
+            {
+                Name = s.Name,
+                Value = false
+            }));
+            return list;
+        }
+
+        private List<UniversityNameValuePair> CheckAvailableUniversity()
+        {
+
+            return new List<UniversityNameValuePair>()
+            {
+                new UniversityNameValuePair() { Name = "brak",Value = false},
+                 new UniversityNameValuePair() { Name = "ukończone",Value = false},
+            };
+        }
 
 
     }

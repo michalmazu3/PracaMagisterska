@@ -1,4 +1,5 @@
-﻿@model  TeamLeasing.ViewModels.SearchDeveloperViewModel
+﻿@using TeamLeasing.ViewModels
+@model  TeamLeasing.ViewModels.SearchDeveloperViewModel
 
 <div id="sidebar">
     <form class="form-horizontal search-jobs" asp-action="Search" asp-controller="Developer" Method="post">
@@ -18,50 +19,61 @@
         <h4>Technologia</h4>
         <div class="form-group">
             @{
-                foreach (var item in Model.Technology)
+                for(int i =0;i<Model.TechnologyNameValuePairs.Count();i++)
                 {
+                    var n = Model.TechnologyNameValuePairs[i].Name;
                     <div class="col-sm-offset-2 col-sm-10">
                         <div class="checkbox">
-                            <label  > @item.Key </label>
-                            @Html.CheckBoxFor(l=>item.Value)
+                            <label>
+                               
+                                <input type="checkbox" asp-for="@Model.TechnologyNameValuePairs[i].Value"/>
+                                @Html.LabelFor(model => model.TechnologyNameValuePairs[i].Name,n )
+                                
+                            </label>
                         </div>
                     </div>
                 }
             }
-            
+            <
 
         </div>
         <h4>Studia</h4>
         <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-                <div class="checkbox">
-                    <label><input type="checkbox">brak</label>
-                </div>
-            </div>
+            @{
+                for (int i = 0; i < Model.UniversityNameValuePairs.Count(); i++)
+                {
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" asp-for="@Model.UniversityNameValuePairs[i].Value" />
+                                <label >@Model.UniversityNameValuePairs[i].Name</label>
+                            </label>
+                        </div>
+                    </div>
+                }
+            }
 
-            <div class="col-sm-offset-2 col-sm-10">
-                <div class="checkbox">
-                    <label><input type="checkbox">ukonczone</label>
-                </div>
-            </div>
+
+
+
         </div>
         <h4>Poziom</h4>
         <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-                <div class="checkbox">
-                    <label><input type="checkbox">junior</label>
+            @{
+                for (int i = 0; i < Model.LevelNameValuePairs.Count(); i++)
+                {
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" asp-for="@Model.LevelNameValuePairs[i].Value" />
+                                <label >@Model.LevelNameValuePairs[i].Name</label>
+                            </label>
+                    </div>
                 </div>
-            </div>
-            <div class="col-sm-offset-2 col-sm-10">
-                <div class="checkbox">
-                    <label><input type="checkbox">regular</label>
-                </div>
-            </div>
-            <div class="col-sm-offset-2 col-sm-10">
-                <div class="checkbox">
-                    <label><input type="checkbox">senior</label>
-                </div>
-            </div>
+                }
+            }
+
+
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">

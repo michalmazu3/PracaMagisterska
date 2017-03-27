@@ -244,4 +244,7 @@ D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Services\Mail\ISen
 D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Services\Mail\MessageModel.cs
 D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Services\Mail\SendEmail.cs
 D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\ViewComponents\SearchDeveloperViewComponent.cs
-D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\ViewModels\SearchDeveloperViewModel.cs
+D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\ViewModels\SearchDeveloper\LevelNameValuePair.cs
+D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\ViewModels\SearchDeveloper\SearchDeveloperViewModel.cs
+D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\ViewModels\SearchDeveloper\TechnologyNameValuePair.cs
+D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\ViewModels\SearchDeveloper\UniversityNameValuePair.cs
