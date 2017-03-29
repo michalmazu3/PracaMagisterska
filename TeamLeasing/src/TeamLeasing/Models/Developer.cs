@@ -31,6 +31,10 @@ namespace TeamLeasing.Models
         [DataType(DataType.Date, ErrorMessage = "Wprowadz date w formacie rok.miesiac.dzień")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime BirthDate { get; set; }
+
+        [Required]
+        public IsFinishedUniversity IsFinishedUniversity { get; set; }
+
         [Display(Name = "Studia")]
         public string University { get; set; }
         [Display(Name = "Doświadczenie")]
@@ -52,5 +56,12 @@ namespace TeamLeasing.Models
         Junior,
         Regular,
         Senior
+    }
+
+    public enum IsFinishedUniversity
+    {
+        Finished,
+        InProgress,
+        NotFinished
     }
 }

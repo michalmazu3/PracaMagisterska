@@ -66,6 +66,7 @@ namespace TeamLeasing.DAL
                         Province = "swietokrzyskie",
                         Surname = "Kowalski",
                         University = "Politechnika świetokrzyska II stopien Informatyka",
+                        IsFinishedUniversity = IsFinishedUniversity.Finished,
                         Technology = _context.Technologies.ToList()[0],
                         Photo =  "/image/photo/profil-large.jpg"
 
@@ -81,7 +82,8 @@ namespace TeamLeasing.DAL
                         Experience = 2,
                         Province = "mazowieckie",
                         Surname = "Nowak",
-                        University = "Politechnika świetokrzyska II stopien Informatyka",
+                        University = "Politechnika świetokrzyska II stopien Informatyka (w trakcie)",
+                        IsFinishedUniversity = IsFinishedUniversity.InProgress,
                         Technology = _context.Technologies.ToList()[3],
                         Photo =  "/image/photo/profil2.jpg"
 
@@ -97,7 +99,8 @@ namespace TeamLeasing.DAL
                         Experience = 7,
                         Province = "wielkopolskie",
                         Surname = "Turek",
-                        University = "Politechnika świetokrzyska II stopien Informatyka",
+                        University = "Politechnika świetokrzyska II stopien Informatyka (w trakcie)",
+                        IsFinishedUniversity = IsFinishedUniversity.InProgress,
                         Technology = _context.Technologies.Where(t=>t.Name.ToLower()=="sql").ToList().FirstOrDefault(),
                         Photo =  "/image/photo/profil3.jpg"
                       },
@@ -111,10 +114,39 @@ namespace TeamLeasing.DAL
                         Password = "karollolek",
                         Experience = 4,
                         Province = "śląskie",
-                        Surname = "Lolek",
-                        University = "Politechnika świetokrzyska II stopien Informatyka",
+                        Surname = "Biracz",
+                        University = " ",
+                        IsFinishedUniversity = IsFinishedUniversity.NotFinished,
                         Photo =  "/image/photo/profil4.jpg",
                         Technology = _context.Technologies.Where(t=>t.Name.ToLower()=="javascript").ToList().FirstOrDefault()
+                    },
+                    new Developer(){  Name = "Piotrek",
+                        BirthDate = new DateTime(1992,08,05),
+                        City = "Opole",
+                        Email = "Karol@com.pl",
+                        Level = Level.Junior,
+                        Password = "karollolek",
+                        Experience = 4,
+                        Province = "śląskie",
+                        Surname = "Olak",
+                        University = " ",
+                        IsFinishedUniversity = IsFinishedUniversity.NotFinished,
+                        Photo =  "/image/photo/profil4.jpg",
+                        Technology = _context.Technologies.Where(t=>t.Name.ToLower()=="python").ToList().FirstOrDefault()
+                    },
+                    new Developer(){  Name = "Heniek",
+                        BirthDate = new DateTime(1992,08,05),
+                        City = "Opole",
+                        Email = "Karol@com.pl",
+                        Level = Level.Junior,
+                        Password = "karollolek",
+                        Experience = 4,
+                        Province = "śląskie",
+                        Surname = "Tomczak",
+                        University = " Univerek",
+                        IsFinishedUniversity = IsFinishedUniversity.Finished,
+                        Photo =  "Uniwerek",
+                        Technology = _context.Technologies.Where(t=>t.Name.ToLower()=="python").ToList().FirstOrDefault()
                     }
                 };
             _context.Developers.AddRange(developer);

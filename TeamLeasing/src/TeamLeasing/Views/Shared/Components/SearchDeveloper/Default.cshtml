@@ -21,33 +21,36 @@
             @{
                 for(int i =0;i<Model.TechnologyNameValuePairs.Count();i++)
                 {
-                    var n = Model.TechnologyNameValuePairs[i].Name;
+                    
                     <div class="col-sm-offset-2 col-sm-10">
                         <div class="checkbox">
                             <label>
-                               
+                                @Html.HiddenFor(x => x.TechnologyNameValuePairs[i].Name)
                                 <input type="checkbox" asp-for="@Model.TechnologyNameValuePairs[i].Value"/>
-                                @Html.LabelFor(model => model.TechnologyNameValuePairs[i].Name,n )
-                                
+                                <label>@Model.TechnologyNameValuePairs[i].Name</label>
+
+
                             </label>
                         </div>
                     </div>
                 }
             }
-            <
-
+           
         </div>
         <h4>Studia</h4>
         <div class="form-group">
             @{
                 for (int i = 0; i < Model.UniversityNameValuePairs.Count(); i++)
                 {
+
+
                     <div class="col-sm-offset-2 col-sm-10">
                         <div class="checkbox">
-                            <label>
-                                <input type="checkbox" asp-for="@Model.UniversityNameValuePairs[i].Value" />
-                                <label >@Model.UniversityNameValuePairs[i].Name</label>
-                            </label>
+                            @Html.HiddenFor(x=>x.UniversityNameValuePairs[i].Name)
+                            <input type="checkbox" asp-for="@Model.UniversityNameValuePairs[i].Value" />
+                            <label >@Model.UniversityNameValuePairs[i].Name</label>
+                            
+
                         </div>
                     </div>
                 }
@@ -65,7 +68,8 @@
                     <div class="col-sm-offset-2 col-sm-10">
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" asp-for="@Model.LevelNameValuePairs[i].Value" />
+                                @Html.HiddenFor(x => x.LevelNameValuePairs[i].Name)
+                                <input type="checkbox" asp-for="@Model.LevelNameValuePairs[i].Value"/>
                                 <label >@Model.LevelNameValuePairs[i].Name</label>
                             </label>
                     </div>

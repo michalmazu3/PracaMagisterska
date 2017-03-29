@@ -24,14 +24,14 @@ namespace TeamLeasing.ViewComponents
         public async Task<IViewComponentResult> InvokeAsync()
         {
             SearchDeveloperViewModel model = new SearchDeveloperViewModel();
-            await Task.Run(() =>
+            await  Task.Run(() =>
             {
                 model.UniversityNameValuePairs = CheckAvailableUniversity();
                 model.TechnologyNameValuePairs = CheckAvailableTechnology().Result;
                 model.LevelNameValuePairs = CheckAvailableLevel().Result;
 
             });
-            return View(model);
+           return View(model);
         }
 
         private async Task<List<LevelNameValuePair>> CheckAvailableLevel()
@@ -40,7 +40,7 @@ namespace TeamLeasing.ViewComponents
             {
                 List<LevelNameValuePair> list = new List<LevelNameValuePair>()
                 {
-                    new LevelNameValuePair() { Name = Level.Junior, Value = true},
+                    new LevelNameValuePair() { Name = Level.Junior, Value = false},
                     new LevelNameValuePair() { Name = Level.Regular, Value = false},
                     new LevelNameValuePair() { Name = Level.Senior, Value = false},
                 };
@@ -65,8 +65,9 @@ namespace TeamLeasing.ViewComponents
 
             return new List<UniversityNameValuePair>()
             {
-                new UniversityNameValuePair() { Name = "brak",Value = false},
-                 new UniversityNameValuePair() { Name = "ukończone",Value = false},
+                new UniversityNameValuePair() { Name = IsFinishedUniversity.NotFinished ,Value = false},
+                new UniversityNameValuePair() { Name = IsFinishedUniversity.InProgress,Value = false},
+                new UniversityNameValuePair() { Name = IsFinishedUniversity.NotFinished,Value = false},
             };
         }
 

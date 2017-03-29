@@ -1,8 +1,10 @@
-﻿namespace TeamLeasing.ViewModels
+﻿ 
+using  TeamLeasing.Models;
+namespace TeamLeasing.ViewModels
 {
     public class UniversityNameValuePair
     {
-        public string Name { get; set; }
+        public IsFinishedUniversity Name { get; set; }
         public bool Value { get; set; }
     }
 }
