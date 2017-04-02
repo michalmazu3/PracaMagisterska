@@ -9,9 +9,10 @@ using TeamLeasing.Models;
 namespace TeamLeasing.Migrations
 {
     [DbContext(typeof(TeamLeasingContext))]
-    partial class TeamLeasingContextModelSnapshot : ModelSnapshot
+    [Migration("20170402132809_identitydev2")]
+    partial class identitydev2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.1")

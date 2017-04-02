@@ -9,9 +9,10 @@ using TeamLeasing.Models;
 namespace TeamLeasing.Migrations
 {
     [DbContext(typeof(TeamLeasingContext))]
-    partial class TeamLeasingContextModelSnapshot : ModelSnapshot
+    [Migration("20170402122441_identityDev")]
+    partial class identityDev
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.1")
@@ -170,46 +171,6 @@ namespace TeamLeasing.Migrations
                     b.ToTable("Developers");
                 });
 
-            modelBuilder.Entity("TeamLeasing.Models.DeveloperUser", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<DateTime>("BirthDate");
-
-                    b.Property<string>("City")
-                        .IsRequired();
-
-                    b.Property<string>("Cv");
-
-                    b.Property<int>("Experience");
-
-                    b.Property<int>("IsFinishedUniversity");
-
-                    b.Property<int>("Level");
-
-                    b.Property<string>("Name")
-                        .IsRequired();
-
-                    b.Property<string>("Photo");
-
-                    b.Property<string>("Province")
-                        .IsRequired();
-
-                    b.Property<string>("Surname")
-                        .IsRequired();
-
-                    b.Property<int?>("TechnologyId");
-
-                    b.Property<string>("University");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("TechnologyId");
-
-                    b.ToTable("DeveloperUser");
-                });
-
             modelBuilder.Entity("TeamLeasing.Models.Employee", b =>
                 {
                     b.Property<int>("Id")
@@ -301,8 +262,6 @@ namespace TeamLeasing.Migrations
 
                     b.Property<int?>("DeveloperId");
 
-                    b.Property<int?>("DeveloperUserId");
-
                     b.Property<int?>("EmployeeId");
 
                     b.Property<bool>("IsHidden");
@@ -319,8 +278,6 @@ namespace TeamLeasing.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("DeveloperId");
-
-                    b.HasIndex("DeveloperUserId");
 
                     b.HasIndex("EmployeeId");
 
@@ -351,7 +308,7 @@ namespace TeamLeasing.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
-                    b.Property<int?>("DeveloperUserId");
+                    b.Property<int?>("DeveloperId");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256);
@@ -383,7 +340,7 @@ namespace TeamLeasing.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DeveloperUserId");
+                    b.HasIndex("DeveloperId");
 
                     b.HasIndex("NormalizedEmail")
                         .HasName("EmailIndex");
@@ -439,13 +396,6 @@ namespace TeamLeasing.Migrations
                         .HasForeignKey("TechnologyId");
                 });
 
-            modelBuilder.Entity("TeamLeasing.Models.DeveloperUser", b =>
-                {
-                    b.HasOne("TeamLeasing.Models.Technology", "Technology")
-                        .WithMany()
-                        .HasForeignKey("TechnologyId");
-                });
-
             modelBuilder.Entity("TeamLeasing.Models.Job", b =>
                 {
                     b.HasOne("TeamLeasing.Models.Employee")
@@ -463,10 +413,6 @@ namespace TeamLeasing.Migrations
                         .WithMany("Offers")
                         .HasForeignKey("DeveloperId");
 
-                    b.HasOne("TeamLeasing.Models.DeveloperUser")
-                        .WithMany("Offers")
-                        .HasForeignKey("DeveloperUserId");
-
                     b.HasOne("TeamLeasing.Models.Employee")
                         .WithMany("Offers")
                         .HasForeignKey("EmployeeId");
@@ -479,9 +425,9 @@ namespace TeamLeasing.Migrations
 
             modelBuilder.Entity("TeamLeasing.Models.User", b =>
                 {
-                    b.HasOne("TeamLeasing.Models.DeveloperUser", "DeveloperUser")
+                    b.HasOne("TeamLeasing.Models.Developer", "Developer")
                         .WithMany()
-                        .HasForeignKey("DeveloperUserId");
+                        .HasForeignKey("DeveloperId");
                 });
         }
     }

@@ -11354,7 +11354,8 @@
       "Microsoft.Extensions.Logging.Console >= 1.1.1",
       "Microsoft.Extensions.Logging.Debug >= 1.1.1",
       "Microsoft.Extensions.Options.ConfigurationExtensions >= 1.1.1",
-      "Microsoft.NETCore.App >= 1.1.1"
+      "Microsoft.NETCore.App >= 1.1.1",
+      "System.Runtime >= 4.3.0"
     ],
     ".NETCoreApp,Version=v1.1": []
   },

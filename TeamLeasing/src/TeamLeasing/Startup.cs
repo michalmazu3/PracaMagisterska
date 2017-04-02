@@ -57,6 +57,7 @@ namespace TeamLeasing
             services.AddTransient<IMessage,MessageModel>();
             services.AddTransient<ISendEmail, SendEmail>();
             services.AddSingleton<TeamLeasingSeedData>();
+            services.AddSingleton<SeedRoles>();
             services.AddLogging();
 
         }
@@ -65,7 +66,8 @@ namespace TeamLeasing
         public void Configure(IApplicationBuilder app,
             IHostingEnvironment env,
             ILoggerFactory loggerFactory,
-            TeamLeasingSeedData seeder)
+            TeamLeasingSeedData seeder,
+            SeedRoles rolesSeeder)
         {
             loggerFactory.AddConsole();
 
@@ -90,6 +92,7 @@ namespace TeamLeasing
             });
 
            seeder.Seed().Wait();
+            rolesSeeder.Seed().Wait();
         }
     }
 }
