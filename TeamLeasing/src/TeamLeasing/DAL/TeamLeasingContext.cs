@@ -1,11 +1,12 @@
 ﻿using JetBrains.Annotations;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using TeamLeasing.Models;
 
 namespace TeamLeasing.DAL
 {
-    public class TeamLeasingContext : DbContext
+    public class TeamLeasingContext : IdentityDbContext<User>
     {
         public IConfigurationRoot _config;
 

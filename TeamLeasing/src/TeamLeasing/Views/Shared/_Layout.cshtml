@@ -26,24 +26,38 @@
                     <li><a asp-controller="Job" asp-action="Search">Oferty pracy</a></li>
                     <li><a asp-controller="Developer" asp-action="Search">Profile programistów</a></li>
                     <li><a asp-controller="Contact" asp-action="Index">Kontact</a></li>
-                    <li><a href="login.html">Zaloguj</a></li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Moje Konto Programista <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="developer-account.html">Edycja konta</a></li>
-                            <li><a href="developer-applications.html">Aplikacje</a></li>
-                            <li><a href="developer-offers.html">Przychodzące oderty</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Moje Konto Pracodawca <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="employee-account.html">Edycja konta</a></li>
-                            <li><a href="employee-job-offers.html">Twoje oferty</a></li>
-                            <li><a href="#">Utwórz oferte</a></li>
-                            <li><a href="employee-send-offers.html">Wysłane propozycje</a></li>
-                        </ul>
-                    </li>
+                 
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li><a asp-controller="Login" asp-action="Logout">@User.Identity.Name  Wyloguj</a></li>
+                    }
+                    else
+                    {
+                       <li><a asp-controller="Login" asp-action="Login">Zaloguj</a></li>
+                    }
+
+                    
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Moje Konto Programista <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="developer-account.html">Edycja konta</a></li>
+                                <li><a href="developer-applications.html">Aplikacje</a></li>
+                                <li><a href="developer-offers.html">Przychodzące oderty</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Moje Konto Pracodawca <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="employee-account.html">Edycja konta</a></li>
+                                <li><a href="employee-job-offers.html">Twoje oferty</a></li>
+                                <li><a href="#">Utwórz oferte</a></li>
+                                <li><a href="employee-send-offers.html">Wysłane propozycje</a></li>
+                            </ul>
+                        </li>
+                    }
                 </ul>
             </div><!--/.nav-collapse -->
         </div>

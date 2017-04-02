@@ -17,9 +17,12 @@
 --reference:C:\Users\Koks\.nuget\packages\Microsoft.ApplicationInsights\2.2.0\lib\netstandard1.5\Microsoft.ApplicationInsights.dll
 --reference:C:\Users\Koks\.nuget\packages\Microsoft.ApplicationInsights.AspNetCore\2.0.0\lib\netstandard1.6\Microsoft.ApplicationInsights.AspNetCore.dll
 --reference:C:\Users\Koks\.nuget\packages\Microsoft.AspNetCore.Antiforgery\1.1.0\lib\netstandard1.3\Microsoft.AspNetCore.Antiforgery.dll
+--reference:C:\Users\Koks\.nuget\packages\Microsoft.AspNetCore.Authentication\1.0.0\lib\netstandard1.3\Microsoft.AspNetCore.Authentication.dll
+--reference:C:\Users\Koks\.nuget\packages\Microsoft.AspNetCore.Authentication.Cookies\1.0.0\lib\netstandard1.3\Microsoft.AspNetCore.Authentication.Cookies.dll
 --reference:C:\Users\Koks\.nuget\packages\Microsoft.AspNetCore.Authorization\1.1.0\lib\netstandard1.3\Microsoft.AspNetCore.Authorization.dll
 --reference:C:\Users\Koks\.nuget\packages\Microsoft.AspNetCore.Cors\1.1.0\lib\netstandard1.3\Microsoft.AspNetCore.Cors.dll
 --reference:C:\Users\Koks\.nuget\packages\Microsoft.AspNetCore.Cryptography.Internal\1.1.0\lib\netstandard1.3\Microsoft.AspNetCore.Cryptography.Internal.dll
+--reference:C:\Users\Koks\.nuget\packages\Microsoft.AspNetCore.Cryptography.KeyDerivation\1.0.0\lib\netstandard1.3\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
 --reference:C:\Users\Koks\.nuget\packages\Microsoft.AspNetCore.DataProtection\1.1.0\lib\netstandard1.3\Microsoft.AspNetCore.DataProtection.dll
 --reference:C:\Users\Koks\.nuget\packages\Microsoft.AspNetCore.DataProtection.Abstractions\1.1.0\lib\netstandard1.3\Microsoft.AspNetCore.DataProtection.Abstractions.dll
 --reference:C:\Users\Koks\.nuget\packages\Microsoft.AspNetCore.Diagnostics\1.1.1\lib\netstandard1.3\Microsoft.AspNetCore.Diagnostics.dll
@@ -33,6 +36,8 @@
 --reference:C:\Users\Koks\.nuget\packages\Microsoft.AspNetCore.Http.Extensions\1.1.1\lib\netstandard1.3\Microsoft.AspNetCore.Http.Extensions.dll
 --reference:C:\Users\Koks\.nuget\packages\Microsoft.AspNetCore.Http.Features\1.1.1\lib\netstandard1.3\Microsoft.AspNetCore.Http.Features.dll
 --reference:C:\Users\Koks\.nuget\packages\Microsoft.AspNetCore.HttpOverrides\1.1.1\lib\netstandard1.3\Microsoft.AspNetCore.HttpOverrides.dll
+--reference:C:\Users\Koks\.nuget\packages\Microsoft.AspNetCore.Identity\1.0.0\lib\netstandard1.3\Microsoft.AspNetCore.Identity.dll
+--reference:C:\Users\Koks\.nuget\packages\Microsoft.AspNetCore.Identity.EntityFrameworkCore\1.0.0\lib\netstandard1.3\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 --reference:C:\Users\Koks\.nuget\packages\Microsoft.AspNetCore.JsonPatch\1.1.0\lib\netstandard1.3\Microsoft.AspNetCore.JsonPatch.dll
 --reference:C:\Users\Koks\.nuget\packages\Microsoft.AspNetCore.Localization\1.1.0\lib\netstandard1.3\Microsoft.AspNetCore.Localization.dll
 --reference:C:\Users\Koks\.nuget\packages\Microsoft.AspNetCore.Mvc\1.1.1\lib\netstandard1.6\Microsoft.AspNetCore.Mvc.dll
@@ -220,6 +225,8 @@ D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Controllers\Contac
 D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Controllers\DeveloperController.cs
 D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Controllers\HomeController.cs
 D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Controllers\JobController.cs
+D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Controllers\LoginController.cs
+D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Controllers\RegistrationController.cs
 D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\DAL\TeamLeasingContext.cs
 D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\DAL\TeamLeasingSeedData.cs
 D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Migrations\20170319180104_Initialdatabase.cs
@@ -232,6 +239,14 @@ D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Migrations\2017032
 D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Migrations\20170325165747_addtitle.Designer.cs
 D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Migrations\20170329192027_IsFinishedUniversity.cs
 D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Migrations\20170329192027_IsFinishedUniversity.Designer.cs
+D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Migrations\20170401110255_identity.cs
+D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Migrations\20170401110255_identity.Designer.cs
+D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Migrations\20170401110856_identity2.cs
+D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Migrations\20170401110856_identity2.Designer.cs
+D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Migrations\20170401141020_identity3.cs
+D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Migrations\20170401141020_identity3.Designer.cs
+D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Migrations\20170401144848_test.cs
+D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Migrations\20170401144848_test.Designer.cs
 D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Migrations\TeamLeasingContextModelSnapshot.cs
 D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Models\Developer.cs
 D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Models\Employee.cs
@@ -239,6 +254,7 @@ D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Models\Job.cs
 D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Models\Message.cs
 D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Models\Offer.cs
 D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Models\Technology.cs
+D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Models\User.cs
 D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Services\Helpers\TempDataExtensions.cs
 D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Services\Mail\IMailConfiguration.cs
 D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Services\Mail\IMessage.cs
@@ -246,6 +262,7 @@ D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Services\Mail\ISen
 D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Services\Mail\MessageModel.cs
 D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Services\Mail\SendEmail.cs
 D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\ViewComponents\SearchDeveloperViewComponent.cs
+D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\ViewModels\LoginViewModel.cs
 D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\ViewModels\SearchDeveloper\LevelNameValuePair.cs
 D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\ViewModels\SearchDeveloper\SearchDeveloperViewModel.cs
 D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\ViewModels\SearchDeveloper\TechnologyNameValuePair.cs

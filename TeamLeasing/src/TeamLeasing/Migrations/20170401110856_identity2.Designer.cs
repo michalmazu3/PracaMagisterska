@@ -9,9 +9,10 @@ using TeamLeasing.Models;
 namespace TeamLeasing.Migrations
 {
     [DbContext(typeof(TeamLeasingContext))]
-    partial class TeamLeasingContextModelSnapshot : ModelSnapshot
+    [Migration("20170401110856_identity2")]
+    partial class identity2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.1")
@@ -297,7 +298,7 @@ namespace TeamLeasing.Migrations
                     b.ToTable("Technologies");
                 });
 
-            modelBuilder.Entity("TeamLeasing.Models.User", b =>
+            modelBuilder.Entity("TeamLeasing.Models.TLUser", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
@@ -335,6 +336,8 @@ namespace TeamLeasing.Migrations
                     b.Property<string>("UserName")
                         .HasMaxLength(256);
 
+                    b.Property<string>("test");
+
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
@@ -357,7 +360,7 @@ namespace TeamLeasing.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("TeamLeasing.Models.User")
+                    b.HasOne("TeamLeasing.Models.TLUser")
                         .WithMany("Claims")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -365,7 +368,7 @@ namespace TeamLeasing.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("TeamLeasing.Models.User")
+                    b.HasOne("TeamLeasing.Models.TLUser")
                         .WithMany("Logins")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -378,7 +381,7 @@ namespace TeamLeasing.Migrations
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("TeamLeasing.Models.User")
+                    b.HasOne("TeamLeasing.Models.TLUser")
                         .WithMany("Roles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);

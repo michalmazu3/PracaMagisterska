@@ -2,33 +2,52 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using TeamLeasing.Models;
 
 namespace TeamLeasing.DAL
 {
     public class TeamLeasingSeedData
     {
+        private UserManager<User> _manager { get; set; }
         private TeamLeasingContext _context;
 
-        public TeamLeasingSeedData(TeamLeasingContext context)
+        public TeamLeasingSeedData(TeamLeasingContext context, UserManager<User> manager)
         {
+            _manager = manager;
             _context = context;
         }
 
-        public void Seed()
+        public async Task Seed()
         {
             _context.Technologies.RemoveRange(_context.Technologies.ToArray());
             _context.Developers.RemoveRange(_context.Developers.ToArray());
             _context.Jobs.RemoveRange(_context.Jobs.ToArray());
-            _context.SaveChanges();
 
-            Technologies();
-            Developers();
-            Jobs();
+            await _context.SaveChangesAsync();
+
+            await Technologies();
+            await Developers();
+            await Jobs();
+            await User();
+        }
+
+        private async Task User()
+        {
+            if (await _manager.FindByEmailAsync("michal@gmail.com") == null)
+            {
+                var result = await _manager.CreateAsync(new User()
+                {
+                    Email = "michal@gmail.com",
+                    UserName = "michal"
+                }, "Michal123$");
+
+            }
 
         }
 
-        private void Technologies()
+        private async Task Technologies()
         {
 
             List<Technology> technology = new List<Technology>()
@@ -42,14 +61,14 @@ namespace TeamLeasing.DAL
                     new Technology() {Name = "SQL"},
                     new Technology() {Name = "C++"}
                 };
-            _context.Technologies.AddRange(technology);
-            _context.SaveChanges();
+            await _context.Technologies.AddRangeAsync(technology);
+            await _context.SaveChangesAsync();
 
 
 
         }
 
-        private void Developers()
+        private async Task Developers()
         {
 
             List<Developer> developer = new List<Developer>()
@@ -149,11 +168,11 @@ namespace TeamLeasing.DAL
                         Technology = _context.Technologies.Where(t=>t.Name.ToLower()=="python").ToList().FirstOrDefault()
                     }
                 };
-            _context.Developers.AddRange(developer);
-            _context.SaveChanges();
+            await _context.Developers.AddRangeAsync(developer);
+            await _context.SaveChangesAsync();
         }
 
-        private void Jobs()
+        private async Task Jobs()
         {
 
             List<Job> jobs = new List<Job>()
@@ -195,8 +214,8 @@ namespace TeamLeasing.DAL
                 },
             };
 
-            _context.Jobs.AddRange(jobs);
-            _context.SaveChanges();
+            await _context.Jobs.AddRangeAsync(jobs);
+            await _context.SaveChangesAsync();
         }
 
     }

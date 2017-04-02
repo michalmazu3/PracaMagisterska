@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using TeamLeasing.DAL;
 using TeamLeasing.Models;
 using TeamLeasing.ViewModels;
@@ -15,91 +17,121 @@ namespace TeamLeasing.Controllers
     public class DeveloperController : Controller
     {
         private readonly TeamLeasingContext _teamLeasingContext;
+        private readonly IServiceScopeFactory _scopeFactory;
+ 
 
-        public DeveloperController(TeamLeasingContext teamLeasingContext)
+        public DeveloperController(TeamLeasingContext teamLeasingContext, IServiceScopeFactory scopeFactory)
         {
             _teamLeasingContext = teamLeasingContext;
+            _scopeFactory = scopeFactory;
         }
 
         // GET: /<controller>/
-        public async Task<IActionResult> Search()
+        public async Task< IActionResult> Search()
         {
-            var developers = await _teamLeasingContext.Developers.Include(i => i.Technology).ToListAsync();
-            return View(developers);
+            using (_teamLeasingContext)
+            {
+               var developers = _teamLeasingContext.Developers.Include(i => i.Technology).ToListAsync();
+               return View( await developers);
+            }
+         
         }
 
         [HttpPost]
         public async Task<IActionResult> Search(SearchDeveloperViewModel vm)
         {
+            IEnumerable<Developer> searchingDevelopers = new List<Developer>();
             List<Developer> developers = new List<Developer>();
+            using (_teamLeasingContext)
+            {
+                developers = await _teamLeasingContext.Developers
+                    .Include(i => i.Technology)
+                    .ToListAsync();
+            }
+                var tech = await Apllytechnologies(vm, developers);
+                var level = await ApllyLevel(vm, developers);
+                var isFinishedUniversity = await ApllyIsFinishedUniversity(vm, developers);
+                var experience = await ApllyExperience(vm, developers);
+                searchingDevelopers = await Intersection(tech, level, isFinishedUniversity, experience);
 
-            var tech = Apllytechnologies(vm);
-            var level = ApllyLevel(vm);
-            var isFinishedUniversity = ApllyIsFinishedUniversity(vm);
-            var experience = ApllyExperience(vm);
+                return View("Search", searchingDevelopers.ToList());
+            
+        }
+        
+        private Task<IEnumerable<Developer>> Intersection(params IEnumerable<Developer>[] paramsDevelopers)
+        {
+            return Task.Run(() =>
+            {
+                paramsDevelopers = paramsDevelopers.Where(w => w.Count() != 0).ToArray();
 
-           // developers = Intersection(tech, level, (t, l)=>  );
+                for (int i = 1; i < paramsDevelopers.Length; i++)
+                {
+                    paramsDevelopers[0] = paramsDevelopers[0].Intersect(paramsDevelopers[i]).ToList();
+                }
+                return paramsDevelopers[0];
+            });
+           
+        }
+        private Task<List<Developer>> ApllyExperience(SearchDeveloperViewModel vm, List<Developer> developers )
+        {
+            return Task.Run(() =>
+            {
+              return  developers.Where(w => w.Experience > vm.ExpirienceMin && w.Experience < vm.ExpirienceMax)
+              .ToList();
+            });
+              
 
-            return View("Search", developers);
         }
 
+        private Task<List<Developer>> ApllyLevel(SearchDeveloperViewModel vm, List<Developer> developers)
+        {
+            return Task.Run(() =>
+            {
+                return developers.Where(w => vm.LevelNameValuePairs
+                             .Where(v => v.Value)
+                              .Select(s => s.Name)
+                              .Contains(w.Level))
+                                 .ToList();
+            });
+           
+        }
+        private Task<List<Developer>> ApllyIsFinishedUniversity(SearchDeveloperViewModel vm, List<Developer> developers)
+        {
+            return Task.Run(() =>
+            {
+                return developers.Where(w => vm.UniversityNameValuePairs
+                          .Where(v => v.Value)
+                          .Select(s => s.Name)
+                          .Contains(w.IsFinishedUniversity))
+                           .ToList();
+            });
+  
+        }
+
+        private Task<List<Developer>> Apllytechnologies(SearchDeveloperViewModel vm, List<Developer> developers)
+        {
+            return Task.Run(() =>
+            {
+                return developers.Where(w => vm.TechnologyNameValuePairs
+                        .Where(v => v.Value)
+                        .Select(s => s.Name)
+                      .Contains(w.Technology.Name))
+                          .ToList();
+            });
        
-
-        private IEnumerable<Developer> Intersection(IEnumerable<Developer> d1, IEnumerable<Developer> d2,
-            Func<IEnumerable<Developer>, IEnumerable<Developer>, List<Developer>> check)
-        {
-
-           return check(d1, d2);
-
         }
 
-   
-
-        private IEnumerable<Developer> ApllyExperience(SearchDeveloperViewModel vm)
+        public  async  Task<IActionResult> Profile(int developerId)
         {
-            return _teamLeasingContext.Developers.Include(i => i.Technology)
-                .Where(w=>w.Experience>vm.ExpirienceMin && w.Experience<vm.ExpirienceMax)
-                .ToList();
-        }
+            using (_teamLeasingContext)
+            {
+                 var developer =  _teamLeasingContext.Developers
+                                                    .Include(i=>i.Technology)
+                                                    .FirstOrDefaultAsync(w => w.Id == developerId);
 
-        private IEnumerable<Developer> ApllyLevel(SearchDeveloperViewModel vm)
-        {
-            return _teamLeasingContext.Developers.Include(i => i.Technology)
-                .Where(
-                    w => vm.LevelNameValuePairs.Where(v => v.Value)
-                                                .Select(s => s.Name)
-                                                .Contains(w.Level))
-                .ToList();
-        }
-        private IEnumerable<Developer> ApllyIsFinishedUniversity(SearchDeveloperViewModel vm)
-        {
-
-            return _teamLeasingContext.Developers.Include(i => i.Technology)
-                 .Where(
-                     w => vm.UniversityNameValuePairs.Where(v => v.Value)
-                                                      .Select(s => s.Name)
-                                                      .Contains(w.IsFinishedUniversity))
-                  .ToList();
-        }
-
-        private IEnumerable<Developer> Apllytechnologies(SearchDeveloperViewModel vm)
-        {
-            return _teamLeasingContext.Developers.Include(i => i.Technology)
-                   .Where(
-                       w => vm.TechnologyNameValuePairs.Where(v => v.Value)
-                                                        .Select(s => s.Name)
-                                                        .Contains(w.Technology.Name))
-                   .ToList();
-        }
-
-        public async Task<IActionResult> Profile(int developerId)
-        {
-            var developer = await _teamLeasingContext.Developers
-                .Include(i => i.Technology)
-                .Where(w => w.Id == developerId)
-                .FirstOrDefaultAsync();
-
-            return View("Profile", developer);
+                 return View("Profile",await developer); 
+            }
+          
         }
     }
 }

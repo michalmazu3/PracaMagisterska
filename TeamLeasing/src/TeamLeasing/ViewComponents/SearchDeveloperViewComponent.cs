@@ -23,41 +23,38 @@ namespace TeamLeasing.ViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            SearchDeveloperViewModel model = new SearchDeveloperViewModel();
-            await  Task.Run(() =>
+            SearchDeveloperViewModel model = new SearchDeveloperViewModel
             {
-                model.UniversityNameValuePairs = CheckAvailableUniversity();
-                model.TechnologyNameValuePairs = CheckAvailableTechnology().Result;
-                model.LevelNameValuePairs = CheckAvailableLevel().Result;
-
-            });
-           return View(model);
+                TechnologyNameValuePairs = await CheckAvailableTechnology(),
+                UniversityNameValuePairs = CheckAvailableUniversity(),
+                LevelNameValuePairs = CheckAvailableLevel()
+            };
+            return View(model);
         }
 
-        private async Task<List<LevelNameValuePair>> CheckAvailableLevel()
+        private List<LevelNameValuePair> CheckAvailableLevel()
         {
-            return await Task.Run(() =>
-            {
-                List<LevelNameValuePair> list = new List<LevelNameValuePair>()
+            return new List<LevelNameValuePair>()
                 {
-                    new LevelNameValuePair() { Name = Level.Junior, Value = false},
-                    new LevelNameValuePair() { Name = Level.Regular, Value = false},
-                    new LevelNameValuePair() { Name = Level.Senior, Value = false},
+                    new LevelNameValuePair() {Name = Level.Junior, Value = false},
+                    new LevelNameValuePair() {Name = Level.Regular, Value = false},
+                    new LevelNameValuePair() {Name = Level.Senior, Value = false},
                 };
-
-                return list;
-            });
         }
 
         private async Task<List<TechnologyNameValuePair>> CheckAvailableTechnology()
         {
-            List<TechnologyNameValuePair> list = new List<TechnologyNameValuePair>();
-            await _teamLeasingContext.Technologies.ForEachAsync(s => list.Add(new TechnologyNameValuePair()
+            return await Task.Run(async() =>
             {
-                Name = s.Name,
-                Value = false
-            }));
-            return list;
+                List<TechnologyNameValuePair> list = new List<TechnologyNameValuePair>();
+                using (_teamLeasingContext)
+                {
+                    return await _teamLeasingContext.Technologies.Select(
+                          s => new TechnologyNameValuePair() { Name = s.Name, Value = false }).ToListAsync();
+                }
+            });
+           
+
         }
 
         private List<UniversityNameValuePair> CheckAvailableUniversity()
@@ -67,7 +64,7 @@ namespace TeamLeasing.ViewComponents
             {
                 new UniversityNameValuePair() { Name = IsFinishedUniversity.NotFinished ,Value = false},
                 new UniversityNameValuePair() { Name = IsFinishedUniversity.InProgress,Value = false},
-                new UniversityNameValuePair() { Name = IsFinishedUniversity.NotFinished,Value = false},
+                new UniversityNameValuePair() { Name = IsFinishedUniversity.Finished,Value = false},
             };
         }
 
