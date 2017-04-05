@@ -12,11 +12,14 @@ namespace TeamLeasing.DAL
     {
         private UserManager<User> _manager { get; set; }
         private TeamLeasingContext _context;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public TeamLeasingSeedData(TeamLeasingContext context, UserManager<User> manager)
+        public TeamLeasingSeedData(TeamLeasingContext context, UserManager<User> manager,
+            RoleManager<IdentityRole> roleManager)
         {
             _manager = manager;
             _context = context;
+            _roleManager = roleManager;
         }
 
         public async Task Seed()
@@ -24,6 +27,7 @@ namespace TeamLeasing.DAL
             _context.Technologies.RemoveRange(_context.Technologies.ToArray());
             _context.Developers.RemoveRange(_context.Developers.ToArray());
             _context.Jobs.RemoveRange(_context.Jobs.ToArray());
+            _context.Users.RemoveRange(_context.Users.ToArray());
 
             await _context.SaveChangesAsync();
 
@@ -44,6 +48,30 @@ namespace TeamLeasing.DAL
                 }, "Michal123$");
 
             }
+
+            DeveloperUser developerUser = new DeveloperUser()
+            {
+                Name = "Michal",
+                BirthDate = new DateTime(1992, 08, 05),
+                City = "Kraków",
+                Level = Level.Junior,
+                Experience = 2,
+                Province = "swietokrzyskie",
+                Surname = "Koks",
+                University = "Politechnika świetokrzyska II stopien Informatyka",
+                IsFinishedUniversity = IsFinishedUniversity.Finished,
+                Technology = null,//_context.Technologies.Where(t => t.Name.ToLower() == "sql").ToList().FirstOrDefault(),
+                Photo = "/image/photo/profil-large.jpg"
+            };
+
+     
+            var r = await _manager.CreateAsync(new User()
+            {
+                UserName = "Majkel12",
+                Email = "michal@com.pl",
+                DeveloperUser = developerUser
+
+            },"Michal123$");
 
         }
 

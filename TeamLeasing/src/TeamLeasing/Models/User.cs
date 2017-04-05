@@ -8,6 +8,6 @@ namespace TeamLeasing.Models
 {
       public class User : IdentityUser
     {
-        public DeveloperUser DeveloperUser { get; set; }
+        public virtual DeveloperUser DeveloperUser { get; set; }
     }
 }
