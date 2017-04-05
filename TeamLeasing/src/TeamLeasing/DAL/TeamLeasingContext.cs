@@ -16,7 +16,6 @@ namespace TeamLeasing.DAL
         }
 
         public DbSet<Developer> Developers { get; set; }
-      //  public DbSet<DeveloperUser> DeveloperUser { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Technology> Technologies { get; set; }
         public DbSet<Job> Jobs { get; set; }

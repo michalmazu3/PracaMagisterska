@@ -6,7 +6,6 @@ namespace TeamLeasing.Models
 {
     public class Technology
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         [Display(Name = "Technologia")]
         public string Name { get; set; }
