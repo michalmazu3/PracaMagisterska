@@ -12,7 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using TeamLeasing.DAL;
-using Microsoft.DotNet.Cli.Utils;
+//using Microsoft.DotNet.Cli.Utils;
 using TeamLeasing.Models;
 using TeamLeasing.Services;
 using TeamLeasing.Services.Mail;
@@ -91,7 +91,7 @@ namespace TeamLeasing
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
-           seeder.Seed().Wait();
+            seeder.Seed().Wait();
             rolesSeeder.Seed().Wait();
         }
     }
