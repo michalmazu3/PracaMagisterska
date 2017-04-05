@@ -26,7 +26,7 @@ namespace TeamLeasing.DAL
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
-            optionsBuilder.UseSqlServer(_config["ConnectionStrings:TeamLeasingAzureConnectionString"]);
+            optionsBuilder.UseSqlServer(_config["ConnectionStrings:TeamLeasingConnectionString"]);
 
         }
     }

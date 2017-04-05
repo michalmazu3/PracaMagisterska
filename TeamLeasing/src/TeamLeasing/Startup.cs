@@ -90,6 +90,10 @@ namespace TeamLeasing
             });
 
            seeder.Seed().Wait();
+<<<<<<< HEAD
+=======
+            rolesSeeder.Seed().Wait();
+>>>>>>> parent of aa64c89... ...
         }
     }
 }
