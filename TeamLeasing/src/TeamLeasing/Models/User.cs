@@ -8,6 +8,5 @@ namespace TeamLeasing.Models
 {
       public class User : IdentityUser
     {
-        public DeveloperUser DeveloperUser { get; set; }
     }
 }

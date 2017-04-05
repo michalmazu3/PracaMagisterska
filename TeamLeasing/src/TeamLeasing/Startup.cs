@@ -12,7 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using TeamLeasing.DAL;
-//using Microsoft.DotNet.Cli.Utils;
+using Microsoft.DotNet.Cli.Utils;
 using TeamLeasing.Models;
 using TeamLeasing.Services;
 using TeamLeasing.Services.Mail;
@@ -57,7 +57,6 @@ namespace TeamLeasing
             services.AddTransient<IMessage,MessageModel>();
             services.AddTransient<ISendEmail, SendEmail>();
             services.AddSingleton<TeamLeasingSeedData>();
-            services.AddSingleton<SeedRoles>();
             services.AddLogging();
 
         }
@@ -66,8 +65,7 @@ namespace TeamLeasing
         public void Configure(IApplicationBuilder app,
             IHostingEnvironment env,
             ILoggerFactory loggerFactory,
-            TeamLeasingSeedData seeder,
-            SeedRoles rolesSeeder)
+            TeamLeasingSeedData seeder)
         {
             loggerFactory.AddConsole();
 
@@ -91,8 +89,7 @@ namespace TeamLeasing
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            seeder.Seed().Wait();
-            rolesSeeder.Seed().Wait();
+           seeder.Seed().Wait();
         }
     }
 }

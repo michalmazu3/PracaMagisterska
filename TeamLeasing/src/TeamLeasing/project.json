@@ -34,8 +34,7 @@
     "Microsoft.EntityFrameworkCore.Relational": "1.1.1",
     "Microsoft.EntityFrameworkCore.Tools": "1.1.0",
     "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.0.0",
-    "Microsoft.Extensions.DependencyInjection.Abstractions": "1.1.0",
-    "System.Runtime": "4.3.0"
+    "Microsoft.Extensions.DependencyInjection.Abstractions": "1.1.0"
   },
   "commands": {
     "ef": "EntityFramework.Commands"
