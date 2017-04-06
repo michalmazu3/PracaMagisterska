@@ -39,11 +39,15 @@
           "Microsoft.EntityFrameworkCore.Tools": "1.1.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.0.0",
 <<<<<<< HEAD
+<<<<<<< HEAD
           "Microsoft.Extensions.DependencyInjection.Abstractions": "1.1.0"
 =======
           "Microsoft.Extensions.DependencyInjection.Abstractions": "1.1.0",
           "System.Runtime": "4.3.0"
 >>>>>>> parent of aa64c89... ...
+=======
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "1.1.0"
+>>>>>>> parent of 1017a4d... no message
         },
         "compile": {
           "TeamLeasing.dll": {}
@@ -2976,11 +2980,15 @@
           "Microsoft.EntityFrameworkCore.Tools": "1.1.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.0.0",
 <<<<<<< HEAD
+<<<<<<< HEAD
           "Microsoft.Extensions.DependencyInjection.Abstractions": "1.1.0"
 =======
           "Microsoft.Extensions.DependencyInjection.Abstractions": "1.1.0",
           "System.Runtime": "4.3.0"
 >>>>>>> parent of aa64c89... ...
+=======
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "1.1.0"
+>>>>>>> parent of 1017a4d... no message
         },
         "runtime": {
           "TeamLeasing.dll": {}

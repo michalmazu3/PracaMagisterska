@@ -4538,28 +4538,12 @@
         "lib/netstandard1.6/Microsoft.ApplicationInsights.AspNetCore.xml"
       ]
     },
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-    "Microsoft.AspNetCore.Antiforgery/1.1.1": {
-      "sha512": "dPXE9f6UV8DAUn/SxDCI3x0Lw5gjZ093ZDgWUZOZcUmv7k52V+X7VQjyO4iGPiFXj71vTwGjMETR4qw/SDVm5w==",
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-      "type": "package",
-      "path": "microsoft.aspnetcore.antiforgery/1.1.1",
-      "files": [
-        "Microsoft.AspNetCore.Antiforgery.1.1.1.nupkg.sha512",
-=======
-=======
     "Microsoft.AspNetCore.Antiforgery/1.1.0": {
       "sha512": "6HM8/rsSGAQybSZ9sNP2f0Xqh507OJu3kvqRksXeHUXV72yuwFpnauGkfIMSt+gwPSvyk8qGqZB2m4sKCUomhA==",
->>>>>>> parent of aa64c89... ...:TeamLeasing/src/TeamLeasing/project.lock.json
       "type": "package",
       "path": "Microsoft.AspNetCore.Antiforgery/1.1.0",
       "files": [
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-        "Microsoft.AspNetCore.Antiforgery.1.1.1.nupkg.sha512",
-=======
         "Microsoft.AspNetCore.Antiforgery.1.1.0.nupkg.sha512",
->>>>>>> parent of aa64c89... ...:TeamLeasing/src/TeamLeasing/project.lock.json
->>>>>>> b398e4e76bf702e512b96992ae611ae558ce8356:TeamLeasing/src/TeamLeasing/project.lock.json
         "Microsoft.AspNetCore.Antiforgery.nuspec",
         "lib/net451/Microsoft.AspNetCore.Antiforgery.dll",
         "lib/net451/Microsoft.AspNetCore.Antiforgery.xml",
@@ -4567,16 +4551,8 @@
         "lib/netstandard1.3/Microsoft.AspNetCore.Antiforgery.xml"
       ]
     },
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-    "Microsoft.AspNetCore.Authentication/1.0.2": {
-      "sha512": "8QqrAoehvziGt9YzPNNzKS1Dv7Gk+gBrS+nS/KvQQaa34lcxI83gwaAM7jYbapTxgUmgDOghzThASIDgWn2KRg==",
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-=======
-=======
     "Microsoft.AspNetCore.Authentication/1.0.0": {
       "sha512": "3af/pZSoaIkZPjGPTlpvIXKDA4NCN6O7++iSO4N2rnKjC5OFHnCX5CLzRxO6721kqovIssRPo84q1HvT4IL6GQ==",
->>>>>>> parent of aa64c89... ...:TeamLeasing/src/TeamLeasing/project.lock.json
->>>>>>> b398e4e76bf702e512b96992ae611ae558ce8356:TeamLeasing/src/TeamLeasing/project.lock.json
       "type": "package",
       "path": "Microsoft.AspNetCore.Authentication/1.0.0",
       "files": [
@@ -4588,16 +4564,8 @@
         "lib/netstandard1.3/Microsoft.AspNetCore.Authentication.xml"
       ]
     },
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-    "Microsoft.AspNetCore.Authentication.Cookies/1.0.2": {
-      "sha512": "MkQSWY+wuerJsNkgCXfqvPhhUyYsFGSRaXpvilzwW921qYFt6nYFOPnjohgLLQtfhKwYBOHZYgKvM8759X2HFg==",
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-=======
-=======
     "Microsoft.AspNetCore.Authentication.Cookies/1.0.0": {
       "sha512": "zWhEmMwAqLnQIn3eWGlfioBkKngLB/cEqhqw+jAPPrelH8nNNCnHKIoC6ZQf5oSPmpTX9vZU7XEOrpXHFxSQGw==",
->>>>>>> parent of aa64c89... ...:TeamLeasing/src/TeamLeasing/project.lock.json
->>>>>>> b398e4e76bf702e512b96992ae611ae558ce8356:TeamLeasing/src/TeamLeasing/project.lock.json
       "type": "package",
       "path": "Microsoft.AspNetCore.Authentication.Cookies/1.0.0",
       "files": [
@@ -4609,28 +4577,12 @@
         "lib/netstandard1.3/Microsoft.AspNetCore.Authentication.Cookies.xml"
       ]
     },
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-    "Microsoft.AspNetCore.Authorization/1.1.1": {
-      "sha512": "QQlgW8+GwKw9V1/iIE8nDPvQyMAr4EFPVnH1q65mk9Z7DhTFTs2r+O8Xtd/HrGUR/ooWuWrgEn15h+sl7xjcrw==",
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-      "type": "package",
-      "path": "microsoft.aspnetcore.authorization/1.1.1",
-      "files": [
-        "Microsoft.AspNetCore.Authorization.1.1.1.nupkg.sha512",
-=======
-=======
     "Microsoft.AspNetCore.Authorization/1.1.0": {
       "sha512": "dqveE6pqsnzkab2vw+aFExFYeCikF/T+GKZW9ki8dwJuN7M2+jJcgWtYAv83q7NjBARVh2xH8xf0ahzeuXL/WQ==",
->>>>>>> parent of aa64c89... ...:TeamLeasing/src/TeamLeasing/project.lock.json
       "type": "package",
       "path": "Microsoft.AspNetCore.Authorization/1.1.0",
       "files": [
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-        "Microsoft.AspNetCore.Authorization.1.1.1.nupkg.sha512",
-=======
         "Microsoft.AspNetCore.Authorization.1.1.0.nupkg.sha512",
->>>>>>> parent of aa64c89... ...:TeamLeasing/src/TeamLeasing/project.lock.json
->>>>>>> b398e4e76bf702e512b96992ae611ae558ce8356:TeamLeasing/src/TeamLeasing/project.lock.json
         "Microsoft.AspNetCore.Authorization.nuspec",
         "lib/net451/Microsoft.AspNetCore.Authorization.dll",
         "lib/net451/Microsoft.AspNetCore.Authorization.xml",
@@ -4638,16 +4590,8 @@
         "lib/netstandard1.3/Microsoft.AspNetCore.Authorization.xml"
       ]
     },
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-    "Microsoft.AspNetCore.Cors/1.1.1": {
-      "sha512": "a4BgNuYMgl5Z7gJ3IXwe1gX017yZg7ebBTaAIeYHDyvz5CRhXf+D2Kit/hhrc29cCNdGYpoADZ5Y/H2Du36SZA==",
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-=======
-=======
     "Microsoft.AspNetCore.Cors/1.1.0": {
       "sha512": "GtBPVpgjHIO8R+0xXyh9BHTYq4+XKpwfuy9Uo2Iza4mYzfQI06CsJh5p+qkjIxQzroIXN5XNGNnVS9dURR0zBA==",
->>>>>>> parent of aa64c89... ...:TeamLeasing/src/TeamLeasing/project.lock.json
->>>>>>> b398e4e76bf702e512b96992ae611ae558ce8356:TeamLeasing/src/TeamLeasing/project.lock.json
       "type": "package",
       "path": "Microsoft.AspNetCore.Cors/1.1.0",
       "files": [
@@ -4659,28 +4603,12 @@
         "lib/netstandard1.3/Microsoft.AspNetCore.Cors.xml"
       ]
     },
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-    "Microsoft.AspNetCore.Cryptography.Internal/1.1.1": {
-      "sha512": "5UWkDHCCFX19CFDZmLIH/WFffCGZz+eFmbCPCcUXjn7oHl3el34aUNB5liKtVmcM4TP1+OjxCMomU6nQy/g6CA==",
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-      "type": "package",
-      "path": "microsoft.aspnetcore.cryptography.internal/1.1.1",
-      "files": [
-        "Microsoft.AspNetCore.Cryptography.Internal.1.1.1.nupkg.sha512",
-=======
-=======
     "Microsoft.AspNetCore.Cryptography.Internal/1.1.0": {
       "sha512": "Oy0pgxQkusvQwIrwbHvGVZhwk59qRVKxcer6HsWw0jCEq2LoQ7mj7x7DovE5ub8UvffLYWx77NMF5uwPtkl8KA==",
->>>>>>> parent of aa64c89... ...:TeamLeasing/src/TeamLeasing/project.lock.json
       "type": "package",
       "path": "Microsoft.AspNetCore.Cryptography.Internal/1.1.0",
       "files": [
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-        "Microsoft.AspNetCore.Cryptography.Internal.1.1.1.nupkg.sha512",
-=======
         "Microsoft.AspNetCore.Cryptography.Internal.1.1.0.nupkg.sha512",
->>>>>>> parent of aa64c89... ...:TeamLeasing/src/TeamLeasing/project.lock.json
->>>>>>> b398e4e76bf702e512b96992ae611ae558ce8356:TeamLeasing/src/TeamLeasing/project.lock.json
         "Microsoft.AspNetCore.Cryptography.Internal.nuspec",
         "lib/net451/Microsoft.AspNetCore.Cryptography.Internal.dll",
         "lib/net451/Microsoft.AspNetCore.Cryptography.Internal.xml",
@@ -4688,16 +4616,8 @@
         "lib/netstandard1.3/Microsoft.AspNetCore.Cryptography.Internal.xml"
       ]
     },
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-    "Microsoft.AspNetCore.Cryptography.KeyDerivation/1.0.2": {
-      "sha512": "8MexQ+9Esvz3Eb4vryIqjkIeObSeGGIBoqzAimZgP9PRcnYNUWO1Akr7KEq/DJBsrJDr2BsN8dd7RCqLMHA3qQ==",
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-=======
-=======
     "Microsoft.AspNetCore.Cryptography.KeyDerivation/1.0.0": {
       "sha512": "OUBTk5RS7b3+Q9Z7F1jAL9JzdWlkITNpUw8EO5Yu1sP4Rq2jaidXKLiEw7oKFbD1Wmcee2s+U/UyHQfy/og7Sw==",
->>>>>>> parent of aa64c89... ...:TeamLeasing/src/TeamLeasing/project.lock.json
->>>>>>> b398e4e76bf702e512b96992ae611ae558ce8356:TeamLeasing/src/TeamLeasing/project.lock.json
       "type": "package",
       "path": "Microsoft.AspNetCore.Cryptography.KeyDerivation/1.0.0",
       "files": [
@@ -4709,28 +4629,12 @@
         "lib/netstandard1.3/Microsoft.AspNetCore.Cryptography.KeyDerivation.xml"
       ]
     },
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-    "Microsoft.AspNetCore.DataProtection/1.1.1": {
-      "sha512": "5R0AKqx/NJ/GHuDymZx1/gXcYl1+/OLo5XPNejBKnWqm/EiZs6+bOM1+O8uEdr3RygUIDTWSCEHq3W7bKt0GSg==",
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-      "type": "package",
-      "path": "microsoft.aspnetcore.dataprotection/1.1.1",
-      "files": [
-        "Microsoft.AspNetCore.DataProtection.1.1.1.nupkg.sha512",
-=======
-=======
     "Microsoft.AspNetCore.DataProtection/1.1.0": {
       "sha512": "wu8pk94CExaLvwwDSnXkTtsdL8mRxbLH8uCKbbPqbtIstSM6bOw/454OvOYKf61BB+It//ItJJYdZTy2j8Kelw==",
->>>>>>> parent of aa64c89... ...:TeamLeasing/src/TeamLeasing/project.lock.json
       "type": "package",
       "path": "Microsoft.AspNetCore.DataProtection/1.1.0",
       "files": [
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-        "Microsoft.AspNetCore.DataProtection.1.1.1.nupkg.sha512",
-=======
         "Microsoft.AspNetCore.DataProtection.1.1.0.nupkg.sha512",
->>>>>>> parent of aa64c89... ...:TeamLeasing/src/TeamLeasing/project.lock.json
->>>>>>> b398e4e76bf702e512b96992ae611ae558ce8356:TeamLeasing/src/TeamLeasing/project.lock.json
         "Microsoft.AspNetCore.DataProtection.nuspec",
         "lib/net451/Microsoft.AspNetCore.DataProtection.dll",
         "lib/net451/Microsoft.AspNetCore.DataProtection.xml",
@@ -4738,28 +4642,12 @@
         "lib/netstandard1.3/Microsoft.AspNetCore.DataProtection.xml"
       ]
     },
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-    "Microsoft.AspNetCore.DataProtection.Abstractions/1.1.1": {
-      "sha512": "vXD8MXsGa5tt9Ez8GlC8rh8YmU+sd/aY4MKtpT3bSusga2fgXB2kUNs1ZbHzKt1ciAlUEmUTeb55qzhIqG3yUg==",
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-      "type": "package",
-      "path": "microsoft.aspnetcore.dataprotection.abstractions/1.1.1",
-      "files": [
-        "Microsoft.AspNetCore.DataProtection.Abstractions.1.1.1.nupkg.sha512",
-=======
-=======
     "Microsoft.AspNetCore.DataProtection.Abstractions/1.1.0": {
       "sha512": "WW6qKPh9A5lNh/bFlXIMttlbLmm2K0O3kyZuFIlL4ShOMyhrJeCHoWPWQ+S5eUBdcuOnd9sPwhlmI5Nvb3NjMA==",
->>>>>>> parent of aa64c89... ...:TeamLeasing/src/TeamLeasing/project.lock.json
       "type": "package",
       "path": "Microsoft.AspNetCore.DataProtection.Abstractions/1.1.0",
       "files": [
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-        "Microsoft.AspNetCore.DataProtection.Abstractions.1.1.1.nupkg.sha512",
-=======
         "Microsoft.AspNetCore.DataProtection.Abstractions.1.1.0.nupkg.sha512",
->>>>>>> parent of aa64c89... ...:TeamLeasing/src/TeamLeasing/project.lock.json
->>>>>>> b398e4e76bf702e512b96992ae611ae558ce8356:TeamLeasing/src/TeamLeasing/project.lock.json
         "Microsoft.AspNetCore.DataProtection.Abstractions.nuspec",
         "lib/net451/Microsoft.AspNetCore.DataProtection.Abstractions.dll",
         "lib/net451/Microsoft.AspNetCore.DataProtection.Abstractions.xml",
@@ -4832,28 +4720,12 @@
         "lib/netstandard1.3/Microsoft.AspNetCore.Hosting.Server.Abstractions.xml"
       ]
     },
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-    "Microsoft.AspNetCore.Html.Abstractions/1.1.1": {
-      "sha512": "0rt7wgMld0EMVytVZhq/rOwcvNujJqKrC8UvEfiS+5JQ3w8rmHlmbiVsRytx0rp+zDYvJeTkQ6YSV1Oc1Nxo6Q==",
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-      "type": "package",
-      "path": "microsoft.aspnetcore.html.abstractions/1.1.1",
-      "files": [
-        "Microsoft.AspNetCore.Html.Abstractions.1.1.1.nupkg.sha512",
-=======
-=======
     "Microsoft.AspNetCore.Html.Abstractions/1.1.0": {
       "sha512": "+zN+RCEAJwzeFfsGIRkNn7NQ0/hrLEKHeKQNegqMRTr42JhuJZfPE+Negz7W/WkgFB3ZQQd9QTth9I3BDlsHzQ==",
->>>>>>> parent of aa64c89... ...:TeamLeasing/src/TeamLeasing/project.lock.json
       "type": "package",
       "path": "Microsoft.AspNetCore.Html.Abstractions/1.1.0",
       "files": [
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-        "Microsoft.AspNetCore.Html.Abstractions.1.1.1.nupkg.sha512",
-=======
         "Microsoft.AspNetCore.Html.Abstractions.1.1.0.nupkg.sha512",
->>>>>>> parent of aa64c89... ...:TeamLeasing/src/TeamLeasing/project.lock.json
->>>>>>> b398e4e76bf702e512b96992ae611ae558ce8356:TeamLeasing/src/TeamLeasing/project.lock.json
         "Microsoft.AspNetCore.Html.Abstractions.nuspec",
         "lib/netstandard1.0/Microsoft.AspNetCore.Html.Abstractions.dll",
         "lib/netstandard1.0/Microsoft.AspNetCore.Html.Abstractions.xml"
@@ -4924,16 +4796,8 @@
         "lib/netstandard1.3/Microsoft.AspNetCore.HttpOverrides.xml"
       ]
     },
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-    "Microsoft.AspNetCore.Identity/1.0.2": {
-      "sha512": "YWHWC4/D2ZciJj6Sxh7z9Cqir3qMd5zffO9HWqkkN1/vAvEwJpf9cM2UEWZcyEzQwkn0iQWD5A6Xu/NBZZR7Bw==",
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-=======
-=======
     "Microsoft.AspNetCore.Identity/1.0.0": {
       "sha512": "qQXsxDocbx3xMPBVBZ2Es6vw5QalV+z9mGXUPbn/XRbjY1viwQjVToE7BrCanqr7q97ds0ciI2AgQhvny0kkqw==",
->>>>>>> parent of aa64c89... ...:TeamLeasing/src/TeamLeasing/project.lock.json
->>>>>>> b398e4e76bf702e512b96992ae611ae558ce8356:TeamLeasing/src/TeamLeasing/project.lock.json
       "type": "package",
       "path": "Microsoft.AspNetCore.Identity/1.0.0",
       "files": [
@@ -4945,16 +4809,8 @@
         "lib/netstandard1.3/Microsoft.AspNetCore.Identity.xml"
       ]
     },
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-    "Microsoft.AspNetCore.Identity.EntityFrameworkCore/1.0.2": {
-      "sha512": "zBwGcnWQ7czlxVibTBVDYNTBlPU7DpdU65f0PK8NNschOpCuJHUr/ed1Bbue3oZT+FZb98hfL/IPdqBoGeXjmw==",
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-=======
-=======
     "Microsoft.AspNetCore.Identity.EntityFrameworkCore/1.0.0": {
       "sha512": "+TX5cTpqRqqjWRHM0BHM02pLv0a5jo+Ai73aLQKKqZOZT/GJgvIyTM1sLeY2ybbfNaEzps8AMFb0r3KzRY11yA==",
->>>>>>> parent of aa64c89... ...:TeamLeasing/src/TeamLeasing/project.lock.json
->>>>>>> b398e4e76bf702e512b96992ae611ae558ce8356:TeamLeasing/src/TeamLeasing/project.lock.json
       "type": "package",
       "path": "Microsoft.AspNetCore.Identity.EntityFrameworkCore/1.0.0",
       "files": [
@@ -4966,28 +4822,12 @@
         "lib/netstandard1.3/Microsoft.AspNetCore.Identity.EntityFrameworkCore.xml"
       ]
     },
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-    "Microsoft.AspNetCore.JsonPatch/1.1.1": {
-      "sha512": "gYhKp1/az+32adF9uABzx6YSxD+b942uWkvS96pU31fXQX51xrDLr4mr0lyoW89ZXYfkv0OHyWtc2PiIPQ+nYA==",
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-      "type": "package",
-      "path": "microsoft.aspnetcore.jsonpatch/1.1.1",
-      "files": [
-        "Microsoft.AspNetCore.JsonPatch.1.1.1.nupkg.sha512",
-=======
-=======
     "Microsoft.AspNetCore.JsonPatch/1.1.0": {
       "sha512": "/mADp5Q1I3oeptoCF8mmAFDMGvlDCLSBatsKCXxk5vQYZUyzOLxoiHgW5QowgIdwnd3AHPmFDib5vm8U2B6q7g==",
->>>>>>> parent of aa64c89... ...:TeamLeasing/src/TeamLeasing/project.lock.json
       "type": "package",
       "path": "Microsoft.AspNetCore.JsonPatch/1.1.0",
       "files": [
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-        "Microsoft.AspNetCore.JsonPatch.1.1.1.nupkg.sha512",
-=======
         "Microsoft.AspNetCore.JsonPatch.1.1.0.nupkg.sha512",
->>>>>>> parent of aa64c89... ...:TeamLeasing/src/TeamLeasing/project.lock.json
->>>>>>> b398e4e76bf702e512b96992ae611ae558ce8356:TeamLeasing/src/TeamLeasing/project.lock.json
         "Microsoft.AspNetCore.JsonPatch.nuspec",
         "lib/net451/Microsoft.AspNetCore.JsonPatch.dll",
         "lib/net451/Microsoft.AspNetCore.JsonPatch.xml",
@@ -4995,16 +4835,8 @@
         "lib/netstandard1.3/Microsoft.AspNetCore.JsonPatch.xml"
       ]
     },
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-    "Microsoft.AspNetCore.Localization/1.1.1": {
-      "sha512": "NsGKNrJDYdf7NOAiASa6NFc5/22imWLK60b8pKpRQYcUhTwOWm+KN9gIaHWK33Cb0xCvpZ/OZtPmqGFwrGQaaw==",
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-=======
-=======
     "Microsoft.AspNetCore.Localization/1.1.0": {
       "sha512": "Px52xLst9/G4dyGt3fSTIZU3aZoz0IOVoInW/M1WRCOM5DzCkLzPYXOHMpQkc8ZVx7YZmHnB8p9IrvNNyjPO6A==",
->>>>>>> parent of aa64c89... ...:TeamLeasing/src/TeamLeasing/project.lock.json
->>>>>>> b398e4e76bf702e512b96992ae611ae558ce8356:TeamLeasing/src/TeamLeasing/project.lock.json
       "type": "package",
       "path": "Microsoft.AspNetCore.Localization/1.1.0",
       "files": [
@@ -5016,28 +4848,12 @@
         "lib/netstandard1.3/Microsoft.AspNetCore.Localization.xml"
       ]
     },
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-    "Microsoft.AspNetCore.Mvc/1.1.2": {
-      "sha512": "ZAG+qhmrYXToDdr78FgpNhT2r3Izvt29IyoWDMW0Uhq2vY4HRJ9iQw1XpIpUOJxgqCrk0E5gjOVOMlQpEVrlQQ==",
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-      "type": "package",
-      "path": "microsoft.aspnetcore.mvc/1.1.2",
-      "files": [
-        "Microsoft.AspNetCore.Mvc.1.1.2.nupkg.sha512",
-=======
-=======
     "Microsoft.AspNetCore.Mvc/1.1.1": {
       "sha512": "W9Z0f4xwcBuVukG6MuKgaZOeK56VH3Gc/11dQeRXXzKHpU7fqRokPusTpwjnuTK36TDqqQTW0jC+yo9uZaRszg==",
->>>>>>> parent of aa64c89... ...:TeamLeasing/src/TeamLeasing/project.lock.json
       "type": "package",
       "path": "Microsoft.AspNetCore.Mvc/1.1.1",
       "files": [
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-        "Microsoft.AspNetCore.Mvc.1.1.2.nupkg.sha512",
-=======
         "Microsoft.AspNetCore.Mvc.1.1.1.nupkg.sha512",
->>>>>>> parent of aa64c89... ...:TeamLeasing/src/TeamLeasing/project.lock.json
->>>>>>> b398e4e76bf702e512b96992ae611ae558ce8356:TeamLeasing/src/TeamLeasing/project.lock.json
         "Microsoft.AspNetCore.Mvc.nuspec",
         "lib/net451/Microsoft.AspNetCore.Mvc.dll",
         "lib/net451/Microsoft.AspNetCore.Mvc.xml",
@@ -5045,28 +4861,12 @@
         "lib/netstandard1.6/Microsoft.AspNetCore.Mvc.xml"
       ]
     },
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-    "Microsoft.AspNetCore.Mvc.Abstractions/1.1.2": {
-      "sha512": "C1Z9lJsxZ+48FWKKqSVoiYTEpNsBzdjvZdosCVRy10S49zKVF17SWFia4NtvCv52w8RwFm3F4OXUdSHRrrMhKg==",
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-      "type": "package",
-      "path": "microsoft.aspnetcore.mvc.abstractions/1.1.2",
-      "files": [
-        "Microsoft.AspNetCore.Mvc.Abstractions.1.1.2.nupkg.sha512",
-=======
-=======
     "Microsoft.AspNetCore.Mvc.Abstractions/1.1.1": {
       "sha512": "oXYnarlPEcpGA0hwaqsUIqNuoOntWl/jS0QT489ypL+WWYa2QsH1aDP+qnLWoybArZLCpYswrLTKia5hWpViog==",
->>>>>>> parent of aa64c89... ...:TeamLeasing/src/TeamLeasing/project.lock.json
       "type": "package",
       "path": "Microsoft.AspNetCore.Mvc.Abstractions/1.1.1",
       "files": [
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-        "Microsoft.AspNetCore.Mvc.Abstractions.1.1.2.nupkg.sha512",
-=======
         "Microsoft.AspNetCore.Mvc.Abstractions.1.1.1.nupkg.sha512",
->>>>>>> parent of aa64c89... ...:TeamLeasing/src/TeamLeasing/project.lock.json
->>>>>>> b398e4e76bf702e512b96992ae611ae558ce8356:TeamLeasing/src/TeamLeasing/project.lock.json
         "Microsoft.AspNetCore.Mvc.Abstractions.nuspec",
         "lib/net451/Microsoft.AspNetCore.Mvc.Abstractions.dll",
         "lib/net451/Microsoft.AspNetCore.Mvc.Abstractions.xml",
@@ -5074,16 +4874,8 @@
         "lib/netstandard1.3/Microsoft.AspNetCore.Mvc.Abstractions.xml"
       ]
     },
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-    "Microsoft.AspNetCore.Mvc.ApiExplorer/1.1.2": {
-      "sha512": "PYFRibRtKk2D1jDuaXj/+75WDlGt8UYnnfEQkEyrQxPsGWytay9ZOx7tYW49cxBEQeVsPUmhViFCtytpRa4x/Q==",
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-=======
-=======
     "Microsoft.AspNetCore.Mvc.ApiExplorer/1.1.1": {
       "sha512": "mBLSRRvEyPrqfbYWR8e8CvbVLLey5KyMcKZ7UOJTwcgMIGP7h3qc3jKGw6RJxtoN67lCZifYlq5wWrSgaHgGoQ==",
->>>>>>> parent of aa64c89... ...:TeamLeasing/src/TeamLeasing/project.lock.json
->>>>>>> b398e4e76bf702e512b96992ae611ae558ce8356:TeamLeasing/src/TeamLeasing/project.lock.json
       "type": "package",
       "path": "Microsoft.AspNetCore.Mvc.ApiExplorer/1.1.1",
       "files": [
@@ -5095,28 +4887,12 @@
         "lib/netstandard1.6/Microsoft.AspNetCore.Mvc.ApiExplorer.xml"
       ]
     },
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-    "Microsoft.AspNetCore.Mvc.Core/1.1.2": {
-      "sha512": "epuhSY6jlS2u3h0qssGdj7RWPHvV/qJd+b4PtzQsQzoCGQz4jRfEv4czQxTpydL/x2u/d3KIrTNr6Gcz/XOo+g==",
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-      "type": "package",
-      "path": "microsoft.aspnetcore.mvc.core/1.1.2",
-      "files": [
-        "Microsoft.AspNetCore.Mvc.Core.1.1.2.nupkg.sha512",
-=======
-=======
     "Microsoft.AspNetCore.Mvc.Core/1.1.1": {
       "sha512": "iderNqoLhYGWiSmdkw0qXZp6gxWxIcOJJCYXNVjM4xBYzFdeQ4QQUStoUZSAEpC1a760jU5VR8bbP8mZe9KJXA==",
->>>>>>> parent of aa64c89... ...:TeamLeasing/src/TeamLeasing/project.lock.json
       "type": "package",
       "path": "Microsoft.AspNetCore.Mvc.Core/1.1.1",
       "files": [
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-        "Microsoft.AspNetCore.Mvc.Core.1.1.2.nupkg.sha512",
-=======
         "Microsoft.AspNetCore.Mvc.Core.1.1.1.nupkg.sha512",
->>>>>>> parent of aa64c89... ...:TeamLeasing/src/TeamLeasing/project.lock.json
->>>>>>> b398e4e76bf702e512b96992ae611ae558ce8356:TeamLeasing/src/TeamLeasing/project.lock.json
         "Microsoft.AspNetCore.Mvc.Core.nuspec",
         "lib/net451/Microsoft.AspNetCore.Mvc.Core.dll",
         "lib/net451/Microsoft.AspNetCore.Mvc.Core.xml",
@@ -5124,16 +4900,8 @@
         "lib/netstandard1.6/Microsoft.AspNetCore.Mvc.Core.xml"
       ]
     },
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-    "Microsoft.AspNetCore.Mvc.Cors/1.1.2": {
-      "sha512": "9NKFz1Ci2+kL1xgwNzYVdVtexkwKrN9VOytTPl5KOymmTxg5ZsGhtiGHKSJN0sdSugtLUEB09GEL1w8AJMJVAg==",
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-=======
-=======
     "Microsoft.AspNetCore.Mvc.Cors/1.1.1": {
       "sha512": "DI2jzqZOUrWxdv7zgyEQx/AF+wkiCtJbPvdlGoL6psbDNUOcb+6ZQCqc645IPFsJZwGA3LZMv0tW8QWRkuKsKg==",
->>>>>>> parent of aa64c89... ...:TeamLeasing/src/TeamLeasing/project.lock.json
->>>>>>> b398e4e76bf702e512b96992ae611ae558ce8356:TeamLeasing/src/TeamLeasing/project.lock.json
       "type": "package",
       "path": "Microsoft.AspNetCore.Mvc.Cors/1.1.1",
       "files": [
@@ -5145,28 +4913,12 @@
         "lib/netstandard1.6/Microsoft.AspNetCore.Mvc.Cors.xml"
       ]
     },
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-    "Microsoft.AspNetCore.Mvc.DataAnnotations/1.1.2": {
-      "sha512": "5tUx7RlL1fPy/aaqHVVNN9qBafmuElfAnKj9QMDssBjRY3Q/r4//qyRGOpSMZrxGlFrRf5yU9uwD277sWRurBQ==",
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-      "type": "package",
-      "path": "microsoft.aspnetcore.mvc.dataannotations/1.1.2",
-      "files": [
-        "Microsoft.AspNetCore.Mvc.DataAnnotations.1.1.2.nupkg.sha512",
-=======
-=======
     "Microsoft.AspNetCore.Mvc.DataAnnotations/1.1.1": {
       "sha512": "43uxmSalS2TuFBjHvj6+r0hQfPqRZphiePg05wlVdwp1smXpPL1Jw+WnnhqfR7LTXCzQrY6uzPdYXWgDNWC2rw==",
->>>>>>> parent of aa64c89... ...:TeamLeasing/src/TeamLeasing/project.lock.json
       "type": "package",
       "path": "Microsoft.AspNetCore.Mvc.DataAnnotations/1.1.1",
       "files": [
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-        "Microsoft.AspNetCore.Mvc.DataAnnotations.1.1.2.nupkg.sha512",
-=======
         "Microsoft.AspNetCore.Mvc.DataAnnotations.1.1.1.nupkg.sha512",
->>>>>>> parent of aa64c89... ...:TeamLeasing/src/TeamLeasing/project.lock.json
->>>>>>> b398e4e76bf702e512b96992ae611ae558ce8356:TeamLeasing/src/TeamLeasing/project.lock.json
         "Microsoft.AspNetCore.Mvc.DataAnnotations.nuspec",
         "lib/net451/Microsoft.AspNetCore.Mvc.DataAnnotations.dll",
         "lib/net451/Microsoft.AspNetCore.Mvc.DataAnnotations.xml",
@@ -5174,28 +4926,12 @@
         "lib/netstandard1.6/Microsoft.AspNetCore.Mvc.DataAnnotations.xml"
       ]
     },
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-    "Microsoft.AspNetCore.Mvc.Formatters.Json/1.1.2": {
-      "sha512": "DnjLNCRvtu0EFwI0HJjBSNO/QRQMLvjWf1eI3c0JeRSr7soWgviGeOQ7WzAAbgwW9XHQgB5MTjl0Zi74ngqPDA==",
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-      "type": "package",
-      "path": "microsoft.aspnetcore.mvc.formatters.json/1.1.2",
-      "files": [
-        "Microsoft.AspNetCore.Mvc.Formatters.Json.1.1.2.nupkg.sha512",
-=======
-=======
     "Microsoft.AspNetCore.Mvc.Formatters.Json/1.1.1": {
       "sha512": "ufdjlIi2B7mPZWmQ/1+Y5z9IMkdtAZuJMXaOoYMYtqiGYGjDcF4o4S1jrDjkhEMlm6xny7KggyPndgCv8sj5mw==",
->>>>>>> parent of aa64c89... ...:TeamLeasing/src/TeamLeasing/project.lock.json
       "type": "package",
       "path": "Microsoft.AspNetCore.Mvc.Formatters.Json/1.1.1",
       "files": [
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-        "Microsoft.AspNetCore.Mvc.Formatters.Json.1.1.2.nupkg.sha512",
-=======
         "Microsoft.AspNetCore.Mvc.Formatters.Json.1.1.1.nupkg.sha512",
->>>>>>> parent of aa64c89... ...:TeamLeasing/src/TeamLeasing/project.lock.json
->>>>>>> b398e4e76bf702e512b96992ae611ae558ce8356:TeamLeasing/src/TeamLeasing/project.lock.json
         "Microsoft.AspNetCore.Mvc.Formatters.Json.nuspec",
         "lib/net451/Microsoft.AspNetCore.Mvc.Formatters.Json.dll",
         "lib/net451/Microsoft.AspNetCore.Mvc.Formatters.Json.xml",
@@ -5203,16 +4939,8 @@
         "lib/netstandard1.6/Microsoft.AspNetCore.Mvc.Formatters.Json.xml"
       ]
     },
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-    "Microsoft.AspNetCore.Mvc.Localization/1.1.2": {
-      "sha512": "W6ZWFB26lJYKUJSgc1lvASo2XmAK+FwEOmfV85r97mS2INl/WyemrwJxQ1I0TUQ7oWEhoSkzWyz0OQ66PfRN9g==",
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-=======
-=======
     "Microsoft.AspNetCore.Mvc.Localization/1.1.1": {
       "sha512": "9lNZxG74K0Vu35LXoEPHWhHL8/LPrcdaDgqSjjVkGU7EoXAP8l9gpncTisvRtnNNYiSZPDfgWIGHCQB4fD0vVw==",
->>>>>>> parent of aa64c89... ...:TeamLeasing/src/TeamLeasing/project.lock.json
->>>>>>> b398e4e76bf702e512b96992ae611ae558ce8356:TeamLeasing/src/TeamLeasing/project.lock.json
       "type": "package",
       "path": "Microsoft.AspNetCore.Mvc.Localization/1.1.1",
       "files": [
@@ -5224,28 +4952,12 @@
         "lib/netstandard1.6/Microsoft.AspNetCore.Mvc.Localization.xml"
       ]
     },
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-    "Microsoft.AspNetCore.Mvc.Razor/1.1.2": {
-      "sha512": "jJ4S09kvxZx5ILbaYYV+rgxJtwLnI01ZTfjpUkOsIBEPOTrZvnCg7vPW9aS5lN6p3fnQdV37v8bY5VMRTHTn6g==",
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-      "type": "package",
-      "path": "microsoft.aspnetcore.mvc.razor/1.1.2",
-      "files": [
-        "Microsoft.AspNetCore.Mvc.Razor.1.1.2.nupkg.sha512",
-=======
-=======
     "Microsoft.AspNetCore.Mvc.Razor/1.1.1": {
       "sha512": "oSHYQc4fPfAp9W6UE9Uzcb/judMOEpTn0QHyY+ox8j3QgDIAXnHroIkN0HTsc7JhsWLx1lAcVLN8ryuPRc7ZdQ==",
->>>>>>> parent of aa64c89... ...:TeamLeasing/src/TeamLeasing/project.lock.json
       "type": "package",
       "path": "Microsoft.AspNetCore.Mvc.Razor/1.1.1",
       "files": [
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-        "Microsoft.AspNetCore.Mvc.Razor.1.1.2.nupkg.sha512",
-=======
         "Microsoft.AspNetCore.Mvc.Razor.1.1.1.nupkg.sha512",
->>>>>>> parent of aa64c89... ...:TeamLeasing/src/TeamLeasing/project.lock.json
->>>>>>> b398e4e76bf702e512b96992ae611ae558ce8356:TeamLeasing/src/TeamLeasing/project.lock.json
         "Microsoft.AspNetCore.Mvc.Razor.nuspec",
         "lib/net451/Microsoft.AspNetCore.Mvc.Razor.dll",
         "lib/net451/Microsoft.AspNetCore.Mvc.Razor.xml",
@@ -5253,28 +4965,12 @@
         "lib/netstandard1.6/Microsoft.AspNetCore.Mvc.Razor.xml"
       ]
     },
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-    "Microsoft.AspNetCore.Mvc.Razor.Host/1.1.2": {
-      "sha512": "52Jzy6uQEo1i9TaNJgrylhD9F+lziXvIFPdtNRK/feEkl6GzTM+71GwdSBGxQA/pZxerVL7klpChTL6jDM/mJQ==",
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-      "type": "package",
-      "path": "microsoft.aspnetcore.mvc.razor.host/1.1.2",
-      "files": [
-        "Microsoft.AspNetCore.Mvc.Razor.Host.1.1.2.nupkg.sha512",
-=======
-=======
     "Microsoft.AspNetCore.Mvc.Razor.Host/1.1.1": {
       "sha512": "a2gc+lAa7ObfT/tvwINl/FKHLPVr97Rh+mdRxF9T6Ja4Dwm4zXNWQBHuRAneVckIl++7XvJ7fS4BVxa5vvhCWw==",
->>>>>>> parent of aa64c89... ...:TeamLeasing/src/TeamLeasing/project.lock.json
       "type": "package",
       "path": "Microsoft.AspNetCore.Mvc.Razor.Host/1.1.1",
       "files": [
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-        "Microsoft.AspNetCore.Mvc.Razor.Host.1.1.2.nupkg.sha512",
-=======
         "Microsoft.AspNetCore.Mvc.Razor.Host.1.1.1.nupkg.sha512",
->>>>>>> parent of aa64c89... ...:TeamLeasing/src/TeamLeasing/project.lock.json
->>>>>>> b398e4e76bf702e512b96992ae611ae558ce8356:TeamLeasing/src/TeamLeasing/project.lock.json
         "Microsoft.AspNetCore.Mvc.Razor.Host.nuspec",
         "lib/net451/Microsoft.AspNetCore.Mvc.Razor.Host.dll",
         "lib/net451/Microsoft.AspNetCore.Mvc.Razor.Host.xml",
@@ -5282,28 +4978,12 @@
         "lib/netstandard1.6/Microsoft.AspNetCore.Mvc.Razor.Host.xml"
       ]
     },
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-    "Microsoft.AspNetCore.Mvc.TagHelpers/1.1.2": {
-      "sha512": "Kd1din7EJIp+hDUcwI92SNA42OAm1vmjnc3touzXteDmZSSUiEUHyZti/LIiB+z82VqcvPNqTJv4HSC689ChRw==",
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-      "type": "package",
-      "path": "microsoft.aspnetcore.mvc.taghelpers/1.1.2",
-      "files": [
-        "Microsoft.AspNetCore.Mvc.TagHelpers.1.1.2.nupkg.sha512",
-=======
-=======
     "Microsoft.AspNetCore.Mvc.TagHelpers/1.1.1": {
       "sha512": "rgcJYPQJDWpM/Zpkciv3vQhlujwg/6T68paYh4kE+AmPXrct5uLsrknpLSOiW3FWRiNbF84GjqCHmNWJPcN9jw==",
->>>>>>> parent of aa64c89... ...:TeamLeasing/src/TeamLeasing/project.lock.json
       "type": "package",
       "path": "Microsoft.AspNetCore.Mvc.TagHelpers/1.1.1",
       "files": [
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-        "Microsoft.AspNetCore.Mvc.TagHelpers.1.1.2.nupkg.sha512",
-=======
         "Microsoft.AspNetCore.Mvc.TagHelpers.1.1.1.nupkg.sha512",
->>>>>>> parent of aa64c89... ...:TeamLeasing/src/TeamLeasing/project.lock.json
->>>>>>> b398e4e76bf702e512b96992ae611ae558ce8356:TeamLeasing/src/TeamLeasing/project.lock.json
         "Microsoft.AspNetCore.Mvc.TagHelpers.nuspec",
         "lib/net451/Microsoft.AspNetCore.Mvc.TagHelpers.dll",
         "lib/net451/Microsoft.AspNetCore.Mvc.TagHelpers.xml",
@@ -5311,28 +4991,12 @@
         "lib/netstandard1.6/Microsoft.AspNetCore.Mvc.TagHelpers.xml"
       ]
     },
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-    "Microsoft.AspNetCore.Mvc.ViewFeatures/1.1.2": {
-      "sha512": "GjJIfkHINimtwauR5Jz7FvgjPDzwnfawuQcMSJ66PW7vAAqwh4NDpMVZYsJgBmvVk8eTJdCwoC7Bdi6KM5MXdg==",
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-      "type": "package",
-      "path": "microsoft.aspnetcore.mvc.viewfeatures/1.1.2",
-      "files": [
-        "Microsoft.AspNetCore.Mvc.ViewFeatures.1.1.2.nupkg.sha512",
-=======
-=======
     "Microsoft.AspNetCore.Mvc.ViewFeatures/1.1.1": {
       "sha512": "r/X3IDRrPdM51rOiHT38Gz0eRqLcIeLBxZdi4YjoyoFO99NywbJZyRhP9IQcyQdn0hdmGrEQgpiLiUn+8cr/lg==",
->>>>>>> parent of aa64c89... ...:TeamLeasing/src/TeamLeasing/project.lock.json
       "type": "package",
       "path": "Microsoft.AspNetCore.Mvc.ViewFeatures/1.1.1",
       "files": [
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-        "Microsoft.AspNetCore.Mvc.ViewFeatures.1.1.2.nupkg.sha512",
-=======
         "Microsoft.AspNetCore.Mvc.ViewFeatures.1.1.1.nupkg.sha512",
->>>>>>> parent of aa64c89... ...:TeamLeasing/src/TeamLeasing/project.lock.json
->>>>>>> b398e4e76bf702e512b96992ae611ae558ce8356:TeamLeasing/src/TeamLeasing/project.lock.json
         "Microsoft.AspNetCore.Mvc.ViewFeatures.nuspec",
         "lib/net451/Microsoft.AspNetCore.Mvc.ViewFeatures.dll",
         "lib/net451/Microsoft.AspNetCore.Mvc.ViewFeatures.xml",
@@ -5340,44 +5004,17 @@
         "lib/netstandard1.6/Microsoft.AspNetCore.Mvc.ViewFeatures.xml"
       ]
     },
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-    "Microsoft.AspNetCore.Razor/1.1.1": {
-      "sha512": "r7049tHMwknWuHpPxBeRNZb3cHFnFxxmTCrsQgYge+rBWaLTRtaR+r4+zcMZJeEIw3tx1ATxz0CFg4Vma7hyag==",
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-      "type": "package",
-      "path": "microsoft.aspnetcore.razor/1.1.1",
-      "files": [
-        "Microsoft.AspNetCore.Razor.1.1.1.nupkg.sha512",
-=======
-=======
     "Microsoft.AspNetCore.Razor/1.1.0": {
       "sha512": "hChh+W6UG0C8aink3KWuX7flFuAiTPrCBfh68fbRJ1sLPk0ELmj6c3zm+VgNXaHEh2OpT/O0eN5XpS1rQ/FcbQ==",
->>>>>>> parent of aa64c89... ...:TeamLeasing/src/TeamLeasing/project.lock.json
       "type": "package",
       "path": "Microsoft.AspNetCore.Razor/1.1.0",
       "files": [
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-        "Microsoft.AspNetCore.Razor.1.1.1.nupkg.sha512",
-=======
         "Microsoft.AspNetCore.Razor.1.1.0.nupkg.sha512",
->>>>>>> parent of aa64c89... ...:TeamLeasing/src/TeamLeasing/project.lock.json
->>>>>>> b398e4e76bf702e512b96992ae611ae558ce8356:TeamLeasing/src/TeamLeasing/project.lock.json
         "Microsoft.AspNetCore.Razor.nuspec",
         "lib/net451/Microsoft.AspNetCore.Razor.dll",
         "lib/net451/Microsoft.AspNetCore.Razor.xml",
         "lib/netstandard1.3/Microsoft.AspNetCore.Razor.dll",
         "lib/netstandard1.3/Microsoft.AspNetCore.Razor.xml"
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-=======
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
->>>>>>> b398e4e76bf702e512b96992ae611ae558ce8356:TeamLeasing/src/TeamLeasing/project.lock.json
-      ]
-    },
-    "Microsoft.AspNetCore.Razor.Runtime/1.1.1": {
-      "sha512": "WhsJwYREDtiTPuPGLRCe8oAu2eBSgzIEGcHfFRZg14MkcQ6eG2xuglxGlROrdMoW9pzJkmBMiEsPr4sDvFi/sw==",
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-=======
-=======
       ]
     },
     "Microsoft.AspNetCore.Razor.Design/1.1.0-preview4-final": {
@@ -5398,20 +5035,10 @@
     },
     "Microsoft.AspNetCore.Razor.Runtime/1.1.0": {
       "sha512": "hQW8+DRFHCHmTzviW54umnBfX1vc9bv/390r62k85LQsUd5Lo59QQ+IyD5fe6o9g/h946IF8Yl25wd6dEk7YqA==",
->>>>>>> parent of aa64c89... ...:TeamLeasing/src/TeamLeasing/project.lock.json
->>>>>>> b398e4e76bf702e512b96992ae611ae558ce8356:TeamLeasing/src/TeamLeasing/project.lock.json
       "type": "package",
       "path": "Microsoft.AspNetCore.Razor.Runtime/1.1.0",
       "files": [
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-        "Microsoft.AspNetCore.Razor.Runtime.1.1.1.nupkg.sha512",
-=======
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-        "Microsoft.AspNetCore.Razor.Runtime.1.1.1.nupkg.sha512",
-=======
         "Microsoft.AspNetCore.Razor.Runtime.1.1.0.nupkg.sha512",
->>>>>>> parent of aa64c89... ...:TeamLeasing/src/TeamLeasing/project.lock.json
->>>>>>> b398e4e76bf702e512b96992ae611ae558ce8356:TeamLeasing/src/TeamLeasing/project.lock.json
         "Microsoft.AspNetCore.Razor.Runtime.nuspec",
         "lib/net451/Microsoft.AspNetCore.Razor.Runtime.dll",
         "lib/net451/Microsoft.AspNetCore.Razor.Runtime.xml",
@@ -5419,25 +5046,11 @@
         "lib/netstandard1.5/Microsoft.AspNetCore.Razor.Runtime.xml"
       ]
     },
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-    "Microsoft.AspNetCore.ResponseCaching.Abstractions/1.1.1": {
-      "sha512": "pM/6pXfU3YaXFj2V7y37Z/jIbKVfXfny+eqxbZSCZVdt+7yESMiHmW9pkMOy1j3P2vZxavgJDXK4bwVOyypxdw==",
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-      "type": "package",
-      "path": "microsoft.aspnetcore.responsecaching.abstractions/1.1.1",
-      "files": [
-        "Microsoft.AspNetCore.ResponseCaching.Abstractions.1.1.1.nupkg.sha512",
-=======
-=======
     "Microsoft.AspNetCore.Razor.Tools/1.1.0-preview4-final": {
       "sha512": "elen0GMaXIUZjL7X61V6tvCm64vYw6NL+XDBIUguFXpx3PK4GXvYALLDK8zzjgUVSS0ChYBX3o4Xw20iQwXiJQ==",
->>>>>>> parent of aa64c89... ...:TeamLeasing/src/TeamLeasing/project.lock.json
       "type": "package",
       "path": "Microsoft.AspNetCore.Razor.Tools/1.1.0-preview4-final",
       "files": [
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-        "Microsoft.AspNetCore.ResponseCaching.Abstractions.1.1.1.nupkg.sha512",
-=======
         "Microsoft.AspNetCore.Razor.Tools.1.1.0-preview4-final.nupkg.sha512",
         "Microsoft.AspNetCore.Razor.Tools.nuspec",
         "lib/net451/dotnet-razor-tooling.exe",
@@ -5453,8 +5066,6 @@
       "path": "Microsoft.AspNetCore.ResponseCaching.Abstractions/1.1.0",
       "files": [
         "Microsoft.AspNetCore.ResponseCaching.Abstractions.1.1.0.nupkg.sha512",
->>>>>>> parent of aa64c89... ...:TeamLeasing/src/TeamLeasing/project.lock.json
->>>>>>> b398e4e76bf702e512b96992ae611ae558ce8356:TeamLeasing/src/TeamLeasing/project.lock.json
         "Microsoft.AspNetCore.ResponseCaching.Abstractions.nuspec",
         "lib/net451/Microsoft.AspNetCore.ResponseCaching.Abstractions.dll",
         "lib/net451/Microsoft.AspNetCore.ResponseCaching.Abstractions.xml",
@@ -5690,12 +5301,6 @@
         "runtimes/win8-arm/native/Microsoft.DiaSymReader.Native.arm.dll"
       ]
     },
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-    "Microsoft.DotNet.PlatformAbstractions/1.1.1": {
-      "sha512": "m+IIxUg8Ev+g34H7CIcuILm3ZWWJNclsgYqc/j5n/QCKhcvRAeAn0byDI7zCqlDUwn6byXYrJxuZpuZh/5C/6g==",
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-=======
-=======
     "Microsoft.DotNet.Cli.Utils/1.0.0-preview2-003121": {
       "sha512": "FLXqhQjkjj83Sh0TRlLEyMIMtAhDRJuPRWnDONtnCv5bozk1jPzflLEXYbk2xsnsOMpnYrUvKQbwUKUWyaXuFQ==",
       "type": "package",
@@ -5709,22 +5314,9 @@
     },
     "Microsoft.DotNet.PlatformAbstractions/1.1.0": {
       "sha512": "Bl6KYfbFSIW3QIRHAp931iR5h01qHjKghdpAtncwbzNUs0+IUZ+XfwkIU0sQsR33ufGvi3u4dZMIYYFysjpHAA==",
->>>>>>> parent of aa64c89... ...:TeamLeasing/src/TeamLeasing/project.lock.json
->>>>>>> b398e4e76bf702e512b96992ae611ae558ce8356:TeamLeasing/src/TeamLeasing/project.lock.json
       "type": "package",
       "path": "Microsoft.DotNet.PlatformAbstractions/1.1.0",
       "files": [
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-=======
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
->>>>>>> b398e4e76bf702e512b96992ae611ae558ce8356:TeamLeasing/src/TeamLeasing/project.lock.json
-        "Microsoft.DotNet.PlatformAbstractions.1.1.1.nupkg.sha512",
-        "Microsoft.DotNet.PlatformAbstractions.nuspec",
-        "lib/net451/Microsoft.DotNet.PlatformAbstractions.dll",
-        "lib/netstandard1.3/Microsoft.DotNet.PlatformAbstractions.dll"
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-=======
-=======
         "Microsoft.DotNet.PlatformAbstractions.1.1.0.nupkg.sha512",
         "Microsoft.DotNet.PlatformAbstractions.nuspec",
         "lib/net451/Microsoft.DotNet.PlatformAbstractions.dll",
@@ -5750,8 +5342,6 @@
         "Microsoft.DotNet.ProjectModel.Loader.1.0.0-preview2-003121.nupkg.sha512",
         "Microsoft.DotNet.ProjectModel.Loader.nuspec",
         "lib/netstandard1.6/Microsoft.DotNet.ProjectModel.Loader.dll"
->>>>>>> parent of aa64c89... ...:TeamLeasing/src/TeamLeasing/project.lock.json
->>>>>>> b398e4e76bf702e512b96992ae611ae558ce8356:TeamLeasing/src/TeamLeasing/project.lock.json
       ]
     },
     "Microsoft.EntityFrameworkCore/1.1.1": {
@@ -5819,28 +5409,12 @@
         "lib/netstandard1.3/Microsoft.EntityFrameworkCore.SqlServer.xml"
       ]
     },
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-    "Microsoft.EntityFrameworkCore.Tools/1.0.0": {
-      "sha512": "5nzzxebDVQ9ZnUYOu+Qh8fQ+GxgvGXt+cmlqa8x4rcKXamD14z6lPBYev149lAOF8ESNLQXV6bKW1VmnDRFQ2Q==",
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-      "type": "package",
-      "path": "microsoft.entityframeworkcore.tools/1.0.0",
-      "files": [
-        "Microsoft.EntityFrameworkCore.Tools.1.0.0.nupkg.sha512",
-=======
-=======
     "Microsoft.EntityFrameworkCore.Tools/1.1.0": {
       "sha512": "sv9JJsG4p/zu4KrRXjTsZ/Bp1mdRbOLkqrxDtQo6P5e1O+1Z6qXm4gaR5km25tpqLN4QD10lX/Kw6MEyLWf2aQ==",
->>>>>>> parent of aa64c89... ...:TeamLeasing/src/TeamLeasing/project.lock.json
       "type": "package",
       "path": "Microsoft.EntityFrameworkCore.Tools/1.1.0",
       "files": [
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-        "Microsoft.EntityFrameworkCore.Tools.1.0.0.nupkg.sha512",
-=======
         "Microsoft.EntityFrameworkCore.Tools.1.1.0.nupkg.sha512",
->>>>>>> parent of aa64c89... ...:TeamLeasing/src/TeamLeasing/project.lock.json
->>>>>>> b398e4e76bf702e512b96992ae611ae558ce8356:TeamLeasing/src/TeamLeasing/project.lock.json
         "Microsoft.EntityFrameworkCore.Tools.nuspec",
         "lib/net451/_._",
         "lib/netstandard1.3/_._",
@@ -5881,10 +5455,6 @@
         "lib/net451/Microsoft.Extensions.Caching.Memory.xml",
         "lib/netstandard1.3/Microsoft.Extensions.Caching.Memory.dll",
         "lib/netstandard1.3/Microsoft.Extensions.Caching.Memory.xml"
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-=======
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-=======
       ]
     },
     "Microsoft.Extensions.CommandLineUtils/1.0.0": {
@@ -5898,8 +5468,6 @@
         "lib/net451/Microsoft.Extensions.CommandLineUtils.xml",
         "lib/netstandard1.3/Microsoft.Extensions.CommandLineUtils.dll",
         "lib/netstandard1.3/Microsoft.Extensions.CommandLineUtils.xml"
->>>>>>> parent of aa64c89... ...:TeamLeasing/src/TeamLeasing/project.lock.json
->>>>>>> b398e4e76bf702e512b96992ae611ae558ce8356:TeamLeasing/src/TeamLeasing/project.lock.json
       ]
     },
     "Microsoft.Extensions.Configuration/1.1.1": {
@@ -5996,28 +5564,12 @@
         "lib/netstandard1.0/Microsoft.Extensions.DependencyInjection.Abstractions.xml"
       ]
     },
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-    "Microsoft.Extensions.DependencyModel/1.1.1": {
-      "sha512": "aeaSE99QKSh84KMnM0toUbzpSXU6KonpgAo+MV+5z4XtZk1ssrn5JfRHdUPfzb9RLU4cYS/VLzStD97YuMGlbg==",
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-      "type": "package",
-      "path": "microsoft.extensions.dependencymodel/1.1.1",
-      "files": [
-        "Microsoft.Extensions.DependencyModel.1.1.1.nupkg.sha512",
-=======
-=======
     "Microsoft.Extensions.DependencyModel/1.1.0": {
       "sha512": "TG7dJ8GY1Myz9lZ8DJL4i6D05ncJQBi5CjBMXMdJ4edKxaW+vP2DndDd1jJabdMdmVRdGrvybzqkB+A6Df7eDw==",
->>>>>>> parent of aa64c89... ...:TeamLeasing/src/TeamLeasing/project.lock.json
       "type": "package",
       "path": "Microsoft.Extensions.DependencyModel/1.1.0",
       "files": [
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-        "Microsoft.Extensions.DependencyModel.1.1.1.nupkg.sha512",
-=======
         "Microsoft.Extensions.DependencyModel.1.1.0.nupkg.sha512",
->>>>>>> parent of aa64c89... ...:TeamLeasing/src/TeamLeasing/project.lock.json
->>>>>>> b398e4e76bf702e512b96992ae611ae558ce8356:TeamLeasing/src/TeamLeasing/project.lock.json
         "Microsoft.Extensions.DependencyModel.nuspec",
         "lib/net451/Microsoft.Extensions.DependencyModel.dll",
         "lib/netstandard1.3/Microsoft.Extensions.DependencyModel.dll",
@@ -6083,16 +5635,8 @@
         "lib/netstandard1.3/Microsoft.Extensions.FileSystemGlobbing.xml"
       ]
     },
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-    "Microsoft.Extensions.Globalization.CultureInfoCache/1.1.1": {
-      "sha512": "wHQ1x+KeTC2NiVpL4uf8MNXBFVG5IkFk3ducKtk+2ks27tMlG0ta8IufZMAgj8r59W+rH7ZiEeTze3xL6YOjVg==",
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-=======
-=======
     "Microsoft.Extensions.Globalization.CultureInfoCache/1.1.0": {
       "sha512": "KAuadrKH0hLZGXfLO/+L6bv4vIeOYpQTjglR5Tu4hm9TJ8sVcPf11qIoU+BXSwalXiaJuazSI9fxbyoIVBsX4A==",
->>>>>>> parent of aa64c89... ...:TeamLeasing/src/TeamLeasing/project.lock.json
->>>>>>> b398e4e76bf702e512b96992ae611ae558ce8356:TeamLeasing/src/TeamLeasing/project.lock.json
       "type": "package",
       "path": "Microsoft.Extensions.Globalization.CultureInfoCache/1.1.0",
       "files": [
@@ -6102,28 +5646,12 @@
         "lib/netstandard1.1/Microsoft.Extensions.Globalization.CultureInfoCache.xml"
       ]
     },
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-    "Microsoft.Extensions.Localization/1.1.1": {
-      "sha512": "OZD39SEb4Vqjw8u9LLyah9kCW+5Oia5UwEG1bPSdxHkgi3Q94VFOqfjFtJDDiZp+bhDY2fG5+yQ+iMlKiE+0nQ==",
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-      "type": "package",
-      "path": "microsoft.extensions.localization/1.1.1",
-      "files": [
-        "Microsoft.Extensions.Localization.1.1.1.nupkg.sha512",
-=======
-=======
     "Microsoft.Extensions.Localization/1.1.0": {
       "sha512": "1DWqIC1k383XaQ3h+WxyKYmerLHDYH7TY7mDcglylG3Wq+zlX3/UUhUEKO0Ft8RKCLxLh/LhIa9NBvM3cYzLIg==",
->>>>>>> parent of aa64c89... ...:TeamLeasing/src/TeamLeasing/project.lock.json
       "type": "package",
       "path": "Microsoft.Extensions.Localization/1.1.0",
       "files": [
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-        "Microsoft.Extensions.Localization.1.1.1.nupkg.sha512",
-=======
         "Microsoft.Extensions.Localization.1.1.0.nupkg.sha512",
->>>>>>> parent of aa64c89... ...:TeamLeasing/src/TeamLeasing/project.lock.json
->>>>>>> b398e4e76bf702e512b96992ae611ae558ce8356:TeamLeasing/src/TeamLeasing/project.lock.json
         "Microsoft.Extensions.Localization.nuspec",
         "lib/net451/Microsoft.Extensions.Localization.dll",
         "lib/net451/Microsoft.Extensions.Localization.xml",
@@ -6131,28 +5659,12 @@
         "lib/netstandard1.3/Microsoft.Extensions.Localization.xml"
       ]
     },
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-    "Microsoft.Extensions.Localization.Abstractions/1.1.1": {
-      "sha512": "93myz0NdUdpKUJCWSwtNwcKEJjhR3fV+/Jrp/o6d11YLC9ssXEtvGF4e3VH7HqBKnOfdxzN+IikAGNGviRep1g==",
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-      "type": "package",
-      "path": "microsoft.extensions.localization.abstractions/1.1.1",
-      "files": [
-        "Microsoft.Extensions.Localization.Abstractions.1.1.1.nupkg.sha512",
-=======
-=======
     "Microsoft.Extensions.Localization.Abstractions/1.1.0": {
       "sha512": "8KkP9veQupIfAEQFLLQFTo75s2fVKOM9SWeHhdSSUD35uD8DX1zOXAUsuaXwQY8cyt6mSUR5zuUEkgbZXnUKCA==",
->>>>>>> parent of aa64c89... ...:TeamLeasing/src/TeamLeasing/project.lock.json
       "type": "package",
       "path": "Microsoft.Extensions.Localization.Abstractions/1.1.0",
       "files": [
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-        "Microsoft.Extensions.Localization.Abstractions.1.1.1.nupkg.sha512",
-=======
         "Microsoft.Extensions.Localization.Abstractions.1.1.0.nupkg.sha512",
->>>>>>> parent of aa64c89... ...:TeamLeasing/src/TeamLeasing/project.lock.json
->>>>>>> b398e4e76bf702e512b96992ae611ae558ce8356:TeamLeasing/src/TeamLeasing/project.lock.json
         "Microsoft.Extensions.Localization.Abstractions.nuspec",
         "lib/netstandard1.0/Microsoft.Extensions.Localization.Abstractions.dll",
         "lib/netstandard1.0/Microsoft.Extensions.Localization.Abstractions.xml"
@@ -11842,33 +11354,7 @@
       "Microsoft.Extensions.Logging.Console >= 1.1.1",
       "Microsoft.Extensions.Logging.Debug >= 1.1.1",
       "Microsoft.Extensions.Options.ConfigurationExtensions >= 1.1.1",
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
       "Microsoft.NETCore.App >= 1.1.1"
-=======
-      "Microsoft.NETCore.App >= 1.1.1",
-      "System.Runtime >= 4.3.0"
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
->>>>>>> b398e4e76bf702e512b96992ae611ae558ce8356:TeamLeasing/src/TeamLeasing/project.lock.json
-    ]
-  },
-  "packageFolders": {
-    "C:\\Users\\Koks\\.nuget\\packages\\": {}
-  },
-  "project": {
-    "version": "1.0.0",
-    "restore": {
-      "projectUniqueName": "D:\\repozutorium\\Praca Magisterska\\TeamLeasing\\src\\TeamLeasing\\TeamLeasing.csproj",
-      "projectName": "TeamLeasing",
-      "projectPath": "D:\\repozutorium\\Praca Magisterska\\TeamLeasing\\src\\TeamLeasing\\TeamLeasing.csproj",
-      "outputPath": "D:\\repozutorium\\Praca Magisterska\\TeamLeasing\\src\\TeamLeasing\\obj\\",
-      "projectStyle": "PackageReference",
-      "originalTargetFrameworks": [
-        "netcoreapp1.1"
-      ],
-      "frameworks": {
-        "netcoreapp1.1": {
-          "projectReferences": {}
-=======
     ],
     ".NETCoreApp,Version=v1.1": []
   },
@@ -11892,107 +11378,11 @@
         },
         "runtime": {
           "lib/netcoreapp1.0/dotnet-razor-tooling.dll": {}
->>>>>>> parent of aa64c89... ...:TeamLeasing/src/TeamLeasing/project.lock.json
         }
       },
       "Microsoft.AspNetCore.Server.IISIntegration.Tools/1.0.0-preview2-final": {
         "type": "package",
         "dependencies": {
-<<<<<<< HEAD:TeamLeasing/src/TeamLeasing/obj/project.assets.json
-          "Microsoft.Extensions.Configuration.EnvironmentVariables": {
-            "target": "Package",
-            "version": "1.1.1"
-          },
-          "MailKit": {
-            "target": "Package",
-            "version": "1.12.0"
-          },
-          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
-            "target": "Package",
-            "version": "1.0.2"
-          },
-          "Microsoft.EntityFrameworkCore": {
-            "target": "Package",
-            "version": "1.1.1"
-          },
-          "Microsoft.Extensions.Configuration.Json": {
-            "target": "Package",
-            "version": "1.1.1"
-          },
-          "Microsoft.Extensions.Logging.Debug": {
-            "target": "Package",
-            "version": "1.1.1"
-          },
-          "Microsoft.AspNetCore.Server.Kestrel": {
-            "target": "Package",
-            "version": "1.1.1"
-          },
-          "Microsoft.EntityFrameworkCore.Tools": {
-            "target": "Package",
-            "version": "1.0.0"
-          },
-          "Microsoft.EntityFrameworkCore.Design": {
-            "target": "Package",
-            "version": "1.1.1"
-          },
-          "Microsoft.AspNetCore.Diagnostics": {
-            "target": "Package",
-            "version": "1.1.1"
-          },
-          "Microsoft.AspNetCore.Server.IISIntegration": {
-            "target": "Package",
-            "version": "1.1.1"
-          },
-          "Microsoft.Extensions.DependencyInjection.Abstractions": {
-            "target": "Package",
-            "version": "1.1.0"
-          },
-          "Microsoft.NETCore.App": {
-            "target": "Package",
-            "version": "1.1.1",
-            "autoReferenced": true
-          },
-          "Microsoft.Extensions.Options.ConfigurationExtensions": {
-            "target": "Package",
-            "version": "1.1.1"
-          },
-          "Microsoft.EntityFrameworkCore.Relational": {
-            "target": "Package",
-            "version": "1.1.1"
-          },
-          "Microsoft.EntityFrameworkCore.SqlServer": {
-            "target": "Package",
-            "version": "1.1.1"
-          },
-          "Microsoft.Extensions.Logging.Console": {
-            "target": "Package",
-            "version": "1.1.1"
-          },
-          "Microsoft.AspNetCore.Mvc": {
-            "target": "Package",
-            "version": "1.1.2"
-          },
-          "Microsoft.ApplicationInsights.AspNetCore": {
-            "target": "Package",
-            "version": "2.0.0"
-          },
-          "Microsoft.AspNetCore.Session": {
-            "target": "Package",
-            "version": "1.0.2"
-          },
-          "Microsoft.Extensions.Logging": {
-            "target": "Package",
-            "version": "1.1.1"
-          },
-          "Microsoft.AspNetCore.StaticFiles": {
-            "target": "Package",
-            "version": "1.1.1"
-          },
-          "Microsoft.AspNetCore.Routing": {
-            "target": "Package",
-            "version": "1.1.1"
-          }
-=======
           "Microsoft.DotNet.ProjectModel": "1.0.0-rc3-003121",
           "Microsoft.Extensions.CommandLineUtils": "1.0.0",
           "Microsoft.NETCore.App": "1.0.0",
@@ -12000,7 +11390,6 @@
         },
         "compile": {
           "lib/netcoreapp1.0/dotnet-publish-iis.dll": {}
->>>>>>> b398e4e76bf702e512b96992ae611ae558ce8356:TeamLeasing/src/TeamLeasing/project.lock.json
         },
         "runtime": {
           "lib/netcoreapp1.0/dotnet-publish-iis.dll": {}

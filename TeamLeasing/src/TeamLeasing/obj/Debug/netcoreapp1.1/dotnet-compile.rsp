@@ -228,9 +228,12 @@ D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Controllers\JobCon
 D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Controllers\LoginController.cs
 D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Controllers\RegistrationController.cs
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\DAL\SeedRoles.cs
 >>>>>>> parent of aa64c89... ...
+=======
+>>>>>>> parent of 1017a4d... no message
 D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\DAL\TeamLeasingContext.cs
 D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\DAL\TeamLeasingSeedData.cs
 D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Migrations\20170319180104_Initialdatabase.cs
@@ -252,6 +255,7 @@ D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Migrations\2017040
 D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Migrations\20170401144848_test.cs
 D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Migrations\20170401144848_test.Designer.cs
 <<<<<<< HEAD
+<<<<<<< HEAD
 D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Migrations\TeamLeasingContextModelSnapshot.cs
 D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Models\Developer.cs
 =======
@@ -263,6 +267,10 @@ D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Migrations\TeamLea
 D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Models\Developer.cs
 D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Models\DeveloperUser.cs
 >>>>>>> parent of aa64c89... ...
+=======
+D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Migrations\TeamLeasingContextModelSnapshot.cs
+D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Models\Developer.cs
+>>>>>>> parent of 1017a4d... no message
 D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Models\Employee.cs
 D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Models\Job.cs
 D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\Models\Message.cs
