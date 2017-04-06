@@ -12,7 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using TeamLeasing.DAL;
-using Microsoft.DotNet.Cli.Utils;
+//using Microsoft.DotNet.Cli.Utils;
 using TeamLeasing.Models;
 using TeamLeasing.Services;
 using TeamLeasing.Services.Mail;
@@ -90,10 +90,9 @@ namespace TeamLeasing
             });
 
            seeder.Seed().Wait();
-<<<<<<< HEAD
-=======
-            rolesSeeder.Seed().Wait();
->>>>>>> parent of aa64c89... ...
+ 
+          
+ 
         }
     }
 }
