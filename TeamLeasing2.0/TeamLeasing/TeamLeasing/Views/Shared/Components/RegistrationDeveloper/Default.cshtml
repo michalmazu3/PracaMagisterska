@@ -4,7 +4,7 @@
 
 <div id="home" class="tab-pane fade in active">
     <h3>Zarejestruj się jako programista !</h3>
-    <form class="form-horizontal" method="post" asp-action="Developer" asp-controller="Registration">
+    <form class="form-horizontal" method="post" asp-action="Developer" asp-controller="Registration" enctype="multipart/form-data">
         <div class="form-group">
             <label asp-for="Email" class="col-sm-2"></label>
             <div class="col-sm-10">
@@ -116,7 +116,7 @@
         <div class="form-group">
             <label for="exampleInputFile" class="col-sm-2">Wgraj CV</label>
             <div class="col-sm-10">
-                <input type="file" id="exampleInputFile">
+                <input asp-for="CvFile" type="file" id="exampleInputFile">
             </div>
         </div>
 

@@ -33,8 +33,9 @@ namespace TeamLeasing.Controllers
         {
             using (_teamLeasingContext)
             {
-               var developers = _teamLeasingContext.Developers.Include(i => i.Technology).ToListAsync();
-               return View( await developers);
+                var developers = await _teamLeasingContext.Users.Include(i=>i.DeveloperUser.Technology).Select(s=>s.DeveloperUser).ToListAsync();
+                                                        
+                return View( developers);
             }
          
         }

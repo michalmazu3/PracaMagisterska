@@ -48,16 +48,20 @@ namespace TeamLeasing.Controllers
                 DeveloperUser developerUser = new DeveloperUser();
 
                 developerUser = _mapper.Map<DeveloperUser>(vm);
-                developerUser.Technology = _teamLeasingContext.Technologies.FirstOrDefault(f => f.Name == vm.ChoosenTechnology);
-                user = _mapper.Map<User>(vm);
-
-                await _teamLeasingContext.DeveloperUsers.AddAsync(developerUser);
-                var result = await _manager.CreateAsync(user, vm.Password);
-                if (result.Succeeded)
+                using (_teamLeasingContext)
                 {
-                    await _teamLeasingContext.DeveloperUsers.AddAsync(developerUser);
-                    await _teamLeasingContext.SaveChangesAsync();
+                    developerUser.TechnologyId = _teamLeasingContext.Technologies.FirstOrDefault(f => f.Name == vm.ChoosenTechnology).Id;
 
+                    user = _mapper.Map<User>(vm);
+                    user.DeveloperUser = developerUser;
+
+                    var result = await _manager.CreateAsync(user, vm.Password);
+                    if (result.Succeeded)
+                    {
+                        await _teamLeasingContext.DeveloperUsers.AddAsync(developerUser);
+                        await _teamLeasingContext.SaveChangesAsync();
+
+                    }
                 }
                 var r = await _manager.AddToRoleAsync(user, Roles.Developer.ToString());
 
@@ -67,6 +71,11 @@ namespace TeamLeasing.Controllers
             {
                 return View("Registration", vm);
             }
+
+            //private async Task<bool> CreateUser(User user, string password)
+            //{
+
+            //}
 
         }
 

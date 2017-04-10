@@ -12,11 +12,13 @@ namespace TeamLeasing.DAL
     {
         private UserManager<User> _manager { get; set; }
         private TeamLeasingContext _context;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public TeamLeasingSeedData(TeamLeasingContext context, UserManager<User> manager)
+        public TeamLeasingSeedData(TeamLeasingContext context, UserManager<User> manager, RoleManager<IdentityRole> roleManager)
         {
             _manager = manager;
             _context = context;
+            _roleManager = roleManager;
         }
 
         public async Task Seed()
@@ -26,22 +28,24 @@ namespace TeamLeasing.DAL
             _context.Jobs.RemoveRange(_context.Jobs.ToArray());
             _context.DeveloperUsers.RemoveRange(_context.DeveloperUsers.ToArray());
             _context.Users.RemoveRange(_context.Users.ToArray());
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync().ContinueWith(async t =>
+            {
+                //   await Technologies();
+                // await Developers();
+                //  await Jobs();
+                // await DeveloperUsers();
+                await User();
 
-            //  await Technologies();
-            await Developers();
-            await Jobs();
-            await DeveloperUsers();
-            await User();
+            });
+
+           
 
         }
 
         private async Task User()
         {
-
-            if (await _manager.FindByEmailAsync("michal@gmail.com") == null)
-            {
-                var dev = new DeveloperUser()
+         
+            DeveloperUser dev = new DeveloperUser()
                 {
                     Name = "Jan User",
                     BirthDate = new DateTime(1992, 08, 05),
@@ -53,32 +57,166 @@ namespace TeamLeasing.DAL
                     University = "Politechnika świetokrzyska II stopien Informatyka",
                     IsFinishedUniversity = IsFinishedUniversity.Finished,
                     // Technology = await _context.Technologies.FindAsync(162),
-                   // TechnologyId = 2,
+                    TechnologyId = 2,
                     Photo = "/image/photo/profil-large.jpg"
 
                 };
-                 var result = await _manager.CreateAsync(new User()
-                {
-                    Email = "michal@gmail.com",
-                    UserName = "michal",
-                    DeveloperUser = dev,
+            User user = new User()
+            {
+                Email = "michal1@gmail.com",
+                UserName = "michal1",
+                DeveloperUser = dev
+            };
+            var result = await _manager.CreateAsync(user, "Michal123$");
+            await _context.DeveloperUsers.AddAsync(dev);
 
-                }, "Michal123$");
-
-                
-
-            }
-            //if (await _manager.FindByEmailAsync("jan@gmail.com") == null)
+            //DeveloperUser dev1 = new DeveloperUser()
             //{
-            //    var result = await _manager.CreateAsync(new User()
-            //    {
-            //        Email = "jan@gmail.com",
-            //        UserName = "jan",
-            //        DeveloperUser = _context.DeveloperUsers.ToList()[1],
+            //    Name = "Jan",
+            //    BirthDate = new DateTime(1992, 08, 05),
+            //    City = "Kielce",
+            //    Level = Level.Junior,
+            //    Experience = 2,
+            //    Province = "swietokrzyskie",
+            //    Surname = "Kowalski",
+            //    University = "Politechnika świetokrzyska II stopien Informatyka",
+            //    IsFinishedUniversity = IsFinishedUniversity.Finished,
+            //    TechnologyId = 1,
+            //    Photo = "/image/photo/profil-large.jpg"
+            //};
+            //User user1 = new User()
+            //{
+            //    Email = "jan@com.pl",
+            //    UserName = "jan",
+            //    DeveloperUser = dev1,
 
-            //    }, "Michal123$");
-            //}
+            //};
+            //await _manager.CreateAsync(user1, "Jankowalski123$");
+            //await _context.DeveloperUsers.AddAsync(dev);
 
+            //DeveloperUser dev2 = new DeveloperUser()
+            //{
+            //    Name = "Paweł",
+            //    BirthDate = new DateTime(1992, 08, 05),
+            //    City = "Warszawa",
+            //    Level = Level.Senior,
+            //    Experience = 2,
+            //    Province = "mazowieckie",
+            //    Surname = "Nowak",
+            //    University = "Politechnika świetokrzyska II stopien Informatyka (w trakcie)",
+            //    IsFinishedUniversity = IsFinishedUniversity.InProgress,
+            //    TechnologyId = 4,
+            //    Photo = "/image/photo/profil2.jpg"
+
+            //};
+            //User  user2 = new User()
+            //{
+            //    Email = "pawel@com.pl",
+            //    UserName = "pawel",
+            //    DeveloperUser = dev2,
+
+            //};
+            //await _manager.CreateAsync(user2, "Qaz123#");
+            //await _context.DeveloperUsers.AddAsync(dev);
+
+            //dev = new DeveloperUser()
+            //{
+            //    Name = "Marcin",
+            //    BirthDate = new DateTime(1992, 08, 05),
+            //    City = "Poznań",
+            //     Level = Level.Regular,
+            //     Experience = 7,
+            //    Province = "wielkopolskie",
+            //    Surname = "Turek",
+            //    University = "Politechnika świetokrzyska II stopien Informatyka (w trakcie)",
+            //    IsFinishedUniversity = IsFinishedUniversity.InProgress,
+            //    TechnologyId = 5,
+            //    Photo = "/image/photo/profil3.jpg"
+            //};
+            //await _manager.CreateAsync(new User()
+            //{
+            //    Email = "Marcin@com.pl",
+            //    UserName = "marcinturek",
+            //    DeveloperUser = dev,
+
+            //}, "Marcinturek123$");
+            //await _context.DeveloperUsers.AddAsync(dev);
+            //dev = new DeveloperUser()
+            //{
+            //    Name = "Karol",
+            //    BirthDate = new DateTime(1992, 08, 05),
+            //    City = "Opole",
+            //    Email = "Karol@com.pl",
+            //    Level = Level.Regular,
+            //    Password = "karollolek",
+            //    Experience = 4,
+            //    Province = "śląskie",
+            //    Surname = "Biracz",
+            //    University = " ",
+            //    IsFinishedUniversity = IsFinishedUniversity.NotFinished,
+            //    Photo = "/image/photo/profil4.jpg",
+            //    Technology = _context.Technologies.Where(t => t.Name.ToLower() == "javascript")
+            //            .ToList()
+            //            .FirstOrDefault()
+            //};
+            //await _manager.CreateAsync(new User()
+            //{
+            //    Email = "jan@com.pl",
+            //    UserName = "jan",
+            //    DeveloperUser = dev,
+
+            //}, "Jankowalski123$");
+            //await _context.DeveloperUsers.AddAsync(dev);
+            //dev = new DeveloperUser()
+            //{
+            //    Name = "Piotrek",
+            //    BirthDate = new DateTime(1992, 08, 05),
+            //    City = "Opole",
+            //    Email = "Karol@com.pl",
+            //    Level = Level.Junior,
+            //    Password = "karollolek",
+            //    Experience = 4,
+            //    Province = "śląskie",
+            //    Surname = "Olak",
+            //    University = " ",
+            //    IsFinishedUniversity = IsFinishedUniversity.NotFinished,
+            //    Photo = "/image/photo/profil4.jpg",
+            //    Technology = _context.Technologies.Where(t => t.Name.ToLower() == "python").ToList().FirstOrDefault()
+            //};
+            //await _manager.CreateAsync(new User()
+            //{
+            //    Email = "jan@com.pl",
+            //    UserName = "jan",
+            //    DeveloperUser = dev,
+
+            //}, "Jankowalski123$");
+            //await _context.DeveloperUsers.AddAsync(dev);
+            //dev = new DeveloperUser()
+            //{
+            //    Name = "Heniek",
+            //    BirthDate = new DateTime(1992, 08, 05),
+            //    City = "Opole",
+            //    Email = "Karol@com.pl",
+            //    Level = Level.Junior,
+            //    Password = "karollolek",
+            //    Experience = 4,
+            //    Province = "śląskie",
+            //    Surname = "Tomczak",
+            //    University = " Univerek",
+            //    IsFinishedUniversity = IsFinishedUniversity.Finished,
+            //    Photo = "Uniwerek",
+            //    Technology = _context.Technologies.Where(t => t.Name.ToLower() == "python").ToList().FirstOrDefault()
+            //};
+            //await _manager.CreateAsync(new User()
+            //{
+            //    Email = "jan@com.pl",
+            //    UserName = "jan",
+            //    DeveloperUser = dev,
+
+            //}, "Jankowalski123$");
+            //await _context.DeveloperUsers.AddAsync(dev);
+
+            await _context.SaveChangesAsync();
 
         }
 

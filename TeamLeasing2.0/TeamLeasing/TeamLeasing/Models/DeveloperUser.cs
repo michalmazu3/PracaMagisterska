@@ -41,7 +41,10 @@ namespace TeamLeasing.Models
         [Display(Name = "Cv")]
         public string Cv { get; set; }
 
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int TechnologyId { get; set; }
          public virtual Technology Technology { get; set; }
+
         public ICollection<Offer> Offers { get; set; }
 
         public string UserId { get; set; }

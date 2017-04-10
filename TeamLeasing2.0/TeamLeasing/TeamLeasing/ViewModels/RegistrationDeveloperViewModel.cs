@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using TeamLeasing.Models;
 
@@ -53,9 +54,11 @@ namespace TeamLeasing.ViewModels
  
         [Display(Name = "Zdjęcie")]
         public string Photo { get; set; }
+
         [Display(Name = "Cv")]
         public string Cv { get; set; }
-
+        public IFormFile CvFile { get; set; }
+            
         [Display(Name = "Technologia")]
         public SelectList Technologies { get; set; }
         [Display(Name = "Poziom")]
