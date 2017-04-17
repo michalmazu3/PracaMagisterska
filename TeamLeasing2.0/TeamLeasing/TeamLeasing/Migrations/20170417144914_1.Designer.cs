@@ -9,8 +9,8 @@ using TeamLeasing.Models;
 namespace TeamLeasing.Migrations
 {
     [DbContext(typeof(TeamLeasingContext))]
-    [Migration("20170409080200_5")]
-    partial class _5
+    [Migration("20170417144914_1")]
+    partial class _1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -176,6 +176,8 @@ namespace TeamLeasing.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("About");
+
                     b.Property<DateTime>("BirthDate");
 
                     b.Property<string>("City")
@@ -200,7 +202,7 @@ namespace TeamLeasing.Migrations
                     b.Property<string>("Surname")
                         .IsRequired();
 
-                    b.Property<int>("TechnologyId");
+                    b.Property<int?>("TechnologyId");
 
                     b.Property<string>("University");
 
@@ -447,8 +449,7 @@ namespace TeamLeasing.Migrations
                 {
                     b.HasOne("TeamLeasing.Models.Technology", "Technology")
                         .WithMany("DeveloperUsers")
-                        .HasForeignKey("TechnologyId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("TechnologyId");
 
                     b.HasOne("TeamLeasing.Models.User", "User")
                         .WithOne("DeveloperUser")

@@ -175,6 +175,8 @@ namespace TeamLeasing.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("About");
+
                     b.Property<DateTime>("BirthDate");
 
                     b.Property<string>("City")
@@ -199,8 +201,7 @@ namespace TeamLeasing.Migrations
                     b.Property<string>("Surname")
                         .IsRequired();
 
-                    b.Property<int>("TechnologyId")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int?>("TechnologyId");
 
                     b.Property<string>("University");
 
@@ -447,8 +448,7 @@ namespace TeamLeasing.Migrations
                 {
                     b.HasOne("TeamLeasing.Models.Technology", "Technology")
                         .WithMany("DeveloperUsers")
-                        .HasForeignKey("TechnologyId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("TechnologyId");
 
                     b.HasOne("TeamLeasing.Models.User", "User")
                         .WithOne("DeveloperUser")

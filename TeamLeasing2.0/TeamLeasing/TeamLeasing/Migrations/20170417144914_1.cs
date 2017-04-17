@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace TeamLeasing.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class _1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -65,6 +65,7 @@ namespace TeamLeasing.Migrations
                     Content = table.Column<string>(maxLength: 500, nullable: false),
                     Email = table.Column<string>(nullable: false),
                     Name = table.Column<string>(nullable: false),
+                    SendingDate = table.Column<DateTime>(nullable: false),
                     Surname = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
@@ -83,6 +84,31 @@ namespace TeamLeasing.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Technologies", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AspNetUsers",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    AccessFailedCount = table.Column<int>(nullable: false),
+                    ConcurrencyStamp = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(maxLength: 256, nullable: true),
+                    EmailConfirmed = table.Column<bool>(nullable: false),
+                    LockoutEnabled = table.Column<bool>(nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
+                    NormalizedEmail = table.Column<string>(maxLength: 256, nullable: true),
+                    NormalizedUserName = table.Column<string>(maxLength: 256, nullable: true),
+                    PasswordHash = table.Column<string>(nullable: true),
+                    PhoneNumber = table.Column<string>(nullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(nullable: false),
+                    SecurityStamp = table.Column<string>(nullable: true),
+                    TwoFactorEnabled = table.Column<bool>(nullable: false),
+                    UserName = table.Column<string>(maxLength: 256, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -139,36 +165,6 @@ namespace TeamLeasing.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "DeveloperUser",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    BirthDate = table.Column<DateTime>(nullable: false),
-                    City = table.Column<string>(nullable: false),
-                    Cv = table.Column<string>(nullable: true),
-                    Experience = table.Column<int>(nullable: false),
-                    IsFinishedUniversity = table.Column<int>(nullable: false),
-                    Level = table.Column<int>(nullable: false),
-                    Name = table.Column<string>(nullable: false),
-                    Photo = table.Column<string>(nullable: true),
-                    Province = table.Column<string>(nullable: false),
-                    Surname = table.Column<string>(nullable: false),
-                    TechnologyId = table.Column<int>(nullable: true),
-                    University = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_DeveloperUser", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_DeveloperUser_Technologies_TechnologyId",
-                        column: x => x.TechnologyId,
-                        principalTable: "Technologies",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Jobs",
                 columns: table => new
                 {
@@ -197,82 +193,6 @@ namespace TeamLeasing.Migrations
                         principalTable: "Technologies",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AspNetUsers",
-                columns: table => new
-                {
-                    Id = table.Column<string>(nullable: false),
-                    AccessFailedCount = table.Column<int>(nullable: false),
-                    ConcurrencyStamp = table.Column<string>(nullable: true),
-                    DeveloperId = table.Column<int>(nullable: true),
-                    Email = table.Column<string>(maxLength: 256, nullable: true),
-                    EmailConfirmed = table.Column<bool>(nullable: false),
-                    LockoutEnabled = table.Column<bool>(nullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
-                    NormalizedEmail = table.Column<string>(maxLength: 256, nullable: true),
-                    NormalizedUserName = table.Column<string>(maxLength: 256, nullable: true),
-                    PasswordHash = table.Column<string>(nullable: true),
-                    PhoneNumber = table.Column<string>(nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(nullable: false),
-                    SecurityStamp = table.Column<string>(nullable: true),
-                    TwoFactorEnabled = table.Column<bool>(nullable: false),
-                    UserName = table.Column<string>(maxLength: 256, nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_AspNetUsers_Developers_DeveloperId",
-                        column: x => x.DeveloperId,
-                        principalTable: "Developers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Offers",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    DeveloperId = table.Column<int>(nullable: true),
-                    DeveloperUserId = table.Column<int>(nullable: true),
-                    EmployeeId = table.Column<int>(nullable: true),
-                    IsHidden = table.Column<bool>(nullable: false),
-                    Level = table.Column<int>(nullable: false),
-                    OfferStatus = table.Column<string>(nullable: false),
-                    Price = table.Column<decimal>(nullable: false),
-                    TechnologyId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Offers", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Offers_Developers_DeveloperId",
-                        column: x => x.DeveloperId,
-                        principalTable: "Developers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Offers_DeveloperUser_DeveloperUserId",
-                        column: x => x.DeveloperUserId,
-                        principalTable: "DeveloperUser",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Offers_Employees_EmployeeId",
-                        column: x => x.EmployeeId,
-                        principalTable: "Employees",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Offers_Technologies_TechnologyId",
-                        column: x => x.TechnologyId,
-                        principalTable: "Technologies",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -340,6 +260,88 @@ namespace TeamLeasing.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "DeveloperUsers",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    About = table.Column<string>(nullable: true),
+                    BirthDate = table.Column<DateTime>(nullable: false),
+                    City = table.Column<string>(nullable: false),
+                    Cv = table.Column<string>(nullable: true),
+                    Experience = table.Column<int>(nullable: false),
+                    IsFinishedUniversity = table.Column<int>(nullable: false),
+                    Level = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(nullable: false),
+                    Photo = table.Column<string>(nullable: true),
+                    Province = table.Column<string>(nullable: false),
+                    Surname = table.Column<string>(nullable: false),
+                    TechnologyId = table.Column<int>(nullable: true),
+                    University = table.Column<string>(nullable: true),
+                    UserId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DeveloperUsers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_DeveloperUsers_Technologies_TechnologyId",
+                        column: x => x.TechnologyId,
+                        principalTable: "Technologies",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_DeveloperUsers_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Offers",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    DeveloperId = table.Column<int>(nullable: true),
+                    DeveloperUserId = table.Column<int>(nullable: true),
+                    EmployeeId = table.Column<int>(nullable: true),
+                    IsHidden = table.Column<bool>(nullable: false),
+                    Level = table.Column<int>(nullable: false),
+                    OfferStatus = table.Column<string>(nullable: false),
+                    Price = table.Column<decimal>(nullable: false),
+                    TechnologyId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Offers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Offers_Developers_DeveloperId",
+                        column: x => x.DeveloperId,
+                        principalTable: "Developers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Offers_DeveloperUsers_DeveloperUserId",
+                        column: x => x.DeveloperUserId,
+                        principalTable: "DeveloperUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Offers_Employees_EmployeeId",
+                        column: x => x.EmployeeId,
+                        principalTable: "Employees",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Offers_Technologies_TechnologyId",
+                        column: x => x.TechnologyId,
+                        principalTable: "Technologies",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "RoleNameIndex",
                 table: "AspNetRoles",
@@ -371,9 +373,15 @@ namespace TeamLeasing.Migrations
                 column: "TechnologyId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DeveloperUser_TechnologyId",
-                table: "DeveloperUser",
+                name: "IX_DeveloperUsers_TechnologyId",
+                table: "DeveloperUsers",
                 column: "TechnologyId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DeveloperUsers_UserId",
+                table: "DeveloperUsers",
+                column: "UserId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Jobs_EmployeeId",
@@ -404,11 +412,6 @@ namespace TeamLeasing.Migrations
                 name: "IX_Offers_TechnologyId",
                 table: "Offers",
                 column: "TechnologyId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AspNetUsers_DeveloperId",
-                table: "AspNetUsers",
-                column: "DeveloperId");
 
             migrationBuilder.CreateIndex(
                 name: "EmailIndex",
@@ -452,19 +455,19 @@ namespace TeamLeasing.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "Developers");
 
             migrationBuilder.DropTable(
-                name: "DeveloperUser");
+                name: "DeveloperUsers");
 
             migrationBuilder.DropTable(
                 name: "Employees");
 
             migrationBuilder.DropTable(
-                name: "Developers");
+                name: "Technologies");
 
             migrationBuilder.DropTable(
-                name: "Technologies");
+                name: "AspNetUsers");
         }
     }
 }

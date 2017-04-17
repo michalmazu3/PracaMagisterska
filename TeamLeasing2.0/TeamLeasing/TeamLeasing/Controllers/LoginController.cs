@@ -15,8 +15,7 @@ using TeamLeasing.ViewModels;
 
 namespace TeamLeasing.Controllers
 {
-  
-    public class LoginController : Controller
+     public class LoginController : Controller
     {
         private readonly UserManager<User> _manager;
         private readonly SignInManager<User> _signInManager;
@@ -30,9 +29,9 @@ namespace TeamLeasing.Controllers
         }
         // GET: /<controller>/
         [HttpGet]
-        public IActionResult Login()
+         public IActionResult Login(string returnUrl)
         {
-            return View("Login");
+            return View("Login"  , new LoginViewModel(){ ReturnUrl =  returnUrl}) ;
         }
 
         [HttpPost]
@@ -43,7 +42,15 @@ namespace TeamLeasing.Controllers
                 var result = await _signInManager.PasswordSignInAsync(vm.Username, vm.Pasword, false, false);
                 if (result.Succeeded)
                 {
-                  return  RedirectToAction("Index", "Home");
+                    if (string.IsNullOrWhiteSpace(vm.ReturnUrl))
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else
+                    {
+                         return Redirect(vm.ReturnUrl);
+                    }
+                 
                 }
                 else
                 {

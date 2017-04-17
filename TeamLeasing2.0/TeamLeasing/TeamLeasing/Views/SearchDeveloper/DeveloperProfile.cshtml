@@ -1,4 +1,4 @@
-﻿@model TeamLeasing.Models.Developer
+﻿@model TeamLeasing.Models.DeveloperUser
 
 <div id="container-developer">
 
@@ -45,7 +45,7 @@
     </div>
     <div id="buttons">
         <button class="btn-primary  btn-lg">Wyślij oferte pracy</button>
-        <button class="btn-primary  btn-lg">Zobacz cv</button>
+        <a  asp-controller="SearchDeveloper" asp-action="Cv" asp-route-developerId="@Model.Id" class="btn btn-primary  btn-lg">Zobacz cv</a>
     </div>
 
 </div>

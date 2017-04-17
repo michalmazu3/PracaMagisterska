@@ -59,9 +59,11 @@ namespace TeamLeasing.Models
     }
 
     public enum IsFinishedUniversity
-    {
+    {   [Display(Name = "Ukończono")]
         Finished,
+        [Display(Name = "W trakcie")]
         InProgress,
+        [Display(Name = "Brak")]
         NotFinished
     }
 }

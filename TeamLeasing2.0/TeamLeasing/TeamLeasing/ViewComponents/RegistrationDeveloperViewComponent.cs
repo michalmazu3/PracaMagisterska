@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TeamLeasing.DAL;
 using TeamLeasing.Models;
+using TeamLeasing.Services.Developer;
 using TeamLeasing.ViewModels;
 
 namespace TeamLeasing.ViewComponents
@@ -14,56 +15,25 @@ namespace TeamLeasing.ViewComponents
     public class RegistrationDeveloperViewComponent : ViewComponent
     {
         private readonly TeamLeasingContext _teamLeasingContext;
+        private readonly IDeveloperConfigurationInformation _developerConfigurationInformation;
 
-        public RegistrationDeveloperViewComponent(TeamLeasingContext _teamLeasingContext)
+        public RegistrationDeveloperViewComponent(TeamLeasingContext _teamLeasingContext, 
+            IDeveloperConfigurationInformation developerConfigurationInformation)
         {
             this._teamLeasingContext = _teamLeasingContext;
+            _developerConfigurationInformation = developerConfigurationInformation;
         }
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            RegistrationDeveloperViewModel vm = await FillViewModel();
- 
+            RegistrationDeveloperViewModel vm =  new RegistrationDeveloperViewModel();
+            vm.IsFinishedUnivesity = _developerConfigurationInformation.GetIsFinishedUniversityConfiguration();
+            vm.Levels = _developerConfigurationInformation.GetLevelConfiguration();
+            vm.Technologies =await _developerConfigurationInformation.GetTechnologyConfiguration();
+
             return View(vm);
         }
-
-        private async Task<RegistrationDeveloperViewModel> FillViewModel()
-        {
-            return await Task.Run(async () =>
-            {
-                RegistrationDeveloperViewModel vm = new RegistrationDeveloperViewModel();
-                vm.Technologies = await FillViewModelWithtechnology();
-                vm.IsFinishedUnivesity = FillViewModelWitchIsFinishedUniversity();
-                vm.Levels = FillViewModelWitchLevel();
-                return vm;
-            });
-        }
-
-        private async Task<SelectList> FillViewModelWithtechnology()
-        {
-            return new SelectList( await _teamLeasingContext.Technologies.Select(s => s.Name).ToListAsync());
-        }
-
-        private SelectList FillViewModelWitchLevel()
-        {
-            List<Level> list = new List<Level>();
-
-            foreach (Level level in Enum.GetValues(typeof(Level)))
-            {
-                list.Add(level);
-             }
-            return new SelectList(list);
-        }
-
-        private SelectList FillViewModelWitchIsFinishedUniversity()
-        {
-            List<IsFinishedUniversity> list = new List<IsFinishedUniversity>();
-
-            foreach (IsFinishedUniversity item in Enum.GetValues(typeof(IsFinishedUniversity)))
-            {
-                list.Add(item);
-            }
-            return new SelectList(list);
-        }
+   
+      
     }
 }

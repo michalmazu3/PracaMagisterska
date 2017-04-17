@@ -16,6 +16,7 @@ using TeamLeasing.DAL;
 using Microsoft.DotNet.Cli.Utils;
 using TeamLeasing.Models;
 using TeamLeasing.Services;
+using TeamLeasing.Services.Developer;
 using TeamLeasing.Services.Mail;
 
 namespace TeamLeasing
@@ -45,21 +46,28 @@ namespace TeamLeasing
                     c.Password.RequiredLength = 4;
                     c.User.RequireUniqueEmail = true;
                     c.Lockout.MaxFailedAccessAttempts = 5;
-                    c.Cookies.ApplicationCookie.LoginPath = "/login/";
+                    c.Cookies.ApplicationCookie.LoginPath = "/login/login";
                 })
                 .AddEntityFrameworkStores<TeamLeasingContext>()
                 .AddDefaultTokenProviders();
          
        
-            services.AddMvc();
+            services.AddMvc(config =>
+            {
+                if (_env.IsProduction())
+                {
+                    config.Filters.Add(new RequireHttpsAttribute());
+                }
+            });
           
-            services.AddDbContext<TeamLeasingContext>(ServiceLifetime.Transient);
+            services.AddDbContext<TeamLeasingContext>(ServiceLifetime.Scoped);
             services.AddSingleton(_configuration);
             services.AddTransient<TeamLeasingSeedData>();
             services.AddTransient<IMessage,MessageModel>();
             services.AddTransient<ISendEmail, SendEmail>();
             services.AddSingleton<TeamLeasingSeedData>();
             services.AddSingleton<SeedRoles>();
+            services.AddSingleton<IDeveloperConfigurationInformation, DeveloperConfigurationInformation>();
             services.AddAutoMapper();
             services.AddLogging();
 
@@ -93,9 +101,9 @@ namespace TeamLeasing
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-
-           seeder.Seed().Wait();
             seedRoles.Seed().Wait();
+           seeder.Seed().Wait();
+
         }
     }
 }

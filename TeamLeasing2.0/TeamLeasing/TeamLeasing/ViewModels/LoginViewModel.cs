@@ -12,5 +12,7 @@ namespace TeamLeasing.ViewModels
         public string Username { get; set; }
         [Required(ErrorMessage = "Podaj hasło")]
         public string  Pasword { get; set; }
+
+        public string ReturnUrl { get; set; }
     }
 }

@@ -234,11 +234,13 @@ table, th, td {
 	padding-left: 340px;
 	height: 200px;
 }
-#container-developer #buttons button{
+#container-developer #buttons a{
   margin: 40px 0 40px 100px;
-	width: 150px;
-	height: 120px;
+  min-width: 150px;
+	
 	float:  left;
+	vertical-align: bottom;
+	
 }
  
 #application h2{

@@ -24,12 +24,12 @@
             <div id="navbar" class="collapse navbar-collapse navbar-right">
                 <ul class="nav navbar-nav">
                     <li><a asp-controller="Job" asp-action="Search">Oferty pracy</a></li>
-                    <li><a asp-controller="Developer" asp-action="Search">Profile programistów</a></li>
+                    <li><a asp-controller="SearchDeveloper" asp-action="Developer">Profile programistów</a></li>
                     <li><a asp-controller="Contact" asp-action="Index">Kontact</a></li>
                  
-                    @if (User.Identity.IsAuthenticated)
+                    @if (User.Identity.IsAuthenticated )
                     {
-                        <li><a asp-controller="Login" asp-action="Logout">@User.Identity.Name  Wyloguj</a></li>
+                        <li><a asp-controller="Login" asp-action="Logout">@User.Identity.Name<br/>Wyloguj</a></li>
                     }
                     else
                     {
@@ -38,16 +38,19 @@
 
                     
 
-                    @if (User.Identity.IsAuthenticated)
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("Developer"))
                     {
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">Moje Konto Programista <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="developer-account.html">Edycja konta</a></li>
+                                <li><a asp-controller="AccountDeveloper" asp-action="Edit">Edycja konta</a></li>
                                 <li><a href="developer-applications.html">Aplikacje</a></li>
                                 <li><a href="developer-offers.html">Przychodzące oderty</a></li>
                             </ul>
                         </li>
+                    }
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("Employee"))
+                    {
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">Moje Konto Pracodawca <span class="caret"></span></a>
                             <ul class="dropdown-menu">

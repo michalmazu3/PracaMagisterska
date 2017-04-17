@@ -38,7 +38,7 @@ namespace TeamLeasing.DAL
                 WithOne(w => w.User).
                 HasForeignKey<DeveloperUser>(h => h.UserId);
 
-        
+
             base.OnModelCreating(modelBuilder);
 
         }

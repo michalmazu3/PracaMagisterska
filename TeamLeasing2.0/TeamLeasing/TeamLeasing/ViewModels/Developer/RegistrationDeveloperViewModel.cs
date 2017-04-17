@@ -14,13 +14,19 @@ namespace TeamLeasing.ViewModels
         [Required(ErrorMessage = "Pole email jest wymagane!")]
         [EmailAddress(ErrorMessage = "Podaj poprawny adres email!")]
         public string Email { get; set; }
-        [Required]
-        [StringLength(50, MinimumLength = 5, ErrorMessage = "Hasło  za krótkie")]
+
+        [Required(ErrorMessage = "Nazwa użytkownika jest wymagana!")]
+        [StringLength(50,MinimumLength = 5, ErrorMessage = "Nazwa zbyt krótka minimum 5 znaków")]
+        public string Username { get; set; }
+        [Required(ErrorMessage = "Hasło jest wymagane")]
+        [RegularExpression(@"^.*(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*\(\)_\-+=]).*$", ErrorMessage = "Wprowadź jedną dużą litere, cyfre i znak")]
+
+        [StringLength(50, MinimumLength = 4, ErrorMessage = "Hasło  za krótkie")]
         [DataType(DataType.Password)]
         [Display(Name = "Hasło")]
         public string Password { get; set; }
         [Required]
-        [Compare("Password")]
+        [Compare("Password",ErrorMessage = "Hasła nie są takie same")]
         [DataType(DataType.Password)]
         [Display(Name = "Potwierdź hasło")]
         public string RePassword { get; set; }
@@ -50,15 +56,19 @@ namespace TeamLeasing.ViewModels
         public string University { get; set; }
         [Display(Name = "Doświadczenie w latach")]
         [Range(0, 20, ErrorMessage = "Podaj wartość z zakreu 0 - 20")]
-        public int Experience { get; set; }
- 
-        [Display(Name = "Zdjęcie")]
-        public string Photo { get; set; }
+        public int? Experience { get; set; }
+
 
         [Display(Name = "Cv")]
         public string Cv { get; set; }
+        [DataType(DataType.Upload)]
+       //  [FileExtensions(Extensions = "pdf", ErrorMessage = "Wgraj plik w formacie pdf")]
         public IFormFile CvFile { get; set; }
-            
+
+        [Display(Name = "Zdjęcie")]
+        public string Photo { get; set; }
+        public IFormFile PhotoFile { get; set; }
+
         [Display(Name = "Technologia")]
         public SelectList Technologies { get; set; }
         [Display(Name = "Poziom")]

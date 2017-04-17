@@ -15,18 +15,20 @@ namespace TeamLeasing.DAL
         public SeedRoles(RoleManager<IdentityRole> roleManager)
         {
             _roleManager = roleManager;
+          
         }
         public async Task Seed()
         {
-            foreach (var role in Enum.GetNames(typeof(Roles)))
-            {
-                if (!await _roleManager.RoleExistsAsync(role.ToString()))
+            
+                foreach (var role in Enum.GetNames(typeof(Roles)))
                 {
-                    IdentityRole newRole = new IdentityRole(role.ToString());
-                    var rezult = await _roleManager.CreateAsync(newRole);
+                    if (!await _roleManager.RoleExistsAsync(role.ToString()))
+                    {
+                        IdentityRole newRole = new IdentityRole(role.ToString());
+                        var rezult = await _roleManager.CreateAsync(newRole);
+                    }
                 }
-            }
-
+            
         }
     }
 

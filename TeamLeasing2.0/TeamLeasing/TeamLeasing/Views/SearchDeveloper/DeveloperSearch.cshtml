@@ -18,7 +18,7 @@
                         <img src=@Url.Content(developer.Photo) style="height: 233px; width: 233px;">
                         <div>
                             <table>
-                                <th><a asp-controller="Developer" asp-action="Profile" asp-route-developerId="@developer.Id">@developer.Name @developer.Surname</a></th>
+                                <th><a asp-controller="SearchDeveloper" asp-action="Profile" asp-route-developerId="@developer.Id">@developer.Name @developer.Surname</a></th>
                                 <tr>
                                     <td>@developer.Technology.Name</td>
                                     <td></td>

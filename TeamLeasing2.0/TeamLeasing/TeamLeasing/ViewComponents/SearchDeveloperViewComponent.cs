@@ -29,7 +29,8 @@ namespace TeamLeasing.ViewComponents
                 UniversityNameValuePairs = CheckAvailableUniversity(),
                 LevelNameValuePairs = CheckAvailableLevel()
             };
-            return View(model);
+        
+            return View("Developer", model);
         }
 
         private List<LevelNameValuePair> CheckAvailableLevel()
