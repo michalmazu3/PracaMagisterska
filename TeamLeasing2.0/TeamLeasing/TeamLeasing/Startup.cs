@@ -16,10 +16,15 @@ using TeamLeasing.DAL;
 using Microsoft.DotNet.Cli.Utils;
 using TeamLeasing.Models;
 using TeamLeasing.Services;
-using TeamLeasing.Services.Developer;
+using TeamLeasing.Services.AppConfigurationService;
+using TeamLeasing.Services.AppConfigurationService.IsFinishedUniversityService;
+using TeamLeasing.Services.AppConfigurationService.LevelService;
+using TeamLeasing.Services.AppConfigurationService.ProvinceService;
+using TeamLeasing.Services.AppConfigurationService.TechnologyService;
 using TeamLeasing.Services.Mail;
 using TeamLeasing.Services.MailService;
 using TeamLeasing.Services.UploadService;
+using TeamLeasing.Services.UserService;
 
 namespace TeamLeasing
 {
@@ -65,12 +70,21 @@ namespace TeamLeasing
             services.AddDbContext<TeamLeasingContext>(ServiceLifetime.Scoped);
             services.AddSingleton(_configuration);
             services.AddTransient<TeamLeasingSeedData>();
-            services.AddTransient<IMessage,MessageModel>();
-            services.AddTransient<ISendEmail, SendEmail>();
+
             services.AddSingleton<TeamLeasingSeedData>();
             services.AddSingleton<SeedRoles>();
-            services.AddSingleton<IDeveloperConfigurationInformation, DeveloperConfigurationInformation>();
+
+            //informacje konfiguracyjne dla serwisu
+            services.AddScoped<IConfigurationService, ConfigurationService>();
+            services.AddScoped<ITechnology, Services.AppConfigurationService.TechnologyService.Technology>();
+            services.AddScoped<IProvince, Province>();
+            services.AddScoped<ILevel, Level>();
+            services.AddScoped<IIsFinishedUniversity, IsFinishedUniversity>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IMessage, MessageModel>();
+            services.AddScoped<ISendEmail, SendEmail>();
             services.AddScoped<IUploadService, UploadService>();
+
             services.AddAutoMapper();
             services.AddLogging();
 

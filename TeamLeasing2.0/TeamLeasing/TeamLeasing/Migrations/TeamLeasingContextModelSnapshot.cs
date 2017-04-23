@@ -195,8 +195,7 @@ namespace TeamLeasing.Migrations
 
                     b.Property<string>("Photo");
 
-                    b.Property<string>("Province")
-                        .IsRequired();
+                    b.Property<int>("Province");
 
                     b.Property<string>("Surname")
                         .IsRequired();
@@ -243,8 +242,7 @@ namespace TeamLeasing.Migrations
                     b.Property<string>("Name")
                         .IsRequired();
 
-                    b.Property<string>("Province")
-                        .IsRequired();
+                    b.Property<int>("Province");
 
                     b.Property<string>("Surname")
                         .IsRequired();

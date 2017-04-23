@@ -39,9 +39,8 @@ namespace TeamLeasing.ViewModels
         [Required(ErrorMessage = "Podaj miejscowość")]
         [Display(Name = "Miejscowość")]
         public string City { get; set; }
-        [Required(ErrorMessage = "Podaj województwo")]
-        [Display(Name = "Województwo")]
-        public string Province { get; set; }
+   
+ 
         [Required(ErrorMessage = "Podaj numer telefonu")]
         [Phone]
         public string Phone { get; set; }
@@ -52,7 +51,7 @@ namespace TeamLeasing.ViewModels
         public DateTime BirthDate { get; set; }
 
        
-         [Display(Name = "Studia")]
+        [Display(Name = "Studia")]
         public string University { get; set; }
         [Display(Name = "Doświadczenie w latach")]
         [Range(0, 20, ErrorMessage = "Podaj wartość z zakreu 0 - 20")]
@@ -75,6 +74,8 @@ namespace TeamLeasing.ViewModels
         public SelectList Levels { get; set; }
         [Display(Name = "Czy ukończyłeś studia ?")]
         public SelectList IsFinishedUnivesity { get; set; }
+        [Display(Name = "Województwo")]
+        public SelectList Province { get; set; }
 
         [Required]
         public string ChoosenTechnology { get; set; }
@@ -82,6 +83,9 @@ namespace TeamLeasing.ViewModels
         public Enums.Level ChoosenLevel{ get; set; }
         [Required]
         public Enums.IsFinishedUniversity ChoosenIsFinishedUnivesity { get; set; }
+        [Required(ErrorMessage = "Podaj województwo")]
+        public Enums.Province ChoosenProvince { get; set; }
+
 
     }
 }

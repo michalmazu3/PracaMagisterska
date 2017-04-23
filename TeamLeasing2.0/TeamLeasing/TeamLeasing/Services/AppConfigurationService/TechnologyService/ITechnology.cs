@@ -6,7 +6,7 @@ namespace TeamLeasing.Services.AppConfigurationService.TechnologyService
 {
     public interface ITechnology
     {
-        Task<SelectList> GetSelectListTechnology();
-        Task<IList<string>> GetListTechnology();
+        Task<SelectList> GetSelectList();
+        Task<IList<string>> GetList();
     }
 }

@@ -7,7 +7,7 @@ using TeamLeasing.DAL;
 
 namespace TeamLeasing.Services.AppConfigurationService.TechnologyService
 {
-    public class Technology
+    public class Technology : ITechnology
     {
         private readonly TeamLeasingContext _teamLeasingContext;
 
@@ -15,13 +15,13 @@ namespace TeamLeasing.Services.AppConfigurationService.TechnologyService
         {
             _teamLeasingContext = teamLeasingContext;
         }
-        public async Task<SelectList> GetSelectListTechnology()
+        public async Task<SelectList> GetSelectList()
         {
-            var list = await this.GetListTechnology();
+            var list = await this.GetList();
             list.Insert(0, "");
             return new SelectList(list);
         }
-        public async Task<IList<string>> GetListTechnology()
+        public async Task<IList<string>> GetList()
         {
             return await _teamLeasingContext.Technologies.Select(s => s.Name)
                 .ToListAsync();

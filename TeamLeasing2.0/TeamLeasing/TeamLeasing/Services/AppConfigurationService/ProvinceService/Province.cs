@@ -9,7 +9,7 @@ namespace TeamLeasing.Services.AppConfigurationService.ProvinceService
 {
     public class Province : IProvince
     {
-        public IList<Enums.Province> GetListProvince()
+        public IList<Enums.Province> GetList()
         {
             List<Enums.Province> list = new List<Enums.Province>();
             foreach (Enums.Province province in Enum.GetValues(typeof(Enums.Province)))
@@ -21,9 +21,9 @@ namespace TeamLeasing.Services.AppConfigurationService.ProvinceService
 
 
 
-        public SelectList GetSelectListProvince()
+        public SelectList GetSelectList()
         {
-            List<string> selectList = this.GetListProvince().Select(s => s.ToString())
+            List<string> selectList = this.GetList().Select(s => s.ToString())
                                                          .ToList();
             selectList.Insert(0, "");
             return new SelectList(selectList);

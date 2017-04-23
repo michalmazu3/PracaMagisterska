@@ -10,7 +10,7 @@ namespace TeamLeasing.Services.AppConfigurationService.LevelService
 {
     public class Level : ILevel
     {
-        public IList<Enums.Level> GetListLevel()
+        public IList<Enums.Level> GetList()
         {
             List<Enums.Level> list = new List<Enums.Level>();
             foreach (Enums.Level level in Enum.GetValues(typeof(Enums.Level)))
@@ -19,9 +19,9 @@ namespace TeamLeasing.Services.AppConfigurationService.LevelService
             }
             return list;
         }
-        public SelectList GetSelectListLevel()
+        public SelectList GetSelectList()
         {
-            List<string> selectList = this.GetListLevel().Select(s => s.ToString())
+            List<string> selectList = this.GetList().Select(s => s.ToString())
                                                          .ToList();
             selectList.Insert(0, "");
             return new SelectList(selectList);

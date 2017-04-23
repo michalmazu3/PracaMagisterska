@@ -19,7 +19,7 @@ namespace TeamLeasing.Models
         public string City { get; set; }
         [Required]
         [Display(Name = "Województwo")]
-        public string Province { get; set; }
+        public Enums.Province Province { get; set; }
         
         [Display(Name = "Firma")]
         public string Company { get; set; }

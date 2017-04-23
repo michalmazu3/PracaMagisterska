@@ -6,7 +6,7 @@ namespace TeamLeasing.Services.AppConfigurationService.LevelService
 {
     public interface ILevel
     {
-        IList<Enums.Level> GetListLevel();
-        SelectList GetSelectListLevel();
+        IList<Enums.Level> GetList();
+        SelectList GetSelectList();
     }
 }

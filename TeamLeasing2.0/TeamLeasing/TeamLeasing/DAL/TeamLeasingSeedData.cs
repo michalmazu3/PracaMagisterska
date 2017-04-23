@@ -28,13 +28,20 @@ namespace TeamLeasing.DAL
             //_context.Developers.RemoveRange(_context.Developers.ToArray());
             //_context.Jobs.RemoveRange(_context.Jobs.ToArray());
             //_context.DeveloperUsers.RemoveRange(_context.DeveloperUsers.ToArray());
+            //_context.EmployeeUsers.RemoveRange(_context.EmployeeUsers.ToArray());
             //_context.Users.RemoveRange(_context.Users.ToArray());
+       
+                await Technologies().ContinueWith(async t =>
+                {
+                    await DeveloperUser();
+                    await EmployeeUsers().ContinueWith(async tt => await Jobs());
+
+                });
+          
 
 
-            //await Technologies().ContinueWith(async t => await DeveloperUser());
-            await EmployeeUsers().ContinueWith(async t => await Jobs());
 
-           /// await Jobs();
+            // await Jobs();
             // await Developers();
             //  await Jobs();
             // await DeveloperUsers();
@@ -66,7 +73,7 @@ namespace TeamLeasing.DAL
                         City = "Lublin",
                         Level = Enums.Level.Regular,
                         Experience = 2,
-                        Province = "małopolskie",
+                        Province = Enums.Province.Lubelskie,
                         Surname = "Kowalski",
                         University = "Politechnika świetokrzyska II stopien Informatyka",
                         IsFinishedUniversity = Enums.IsFinishedUniversity.Finished,
@@ -100,7 +107,7 @@ namespace TeamLeasing.DAL
                         City = "Kielce",
                         Level = Enums.Level.Junior,
                         Experience = 2,
-                        Province = "swietokrzyskie",
+                        Province = Enums.Province.Dolnośląskie,
                         Surname = "Kowalski",
                         University = "Politechnika świetokrzyska II stopien Informatyka",
                         IsFinishedUniversity = Enums.IsFinishedUniversity.Finished,
@@ -133,7 +140,7 @@ namespace TeamLeasing.DAL
                         City = "Kielce",
                         Level = Enums.Level.Senior,
                         Experience = 2,
-                        Province = "swietokrzyskie",
+                        Province = Enums.Province.Mazowieckie,
                         Surname = "Kowalski",
                         University = "Politechnika świetokrzyska II stopien Informatyka",
                         IsFinishedUniversity = Enums.IsFinishedUniversity.NotFinished,
@@ -166,7 +173,7 @@ namespace TeamLeasing.DAL
                         City = "Warszawa",
                         Level = Enums.Level.Senior,
                         Experience = 2,
-                        Province = "mazowieckie",
+                        Province = Enums.Province.Mazowieckie,
                         Surname = "Nowak",
                         University = "Politechnika świetokrzyska II stopien Informatyka (w trakcie)",
                         IsFinishedUniversity = Enums.IsFinishedUniversity.InProgress,
@@ -200,7 +207,7 @@ namespace TeamLeasing.DAL
                         City = "Poznań",
                         Level = Enums.Level.Regular,
                         Experience = 7,
-                        Province = "wielkopolskie",
+                        Province = Enums.Province.Wielkopolskie,
                         Surname = "Turek",
                         University = "Politechnika świetokrzyska II stopien Informatyka (w trakcie)",
                         IsFinishedUniversity = Enums.IsFinishedUniversity.InProgress,
@@ -233,7 +240,7 @@ namespace TeamLeasing.DAL
                         City = "Opole",
                         Level = Enums.Level.Regular,
                         Experience = 4,
-                        Province = "śląskie",
+                        Province = Enums.Province.Śląskie,
                         Surname = "Biracz",
                         University = " ",
                         IsFinishedUniversity = Enums.IsFinishedUniversity.NotFinished,
@@ -268,7 +275,7 @@ namespace TeamLeasing.DAL
                         Level = Enums.Level.Junior,
 
                         Experience = 4,
-                        Province = "śląskie",
+                        Province = Enums.Province.Śląskie,
                         Surname = "Olak",
                         University = " ",
                         IsFinishedUniversity = Enums.IsFinishedUniversity.NotFinished,
@@ -301,7 +308,7 @@ namespace TeamLeasing.DAL
                         City = "Opole",
                         Level = Enums.Level.Junior,
                         Experience = 4,
-                        Province = "śląskie",
+                        Province = Enums.Province.Dolnośląskie,
                         Surname = "Tomczak",
                         University = " Univerek",
                         IsFinishedUniversity = Enums.IsFinishedUniversity.Finished,
@@ -318,7 +325,7 @@ namespace TeamLeasing.DAL
             };
         }
 
-  
+
         private async Task Technologies()
         {
             if (!_context.Technologies.Any())
@@ -359,7 +366,7 @@ namespace TeamLeasing.DAL
                     {
                         Name = "Władysław",
                         City = "Kielce",
-                        Province = "świętokrzyskie",
+                        Province = Enums.Province.Podkarpackie,
                         Surname = "Sołkiewicz",
                         Company = "Vive",
                         UserId = _context.Users.Find(user.Id).Id,
@@ -386,7 +393,7 @@ namespace TeamLeasing.DAL
                     {
                         Name = "Tomasz",
                         City = "Kraków",
-                        Province = "świętokrzyskie",
+                        Province = Enums.Province.Małopolskie,
                         Surname = "Bińczak",
                         Company = "infover",
                         UserId = _context.Users.Find(user.Id).Id,
@@ -403,7 +410,7 @@ namespace TeamLeasing.DAL
 
 
 
- 
+
         private async Task Jobs()
         {
             if (!_context.Jobs.Any())
@@ -420,7 +427,7 @@ namespace TeamLeasing.DAL
                         Technology = _context.Technologies.Where(t => t.Name.ToLower() == "javascript")
                             .ToList()
                             .FirstOrDefault(),
-                        EmployeeUserId = 5
+                        EmployeeUserId =7
 
                     },
                     new Job()
@@ -433,7 +440,7 @@ namespace TeamLeasing.DAL
                         Technology = _context.Technologies.Where(t => t.Name.ToLower() == "sql")
                             .ToList()
                             .FirstOrDefault(),
-                        EmployeeUserId = 5
+                        EmployeeUserId =7
 
 
                     },
@@ -447,7 +454,7 @@ namespace TeamLeasing.DAL
                         Technology = _context.Technologies.Where(t => t.Name.ToLower() == "sql")
                             .ToList()
                             .FirstOrDefault(),
-                        EmployeeUserId = 6
+                        EmployeeUserId =8
 
                     },
                     new Job()
@@ -460,15 +467,15 @@ namespace TeamLeasing.DAL
                         Technology = _context.Technologies.Where(t => t.Name.ToLower() == "c#")
                             .ToList()
                             .FirstOrDefault(),
-                        EmployeeUserId = 6
+                        EmployeeUserId = 8
 
                     },
                 };
 
                 await _context.Jobs.AddRangeAsync(jobs);
                 await _context.SaveChangesAsync();
-             
-                
+
+
             }
         }
 

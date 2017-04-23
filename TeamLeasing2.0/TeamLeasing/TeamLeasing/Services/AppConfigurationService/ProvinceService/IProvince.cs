@@ -7,7 +7,7 @@ namespace TeamLeasing.Services.AppConfigurationService.ProvinceService
 {
     public interface IProvince
     {
-        SelectList GetSelectListProvince();
-        IList<Enums.Province> GetListProvince();
+        SelectList GetSelectList();
+        IList<Enums.Province> GetList();
     }
 }

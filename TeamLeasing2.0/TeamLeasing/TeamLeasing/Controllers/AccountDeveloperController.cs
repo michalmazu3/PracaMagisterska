@@ -5,10 +5,11 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.IO;
+using System.Linq;
 using Microsoft.AspNetCore.Identity;
 using TeamLeasing.DAL;
 using TeamLeasing.Models;
-using TeamLeasing.Services.Developer;
+using TeamLeasing.Services.AppConfigurationService;
 using System.Security.Principal;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -22,17 +23,17 @@ namespace TeamLeasing.Controllers
     {
         private readonly TeamLeasingContext _teamLeasingContext;
         private readonly UserManager<User> _manager;
-        private readonly IDeveloperConfigurationInformation _developerConfigurationInformation;
+        private readonly IConfigurationService _configurationService;
         private readonly IUploadService _uploadService;
         private readonly IHostingEnvironment _environment;
 
         public AccountDeveloperController(TeamLeasingContext _teamLeasingContext, UserManager<User> manager,
-                    IDeveloperConfigurationInformation developerConfigurationInformation,
+                    IConfigurationService configurationService,
                     IUploadService uploadService, IHostingEnvironment environment)
         {
             this._teamLeasingContext = _teamLeasingContext;
             _manager = manager;
-            _developerConfigurationInformation = developerConfigurationInformation;
+            _configurationService = configurationService;
             _uploadService = uploadService;
             _environment = environment;
         }
@@ -47,25 +48,23 @@ namespace TeamLeasing.Controllers
 
         private async Task<EditDeveloperProfileViewModel> PrepareViewModel()
         {
-            Task<EditDeveloperProfileViewModel> t1 = GetCurrentUserFile();
+            EditDeveloperProfileViewModel editvm = new EditDeveloperProfileViewModel();
 
-          
-            var t2 = await t1.ContinueWith(async t => new EditDeveloperProfileViewModel()
-            {
-                Technologies = await _developerConfigurationInformation.GetSelectListTechnology(),
-                Levels = _developerConfigurationInformation.GetSelectListLevel(),
-                IsFinishedUnivesity = _developerConfigurationInformation.GetSelectListIsFinishedUniversity(),
-                Cv = t.Result.Cv,
-                Photo = t.Result.Photo,
+            editvm = await GetCurrentUserFile();
+            editvm.Technologies = await _configurationService.GetTechnology().GetSelectList();
+            editvm.Levels = _configurationService.GetLevel().GetSelectList();
+            editvm.IsFinishedUnivesity = _configurationService.GetIsFinishedUniversity().GetSelectList();
+            editvm.Province = _configurationService.GetProvince().GetSelectList();
 
-            });
-            return await t2;
+            return editvm;
         }
 
         public async Task<EditDeveloperProfileViewModel> GetCurrentUserFile()
         {
-            var userId = _manager.GetUserId(HttpContext.User);
-            var user = await _manager.Users.Include(i => i.DeveloperUser).FirstOrDefaultAsync(f => f.Id == userId);
+            string username = _manager.GetUserName(HttpContext.User);
+           User user =  _manager.Users.Include(i => i.DeveloperUser).First(f => f.UserName == username);
+          
+            
 
             return new EditDeveloperProfileViewModel()
             {
@@ -124,7 +123,10 @@ namespace TeamLeasing.Controllers
 
             developerUser.Experience = vm.Experience == null || vm.Experience < 0 ? developerUser.Experience : (int)vm.Experience;
             developerUser.City = vm.City ?? developerUser.City;
-            developerUser.Province = vm.Province ?? developerUser.Province;
+            developerUser.Province = string.IsNullOrEmpty(vm.ChoosenProvince)
+                ? developerUser.Province
+                : (Enums.Province)Enum.Parse(typeof(Enums.Province), vm.ChoosenProvince);
+
 
             developerUser.IsFinishedUniversity = string.IsNullOrEmpty(vm.ChoosenIsFinishedUnivesity)
                                                         ? developerUser.IsFinishedUniversity
@@ -224,7 +226,7 @@ namespace TeamLeasing.Controllers
                 return View("_Error", new ErrorViewModel()
                 {
                     Message = e.Message,
-                    ReturnUrl = UrlHelperExtensions.Action(Url, "Edit","AccountDeveloper"),
+                    ReturnUrl = UrlHelperExtensions.Action(Url, "Edit", "AccountDeveloper"),
                 });
             }
 

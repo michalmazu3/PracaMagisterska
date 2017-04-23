@@ -6,7 +6,7 @@ namespace TeamLeasing.Services.AppConfigurationService.IsFinishedUniversityServi
 {
     public interface IIsFinishedUniversity
     {
-        IList<Enums.IsFinishedUniversity> GetListIsFinishedUniversity();
-        SelectList GetSelectListIsFinishedUniversity();
+        IList<Enums.IsFinishedUniversity> GetList();
+        SelectList GetSelectList();
     }
 }

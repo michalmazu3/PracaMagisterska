@@ -9,7 +9,8 @@ using System.Collections;
 using Microsoft.EntityFrameworkCore;
 using Org.BouncyCastle.Crypto.Tls;
 using TeamLeasing.Infrastructure.Extension;
-using TeamLeasing.Services.Developer;
+using TeamLeasing.Services.AppConfigurationService;
+using TeamLeasing.Services.AppConfigurationService;
 using TeamLeasing.ViewModels;
 using TeamLeasing.ViewModels.Developer;
 
@@ -18,13 +19,15 @@ namespace TeamLeasing.ViewComponents
     public class SearchDeveloperViewComponent : ViewComponent
     {
         private readonly TeamLeasingContext _teamLeasingContext;
-        private readonly IDeveloperConfigurationInformation _developerConfigurationInformation;
+        private readonly IConfigurationService _configurationService;
+
 
         public SearchDeveloperViewComponent(TeamLeasingContext teamLeasingContext, 
-            IDeveloperConfigurationInformation developerConfigurationInformation)
+            IConfigurationService configurationService)
         {
             _teamLeasingContext = teamLeasingContext;
-            _developerConfigurationInformation = developerConfigurationInformation;
+            _configurationService = configurationService;
+            ;
         }
 
         public async Task<IViewComponentResult> InvokeAsync(SidebarDeveloperViewModel test)
@@ -42,7 +45,7 @@ namespace TeamLeasing.ViewComponents
 
         private List<NameValuePairSearchViewModel<Enums.Level>> CheckAvailableLevel()
         {
-            return _developerConfigurationInformation.GetListLevel()
+            return _configurationService.GetLevel().GetList()
                 .Select(level => new NameValuePairSearchViewModel<Enums.Level>()
                 {
                     Name = level,
@@ -52,7 +55,7 @@ namespace TeamLeasing.ViewComponents
 
         private async Task<List<NameValuePairSearchViewModel<string>>> CheckAvailableTechnology()
         {
-            var technologyList = await _developerConfigurationInformation.GetListTechnology();
+            var technologyList = await _configurationService.GetTechnology().GetList();
             return await Task.Run(() =>
             {
                 return technologyList.Select(s => new NameValuePairSearchViewModel<string>()
@@ -66,7 +69,7 @@ namespace TeamLeasing.ViewComponents
 
         private List<NameValuePairSearchViewModel<Enums.IsFinishedUniversity>> CheckAvailableUniversity()
         {
-            return _developerConfigurationInformation.GetListIsFinishedUniversity()
+            return _configurationService.GetIsFinishedUniversity().GetList()
                 .Select(s => new NameValuePairSearchViewModel<Enums.IsFinishedUniversity>()
                 {
                     Name = s,

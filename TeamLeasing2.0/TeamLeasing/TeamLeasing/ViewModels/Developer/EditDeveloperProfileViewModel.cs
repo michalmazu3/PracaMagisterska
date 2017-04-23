@@ -16,7 +16,7 @@ namespace TeamLeasing.ViewModels.Developer
         public string City { get; set; }
     
         [Display(Name = "Województwo")]
-        public string Province { get; set; }
+        public SelectList Province { get; set; }
         
         [Phone(ErrorMessage = "Podaj poprawny numer telefonu")]
         public string Phone { get; set; }
@@ -61,5 +61,6 @@ namespace TeamLeasing.ViewModels.Developer
         public string ChoosenTechnology { get; set; }
         public string ChoosenLevel { get; set; }
         public string ChoosenIsFinishedUnivesity { get; set; }
+        public string ChoosenProvince { get; set; }
     }
 }
