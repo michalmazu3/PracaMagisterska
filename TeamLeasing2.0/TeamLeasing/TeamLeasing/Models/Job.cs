@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace TeamLeasing.Models
 {
@@ -21,6 +23,11 @@ namespace TeamLeasing.Models
         public JobStatus Status { get; set; }
         
         public virtual Technology Technology { get; set; }
+
+        public int EmployeeUserId { get; set; }
+        public virtual EmployeeUser EmployeeUser { get; set; }
+
+        public virtual ICollection<DeveloperUserJob> DeveloperUsers { get; set; }
     }
 
     public enum JobStatus

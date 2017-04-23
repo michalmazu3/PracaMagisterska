@@ -13,27 +13,12 @@
     ViewData["Title"] = "Edycja profilu";
 }
 <div id="content-contact">
-    <div id="login">
+    <div id="login" class="account">
         <h2>Edycja konta</h2>
 
         <form class="form-horizontal" method="post" asp-action="Edit" asp-controller="AccountDeveloper" enctype="multipart/form-data">
 
-            <div class="form-group">
-                <label for="exampleInputPassword1" asp-for="Password" class="col-sm-2"></label>
-                <div class="col-sm-10">
-                    <input asp-for="Password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Hasło">
-                </div>
-                <span asp-validation-for="Password" class="help-block"></span>
 
-            </div>
-            <div class="form-group">
-                <label for="exampleInputPassword1" asp-for="RePassword" class="col-sm-2"></label>
-                <div class="col-sm-10">
-                    <input asp-for="RePassword" type="password" class="form-control" id="exampleInputPassword1" placeholder="Powtórz hasło">
-                </div>
-                <span asp-validation-for="RePassword" class="help-block"></span>
-
-            </div>
             <div class="form-group">
                 <label for="exampleInputPassword1" asp-for="Phone" class="col-sm-2"></label>
                 <div class="col-sm-10">
@@ -88,7 +73,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="exampleInputPassword1" asp-for="About"  class="col-sm-2"> </label>
+                <label for="exampleInputPassword1" asp-for="About" class="col-sm-2"> </label>
                 <div class="col-sm-10">
                     <textarea class="form-control" asp-for="About" rows="5" id="comment"></textarea>
 
@@ -96,25 +81,59 @@
                 <span asp-validation-for="About" class="help-block"></span>
 
             </div>
-            @*<div class="form-group">
-        <label for="exampleInputFile" class="col-sm-2">Wgraj CV</label>
-        <div class="col-sm-10">
-            <input asp-for="CvFile" type="file" id="exampleInputFile">
-        </div>
-        <span asp-validation-for="CvFile" class="help-block"></span>
-
-    </div>
-
-    <div class="form-group">
-        <label for="exampleInputFile" class="col-sm-2">Wgraj zdjęcie</label>
-        <div class="col-sm-10">
-            <input asp-for="PhotoFile" type="file" id="exampleInputFile">
-        </div>
-        <span asp-validation-for="PhotoFile" class="help-block"></span>
-
-    </div>*@
+          
 
             <button type="submit" class="btn btn-default">Zapisz zmiany</button>
+        </form>
+
+        <h4>Cv</h4>
+        <form class="form-horizontal" method="post" asp-action="UploadCV" asp-controller="AccountDeveloper" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="exampleInputFile" class="col-sm-2">Aktualne Cv</label>
+                <div class="col-sm-10">
+                    @if (string.IsNullOrEmpty(Model.Cv))
+                    {
+                        <label class="col-sm-2">Brak pliku</label>
+                    }
+                    else
+                    {
+                        <a href="@Url.Content(Model.Cv)"> Pobierz cv </a>
+
+                    }
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputFile" class="col-sm-2">Wgraj CV</label>
+                <div class="col-sm-10">
+                    <input asp-for="CvFile" type="file" id="exampleInputFile">
+                </div>
+                <span asp-validation-for="CvFile" class="help-block"></span>
+            </div>
+            <button type="submit" class="btn btn-default">Wgraj CV</button>
+        </form>
+
+        <h4>Zdjęcie</h4>
+        <form class="form-horizontal" method="post" asp-action="UploadPhoto" asp-controller="AccountDeveloper" enctype="multipart/form-data" style="border-bottom: groove">
+            <div class="form-group">
+                <label for="exampleInputFile" class="col-sm-2">Aktualne zdjęcie</label>
+                <div class="col-sm-10">
+                   
+                        <a href="@Url.Content(Model.Photo)" style="display: block">
+                            <img src=@Url.Content(Model.Photo) width="200" height="200" alt="">
+                        </a>
+
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputFile" class="col-sm-2">Nowe zdjęcie</label>
+                <div class="col-sm-10">
+                    <input asp-for="PhotoFile" type="file" id="exampleInputFile">
+                </div>
+                <span asp-validation-for="PhotoFile" class="help-block"></span>
+            </div>
+            <button type="submit" class="btn btn-default">Wgraj zdjęcie</button>
+            <a class="btn btn-default" asp-controller="AccountDeveloper" asp-action="DeletePhoto" >Usuń zdjęcie</a>
+
         </form>
     </div>
 </div>
@@ -122,118 +141,3 @@
 
 
 
-
-
-        @*<div id="content-contact" >
-                <div id="login">
-                    <h2>Edycja konta</h2>
-                    <form class="form-horizontal">
-                        <div class="form-group">
-                            <label for="exampleInputPassword1"  class="col-sm-2">Hasło</label>
-                            <div class="col-sm-10">
-                                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Hasło">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="exampleInputPassword1"  class="col-sm-2">Imię</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Imię">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1"  class="col-sm-2">Nazwisko</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Nazwisko">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1"  class="col-sm-2">Telefon</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Telefon">
-
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1"  class="col-sm-2">Miejscowość</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Telefon">
-
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1"  class="col-sm-2">Województwo</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Telefon">
-
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1"  class="col-sm-2">Data urodzenia</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Telefon">
-
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1"  class="col-sm-2">Studia</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Telefon">
-
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1"  class="col-sm-2">Technologia</label>
-                            <div class="col-sm-10">
-                                <select class="form-control" id="sel1">
-                                    <option>c#</option>
-                                    <option>java</option>
-                                    <option>php</option>
-                                    <option>python</option>
-                                    <option>html/css</option>
-                                    <option>javascript</option>
-                                    <option>SQL</option>
-                                    <option>Ruby</option>
-                                </select>
-
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1"  class="col-sm-2">Poziom</label>
-                            <div class="col-sm-10">
-                                <select class="form-control" id="sel1">
-                                    <option>junior</option>
-                                    <option>regular</option>
-                                    <option>senior</option>
-                                </select>
-
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1"  class="col-sm-2">O sobie</label>
-                            <div class="col-sm-10">
-                                <textarea class="form-control" rows="5" id="comment"></textarea>
-
-                            </div>
-                        </div>
-
-
-
-                        <div class="form-group">
-                            <label for="exampleInputFile" class="col-sm-2">Wgraj CV</label>
-                            <div class="col-sm-10">
-                                <input type="file" id="exampleInputFile">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputFile" class="col-sm-2">Wgraj zdjęcie</label>
-                            <div class="col-sm-10">
-                                <input type="file" id="exampleInputFile">
-                            </div>
-                        </div>
-
-                        <button type="submit" class="btn btn-default">Zatwierdź edycje</button>
-                    </form>
-                </div>
-            </div>
-        *@

@@ -23,7 +23,7 @@
             </div>
             <div id="navbar" class="collapse navbar-collapse navbar-right">
                 <ul class="nav navbar-nav">
-                    <li><a asp-controller="Job" asp-action="Search">Oferty pracy</a></li>
+                    <li><a asp-controller="SearchJob" asp-action="Search">Oferty pracy</a></li>
                     <li><a asp-controller="SearchDeveloper" asp-action="Developer">Profile programistów</a></li>
                     <li><a asp-controller="Contact" asp-action="Index">Kontact</a></li>
                  
@@ -73,7 +73,8 @@
     </div>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
     @RenderSection("scripts", false)
 </body>
 </html>

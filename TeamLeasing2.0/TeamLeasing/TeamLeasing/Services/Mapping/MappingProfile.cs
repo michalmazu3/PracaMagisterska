@@ -3,6 +3,7 @@ using AutoMapper;
 using TeamLeasing.DAL;
 using TeamLeasing.Models;
 using TeamLeasing.ViewModels;
+using TeamLeasing.ViewModels.Job.SearchJob;
 
 namespace TeamLeasing.Services.Mapping
 {
@@ -37,7 +38,14 @@ namespace TeamLeasing.Services.Mapping
                     .ForMember(f=>f.UserName, opt=>opt.MapFrom(src=>src.Username))
                     .ReverseMap();
 
-                
+
+
+                CreateMap<Job, JobViewModel>()
+                    .ForMember(p => p.Technology, opt => opt.MapFrom(src => src.Technology.Name))
+                    .ForMember(p => p.City, opt => opt.MapFrom(src => src.EmployeeUser.City))
+                    .ForMember(p => p.Province, opt => opt.MapFrom(src => src.EmployeeUser.Province))
+                    .ForMember(p => p.Company, opt => opt.MapFrom(src => src.EmployeeUser.Company));
+
             }
 
 

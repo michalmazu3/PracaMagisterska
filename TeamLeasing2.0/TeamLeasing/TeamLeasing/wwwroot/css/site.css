@@ -284,3 +284,8 @@ table, th, td {
 .img {
     
 }
+
+.account form{
+	border-bottom: groove;
+	padding-bottom: 20;
+}

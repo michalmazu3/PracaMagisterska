@@ -18,6 +18,7 @@ using TeamLeasing.Models;
 using TeamLeasing.Services;
 using TeamLeasing.Services.Developer;
 using TeamLeasing.Services.Mail;
+using TeamLeasing.Services.UploadService;
 
 namespace TeamLeasing
 {
@@ -68,6 +69,7 @@ namespace TeamLeasing
             services.AddSingleton<TeamLeasingSeedData>();
             services.AddSingleton<SeedRoles>();
             services.AddSingleton<IDeveloperConfigurationInformation, DeveloperConfigurationInformation>();
+            services.AddScoped<IUploadService, UploadService>();
             services.AddAutoMapper();
             services.AddLogging();
 

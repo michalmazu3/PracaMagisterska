@@ -27,9 +27,9 @@ namespace TeamLeasing.ViewComponents
         public async Task<IViewComponentResult> InvokeAsync()
         {
             RegistrationDeveloperViewModel vm =  new RegistrationDeveloperViewModel();
-            vm.IsFinishedUnivesity = _developerConfigurationInformation.GetIsFinishedUniversityConfiguration();
-            vm.Levels = _developerConfigurationInformation.GetLevelConfiguration();
-            vm.Technologies =await _developerConfigurationInformation.GetTechnologyConfiguration();
+            vm.IsFinishedUnivesity = _developerConfigurationInformation.GetSelectListIsFinishedUniversity();
+            vm.Levels = _developerConfigurationInformation.GetSelectListLevel();
+            vm.Technologies =await _developerConfigurationInformation.GetSelectListTechnology();
 
             return View(vm);
         }

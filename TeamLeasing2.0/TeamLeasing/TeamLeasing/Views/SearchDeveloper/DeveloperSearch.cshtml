@@ -1,4 +1,5 @@
-﻿@model IEnumerable<TeamLeasing.Models.DeveloperUser>
+﻿@using Microsoft.Extensions.WebEncoders.Testing
+@model  TeamLeasing.ViewModels.Developer.SearchDeveloperViewModel
 @section scripts{
 
     <script src="~/script/switch-banner.js"></script>
@@ -6,13 +7,13 @@
 
 @Html.Partial("_Banner")
 <div id="content">
-    @await Component.InvokeAsync("SearchDeveloper")
+    @await Component.InvokeAsync("SearchDeveloper", new { test =  ViewBag["test"]})
     <div id="container">
         
         @{
             if (Model != null)
             {
-                foreach (var developer in Model)
+                foreach (var developer in Model.DeveloperUsers)
                 {
                     <div class="profile-item">
                         <img src=@Url.Content(developer.Photo) style="height: 233px; width: 233px;">

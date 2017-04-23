@@ -217,7 +217,20 @@ namespace TeamLeasing.Migrations
                     b.ToTable("DeveloperUsers");
                 });
 
-            modelBuilder.Entity("TeamLeasing.Models.Employee", b =>
+            modelBuilder.Entity("TeamLeasing.Models.DeveloperUserJob", b =>
+                {
+                    b.Property<int>("DeveloperUserId");
+
+                    b.Property<int>("JobId");
+
+                    b.HasKey("DeveloperUserId", "JobId");
+
+                    b.HasIndex("JobId");
+
+                    b.ToTable("DeveloperUserJob");
+                });
+
+            modelBuilder.Entity("TeamLeasing.Models.EmployeeUser", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -225,17 +238,10 @@ namespace TeamLeasing.Migrations
                     b.Property<string>("City")
                         .IsRequired();
 
-                    b.Property<string>("Email")
-                        .IsRequired();
+                    b.Property<string>("Company");
 
                     b.Property<string>("Name")
                         .IsRequired();
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasMaxLength(50);
-
-                    b.Property<string>("Phone");
 
                     b.Property<string>("Province")
                         .IsRequired();
@@ -243,9 +249,14 @@ namespace TeamLeasing.Migrations
                     b.Property<string>("Surname")
                         .IsRequired();
 
+                    b.Property<string>("UserId");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Employees");
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("EmployeeUsers");
                 });
 
             modelBuilder.Entity("TeamLeasing.Models.Job", b =>
@@ -256,7 +267,7 @@ namespace TeamLeasing.Migrations
                     b.Property<string>("Descritpion")
                         .IsRequired();
 
-                    b.Property<int?>("EmployeeId");
+                    b.Property<int>("EmployeeUserId");
 
                     b.Property<bool>("IsHidden");
 
@@ -271,7 +282,7 @@ namespace TeamLeasing.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EmployeeId");
+                    b.HasIndex("EmployeeUserId");
 
                     b.HasIndex("TechnologyId");
 
@@ -312,7 +323,7 @@ namespace TeamLeasing.Migrations
 
                     b.Property<int?>("DeveloperUserId");
 
-                    b.Property<int?>("EmployeeId");
+                    b.Property<int?>("EmployeeUserId");
 
                     b.Property<bool>("IsHidden");
 
@@ -331,7 +342,7 @@ namespace TeamLeasing.Migrations
 
                     b.HasIndex("DeveloperUserId");
 
-                    b.HasIndex("EmployeeId");
+                    b.HasIndex("EmployeeUserId");
 
                     b.HasIndex("TechnologyId");
 
@@ -455,11 +466,32 @@ namespace TeamLeasing.Migrations
                         .HasForeignKey("TeamLeasing.Models.DeveloperUser", "UserId");
                 });
 
+            modelBuilder.Entity("TeamLeasing.Models.DeveloperUserJob", b =>
+                {
+                    b.HasOne("TeamLeasing.Models.DeveloperUser", "DeveloperUser")
+                        .WithMany("Jobs")
+                        .HasForeignKey("DeveloperUserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("TeamLeasing.Models.Job", "Job")
+                        .WithMany("DeveloperUsers")
+                        .HasForeignKey("JobId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("TeamLeasing.Models.EmployeeUser", b =>
+                {
+                    b.HasOne("TeamLeasing.Models.User", "User")
+                        .WithOne("EmployeeUser")
+                        .HasForeignKey("TeamLeasing.Models.EmployeeUser", "UserId");
+                });
+
             modelBuilder.Entity("TeamLeasing.Models.Job", b =>
                 {
-                    b.HasOne("TeamLeasing.Models.Employee")
+                    b.HasOne("TeamLeasing.Models.EmployeeUser", "EmployeeUser")
                         .WithMany("Jobs")
-                        .HasForeignKey("EmployeeId");
+                        .HasForeignKey("EmployeeUserId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("TeamLeasing.Models.Technology", "Technology")
                         .WithMany("Jobs")
@@ -476,9 +508,9 @@ namespace TeamLeasing.Migrations
                         .WithMany("Offers")
                         .HasForeignKey("DeveloperUserId");
 
-                    b.HasOne("TeamLeasing.Models.Employee")
+                    b.HasOne("TeamLeasing.Models.EmployeeUser")
                         .WithMany("Offers")
-                        .HasForeignKey("EmployeeId");
+                        .HasForeignKey("EmployeeUserId");
 
                     b.HasOne("TeamLeasing.Models.Technology", "Technology")
                         .WithMany()
