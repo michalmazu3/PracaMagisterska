@@ -11,17 +11,15 @@ namespace TeamLeasing.ViewModels.Developer
 {
     public class SidebarDeveloperViewModel
     {
-        
+        [Display(Name = "Od")]
+        public int? ExpirienceMin { get; set; }
 
-        [Display(Name = "Odd")]
-        public int ExpirienceMin { get; set; }
-
-        [Display(Name = "Ddo")]
-        public int ExpirienceMax { get; set; }
+        [Display(Name = "Do")]
+        public int? ExpirienceMax { get; set; }
 
         public List<NameValuePairSearchViewModel<string>> TechnologyNameValuePairs { get; set; }
-        public List<NameValuePairSearchViewModel<Level>> LevelNameValuePairs { get; set; }
-        public List<NameValuePairSearchViewModel<IsFinishedUniversity>> UniversityNameValuePairs { get; set; }
+        public List<NameValuePairSearchViewModel<Enums.Level>> LevelNameValuePairs { get; set; }
+        public List<NameValuePairSearchViewModel<Enums.IsFinishedUniversity>> UniversityNameValuePairs { get; set; }
 
         
     }

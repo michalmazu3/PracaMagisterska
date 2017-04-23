@@ -79,9 +79,9 @@ namespace TeamLeasing.ViewModels
         [Required]
         public string ChoosenTechnology { get; set; }
         [Required]
-        public Level ChoosenLevel{ get; set; }
+        public Enums.Level ChoosenLevel{ get; set; }
         [Required]
-        public IsFinishedUniversity ChoosenIsFinishedUnivesity { get; set; }
+        public Enums.IsFinishedUniversity ChoosenIsFinishedUnivesity { get; set; }
 
     }
 }

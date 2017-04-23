@@ -27,7 +27,7 @@ namespace TeamLeasing.Models
         public DateTime BirthDate { get; set; }
 
         [Required]
-        public IsFinishedUniversity IsFinishedUniversity { get; set; }
+        public Enums.IsFinishedUniversity IsFinishedUniversity { get; set; }
 
         [Display(Name = "Studia")]
         public string University { get; set; }
@@ -35,7 +35,7 @@ namespace TeamLeasing.Models
         [Range(0, 20, ErrorMessage = "Podaj wartość z zakreu 0 - 20")]
         public int Experience { get; set; }
         [Display(Name = "Poziom")]
-        public Level Level { get; set; }
+        public Enums.Level Level { get; set; }
         [Display(Name = "Zdjęcie")]
         public string Photo { get; set; }
         [Display(Name = "Cv")]

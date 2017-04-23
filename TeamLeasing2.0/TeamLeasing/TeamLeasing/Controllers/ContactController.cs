@@ -6,6 +6,7 @@ using TeamLeasing.DAL;
 using TeamLeasing.Models;
 using TeamLeasing.Services;
 using TeamLeasing.Services.Mail;
+using TeamLeasing.Services.MailService;
 
 namespace TeamLeasing.Controllers
 {

@@ -1,4 +1,6 @@
-﻿namespace TeamLeasing.Services.Mail
+﻿using TeamLeasing.Services.Mail;
+
+namespace TeamLeasing.Services.MailService
 {
     public interface ISendEmail : IMailConfiguration
     {

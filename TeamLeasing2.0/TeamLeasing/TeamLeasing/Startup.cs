@@ -18,6 +18,7 @@ using TeamLeasing.Models;
 using TeamLeasing.Services;
 using TeamLeasing.Services.Developer;
 using TeamLeasing.Services.Mail;
+using TeamLeasing.Services.MailService;
 using TeamLeasing.Services.UploadService;
 
 namespace TeamLeasing
@@ -60,7 +61,7 @@ namespace TeamLeasing
                     config.Filters.Add(new RequireHttpsAttribute());
                 }
             });
-          
+            services.AddSession();
             services.AddDbContext<TeamLeasingContext>(ServiceLifetime.Scoped);
             services.AddSingleton(_configuration);
             services.AddTransient<TeamLeasingSeedData>();
@@ -84,6 +85,8 @@ namespace TeamLeasing
         {
             loggerFactory.AddConsole();
 
+
+            app.UseSession();
             app.UseIdentity();
             if (env.IsEnvironment("Development"))
             {

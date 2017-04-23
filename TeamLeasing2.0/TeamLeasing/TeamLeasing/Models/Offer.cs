@@ -11,7 +11,7 @@ namespace TeamLeasing.Models
 
         [Required]
         [Display(Name = "Poziom")]
-        public Level Level { get; set; }
+        public Enums.Level Level { get; set; }
         public bool IsHidden { get; set; }
         [Required]
         [Display(Name = "Status")]
@@ -22,10 +22,5 @@ namespace TeamLeasing.Models
         public virtual Technology Technology { get; set; }
     }
 
-    public enum OfferStatus
-    {
-        InProgress,
-        Rejected,
-        Accepted
-    }
+   
 }

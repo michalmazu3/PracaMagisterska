@@ -128,12 +128,12 @@ namespace TeamLeasing.Controllers
 
             developerUser.IsFinishedUniversity = string.IsNullOrEmpty(vm.ChoosenIsFinishedUnivesity)
                                                         ? developerUser.IsFinishedUniversity
-                                                        : (IsFinishedUniversity)Enum.Parse(typeof(IsFinishedUniversity), vm.ChoosenIsFinishedUnivesity);
+                                                        : (Enums.IsFinishedUniversity)Enum.Parse(typeof(Enums.IsFinishedUniversity), vm.ChoosenIsFinishedUnivesity);
 
 
             developerUser.Level = string.IsNullOrEmpty(vm.ChoosenLevel)
                                         ? developerUser.Level
-                                        : (Level)Enum.Parse(typeof(Level), vm.ChoosenLevel);
+                                        : (Enums.Level)Enum.Parse(typeof(Enums.Level), vm.ChoosenLevel);
 
             developerUser.University = vm.University ?? developerUser.University;
             developerUser.About = vm.About ?? developerUser.About;

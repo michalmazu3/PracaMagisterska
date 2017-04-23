@@ -8,6 +8,7 @@ using TeamLeasing.Models;
 using System.Collections;
 using Microsoft.EntityFrameworkCore;
 using Org.BouncyCastle.Crypto.Tls;
+using TeamLeasing.Infrastructure.Extension;
 using TeamLeasing.Services.Developer;
 using TeamLeasing.ViewModels;
 using TeamLeasing.ViewModels.Developer;
@@ -26,7 +27,7 @@ namespace TeamLeasing.ViewComponents
             _developerConfigurationInformation = developerConfigurationInformation;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync(string test)
+        public async Task<IViewComponentResult> InvokeAsync(SidebarDeveloperViewModel test)
         {
             SidebarDeveloperViewModel model = new SidebarDeveloperViewModel
             {
@@ -34,14 +35,15 @@ namespace TeamLeasing.ViewComponents
                 UniversityNameValuePairs = CheckAvailableUniversity(),
                 LevelNameValuePairs = CheckAvailableLevel()
             };
-        
-            return View("Sidebar", model);
+            SidebarDeveloperViewModel tt = TempData.Get<SidebarDeveloperViewModel>("search");
+            
+            return View("Sidebar", tt??model);
         }
 
-        private List<NameValuePairSearchViewModel<Level>> CheckAvailableLevel()
+        private List<NameValuePairSearchViewModel<Enums.Level>> CheckAvailableLevel()
         {
             return _developerConfigurationInformation.GetListLevel()
-                .Select(level => new NameValuePairSearchViewModel<Level>()
+                .Select(level => new NameValuePairSearchViewModel<Enums.Level>()
                 {
                     Name = level,
                     Value = false
@@ -62,10 +64,10 @@ namespace TeamLeasing.ViewComponents
             });
         }
 
-        private List<NameValuePairSearchViewModel<IsFinishedUniversity>> CheckAvailableUniversity()
+        private List<NameValuePairSearchViewModel<Enums.IsFinishedUniversity>> CheckAvailableUniversity()
         {
             return _developerConfigurationInformation.GetListIsFinishedUniversity()
-                .Select(s => new NameValuePairSearchViewModel<IsFinishedUniversity>()
+                .Select(s => new NameValuePairSearchViewModel<Enums.IsFinishedUniversity>()
                 {
                     Name = s,
                     Value = false,
