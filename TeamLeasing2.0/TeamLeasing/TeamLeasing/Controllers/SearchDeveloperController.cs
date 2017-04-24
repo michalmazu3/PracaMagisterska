@@ -11,10 +11,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using TeamLeasing.DAL;
-using TeamLeasing.Infrastructure.Extension;
 using TeamLeasing.Models;
 using TeamLeasing.ViewModels;
-using TeamLeasing.ViewModels.Developer;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -28,32 +26,38 @@ namespace TeamLeasing.Controllers
         private readonly IHostingEnvironment _environment;
 
 
-        public SearchDeveloperController(TeamLeasingContext teamLeasingContext, UserManager<User> manager
-            , IHostingEnvironment environment)
+        public SearchDeveloperController(TeamLeasingContext teamLeasingContext, UserManager<User> manager, IHostingEnvironment environment)
         {
             _teamLeasingContext = teamLeasingContext;
             _manager = manager;
             _environment = environment;
+            //using (_teamLeasingContext)
+            //{
+            //    var list = _teamLeasingContext.Technologies.Include(i => i.DeveloperUsers).Select(s => s).ToArray();
+            //}
         }
 
         [Route("[action]")]
         [HttpGet]
-        public async Task<IActionResult> Developers(List<int> developersId)
+        public async Task<IActionResult> Developer(List<int> developersId)
         {
 
-            var developers = !developersId.Any()
+            var developers = developersId.Count() == 0
                 ? await _teamLeasingContext.DeveloperUsers
                     .Include(i => i.Technology)
                     .ToListAsync()
                 : await _teamLeasingContext.DeveloperUsers
                     .Include(i => i.Technology)
                     .Join(developersId, a => a.Id, b => b, (a, b) => a).ToListAsync();
+
+
+
             return View("DeveloperSearch", developers);
         }
 
-        [Route("[action]")]
         [HttpPost]
-        public async Task<IActionResult> Developers(SidebarDeveloperViewModel vm)
+        [Route("[action]")]
+        public async Task<IActionResult> Developer(SearchDeveloperViewModel vm)
         {
             IEnumerable<DeveloperUser> searchingDevelopers = new List<DeveloperUser>();
             List<DeveloperUser> developers = await _teamLeasingContext.DeveloperUsers
@@ -66,38 +70,25 @@ namespace TeamLeasing.Controllers
             var experience = await ApllyExperience(vm, developers);
             searchingDevelopers = await Intersection(tech, level, isFinishedUniversity, experience);
 
-            TempData.Put("search", vm);
-
-            return RedirectToAction("Developers", new { developersId = new List<int>(searchingDevelopers.Select(s => s.Id).ToList()) });
+         
+            return RedirectToAction("Developer",  new { developersId = new List<int>(searchingDevelopers.Select(s => s.Id).ToList()) }); 
         }
 
         [Authorize]
-        [Route("developer/{developerId}/[action]/download")]
         public async Task<IActionResult> Cv(int developerId)
         {
             DeveloperUser developerUser = await _teamLeasingContext.DeveloperUsers.FindAsync(developerId);
 
-            return await DownloadFile(developerUser.Surname, developerUser.Name, developerId);
-
-        }
-
-        private async Task<IActionResult> DownloadFile(string surname, string name, int id)
-        {
-            var fileName = $"{surname}_{name}.pdf";
-            var filepath = $"wwwroot/UploadFIle/Cv/{fileName}";
-
-            try
+            var pathToFile = $"UploadFile\\Cv\\{developerUser.Surname}_{developerUser.Name}.pdf";
+            string pdfPath = Path.Combine(_environment.WebRootPath, pathToFile);
+            var file = File(pdfPath, "application/pdf", $"{developerUser.Surname}_{developerUser.Name}.pdf");
+            if (file!=null)
             {
-                byte[] fileBytes = System.IO.File.ReadAllBytes(filepath);
-                return File(fileBytes, "application/x-msdownload", fileName);
+                return file;
             }
-            catch (Exception e)
+            else
             {
-                return View("_Error", new ErrorViewModel()
-                {
-                    Message = $"Nie można odnaleźć pliku dla użytkownika {name} {surname}",
-                    ReturnUrl = UrlHelperExtensions.Action(Url, "Profile", "SearchDeveloper", new { developerId = id })
-                });
+                throw  new  Exception(message:"brak pliku");
             }
         }
 
@@ -115,8 +106,7 @@ namespace TeamLeasing.Controllers
             });
 
         }
-
-        private Task<List<DeveloperUser>> ApllyExperience(SidebarDeveloperViewModel vm, List<DeveloperUser> developers)
+        private Task<List<DeveloperUser>> ApllyExperience(SearchDeveloperViewModel vm, List<DeveloperUser> developers)
         {
             return Task.Run(() =>
             {
@@ -127,7 +117,7 @@ namespace TeamLeasing.Controllers
 
         }
 
-        private Task<List<DeveloperUser>> ApllyLevel(SidebarDeveloperViewModel vm, List<DeveloperUser> developers)
+        private Task<List<DeveloperUser>> ApllyLevel(SearchDeveloperViewModel vm, List<DeveloperUser> developers)
         {
             return Task.Run(() =>
             {
@@ -139,7 +129,7 @@ namespace TeamLeasing.Controllers
             });
 
         }
-        private Task<List<DeveloperUser>> ApllyIsFinishedUniversity(SidebarDeveloperViewModel vm, List<DeveloperUser> developers)
+        private Task<List<DeveloperUser>> ApllyIsFinishedUniversity(SearchDeveloperViewModel vm, List<DeveloperUser> developers)
         {
             return Task.Run(() =>
             {
@@ -152,7 +142,7 @@ namespace TeamLeasing.Controllers
 
         }
 
-        private Task<List<DeveloperUser>> Apllytechnologies(SidebarDeveloperViewModel vm, List<DeveloperUser> developers)
+        private Task<List<DeveloperUser>> Apllytechnologies(SearchDeveloperViewModel vm, List<DeveloperUser> developers)
         {
             return Task.Run(() =>
             {
@@ -164,12 +154,12 @@ namespace TeamLeasing.Controllers
             });
 
         }
-        [Route("developer/{developerId}")]
-        // [HttpGet("{developerId}")]
+        [Route("developer/[action]/{developerId}")]
+       // [HttpGet("{developerId}")]
         public async Task<IActionResult> Profile(int developerId)
         {
 
-            var developer = await _teamLeasingContext.DeveloperUsers
+            var developer =await _teamLeasingContext.DeveloperUsers
                                                .Include(i => i.Technology)
                                                .FirstOrDefaultAsync(w => w.Id == developerId);
 

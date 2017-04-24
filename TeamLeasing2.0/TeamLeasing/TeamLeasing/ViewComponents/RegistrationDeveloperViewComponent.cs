@@ -7,28 +7,29 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TeamLeasing.DAL;
 using TeamLeasing.Models;
-using TeamLeasing.Services.AppConfigurationService;
+using TeamLeasing.Services.Developer;
 using TeamLeasing.ViewModels;
 
 namespace TeamLeasing.ViewComponents
 {
     public class RegistrationDeveloperViewComponent : ViewComponent
     {
-       
-        private readonly IConfigurationService _configurationService;
+        private readonly TeamLeasingContext _teamLeasingContext;
+        private readonly IDeveloperConfigurationInformation _developerConfigurationInformation;
 
-        public RegistrationDeveloperViewComponent(IConfigurationService configurationService)
+        public RegistrationDeveloperViewComponent(TeamLeasingContext _teamLeasingContext, 
+            IDeveloperConfigurationInformation developerConfigurationInformation)
         {
-            _configurationService = configurationService;
+            this._teamLeasingContext = _teamLeasingContext;
+            _developerConfigurationInformation = developerConfigurationInformation;
         }
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
             RegistrationDeveloperViewModel vm =  new RegistrationDeveloperViewModel();
-            vm.IsFinishedUnivesity = _configurationService.GetIsFinishedUniversity().GetSelectList();
-            vm.Levels = _configurationService.GetLevel().GetSelectList();
-            vm.Technologies =await _configurationService.GetTechnology().GetSelectList();
-            vm.Province = _configurationService.GetProvince().GetSelectList();
+            vm.IsFinishedUnivesity = _developerConfigurationInformation.GetIsFinishedUniversityConfiguration();
+            vm.Levels = _developerConfigurationInformation.GetLevelConfiguration();
+            vm.Technologies =await _developerConfigurationInformation.GetTechnologyConfiguration();
 
             return View(vm);
         }

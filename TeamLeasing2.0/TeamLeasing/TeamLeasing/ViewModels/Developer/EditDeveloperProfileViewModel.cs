@@ -11,12 +11,25 @@ namespace TeamLeasing.ViewModels.Developer
 {
     public class EditDeveloperProfileViewModel
     {
+
+       
+       
+        [RegularExpression(@"^.*(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*\(\)_\-+=]).*$", ErrorMessage = "Wprowadź jedną dużą litere, cyfre i znak")]
+        [StringLength(50, MinimumLength = 4, ErrorMessage = "Hasło  za krótkie")]
+        [DataType(DataType.Password)]
+        [Display(Name = "Hasło")]
+        public string Password { get; set; }
+        [Compare("Password", ErrorMessage = "Hasła nie są takie same")]
+        [DataType(DataType.Password)]
+        [Display(Name = "Potwierdź hasło")]
+        public string RePassword { get; set; }
+       
       
         [Display(Name = "Miejscowość")]
         public string City { get; set; }
     
         [Display(Name = "Województwo")]
-        public SelectList Province { get; set; }
+        public string Province { get; set; }
         
         [Phone(ErrorMessage = "Podaj poprawny numer telefonu")]
         public string Phone { get; set; }
@@ -34,21 +47,11 @@ namespace TeamLeasing.ViewModels.Developer
 
         [Display(Name = "Cv")]
         public string Cv { get; set; }
-
-        [Required(ErrorMessage = "Please Upload a Valid Cv File")]
         [DataType(DataType.Upload)]
-        [Display(Name = "Cv")]
-        [FileExtensions(Extensions = "pdf")]
         public IFormFile CvFile { get; set; }
 
         [Display(Name = "Zdjęcie")]
         public string Photo { get; set; }
-
-
-        [Required(ErrorMessage = "Please Upload a Valid Photo File")]
-        [DataType(DataType.Upload)]
-        [Display(Name = "Zdjęcie")]
-        [FileExtensions(Extensions = "jpg")]
         public IFormFile PhotoFile { get; set; }
 
         [Display(Name = "Technologia")]
@@ -59,8 +62,7 @@ namespace TeamLeasing.ViewModels.Developer
         public SelectList IsFinishedUnivesity { get; set; }
 
         public string ChoosenTechnology { get; set; }
-        public string ChoosenLevel { get; set; }
-        public string ChoosenIsFinishedUnivesity { get; set; }
-        public string ChoosenProvince { get; set; }
+        public Level ChoosenLevel { get; set; }
+        public IsFinishedUniversity ChoosenIsFinishedUnivesity { get; set; }
     }
 }

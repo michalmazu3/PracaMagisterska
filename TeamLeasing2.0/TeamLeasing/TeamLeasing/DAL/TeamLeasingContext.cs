@@ -18,12 +18,11 @@ namespace TeamLeasing.DAL
 
         public DbSet<Developer> Developers { get; set; }
         public DbSet<DeveloperUser> DeveloperUsers { get; set; }
-        public DbSet<EmployeeUser> EmployeeUsers { get; set; }
+        public DbSet<Employee> Employees { get; set; }
         public DbSet<Technology> Technologies { get; set; }
         public DbSet<Job> Jobs { get; set; }
         public DbSet<Offer> Offers { get; set; }
         public DbSet<Message> Messages { get; set; }
-        public DbSet<DeveloperUserJob> DeveloperUserJob { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -39,23 +38,6 @@ namespace TeamLeasing.DAL
                 WithOne(w => w.User).
                 HasForeignKey<DeveloperUser>(h => h.UserId);
 
-            modelBuilder.Entity<User>().
-                HasOne(h => h.EmployeeUser).
-                WithOne(w => w.User).
-                HasForeignKey<EmployeeUser>(h => h.UserId);
-
-            modelBuilder.Entity<DeveloperUserJob>()
-               .HasKey(d => new {d.DeveloperUserId, d.JobId});
-
-            modelBuilder.Entity<DeveloperUserJob>()
-                .HasOne(o => o.DeveloperUser)
-                .WithMany(m => m.Jobs)
-                .HasForeignKey(f => f.DeveloperUserId);
-
-            modelBuilder.Entity<DeveloperUserJob>()
-                .HasOne(o => o.Job)
-                .WithMany(w => w.DeveloperUsers)
-                .HasForeignKey(f => f.JobId);
 
             base.OnModelCreating(modelBuilder);
 

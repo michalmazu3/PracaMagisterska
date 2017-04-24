@@ -28,20 +28,10 @@ namespace TeamLeasing.DAL
             //_context.Developers.RemoveRange(_context.Developers.ToArray());
             //_context.Jobs.RemoveRange(_context.Jobs.ToArray());
             //_context.DeveloperUsers.RemoveRange(_context.DeveloperUsers.ToArray());
-            //_context.EmployeeUsers.RemoveRange(_context.EmployeeUsers.ToArray());
             //_context.Users.RemoveRange(_context.Users.ToArray());
-       
-                await Technologies().ContinueWith(async t =>
-                {
-                    await DeveloperUser();
-                    await EmployeeUsers().ContinueWith(async tt => await Jobs());
-
-                });
-          
-
-
-
-            // await Jobs();
+             await Technologies();
+           await _context.SaveChangesAsync().ContinueWith(async t => await User());
+             
             // await Developers();
             //  await Jobs();
             // await DeveloperUsers();
@@ -53,9 +43,9 @@ namespace TeamLeasing.DAL
 
         }
 
-        private async Task DeveloperUser()
+        private async Task User()
         {
-            if (_manager.FindByEmailAsync("jaroslaw@gmail.com").Result == null)
+            if (_manager.FindByEmailAsync("jaroslaw@gmail.com").Result==null)
             {
                 User user = new User()
                 {
@@ -71,12 +61,12 @@ namespace TeamLeasing.DAL
                         Name = "JAroslaw ",
                         BirthDate = new DateTime(1942, 03, 05),
                         City = "Lublin",
-                        Level = Enums.Level.Regular,
+                        Level = Level.Regular,
                         Experience = 2,
-                        Province = Enums.Province.Lubelskie,
+                        Province = "małopolskie",
                         Surname = "Kowalski",
                         University = "Politechnika świetokrzyska II stopien Informatyka",
-                        IsFinishedUniversity = Enums.IsFinishedUniversity.Finished,
+                        IsFinishedUniversity = IsFinishedUniversity.Finished,
                         Technology = await _context.Technologies.FindAsync(2),
                         Photo = "/image/photo/profil-large.jpg",
                         UserId = _context.Users.Find(user.Id).Id,
@@ -105,12 +95,12 @@ namespace TeamLeasing.DAL
                         Name = "Janek",
                         BirthDate = new DateTime(1992, 08, 05),
                         City = "Kielce",
-                        Level = Enums.Level.Junior,
+                        Level = Level.Junior,
                         Experience = 2,
-                        Province = Enums.Province.Dolnośląskie,
+                        Province = "swietokrzyskie",
                         Surname = "Kowalski",
                         University = "Politechnika świetokrzyska II stopien Informatyka",
-                        IsFinishedUniversity = Enums.IsFinishedUniversity.Finished,
+                        IsFinishedUniversity = IsFinishedUniversity.Finished,
                         Technology = await _context.Technologies.FirstOrDefaultAsync(f => f.Name.ToLower() == "python"),
                         Photo = "/image/photo/profil-large.jpg",
                         UserId = _context.Users.Find(user.Id).Id,
@@ -138,12 +128,12 @@ namespace TeamLeasing.DAL
                         Name = "Jan",
                         BirthDate = new DateTime(1992, 08, 05),
                         City = "Kielce",
-                        Level = Enums.Level.Senior,
+                        Level = Level.Senior,
                         Experience = 2,
-                        Province = Enums.Province.Mazowieckie,
+                        Province = "swietokrzyskie",
                         Surname = "Kowalski",
                         University = "Politechnika świetokrzyska II stopien Informatyka",
-                        IsFinishedUniversity = Enums.IsFinishedUniversity.NotFinished,
+                        IsFinishedUniversity = IsFinishedUniversity.NotFinished,
                         Technology = await _context.Technologies.FirstOrDefaultAsync(f => f.Name.ToLower() == "python"),
                         Photo = "/image/photo/profil-large.jpg",
                         UserId = _context.Users.Find(user.Id).Id,
@@ -171,12 +161,12 @@ namespace TeamLeasing.DAL
                         Name = "Paweł",
                         BirthDate = new DateTime(1992, 08, 05),
                         City = "Warszawa",
-                        Level = Enums.Level.Senior,
+                        Level = Level.Senior,
                         Experience = 2,
-                        Province = Enums.Province.Mazowieckie,
+                        Province = "mazowieckie",
                         Surname = "Nowak",
                         University = "Politechnika świetokrzyska II stopien Informatyka (w trakcie)",
-                        IsFinishedUniversity = Enums.IsFinishedUniversity.InProgress,
+                        IsFinishedUniversity = IsFinishedUniversity.InProgress,
                         Technology = await _context.Technologies.FirstOrDefaultAsync(f => f.Name.ToLower() == "sql"),
                         Photo = "/image/photo/profil2.jpg",
                         UserId = _context.Users.Find(user.Id).Id,
@@ -205,12 +195,12 @@ namespace TeamLeasing.DAL
                         Name = "Marcin",
                         BirthDate = new DateTime(1992, 08, 05),
                         City = "Poznań",
-                        Level = Enums.Level.Regular,
+                        Level = Level.Regular,
                         Experience = 7,
-                        Province = Enums.Province.Wielkopolskie,
+                        Province = "wielkopolskie",
                         Surname = "Turek",
                         University = "Politechnika świetokrzyska II stopien Informatyka (w trakcie)",
-                        IsFinishedUniversity = Enums.IsFinishedUniversity.InProgress,
+                        IsFinishedUniversity = IsFinishedUniversity.InProgress,
                         Technology = await _context.Technologies.FirstOrDefaultAsync(f => f.Name.ToLower() == "c#"),
                         Photo = "/image/photo/profil3.jpg",
                         UserId = _context.Users.Find(user.Id).Id,
@@ -238,12 +228,12 @@ namespace TeamLeasing.DAL
                         Name = "Karol",
                         BirthDate = new DateTime(1992, 08, 05),
                         City = "Opole",
-                        Level = Enums.Level.Regular,
+                        Level = Level.Regular,
                         Experience = 4,
-                        Province = Enums.Province.Śląskie,
+                        Province = "śląskie",
                         Surname = "Biracz",
                         University = " ",
-                        IsFinishedUniversity = Enums.IsFinishedUniversity.NotFinished,
+                        IsFinishedUniversity = IsFinishedUniversity.NotFinished,
                         Photo = "/image/photo/profil4.jpg",
                         Technology = await _context.Technologies.FirstOrDefaultAsync(f => f.Name.ToLower() == "javascript"),
                         UserId = _context.Users.Find(user.Id).Id,
@@ -272,13 +262,13 @@ namespace TeamLeasing.DAL
                         Name = "Piotrek",
                         BirthDate = new DateTime(1992, 08, 05),
                         City = "Opole",
-                        Level = Enums.Level.Junior,
-
+                         Level = Level.Junior,
+                       
                         Experience = 4,
-                        Province = Enums.Province.Śląskie,
+                        Province = "śląskie",
                         Surname = "Olak",
                         University = " ",
-                        IsFinishedUniversity = Enums.IsFinishedUniversity.NotFinished,
+                        IsFinishedUniversity = IsFinishedUniversity.NotFinished,
                         Photo = "/image/photo/profil4.jpg",
                         Technology = await _context.Technologies.FirstOrDefaultAsync(f => f.Name.ToLower() == "html/css"),
                         UserId = _context.Users.Find(user.Id).Id,
@@ -306,12 +296,12 @@ namespace TeamLeasing.DAL
                         Name = "Heniek",
                         BirthDate = new DateTime(1992, 08, 05),
                         City = "Opole",
-                        Level = Enums.Level.Junior,
-                        Experience = 4,
-                        Province = Enums.Province.Dolnośląskie,
+                         Level = Level.Junior,
+                         Experience = 4,
+                        Province = "śląskie",
                         Surname = "Tomczak",
                         University = " Univerek",
-                        IsFinishedUniversity = Enums.IsFinishedUniversity.Finished,
+                        IsFinishedUniversity = IsFinishedUniversity.Finished,
                         Photo = "/image/photo/profil4.jpg",
                         Technology = await _context.Technologies.FirstOrDefaultAsync(f => f.Name.ToLower() == "python"),
                         UserId = _context.Users.Find(user.Id).Id,
@@ -325,7 +315,45 @@ namespace TeamLeasing.DAL
             };
         }
 
+        private async Task DeveloperUsers()
+        {
+            List<DeveloperUser> developerUsers = new List<DeveloperUser>()
+                {
+                    new DeveloperUser()
+                    {
+                        Name = "Jan User",
+                        BirthDate = new DateTime(1992,08,05),
+                        City = "Kielce",
+                        Level = Level.Junior,
+                        Experience = 2,
+                        Province = "swietokrzyskie",
+                        Surname = "Kowalski",
+                        University = "Politechnika świetokrzyska II stopien Informatyka",
+                        IsFinishedUniversity = IsFinishedUniversity.Finished,
+                       // Technology = _context.Technologies.ToList()[0],
+                        Photo =  "/image/photo/profil-large.jpg"
 
+                    },
+                    new DeveloperUser()
+                    {
+                        Name = "Paweł User",
+                        BirthDate = new DateTime(1992,08,05),
+                        City = "Warszawa",
+                        Level = Level.Senior,
+                        Experience = 2,
+                        Province = "mazowieckie",
+                        Surname = "Nowak",
+                        University = "Politechnika świetokrzyska II stopien Informatyka (w trakcie)",
+                        IsFinishedUniversity = IsFinishedUniversity.InProgress,
+                      //  Technology = _context.Technologies.ToList()[3],
+                        Photo =  "/image/photo/profil2.jpg"
+
+                    },
+                };
+
+            await _context.AddRangeAsync(developerUsers);
+            await _context.SaveChangesAsync();
+        }
         private async Task Technologies()
         {
             if (!_context.Technologies.Any())
@@ -349,134 +377,154 @@ namespace TeamLeasing.DAL
 
         }
 
-        private async Task EmployeeUsers()
+        private async Task Developers()
         {
-            if (_manager.FindByEmailAsync("vive@gmail.com").Result == null)
-            {
-                User user = new User()
+
+            List<Developer> developer = new List<Developer>()
                 {
-                    Email = "vive@gmail.com",
-                    UserName = "ViveCompany",
-                    PhoneNumber = "66526323",
-                };
-                var result = await _manager.CreateAsync(user, "Qazqaz12#");
-                if (result.Succeeded)
-                {
-                    EmployeeUser emp = new EmployeeUser()
+                    new Developer()
                     {
-                        Name = "Władysław",
+                        Name = "Jan",
+                        BirthDate = new DateTime(1992,08,05),
                         City = "Kielce",
-                        Province = Enums.Province.Podkarpackie,
-                        Surname = "Sołkiewicz",
-                        Company = "Vive",
-                        UserId = _context.Users.Find(user.Id).Id,
-                    };
+                        Email = "jan@com.pl",
+                        Level = Level.Junior,
+                        Password = "jankowalski",
+                        Experience = 2,
+                        Province = "swietokrzyskie",
+                        Surname = "Kowalski",
+                        University = "Politechnika świetokrzyska II stopien Informatyka",
+                        IsFinishedUniversity = IsFinishedUniversity.Finished,
+                        Technology = _context.Technologies.ToList()[0],
+                        Photo =  "/image/photo/profil-large.jpg"
 
-                    await _context.EmployeeUsers.AddAsync(emp);
-                    await _context.SaveChangesAsync();
-                    await _manager.AddToRoleAsync(_context.Users.Find(user.Id), Roles.Employee.ToString());
-                }
-                ;
-            }
-            if (_manager.FindByEmailAsync("infover@gmail.com").Result == null)
-            {
-                User user = new User()
-                {
-                    Email = "infover@gmail.com",
-                    UserName = "InfoverSa",
-                    PhoneNumber = "66526323",
-                };
-                var result = await _manager.CreateAsync(user, "Qazqaz12#");
-                if (result.Succeeded)
-                {
-                    EmployeeUser emp = new EmployeeUser()
+                    },
+                    new Developer()
                     {
-                        Name = "Tomasz",
-                        City = "Kraków",
-                        Province = Enums.Province.Małopolskie,
-                        Surname = "Bińczak",
-                        Company = "infover",
-                        UserId = _context.Users.Find(user.Id).Id,
-                    };
+                        Name = "Paweł",
+                        BirthDate = new DateTime(1992,08,05),
+                        City = "Warszawa",
+                        Email = "jan@com.pl",
+                        Level = Level.Senior,
+                        Password = "pawelnowak",
+                        Experience = 2,
+                        Province = "mazowieckie",
+                        Surname = "Nowak",
+                        University = "Politechnika świetokrzyska II stopien Informatyka (w trakcie)",
+                        IsFinishedUniversity = IsFinishedUniversity.InProgress,
+                        Technology = _context.Technologies.ToList()[3],
+                        Photo =  "/image/photo/profil2.jpg"
 
-                    await _context.EmployeeUsers.AddAsync(emp);
-                    await _context.SaveChangesAsync();
-                    await _manager.AddToRoleAsync(_context.Users.Find(user.Id), Roles.Employee.ToString());
-                }
-                ;
-            }
-
+                    },
+                      new Developer()
+                    {
+                        Name = "Marcin",
+                        BirthDate = new DateTime(1992,08,05),
+                        City = "Poznań",
+                        Email = "Marcin@com.pl",
+                        Level = Level.Regular,
+                        Password = "marcinturek",
+                        Experience = 7,
+                        Province = "wielkopolskie",
+                        Surname = "Turek",
+                        University = "Politechnika świetokrzyska II stopien Informatyka (w trakcie)",
+                        IsFinishedUniversity = IsFinishedUniversity.InProgress,
+                        Technology = _context.Technologies.Where(t=>t.Name.ToLower()=="sql").ToList().FirstOrDefault(),
+                        Photo =  "/image/photo/profil3.jpg"
+                      },
+                        new Developer()
+                    {
+                        Name = "Karol",
+                        BirthDate = new DateTime(1992,08,05),
+                        City = "Opole",
+                        Email = "Karol@com.pl",
+                        Level = Level.Regular,
+                        Password = "karollolek",
+                        Experience = 4,
+                        Province = "śląskie",
+                        Surname = "Biracz",
+                        University = " ",
+                        IsFinishedUniversity = IsFinishedUniversity.NotFinished,
+                        Photo =  "/image/photo/profil4.jpg",
+                        Technology = _context.Technologies.Where(t=>t.Name.ToLower()=="javascript").ToList().FirstOrDefault()
+                    },
+                    new Developer(){  Name = "Piotrek",
+                        BirthDate = new DateTime(1992,08,05),
+                        City = "Opole",
+                        Email = "Karol@com.pl",
+                        Level = Level.Junior,
+                        Password = "karollolek",
+                        Experience = 4,
+                        Province = "śląskie",
+                        Surname = "Olak",
+                        University = " ",
+                        IsFinishedUniversity = IsFinishedUniversity.NotFinished,
+                        Photo =  "/image/photo/profil4.jpg",
+                        Technology = _context.Technologies.Where(t=>t.Name.ToLower()=="python").ToList().FirstOrDefault()
+                    },
+                    new Developer(){  Name = "Heniek",
+                        BirthDate = new DateTime(1992,08,05),
+                        City = "Opole",
+                        Email = "Karol@com.pl",
+                        Level = Level.Junior,
+                        Password = "karollolek",
+                        Experience = 4,
+                        Province = "śląskie",
+                        Surname = "Tomczak",
+                        University = " Univerek",
+                        IsFinishedUniversity = IsFinishedUniversity.Finished,
+                        Photo =  "Uniwerek",
+                        Technology = _context.Technologies.Where(t=>t.Name.ToLower()=="python").ToList().FirstOrDefault()
+                    }
+                };
+            await _context.Developers.AddRangeAsync(developer);
+            await _context.SaveChangesAsync();
         }
-
-
-
 
         private async Task Jobs()
         {
-            if (!_context.Jobs.Any())
+
+            List<Job> jobs = new List<Job>()
             {
-                List<Job> jobs = new List<Job>()
+                new Job()
                 {
-                    new Job()
-                    {
-                        Title = "Developer Javascript frotned",
-                        Descritpion =
-                            "Opis stanowiska:\r\n\r\nOsoba zatrudniona na stanowisku programisty będzie uczestniczyć w projektach tworzenia i dalszego rozwijania oprogramowania oraz opracowanych przez Xerrex systemów informatycznych związanych z archiwizacją, obiegiem oraz przetwarzaniem wersji papierowej dokumentów na postać cyfrową.",
-                        Price = 5000,
-                        IsHidden = false,
-                        Technology = _context.Technologies.Where(t => t.Name.ToLower() == "javascript")
-                            .ToList()
-                            .FirstOrDefault(),
-                        EmployeeUserId =7
+                    Title = "Developer Javascript frotned",
+                    Descritpion = "Opis stanowiska:\r\n\r\nOsoba zatrudniona na stanowisku programisty będzie uczestniczyć w projektach tworzenia i dalszego rozwijania oprogramowania oraz opracowanych przez Xerrex systemów informatycznych związanych z archiwizacją, obiegiem oraz przetwarzaniem wersji papierowej dokumentów na postać cyfrową.",
+                    Price = 5000,
+                    IsHidden = false,
+                   Technology = _context.Technologies.Where(t=>t.Name.ToLower()=="javascript").ToList().FirstOrDefault()
 
-                    },
-                    new Job()
-                    {
-                        Title = "Administracja znajomość sql",
-                        Descritpion =
-                            "Fideltronik to grupa firm w branży elektronicznej z polskim kapitałem posiadająca zakłady produkcyjne i biura inżynierskie w Suchej Beskidzkiej (siedziba główna), Krakowie, Gdańsku oraz w Szwecji i Norwegii. Realizujemy pełny zakres usług produkcyjnych i inżynierskich w zakresie elektroniki (EMS -Electronics Manufacturing Services), jak również tworzymy oprogramowanie wspierające zarządzanie wybranymi procesami w przedsiębiorstwach.\r\n\r\nFideltronik powstał w roku 1987 i dzięki strategii dynamicznego rozwoju jesteśmy obecnie największym polskim dostawcą EMS oraz mamy wysoką pozycję w Europie, a nasze produkty trafiają do odbiorców na całym świecie. Wśród naszych klientów są firmy globalne o znanych markach.",
-                        Price = 8000,
-                        IsHidden = false,
-                        Technology = _context.Technologies.Where(t => t.Name.ToLower() == "sql")
-                            .ToList()
-                            .FirstOrDefault(),
-                        EmployeeUserId =7
+                },
+                 new Job()
+                {
+                     Title = "Administracja znajomość sql",
+                     Descritpion = "Fideltronik to grupa firm w branży elektronicznej z polskim kapitałem posiadająca zakłady produkcyjne i biura inżynierskie w Suchej Beskidzkiej (siedziba główna), Krakowie, Gdańsku oraz w Szwecji i Norwegii. Realizujemy pełny zakres usług produkcyjnych i inżynierskich w zakresie elektroniki (EMS -Electronics Manufacturing Services), jak również tworzymy oprogramowanie wspierające zarządzanie wybranymi procesami w przedsiębiorstwach.\r\n\r\nFideltronik powstał w roku 1987 i dzięki strategii dynamicznego rozwoju jesteśmy obecnie największym polskim dostawcą EMS oraz mamy wysoką pozycję w Europie, a nasze produkty trafiają do odbiorców na całym świecie. Wśród naszych klientów są firmy globalne o znanych markach.",
+                     Price = 8000,
+                    IsHidden = false,
+                   Technology = _context.Technologies.Where(t=>t.Name.ToLower()=="sql").ToList().FirstOrDefault()
 
+                },
+                  new Job()
+                {
+                      Title = "Młodszy programista baz danych",
+                      Descritpion = "Technology Center in Gdansk is a part of ​UTC Climate, Controls & Security\'s fire safety, security, building automation, heating, ventilation, air conditioning and refrigeration systems and services promote safer, smarter  and sustainable buildings. With over 200 employees we develop new products for different units from CCS group.\r\n\r\nLenel Systems, the global leader in advanced security systems, is the one of the unit supported in Gdansk. We serve top Fortune 100 companies to effectively and efficiently protect buildings, people and assets: ",
+                     Price = 2211,
+                    IsHidden = false,
+                   Technology = _context.Technologies.Where(t=>t.Name.ToLower()=="sql").ToList().FirstOrDefault()
 
-                    },
-                    new Job()
-                    {
-                        Title = "Młodszy programista baz danych",
-                        Descritpion =
-                            "Technology Center in Gdansk is a part of ​UTC Climate, Controls & Security\'s fire safety, security, building automation, heating, ventilation, air conditioning and refrigeration systems and services promote safer, smarter  and sustainable buildings. With over 200 employees we develop new products for different units from CCS group.\r\n\r\nLenel Systems, the global leader in advanced security systems, is the one of the unit supported in Gdansk. We serve top Fortune 100 companies to effectively and efficiently protect buildings, people and assets: ",
-                        Price = 2211,
-                        IsHidden = false,
-                        Technology = _context.Technologies.Where(t => t.Name.ToLower() == "sql")
-                            .ToList()
-                            .FirstOrDefault(),
-                        EmployeeUserId =8
+                },
+                   new Job()
+                {     Title = "Developer backend c#",
+                      Descritpion = "Technology Center in Gdansk is a part of ​UTC Climate, Controls & Security\'s fire safety, security, building automation, heating, ventilation, air conditioning and refrigeration systems and services promote safer, smarter  and sustainable buildings. With over 200 employees we develop new products for different units from CCS group.\r\n\r\nLenel Systems, the global leader in advanced security systems, is the one of the unit supported in Gdansk. We serve top Fortune 100 companies to effectively and efficiently protect buildings, people and assets: ",
+                     Price = 4332,
+                    IsHidden = false,
+                   Technology = _context.Technologies.Where(t=>t.Name.ToLower()=="c#").ToList().FirstOrDefault()
 
-                    },
-                    new Job()
-                    {
-                        Title = "Developer backend c#",
-                        Descritpion =
-                            "Technology Center in Gdansk is a part of ​UTC Climate, Controls & Security\'s fire safety, security, building automation, heating, ventilation, air conditioning and refrigeration systems and services promote safer, smarter  and sustainable buildings. With over 200 employees we develop new products for different units from CCS group.\r\n\r\nLenel Systems, the global leader in advanced security systems, is the one of the unit supported in Gdansk. We serve top Fortune 100 companies to effectively and efficiently protect buildings, people and assets: ",
-                        Price = 4332,
-                        IsHidden = false,
-                        Technology = _context.Technologies.Where(t => t.Name.ToLower() == "c#")
-                            .ToList()
-                            .FirstOrDefault(),
-                        EmployeeUserId = 8
+                },
+            };
 
-                    },
-                };
-
-                await _context.Jobs.AddRangeAsync(jobs);
-                await _context.SaveChangesAsync();
-
-
-            }
+            await _context.Jobs.AddRangeAsync(jobs);
+            await _context.SaveChangesAsync();
         }
 
     }

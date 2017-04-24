@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using TeamLeasing.Models;
+﻿using System.ComponentModel.DataAnnotations;
+
 namespace TeamLeasing.Models
 {
     public class Job
@@ -20,15 +18,16 @@ namespace TeamLeasing.Models
         public string Descritpion { get; set; }
         public bool IsHidden { get; set; }
         [Display(Name = "Status")]
-        public Enums.JobStatus Status { get; set; }
+        public JobStatus Status { get; set; }
         
         public virtual Technology Technology { get; set; }
-
-        public int EmployeeUserId { get; set; }
-        public virtual EmployeeUser EmployeeUser { get; set; }
-
-        public virtual ICollection<DeveloperUserJob> DeveloperUsers { get; set; }
     }
 
-   
+    public enum JobStatus
+    {
+        NoApplications,
+        InProgress,
+        Rejected,
+        Accepted
+    }
 }

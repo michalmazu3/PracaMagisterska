@@ -13,7 +13,6 @@ using Microsoft.EntityFrameworkCore;
 using TeamLeasing.DAL;
 using TeamLeasing.Models;
 using TeamLeasing.Models;
-using TeamLeasing.Services.UploadService;
 using TeamLeasing.ViewModels;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
@@ -28,19 +27,19 @@ namespace TeamLeasing.Controllers
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IMapper _mapper;
         private readonly TeamLeasingContext _teamLeasingContext;
-        private readonly IUploadService _uploadService;
+        private readonly IHostingEnvironment _environment;
 
 
         public RegistrationController(UserManager<User> manager, SignInManager<User> signInManager,
             RoleManager<IdentityRole> roleManager, IMapper mapper, TeamLeasingContext teamLeasingContext,
-            IUploadService uploadService)
+            IHostingEnvironment environment)
         {
             _manager = manager;
             _signInManager = signInManager;
             _roleManager = roleManager;
             _mapper = mapper;
             _teamLeasingContext = teamLeasingContext;
-            _uploadService = uploadService;
+            _environment = environment;
         }
 
         // GET: /<controller>/
@@ -54,20 +53,7 @@ namespace TeamLeasing.Controllers
         {
             if (ModelState.IsValid)
             {
-                try
-                {
-                    return await CreateUser(vm);
-
-                }
-                catch (Exception e)
-                {
-                    return View("_Error", new ErrorViewModel()
-                    {
-                        Message = e.Message,
-                        ReturnUrl = UrlHelperExtensions.Action(Url, "Index", "Registration"),
-
-                    });
-                }
+                return await CreateUser(vm);
 
             }
             return View("Registration", vm);
@@ -80,20 +66,23 @@ namespace TeamLeasing.Controllers
             user = _mapper.Map<User>(vm);
 
             var result = await _manager.CreateAsync(user, vm.Password);
-            if (result.Succeeded)
-            {
+            if (result.Succeeded){
+
                 var newUser = _teamLeasingContext.Users.Find(user.Id);
-                DeveloperUser developerUser = await CreateDeveloperUser(vm, newUser);
+                DeveloperUser developerUser =  await CreateDeveloperUser(vm, newUser);
+
 
                 await _teamLeasingContext.DeveloperUsers.AddAsync(developerUser);
                 await _teamLeasingContext.SaveChangesAsync();
                 await _manager.AddToRoleAsync(_teamLeasingContext.Users.Find(user.Id), Roles.Developer.ToString());
 
-                await _signInManager.SignInAsync(_teamLeasingContext.Users.Find(user.Id), true, null);
-                return RedirectToAction("Index", "Home");
+               await _signInManager.SignInAsync(_teamLeasingContext.Users.Find(user.Id), true, null);
+               return RedirectToAction("Index", "Home");
+
             }
 
-            throw new Exception(message: "Utworzenie użytkownka z przyczyn niewyjaśnionych nie powiodło się");
+            throw new Exception(message: "User creating error");
+
         }
 
         private async Task<DeveloperUser> CreateDeveloperUser(RegistrationDeveloperViewModel vm, User user)
@@ -106,11 +95,44 @@ namespace TeamLeasing.Controllers
                 .FirstOrDefault();
             developerUser.UserId = user.Id;
 
-            developerUser.Cv = await _uploadService.UploadCvFile(vm.Name, vm.Surname, vm.CvFile);
-            developerUser.Photo = await _uploadService.UploadPhotoFile(vm.Name, vm.Surname, vm.PhotoFile);
+            developerUser.Cv = await CopyCvFile(vm.Name, vm.Surname, vm.CvFile);
+            developerUser.Photo = await CopyPhotoFile(vm.Name, vm.Surname, vm.PhotoFile);
             return developerUser;
         }
 
+        private async Task<string> CopyPhotoFile(string name, string surname, IFormFile photoFile)
+        {
 
+            var pathToFile = $"UploadFile/Photo/{surname}_{name}.jpg";
+            var uploadCv = Path.Combine(_environment.WebRootPath, pathToFile);
+
+            if (photoFile != null)
+            {
+                using (var fileStream = new FileStream(uploadCv, FileMode.Create))
+                {
+                    await photoFile.CopyToAsync(fileStream);
+                }
+                return pathToFile;
+            }
+
+            throw new Exception(message: "Bład wgrywania pliku");
+        }
+
+        private async Task<string> CopyCvFile(string Name, string Surname, IFormFile cvFile)
+        {
+            var pathToFile = $"UploadFile/Cv/{Surname}_{Name}.pdf";
+            var uploadCv = Path.Combine(_environment.WebRootPath, pathToFile);
+
+            if (cvFile != null)
+            {
+                using (var fileStream = new FileStream(uploadCv, FileMode.Create))
+                {
+                    await cvFile.CopyToAsync(fileStream);
+                }
+                return pathToFile;
+            }
+
+            throw new Exception(message: "Bład wgrywania pliku");
+        }
     }
 }

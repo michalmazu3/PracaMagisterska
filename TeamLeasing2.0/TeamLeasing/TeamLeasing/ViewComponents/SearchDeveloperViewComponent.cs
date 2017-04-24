@@ -8,74 +8,67 @@ using TeamLeasing.Models;
 using System.Collections;
 using Microsoft.EntityFrameworkCore;
 using Org.BouncyCastle.Crypto.Tls;
-using TeamLeasing.Infrastructure.Extension;
-using TeamLeasing.Services.AppConfigurationService;
-using TeamLeasing.Services.AppConfigurationService;
 using TeamLeasing.ViewModels;
-using TeamLeasing.ViewModels.Developer;
 
 namespace TeamLeasing.ViewComponents
 {
     public class SearchDeveloperViewComponent : ViewComponent
     {
         private readonly TeamLeasingContext _teamLeasingContext;
-        private readonly IConfigurationService _configurationService;
 
-
-        public SearchDeveloperViewComponent(TeamLeasingContext teamLeasingContext, 
-            IConfigurationService configurationService)
+        public SearchDeveloperViewComponent(TeamLeasingContext teamLeasingContext)
         {
             _teamLeasingContext = teamLeasingContext;
-            _configurationService = configurationService;
-            ;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync(SidebarDeveloperViewModel test)
+        public async Task<IViewComponentResult> InvokeAsync()
         {
-            SidebarDeveloperViewModel model = new SidebarDeveloperViewModel
+            SearchDeveloperViewModel model = new SearchDeveloperViewModel
             {
                 TechnologyNameValuePairs = await CheckAvailableTechnology(),
                 UniversityNameValuePairs = CheckAvailableUniversity(),
                 LevelNameValuePairs = CheckAvailableLevel()
             };
-            SidebarDeveloperViewModel tt = TempData.Get<SidebarDeveloperViewModel>("search");
-            
-            return View("Sidebar", tt??model);
+        
+            return View("Developer", model);
         }
 
-        private List<NameValuePairSearchViewModel<Enums.Level>> CheckAvailableLevel()
+        private List<LevelNameValuePair> CheckAvailableLevel()
         {
-            return _configurationService.GetLevel().GetList()
-                .Select(level => new NameValuePairSearchViewModel<Enums.Level>()
+            return new List<LevelNameValuePair>()
                 {
-                    Name = level,
-                    Value = false
-                }).ToList();
+                    new LevelNameValuePair() {Name = Level.Junior, Value = false},
+                    new LevelNameValuePair() {Name = Level.Regular, Value = false},
+                    new LevelNameValuePair() {Name = Level.Senior, Value = false},
+                };
         }
 
-        private async Task<List<NameValuePairSearchViewModel<string>>> CheckAvailableTechnology()
+        private async Task<List<TechnologyNameValuePair>> CheckAvailableTechnology()
         {
-            var technologyList = await _configurationService.GetTechnology().GetList();
-            return await Task.Run(() =>
+            return await Task.Run(async() =>
             {
-                return technologyList.Select(s => new NameValuePairSearchViewModel<string>()
-                    {
-                        Name = s,
-                        Value = false,
-                    })
-                    .ToList();
+                List<TechnologyNameValuePair> list = new List<TechnologyNameValuePair>();
+                using (_teamLeasingContext)
+                {
+                    return await _teamLeasingContext.Technologies.Select(
+                          s => new TechnologyNameValuePair() { Name = s.Name, Value = false }).ToListAsync();
+                }
             });
+           
+
         }
 
-        private List<NameValuePairSearchViewModel<Enums.IsFinishedUniversity>> CheckAvailableUniversity()
+        private List<UniversityNameValuePair> CheckAvailableUniversity()
         {
-            return _configurationService.GetIsFinishedUniversity().GetList()
-                .Select(s => new NameValuePairSearchViewModel<Enums.IsFinishedUniversity>()
-                {
-                    Name = s,
-                    Value = false,
-                })
-                .ToList();
+
+            return new List<UniversityNameValuePair>()
+            {
+                new UniversityNameValuePair() { Name = IsFinishedUniversity.NotFinished ,Value = false},
+                new UniversityNameValuePair() { Name = IsFinishedUniversity.InProgress,Value = false},
+                new UniversityNameValuePair() { Name = IsFinishedUniversity.Finished,Value = false},
+            };
         }
+
+
     }
 }

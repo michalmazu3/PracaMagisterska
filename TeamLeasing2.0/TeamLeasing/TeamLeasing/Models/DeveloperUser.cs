@@ -47,7 +47,6 @@ namespace TeamLeasing.Models
         //public int TechnologyId { get; set; }
          public virtual Technology Technology { get; set; }
 
-        public  ICollection<DeveloperUserJob> Jobs { get; set; }
         public ICollection<Offer> Offers { get; set; }
 
         public string UserId { get; set; }
