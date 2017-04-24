@@ -14,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using TeamLeasing.DAL;
 using Microsoft.DotNet.Cli.Utils;
+using TeamLeasing.Infrastructure;
 using TeamLeasing.Models;
 using TeamLeasing.Services;
 using TeamLeasing.Services.AppConfigurationService;
@@ -48,6 +49,13 @@ namespace TeamLeasing
                 options.IdleTimeout = TimeSpan.FromDays(7);
                 options.CookieName = ".FileSystem";
             });
+
+            services.AddIdentity<User, IdentityRole>()
+                .AddEntityFrameworkStores<TeamLeasingContext>()
+                .AddDefaultTokenProviders()
+                .AddUserManager<OptimizedUserManager>();
+
+
             services.AddIdentity<User, IdentityRole>(c =>
                 {
                     c.Password.RequiredLength = 4;

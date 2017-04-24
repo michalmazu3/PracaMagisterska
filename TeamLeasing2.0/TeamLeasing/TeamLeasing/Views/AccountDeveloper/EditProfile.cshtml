@@ -36,7 +36,7 @@
             <div class="form-group">
                 <label for="exampleInputPassword1" asp-for="Province" class="col-sm-2"></label>
                 <div class="col-sm-10">
-                    <input asp-for="Province" type="text" class="form-control" id="exampleInputPassword1" placeholder="Województwo">
+                    <select asp-for="ChoosenProvince" asp-items="@Model.Province" class="form-control" id="exampleInputPassword1"></select>
                 </div>
                 <span asp-validation-for="Province" class="help-block"></span>
             </div>

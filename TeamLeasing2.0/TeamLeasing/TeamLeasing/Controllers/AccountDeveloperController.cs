@@ -14,6 +14,7 @@ using System.Security.Principal;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using TeamLeasing.Infrastructure;
 using TeamLeasing.Services.UploadService;
 using TeamLeasing.ViewModels;
 using TeamLeasing.ViewModels.Developer;
@@ -22,16 +23,16 @@ namespace TeamLeasing.Controllers
     public class AccountDeveloperController : Controller
     {
         private readonly TeamLeasingContext _teamLeasingContext;
-        private readonly UserManager<User> _manager;
+        private readonly OptimizedUserManager _manager;
         private readonly IConfigurationService _configurationService;
         private readonly IUploadService _uploadService;
         private readonly IHostingEnvironment _environment;
 
-        public AccountDeveloperController(TeamLeasingContext _teamLeasingContext, UserManager<User> manager,
+        public AccountDeveloperController(TeamLeasingContext teamLeasingContext, OptimizedUserManager manager,
                     IConfigurationService configurationService,
                     IUploadService uploadService, IHostingEnvironment environment)
         {
-            this._teamLeasingContext = _teamLeasingContext;
+            this._teamLeasingContext = teamLeasingContext;
             _manager = manager;
             _configurationService = configurationService;
             _uploadService = uploadService;
@@ -49,8 +50,12 @@ namespace TeamLeasing.Controllers
         private async Task<EditDeveloperProfileViewModel> PrepareViewModel()
         {
             EditDeveloperProfileViewModel editvm = new EditDeveloperProfileViewModel();
+            string userId = _manager.GetUserId(HttpContext.User);
+            User user = await _manager.FindDeveloperUserByIdAsync(userId);
 
-            editvm = await GetCurrentUserFile();
+            // editvm = await GetCurrentUserFile();
+            editvm.Cv = user.DeveloperUser.Cv;
+            editvm.Phone = user.DeveloperUser.Photo;
             editvm.Technologies = await _configurationService.GetTechnology().GetSelectList();
             editvm.Levels = _configurationService.GetLevel().GetSelectList();
             editvm.IsFinishedUnivesity = _configurationService.GetIsFinishedUniversity().GetSelectList();
@@ -61,7 +66,7 @@ namespace TeamLeasing.Controllers
 
         public async Task<EditDeveloperProfileViewModel> GetCurrentUserFile()
         {
-            string username = _manager.GetUserName(HttpContext.User);
+            string username = _manager.GetUserId(HttpContext.User);
            User user =  _manager.Users.Include(i => i.DeveloperUser).First(f => f.UserName == username);
           
             
