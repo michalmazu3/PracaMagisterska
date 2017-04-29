@@ -1,9 +1,0 @@
-D:\repozutorium\Praca Magisterska\TeamLeasing2.0\TeamLeasing\TeamLeasing\bin\Debug\netcoreapp1.1\TeamLeasing.deps.json
-D:\repozutorium\Praca Magisterska\TeamLeasing2.0\TeamLeasing\TeamLeasing\bin\Debug\netcoreapp1.1\TeamLeasing.runtimeconfig.json
-D:\repozutorium\Praca Magisterska\TeamLeasing2.0\TeamLeasing\TeamLeasing\bin\Debug\netcoreapp1.1\TeamLeasing.runtimeconfig.dev.json
-D:\repozutorium\Praca Magisterska\TeamLeasing2.0\TeamLeasing\TeamLeasing\obj\Debug\netcoreapp1.1\TeamLeasing.AssemblyInfo.cs
-D:\repozutorium\Praca Magisterska\TeamLeasing2.0\TeamLeasing\TeamLeasing\bin\Debug\netcoreapp1.1\TeamLeasing.dll
-D:\repozutorium\Praca Magisterska\TeamLeasing2.0\TeamLeasing\TeamLeasing\bin\Debug\netcoreapp1.1\TeamLeasing.pdb
-D:\repozutorium\Praca Magisterska\TeamLeasing2.0\TeamLeasing\TeamLeasing\obj\Debug\netcoreapp1.1\TeamLeasing.dll
-D:\repozutorium\Praca Magisterska\TeamLeasing2.0\TeamLeasing\TeamLeasing\obj\Debug\netcoreapp1.1\TeamLeasing.pdb
-D:\repozutorium\Praca Magisterska\TeamLeasing2.0\TeamLeasing\TeamLeasing\obj\Debug\netcoreapp1.1\TeamLeasing.csprojResolveAssemblyReference.cache
