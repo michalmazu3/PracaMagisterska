@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
@@ -11,6 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using TeamLeasing.DAL;
+using TeamLeasing.Infrastructure;
 using TeamLeasing.Infrastructure.Extension;
 using TeamLeasing.Models;
 using TeamLeasing.ViewModels;
@@ -24,11 +26,11 @@ namespace TeamLeasing.Controllers
     public class SearchDeveloperController : Controller
     {
         private readonly TeamLeasingContext _teamLeasingContext;
-        private readonly UserManager<User> _manager;
+        private readonly OptimizedDbManager _manager;
         private readonly IHostingEnvironment _environment;
 
 
-        public SearchDeveloperController(TeamLeasingContext teamLeasingContext, UserManager<User> manager
+        public SearchDeveloperController(TeamLeasingContext teamLeasingContext, OptimizedDbManager manager
             , IHostingEnvironment environment)
         {
             _teamLeasingContext = teamLeasingContext;
@@ -40,35 +42,23 @@ namespace TeamLeasing.Controllers
         [HttpGet]
         public async Task<IActionResult> Developers(List<int> developersId)
         {
+            var developers = await _manager.GetDeveloperUser();
+            var selectedDevelopers = !developersId.Any()
+                 ? developers
+                 : developers.Join(developersId, a => a.Id, b => b, (a, b) => a);
 
-            var developers = !developersId.Any()
-                ? await _teamLeasingContext.DeveloperUsers
-                    .Include(i => i.Technology)
-                    .ToListAsync()
-                : await _teamLeasingContext.DeveloperUsers
-                    .Include(i => i.Technology)
-                    .Join(developersId, a => a.Id, b => b, (a, b) => a).ToListAsync();
-            return View("DeveloperSearch", developers);
+            return View("DeveloperSearch", selectedDevelopers.ToList());
         }
 
         [Route("[action]")]
         [HttpPost]
         public async Task<IActionResult> Developers(SidebarDeveloperViewModel vm)
         {
-            IEnumerable<DeveloperUser> searchingDevelopers = new List<DeveloperUser>();
-            List<DeveloperUser> developers = await _teamLeasingContext.DeveloperUsers
-                                                                      .Include(i => i.Technology)
-                                                                      .ToListAsync();
-
-            var tech = await Apllytechnologies(vm, developers);
-            var level = await ApllyLevel(vm, developers);
-            var isFinishedUniversity = await ApllyIsFinishedUniversity(vm, developers);
-            var experience = await ApllyExperience(vm, developers);
-            searchingDevelopers = await Intersection(tech, level, isFinishedUniversity, experience);
-
-            TempData.Put("search", vm);
-
-            return RedirectToAction("Developers", new { developersId = new List<int>(searchingDevelopers.Select(s => s.Id).ToList()) });
+            List<DeveloperUser> developers = await _manager.GetDeveloperUser();
+            List<DeveloperUser> searchingDevelopers = await GetSearchResul(vm, developers);
+            TempData.Put("searchDevelopers", vm);
+            return RedirectToAction("Developers", new { developersId = new List<int>(searchingDevelopers.Select(s => s.Id)
+                                                                                                        .ToList()) });
         }
 
         [Authorize]
@@ -76,13 +66,12 @@ namespace TeamLeasing.Controllers
         public async Task<IActionResult> Cv(int developerId)
         {
             DeveloperUser developerUser = await _teamLeasingContext.DeveloperUsers.FindAsync(developerId);
-
             return await DownloadFile(developerUser.Surname, developerUser.Name, developerId);
-
         }
 
         private async Task<IActionResult> DownloadFile(string surname, string name, int id)
         {
+
             var fileName = $"{surname}_{name}.pdf";
             var filepath = $"wwwroot/UploadFIle/Cv/{fileName}";
 
@@ -99,8 +88,41 @@ namespace TeamLeasing.Controllers
                     ReturnUrl = UrlHelperExtensions.Action(Url, "Profile", "SearchDeveloper", new { developerId = id })
                 });
             }
+
+
         }
 
+
+
+        private async Task<List<DeveloperUser>> GetSearchResul(SidebarDeveloperViewModel vm,
+            List<DeveloperUser> developers)
+        {
+           return  await  Task.Run(async () =>
+            {
+                var tech = Aplly<DeveloperUser>(w => vm.TechnologyNameValuePairs
+                    .Where(s => s.Value)
+                    .Select(s => s.Name)
+                    .Contains(w.Technology.Name), developers);
+
+                var level = Aplly<DeveloperUser>(w => vm.LevelNameValuePairs
+                    .Where(s => s.Value)
+                    .Select(s => s.Name)
+                    .Contains(w.Level), developers);
+
+                var isFinishedUniversity = Aplly<DeveloperUser>(w => vm.UniversityNameValuePairs
+                    .Where(s => s.Value)
+                    .Select(s => s.Name)
+                    .Contains(w.IsFinishedUniversity), developers);
+
+                var experience = Aplly<DeveloperUser>(w => w.Experience > vm.ExpirienceMin
+                                                           && w.Experience < vm.ExpirienceMax, developers);
+
+                var searchingResult = await Intersection(tech, level, isFinishedUniversity, experience);
+
+                return searchingResult.ToList();
+            });
+         
+        }
         private Task<IEnumerable<DeveloperUser>> Intersection(params IEnumerable<DeveloperUser>[] paramsDevelopers)
         {
             return Task.Run(() =>
@@ -116,54 +138,13 @@ namespace TeamLeasing.Controllers
 
         }
 
-        private Task<List<DeveloperUser>> ApllyExperience(SidebarDeveloperViewModel vm, List<DeveloperUser> developers)
+        private List<T> Aplly<T>(Func<T, bool> querry, List<T> list)
         {
-            return Task.Run(() =>
-            {
-                return developers.Where(w => w.Experience > vm.ExpirienceMin && w.Experience < vm.ExpirienceMax)
-                .ToList();
-            });
-
-
+            return list.Where(querry).ToList();
         }
 
-        private Task<List<DeveloperUser>> ApllyLevel(SidebarDeveloperViewModel vm, List<DeveloperUser> developers)
-        {
-            return Task.Run(() =>
-            {
-                return developers.Where(w => vm.LevelNameValuePairs
-                             .Where(v => v.Value)
-                              .Select(s => s.Name)
-                              .Contains(w.Level))
-                                 .ToList();
-            });
+      
 
-        }
-        private Task<List<DeveloperUser>> ApllyIsFinishedUniversity(SidebarDeveloperViewModel vm, List<DeveloperUser> developers)
-        {
-            return Task.Run(() =>
-            {
-                return developers.Where(w => vm.UniversityNameValuePairs
-                          .Where(v => v.Value)
-                          .Select(s => s.Name)
-                          .Contains(w.IsFinishedUniversity))
-                           .ToList();
-            });
-
-        }
-
-        private Task<List<DeveloperUser>> Apllytechnologies(SidebarDeveloperViewModel vm, List<DeveloperUser> developers)
-        {
-            return Task.Run(() =>
-            {
-                return developers.Where(w => vm.TechnologyNameValuePairs
-                        .Where(v => v.Value)
-                        .Select(s => s.Name)
-                      .Contains(w.Technology.Name))
-                          .ToList();
-            });
-
-        }
         [Route("developer/{developerId}")]
         // [HttpGet("{developerId}")]
         public async Task<IActionResult> Profile(int developerId)

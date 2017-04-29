@@ -15,6 +15,7 @@ using Microsoft.Extensions.Logging;
 using TeamLeasing.DAL;
 using Microsoft.DotNet.Cli.Utils;
 using TeamLeasing.Infrastructure;
+using TeamLeasing.Infrastructure.Helper;
 using TeamLeasing.Models;
 using TeamLeasing.Services;
 using TeamLeasing.Services.AppConfigurationService;
@@ -61,7 +62,7 @@ namespace TeamLeasing
                 })
                 .AddEntityFrameworkStores<TeamLeasingContext>()
                 .AddDefaultTokenProviders()
-                .AddUserManager<OptimizedUserManager>(); ;
+                .AddUserManager<OptimizedDbManager>(); ;
          
        
             services.AddMvc(config =>
@@ -74,16 +75,17 @@ namespace TeamLeasing
             services.AddSession();
             services.AddDbContext<TeamLeasingContext>(ServiceLifetime.Scoped);
             services.AddSingleton(_configuration);
-            services.AddTransient<TeamLeasingSeedData>();
-            services.AddTransient<IMessage,MessageModel>();
-            services.AddTransient<ISendEmail, SendEmail>();
+            services.AddScoped<TeamLeasingSeedData>();
+      
             services.AddSingleton<TeamLeasingSeedData>();
             services.AddSingleton<SeedRoles>();
             services.AddSingleton<IConfigurationService, ConfigurationService>();
             services.AddSingleton<IUserService, UserService>();
             services.AddScoped<IUploadService, UploadService>();
-            services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddAutoMapper();
+            services.AddScoped<IMessage, MessageModel>();
+            services.AddScoped<ISendEmail, SendEmail>();
+            services.AddScoped<ILoadingDataToSidebarHelper, LoadingDataToSidebarHelper>();
+             services.AddAutoMapper();
             services.AddLogging();
 
         }

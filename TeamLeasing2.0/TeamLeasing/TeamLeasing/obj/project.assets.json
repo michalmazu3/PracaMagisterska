@@ -12091,10 +12091,10 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Koks\\Desktop\\PracaMagisterska-62f9ff6d823f5cc065439ae3491b077d3577e613\\TeamLeasing2.0\\TeamLeasing\\TeamLeasing\\TeamLeasing.csproj",
+      "projectUniqueName": "D:\\repozutorium\\Praca Magisterska\\TeamLeasing2.0\\TeamLeasing\\TeamLeasing\\TeamLeasing.csproj",
       "projectName": "TeamLeasing",
-      "projectPath": "C:\\Users\\Koks\\Desktop\\PracaMagisterska-62f9ff6d823f5cc065439ae3491b077d3577e613\\TeamLeasing2.0\\TeamLeasing\\TeamLeasing\\TeamLeasing.csproj",
-      "outputPath": "C:\\Users\\Koks\\Desktop\\PracaMagisterska-62f9ff6d823f5cc065439ae3491b077d3577e613\\TeamLeasing2.0\\TeamLeasing\\TeamLeasing\\obj\\",
+      "projectPath": "D:\\repozutorium\\Praca Magisterska\\TeamLeasing2.0\\TeamLeasing\\TeamLeasing\\TeamLeasing.csproj",
+      "outputPath": "D:\\repozutorium\\Praca Magisterska\\TeamLeasing2.0\\TeamLeasing\\TeamLeasing\\obj\\",
       "projectStyle": "PackageReference",
       "originalTargetFrameworks": [
         "netcoreapp1.1"

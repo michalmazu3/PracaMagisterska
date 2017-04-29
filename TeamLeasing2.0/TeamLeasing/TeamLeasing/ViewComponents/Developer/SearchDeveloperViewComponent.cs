@@ -9,6 +9,7 @@ using System.Collections;
 using Microsoft.EntityFrameworkCore;
 using Org.BouncyCastle.Crypto.Tls;
 using TeamLeasing.Infrastructure.Extension;
+using TeamLeasing.Infrastructure.Helper;
 using TeamLeasing.Services.AppConfigurationService;
 using TeamLeasing.ViewModels;
 using TeamLeasing.ViewModels.Developer;
@@ -17,60 +18,33 @@ namespace TeamLeasing.ViewComponents
 {
     public class SearchDeveloperViewComponent : ViewComponent
     {
-        private readonly IConfigurationService _configurationService;
+        private readonly ILoadingDataToSidebarHelper _loadingDataToSidebar;
 
 
-        public SearchDeveloperViewComponent(IConfigurationService configurationService)
+        public SearchDeveloperViewComponent(ILoadingDataToSidebarHelper loadingDataToSidebar)
         {
-            _configurationService = configurationService;
+            _loadingDataToSidebar = loadingDataToSidebar;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync(SidebarDeveloperViewModel test)
+        public async Task<IViewComponentResult> InvokeAsync()
         {
-            SidebarDeveloperViewModel model = new SidebarDeveloperViewModel
+            SidebarDeveloperViewModel vm = TempData.Get<SidebarDeveloperViewModel>("searchDevelopers") ??
+                                             await PrepareViewModel();
+
+            return View("Sidebar", vm);
+        }
+
+        private async Task<SidebarDeveloperViewModel> PrepareViewModel()
+        {
+            return new SidebarDeveloperViewModel
             {
-                TechnologyNameValuePairs = await CheckAvailableTechnology(),
-                UniversityNameValuePairs = CheckAvailableUniversity(),
-                LevelNameValuePairs = CheckAvailableLevel()
+                TechnologyNameValuePairs =
+                    await _loadingDataToSidebar.LoadColletionAsync(s => s.TechnologyService.GetListTechnology()),
+                UniversityNameValuePairs =
+                    _loadingDataToSidebar.LoadColletion(
+                        s => s.IsFinishedUniversityService.GetListIsFinishedUniversity()),
+                LevelNameValuePairs = _loadingDataToSidebar.LoadColletion(t => t.LevelSerice.GetListLevel())
             };
-            SidebarDeveloperViewModel tt = TempData.Get<SidebarDeveloperViewModel>("search");
-            
-            return View("Sidebar", tt??model);
-        }
-
-        private List<NameValuePairSearchViewModel<Enums.Level>> CheckAvailableLevel()
-        {
-            return _configurationService.LevelSerice.GetListLevel()
-                .Select(level => new NameValuePairSearchViewModel<Enums.Level>()
-                {
-                    Name = level,
-                    Value = false
-                }).ToList();
-        }
-
-        private async Task<List<NameValuePairSearchViewModel<string>>> CheckAvailableTechnology()
-        {
-            var technologyList = await _configurationService.TechnologyService.GetListTechnology();
-            return await Task.Run(() =>
-            {
-                return technologyList.Select(s => new NameValuePairSearchViewModel<string>()
-                    {
-                        Name = s,
-                        Value = false,
-                    })
-                    .ToList();
-            });
-        }
-
-        private List<NameValuePairSearchViewModel<Enums.IsFinishedUniversity>> CheckAvailableUniversity()
-        {
-            return _configurationService.IsFinishedUniversityService.GetListIsFinishedUniversity()
-                .Select(s => new NameValuePairSearchViewModel<Enums.IsFinishedUniversity>()
-                {
-                    Name = s,
-                    Value = false,
-                })
-                .ToList();
         }
     }
 }

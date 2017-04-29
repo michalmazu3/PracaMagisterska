@@ -25,13 +25,13 @@ namespace TeamLeasing.Controllers
     public class AccountDeveloperController : Controller
     {
         private readonly TeamLeasingContext _teamLeasingContext;
-        private readonly OptimizedUserManager _manager;
+        private readonly OptimizedDbManager _manager;
         private readonly IHttpContextAccessor _contextAccessor;
 
         private readonly IUploadService _uploadService;
         private readonly IHostingEnvironment _environment;
 
-        public AccountDeveloperController(TeamLeasingContext _teamLeasingContext, OptimizedUserManager manager, IHttpContextAccessor contextAccessor,
+        public AccountDeveloperController(TeamLeasingContext _teamLeasingContext, OptimizedDbManager manager, IHttpContextAccessor contextAccessor,
             IUploadService uploadService, IHostingEnvironment environment)
         {
             this._teamLeasingContext = _teamLeasingContext;
