@@ -1,0 +1,48 @@
+﻿@model TeamLeasing.Models.DeveloperUser
+
+<div id="container-developer">
+
+    <img src=@Url.Content(Model.Photo) alt="">
+    <div>
+        <table>
+            <th><h2>@Model.Name  @Model.Surname</h2></th>
+            <tr>
+                <td><strong>@Model.Technology.Name</strong></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><strong>@Model.Level Developer</strong></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><strong>@Html.LabelFor(l=>l.BirthDate)</strong></td>
+                <td>@Model.BirthDate.ToString("d")</td>
+            </tr>
+            <tr>
+                <td><strong>@Html.LabelFor(l=>l.Experience)</strong></td>
+                <td>@Model.Experience</td>
+            </tr>
+            <tr>
+                <td><strong>@Html.LabelFor(l=>l.University)</strong></td>
+                <td>@Model.University</td>
+            </tr>
+            <tr>
+                <td><strong>@Html.LabelFor(l=>l.City)</strong></td>
+                <td>@Model.City</td>
+            </tr>
+            <tr>
+                <td><strong>@Html.LabelFor(l=>l.Province)</strong></td>
+                <td>@Model.Province</td>
+            </tr>
+
+        </table>
+        <tr>
+
+        <p>@Model.About</p>
+    </div>
+    <div id="buttons">
+        <a class="btn-primary  btn-lg">Wyślij oferte pracy</a>
+        <a  asp-controller="SearchDeveloper" asp-action="Cv" asp-route-developerId="@Model.Id" class="btn btn-primary  btn-lg">Zobacz cv</a>
+    </div>
+
+</div>

@@ -1,0 +1,59 @@
+﻿@using Microsoft.Extensions.WebEncoders.Testing
+@model  List<TeamLeasing.Models.DeveloperUser>
+@section scripts{
+
+    <script src="~/script/switch-banner.js"></script>
+}
+
+@Html.Partial("_Banner")
+<div id="content">
+    @await Component.InvokeAsync("SearchDeveloper")
+    <div id="container">
+        
+        @{
+            if (Model != null)
+            {
+                foreach (var developer in Model)
+                {
+                    <div class="profile-item">
+                        <img src=@Url.Content(developer.Photo) style="height: 233px; width: 233px;">
+                        <div>
+                            <table>
+                                <th><a asp-controller="SearchDeveloper" asp-action="Profile" asp-route-developerId="@developer.Id">@developer.Name @developer.Surname</a></th>
+                                <tr>
+                                    <td>@developer.Technology.Name</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>@developer.Level.ToString()</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>@Html.LabelFor(l => developer.BirthDate)</td>
+                                    <td>@developer.BirthDate.ToString("d")</td>
+                                </tr>
+                                <tr>
+                                    <td>@Html.LabelFor(s => developer.Experience)</td>
+                                    <td>@developer.Experience</td>
+                                </tr>
+                                <tr>
+                                    <td>@Html.LabelFor(l => developer.University)</td>
+                                    <td>@developer.University</td>
+                                </tr>
+                                <tr>
+                                    <td>@Html.LabelFor(l => developer.City)</td>
+                                    <td>@developer.City</td>
+                                </tr>
+                                <tr>
+                                    <td>@Html.LabelFor(l => developer.Province)</td>
+                                    <td>@developer.Province</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                }
+            }
+        }
+
+    </div>
+</div>

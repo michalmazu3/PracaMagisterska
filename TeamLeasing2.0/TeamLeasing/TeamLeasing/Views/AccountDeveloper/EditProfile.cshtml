@@ -1,0 +1,22 @@
+﻿
+
+@using TeamLeasing.Services.AppConfigurationService
+@model TeamLeasing.ViewModels.Developer.EditDeveloperAccountViewModel
+@inject IConfigurationService ConfigurationService
+@section scripts{
+    <script src="~/lib/jquery-validation/src/core.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js"></script>
+    <script src="~/script/switch-registration.js"></script>
+    <script src="~/script/validation-bootstrap.js"></script>
+    <script src="~/script/university-field.js"></script>
+}
+@{
+    ViewData["Title"] = "Edycja profilu";
+}
+<div id="content-contact">
+    <div id="login" class="account">
+        @await Html.PartialAsync("_EditDeveloperAccount", Model.BasicInformation)
+        @await Html.PartialAsync("_EditDeveloperCv", Model.Cv)
+        @await Html.PartialAsync("_EditDeveloperPhoto", Model.Photo)
+    </div>
+</div>

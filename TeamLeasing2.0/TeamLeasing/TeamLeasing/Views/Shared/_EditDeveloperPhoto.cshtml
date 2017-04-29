@@ -1,0 +1,23 @@
+﻿@model TeamLeasing.ViewModels.Developer.Account.Photo
+
+<h4>Zdjęcie</h4>
+<form class="form-horizontal" method="post" asp-action="UploadPhoto" asp-controller="AccountDeveloper" enctype="multipart/form-data" style="border-bottom: groove">
+    <div class="form-group">
+        <label for="exampleInputFile" class="col-sm-2">Aktualne zdjęcie</label>
+        <div class="col-sm-10">
+
+            <a href="@Url.Content(Model.PhotoPath)" style="display: block">
+                <img src=@Url.Content(Model.PhotoPath) width="200" height="200" alt="">
+            </a>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputFile" class="col-sm-2">Nowe zdjęcie</label>
+        <div class="col-sm-10">
+            <input asp-for="PhotoFile" type="file" id="exampleInputFile">
+        </div>
+        <span asp-validation-for="PhotoFile" class="help-block"></span>
+    </div>
+    <button type="submit" class="btn btn-default">Wgraj zdjęcie</button>
+    <a class="btn btn-default" asp-controller="AccountDeveloper" asp-action="DeletePhoto">Usuń zdjęcie</a>
+</form>

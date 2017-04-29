@@ -1,0 +1,15 @@
+D:\repozytorium\private\praca magisterska\TeamLeasing\src\TeamLeasing\bin\Debug\netcoreapp1.1\TeamLeasing.deps.json
+D:\repozytorium\private\praca magisterska\TeamLeasing\src\TeamLeasing\bin\Debug\netcoreapp1.1\TeamLeasing.runtimeconfig.json
+D:\repozytorium\private\praca magisterska\TeamLeasing\src\TeamLeasing\bin\Debug\netcoreapp1.1\TeamLeasing.runtimeconfig.dev.json
+D:\repozytorium\private\praca magisterska\TeamLeasing\src\TeamLeasing\bin\Debug\netcoreapp1.1\TeamLeasing.dll
+D:\repozytorium\private\praca magisterska\TeamLeasing\src\TeamLeasing\bin\Debug\netcoreapp1.1\TeamLeasing.pdb
+D:\repozytorium\private\praca magisterska\TeamLeasing\src\TeamLeasing\obj\Debug\netcoreapp1.1\TeamLeasing.AssemblyInfo.cs
+D:\repozytorium\private\praca magisterska\TeamLeasing\src\TeamLeasing\obj\Debug\netcoreapp1.1\TeamLeasing.dll
+D:\repozytorium\private\praca magisterska\TeamLeasing\src\TeamLeasing\obj\Debug\netcoreapp1.1\TeamLeasing.pdb
+D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\bin\Debug\netcoreapp1.1\TeamLeasing.deps.json
+D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\bin\Debug\netcoreapp1.1\TeamLeasing.runtimeconfig.json
+D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\bin\Debug\netcoreapp1.1\TeamLeasing.runtimeconfig.dev.json
+D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\obj\Debug\netcoreapp1.1\TeamLeasing.csprojResolveAssemblyReference.cache
+D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\obj\Debug\netcoreapp1.1\TeamLeasing.AssemblyInfo.cs
+D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\obj\Debug\netcoreapp1.1\TeamLeasing.dll
+D:\repozutorium\Praca Magisterska\TeamLeasing\src\TeamLeasing\obj\Debug\netcoreapp1.1\TeamLeasing.pdb

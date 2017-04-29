@@ -1,0 +1,7 @@
+﻿{
+  "ConnectionStrings": {
+    "TeamLeasingConnectionString": "Data Source=DESKTOP-K9TOQB7;Initial Catalog=TeamLeasing;Integrated Security=True",
+    "TeamLeasingConnectionStringAzure": "Server=tcp:teamleasingserwer.database.windows.net,1427;Initial Catalog=TeamLeasingDb;Persist Security Info=False;User ID=Mazur;Password=Admin123$;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
+
+  } 
+}
