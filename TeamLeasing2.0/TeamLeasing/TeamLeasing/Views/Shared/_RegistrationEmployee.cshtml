@@ -1,0 +1,85 @@
+﻿using TeamLeasing.Models
+@using TeamLeasing.Services.AppConfigurationService
+@model TeamLeasing.ViewModels.Employee.RegistrationEmployeeViewModel
+@inject IConfigurationService ConfigurationService
+
+
+<div id="menu1" class="tab-pane fade">
+    <h3>Zarejestruj się jako pracodawca !</h3>
+    <form class="form-horizontal" asp-controller="Registration" asp-action="Employee" method="post">
+        <div class="form-group">
+            <label asp-for="Email" class="col-sm-2"></label>
+            <div class="col-sm-10">
+                <input asp-for="Email" type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+            </div>
+            <span asp-validation-for="Email" class="help-block"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Username" class="col-sm-2"></label>
+            <div class="col-sm-10">
+                <input asp-for="Username" type="text" class="form-control" id="exampleInputEmail1" placeholder="Nazwa użytkownika">
+            </div>
+            <span asp-validation-for="Username" class="help-block"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="exampleInputPassword1" asp-for="Password" class="col-sm-2"></label>
+            <div class="col-sm-10">
+                <input asp-for="Password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Hasło">
+            </div>
+            <span asp-validation-for="Password" class="help-block"></span>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1" asp-for="RePassword" class="col-sm-2"></label>
+            <div class="col-sm-10">
+                <input asp-for="RePassword" type="password" class="form-control" id="exampleInputPassword1" placeholder="Powtórz hasło">
+            </div>
+            <span asp-validation-for="RePassword" class="help-block"></span>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1" asp-for="Name" class="col-sm-2"></label>
+            <div class="col-sm-10">
+                <input asp-for="Name" type="text" class="form-control" id="exampleInputPassword1" placeholder="Imię">
+            </div>
+            <span asp-validation-for="Name" class="help-block"></span>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1" asp-for="Surname" class="col-sm-2"></label>
+            <div class="col-sm-10">
+                <input type="text" asp-for="Surname" class="form-control" id="exampleInputPassword1" placeholder="Nazwisko">
+            </div>
+            <span asp-validation-for="Surname" class="help-block"></span>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1" asp-for="Phone" class="col-sm-2"></label>
+            <div class="col-sm-10">
+                <input type="text" asp-for="Phone" class="form-control" id="exampleInputPassword1" placeholder="Telefon">
+            </div>
+            <span asp-validation-for="Phone" class="help-block"></span>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1" asp-for="City" class="col-sm-2"></label>
+            <div class="col-sm-10">
+                <input type="text" asp-for="City" class="form-control" id="exampleInputPassword1" placeholder="Miasto">
+            </div>
+            <span asp-validation-for="City" class="help-block"></span>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1" asp-for="@ConfigurationService.ProvinceService" class="col-sm-2"></label>
+            <div class="col-sm-10">
+                <select asp-for="ChoosenProvince" asp-items="@ConfigurationService.ProvinceService.GetSelectListProvince()" class="form-control" id="exampleInputPassword1"></select>
+
+            </div>
+            <span asp-validation-for="ChoosenProvince" class="help-block"></span>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1" class="col-sm-2" asp-for="Company"> </label>
+            <div class="col-sm-10">
+                <input asp-for="Company" type="text" class="form-control" id="exampleInputPassword1" placeholder="Firma">
+            </div>
+            <span asp-validation-for="Company" class="help-block"></span>
+
+        </div>
+        <button type="submit" class="btn btn-default">Zarejestruj</button>
+    </form>
+</div>

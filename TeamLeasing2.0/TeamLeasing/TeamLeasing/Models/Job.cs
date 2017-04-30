@@ -18,10 +18,15 @@ namespace TeamLeasing.Models
         [Required]
         [Display(Name = "Opis")]
         public string Descritpion { get; set; }
+        [Display(Name = "Poziom")]
+        public Enums.Level Level { get; set; }
+        [Display(Name = "Rodzaj zatrudnienia")]
+        public string EmploymentType { get; set; }
+
         public bool IsHidden { get; set; }
-        [Display(Name = "Status")]
-        public Enums.JobStatus Status { get; set; }
-        
+
+        public Enums.JobStatusForDeveloper StatusForDeveloper { get; set; }
+        public Enums.JobStatusForEmployee StatusForEmployee { get; set; }
         public virtual Technology Technology { get; set; }
 
         public int EmployeeUserId { get; set; }

@@ -11,44 +11,44 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TeamLeasing.DAL;
+using TeamLeasing.Infrastructure;
 using TeamLeasing.Models;
 using TeamLeasing.Models;
 using TeamLeasing.Services.UploadService;
 using TeamLeasing.ViewModels;
+using TeamLeasing.ViewModels.Employee;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace TeamLeasing.Controllers
 {
-    [Route("/registration")]
-    public class RegistrationController : Controller
+     public class RegistrationController : Controller
     {
-        private readonly UserManager<User> _manager;
+        private readonly OptimizedDbManager _manager;
         private readonly SignInManager<User> _signInManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IMapper _mapper;
         private readonly TeamLeasingContext _teamLeasingContext;
         private readonly IUserService _userService;
  
 
-        public RegistrationController(UserManager<User> manager, SignInManager<User> signInManager,
-            RoleManager<IdentityRole> roleManager, IMapper mapper, TeamLeasingContext teamLeasingContext,
+        public RegistrationController(OptimizedDbManager manager, SignInManager<User> signInManager,
+           IMapper mapper, TeamLeasingContext teamLeasingContext,
             IUserService userService)
         {
             _manager = manager;
             _signInManager = signInManager;
-            _roleManager = roleManager;
             _mapper = mapper;
             _teamLeasingContext = teamLeasingContext;
             _userService = userService;
          }
 
-        // GET: /<controller>/
+        [Route("[controller]")]
         public IActionResult Index()
         {
-            return View("Registration");
+            return View("Registration", new RegistrationViewModel());
         }
 
+        [Route("[controller]/[action]")]
         [HttpPost]
         public async Task<IActionResult> Developer(RegistrationDeveloperViewModel vm)
         {
@@ -57,7 +57,6 @@ namespace TeamLeasing.Controllers
                 try
                 {
                     return await CreateUser(vm);
-
                 }
                 catch (Exception e)
                 {
@@ -70,7 +69,7 @@ namespace TeamLeasing.Controllers
                 }
 
             }
-            return View("Registration", vm);
+            return View("Registration", new RegistrationViewModel(){RegistrationDeveloperViewModel = vm});
 
         }
 
@@ -110,7 +109,32 @@ namespace TeamLeasing.Controllers
             developerUser.Photo = await _userService.UploadService.UploadPhotoFile(vm.Name, vm.Surname, vm.PhotoFile);
             return developerUser;
         }
+        [Route("[controller]/[action]")]
+        [HttpPost]
+        public async Task<IActionResult> Employee(RegistrationEmployeeViewModel vm)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var user = await _manager.CreateEmployeeUser(vm);
+                    if (user!=null)
+                    {
+                        await _signInManager.SignInAsync(user, true, null);
+                        return RedirectToAction("Index", "Home");
+                    }
 
-
+                }
+                catch (Exception e)
+                {
+                    return View("_Error", new ErrorViewModel()
+                    {
+                        Message = e.Message,
+                        ReturnUrl = UrlHelperExtensions.Action(Url, "Index", "Registration"),
+                    });
+                }
+            }
+            return View("Registration", new RegistrationViewModel(){RegistrationEmployeeViewModel = vm});
+        }
     }
 }

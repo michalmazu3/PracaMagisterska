@@ -1,4 +1,6 @@
-﻿@using TeamLeasing.ViewModels
+﻿@using TeamLeasing.Infrastructure.Extension
+@using TeamLeasing.Models
+@using TeamLeasing.ViewModels
 @model  TeamLeasing.ViewModels.Developer.SidebarDeveloperViewModel
 
 <div id="sidebar">
@@ -48,8 +50,8 @@
                         <div class="checkbox">
                             @Html.HiddenFor(x=>x.UniversityNameValuePairs[i].Name)
                             <input type="checkbox" asp-for="@Model.UniversityNameValuePairs[i].Value" />
-                            <label >@Model.UniversityNameValuePairs[i].Name</label>
-                            
+                            <label >@Model.UniversityNameValuePairs[i].Name.GetAttribute().Name</label>
+                       
 
                         </div>
                     </div>

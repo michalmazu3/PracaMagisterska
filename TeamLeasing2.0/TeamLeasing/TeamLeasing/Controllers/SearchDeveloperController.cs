@@ -14,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using TeamLeasing.DAL;
 using TeamLeasing.Infrastructure;
 using TeamLeasing.Infrastructure.Extension;
+using TeamLeasing.Infrastructure.Helper;
 using TeamLeasing.Models;
 using TeamLeasing.ViewModels;
 using TeamLeasing.ViewModels.Developer;
@@ -28,14 +29,16 @@ namespace TeamLeasing.Controllers
         private readonly TeamLeasingContext _teamLeasingContext;
         private readonly OptimizedDbManager _manager;
         private readonly IHostingEnvironment _environment;
+        private readonly ISearchHelper _searchHelper;
 
 
         public SearchDeveloperController(TeamLeasingContext teamLeasingContext, OptimizedDbManager manager
-            , IHostingEnvironment environment)
+            , IHostingEnvironment environment, ISearchHelper searchHelper)
         {
             _teamLeasingContext = teamLeasingContext;
             _manager = manager;
             _environment = environment;
+            _searchHelper = searchHelper;
         }
 
         [Route("[action]")]
@@ -60,7 +63,35 @@ namespace TeamLeasing.Controllers
             return RedirectToAction("Developers", new { developersId = new List<int>(searchingDevelopers.Select(s => s.Id)
                                                                                                         .ToList()) });
         }
+        private async Task<List<DeveloperUser>> GetSearchResul(SidebarDeveloperViewModel vm,
+            List<DeveloperUser> developers)
+        {
+            return await Task.Run(async () =>
+            {
+                var tech = _searchHelper.Aplly<DeveloperUser>(w => vm.TechnologyNameValuePairs
+                    .Where(s => s.Value)
+                    .Select(s => s.Name)
+                    .Contains(w.Technology.Name), developers);
 
+                var level = _searchHelper.Aplly<DeveloperUser>(w => vm.LevelNameValuePairs
+                    .Where(s => s.Value)
+                    .Select(s => s.Name)
+                    .Contains(w.Level), developers);
+
+                var isFinishedUniversity = _searchHelper.Aplly<DeveloperUser>(w => vm.UniversityNameValuePairs
+                    .Where(s => s.Value)
+                    .Select(s => s.Name)
+                    .Contains(w.IsFinishedUniversity), developers);
+
+                var experience = _searchHelper.Aplly<DeveloperUser>(w => w.Experience > vm.ExpirienceMin
+                                                                         && w.Experience < vm.ExpirienceMax, developers);
+
+                var searchingResult = await _searchHelper.Intersection<DeveloperUser>(tech, level, isFinishedUniversity, experience);
+
+                return searchingResult.ToList();
+            });
+
+        }
         [Authorize]
         [Route("developer/{developerId}/[action]/download")]
         public async Task<IActionResult> Cv(int developerId)
@@ -94,56 +125,7 @@ namespace TeamLeasing.Controllers
 
 
 
-        private async Task<List<DeveloperUser>> GetSearchResul(SidebarDeveloperViewModel vm,
-            List<DeveloperUser> developers)
-        {
-           return  await  Task.Run(async () =>
-            {
-                var tech = Aplly<DeveloperUser>(w => vm.TechnologyNameValuePairs
-                    .Where(s => s.Value)
-                    .Select(s => s.Name)
-                    .Contains(w.Technology.Name), developers);
 
-                var level = Aplly<DeveloperUser>(w => vm.LevelNameValuePairs
-                    .Where(s => s.Value)
-                    .Select(s => s.Name)
-                    .Contains(w.Level), developers);
-
-                var isFinishedUniversity = Aplly<DeveloperUser>(w => vm.UniversityNameValuePairs
-                    .Where(s => s.Value)
-                    .Select(s => s.Name)
-                    .Contains(w.IsFinishedUniversity), developers);
-
-                var experience = Aplly<DeveloperUser>(w => w.Experience > vm.ExpirienceMin
-                                                           && w.Experience < vm.ExpirienceMax, developers);
-
-                var searchingResult = await Intersection(tech, level, isFinishedUniversity, experience);
-
-                return searchingResult.ToList();
-            });
-         
-        }
-        private Task<IEnumerable<DeveloperUser>> Intersection(params IEnumerable<DeveloperUser>[] paramsDevelopers)
-        {
-            return Task.Run(() =>
-            {
-                paramsDevelopers = paramsDevelopers.Where(w => w.Count() != 0).ToArray();
-
-                for (int i = 1; i < paramsDevelopers.Length; i++)
-                {
-                    paramsDevelopers[0] = paramsDevelopers[0].Intersect(paramsDevelopers[i]).ToList();
-                }
-                return paramsDevelopers[0];
-            });
-
-        }
-
-        private List<T> Aplly<T>(Func<T, bool> querry, List<T> list)
-        {
-            return list.Where(querry).ToList();
-        }
-
-      
 
         [Route("developer/{developerId}")]
         // [HttpGet("{developerId}")]
@@ -151,8 +133,8 @@ namespace TeamLeasing.Controllers
         {
 
             var developer = await _teamLeasingContext.DeveloperUsers
-                                               .Include(i => i.Technology)
-                                               .FirstOrDefaultAsync(w => w.Id == developerId);
+                                                    .Include(i => i.Technology)
+                                                    .FirstOrDefaultAsync(w => w.Id == developerId);
 
             return View("DeveloperProfile", developer);
 

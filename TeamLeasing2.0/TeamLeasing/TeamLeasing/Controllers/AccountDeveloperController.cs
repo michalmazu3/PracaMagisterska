@@ -1,15 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.IO;
+using System.Linq;
 using Microsoft.AspNetCore.Identity;
 using TeamLeasing.DAL;
 using TeamLeasing.Models;
 using TeamLeasing.Services.AppConfigurationService;
 using System.Security.Principal;
+using AutoMapper;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
@@ -22,26 +25,30 @@ using TeamLeasing.ViewModels.Developer.Account;
 
 namespace TeamLeasing.Controllers
 {
+    [Route("account")]
     public class AccountDeveloperController : Controller
     {
         private readonly TeamLeasingContext _teamLeasingContext;
         private readonly OptimizedDbManager _manager;
         private readonly IHttpContextAccessor _contextAccessor;
+        private readonly IMapper _mapper;
 
         private readonly IUploadService _uploadService;
         private readonly IHostingEnvironment _environment;
 
-        public AccountDeveloperController(TeamLeasingContext _teamLeasingContext, OptimizedDbManager manager, IHttpContextAccessor contextAccessor,
+        public AccountDeveloperController(TeamLeasingContext teamLeasingContext,
+            OptimizedDbManager manager,IHttpContextAccessor contextAccessor, IMapper mapper,
             IUploadService uploadService, IHostingEnvironment environment)
         {
-            this._teamLeasingContext = _teamLeasingContext;
+            this._teamLeasingContext = teamLeasingContext;
             _manager = manager;
             _contextAccessor = contextAccessor;
+            _mapper = mapper;
 
             _uploadService = uploadService;
             _environment = environment;
         }
-        //  [Route("account/[action]")]
+        [Route("[action]")]
         [Authorize(Roles = "Developer")]
         public async Task<IActionResult> Edit()
         {
@@ -50,7 +57,8 @@ namespace TeamLeasing.Controllers
             return View("EditProfile", vm);
         }
 
-        public async Task<EditDeveloperAccountViewModel> GetCurrentUserFile()
+      
+        private async Task<EditDeveloperAccountViewModel> GetCurrentUserFile()
         {
             var userId = _manager.GetUserId(HttpContext.User);
             var user = await _manager.FindDeveloperUserByIdAsync(userId);
@@ -66,6 +74,7 @@ namespace TeamLeasing.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Developer")]
+        [Route("[action]")]
         public async Task<IActionResult> Edit(EditDeveloperAccountViewModel vm)
         {
             if (ModelState.IsValid)
@@ -104,7 +113,6 @@ namespace TeamLeasing.Controllers
 
             return user;
         }
-
         private async Task UpdateDeveloperUserInformation(BasicInformation informationm, DeveloperUser developerUser)
         {
             developerUser.Technology = informationm.ChoosenTechnology != null ? await _teamLeasingContext.Technologies
@@ -134,6 +142,8 @@ namespace TeamLeasing.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Developer")]
+        [Route("[action]")]
+
         public async Task<IActionResult> UploadCV(IFormFile cvFile)
         {
             if (ModelState.IsValid)
@@ -164,10 +174,10 @@ namespace TeamLeasing.Controllers
             return RedirectToAction("Edit", "AccountDeveloper");
 
         }
-
-
         [HttpPost]
         [Authorize(Roles = "Developer")]
+        [Route("[action]")]
+
         public async Task<IActionResult> UploadPhoto(IFormFile photoFile)
         {
             if (ModelState.IsValid)
@@ -197,9 +207,8 @@ namespace TeamLeasing.Controllers
             return RedirectToAction("Edit", "AccountDeveloper");
 
         }
-
-
         [Authorize(Roles = "Developer")]
+        [Route("[action]")]
         public async Task<IActionResult> DeletePhoto()
         {
             var userId = _manager.GetUserId(HttpContext.User);
@@ -224,6 +233,17 @@ namespace TeamLeasing.Controllers
 
             return RedirectToAction("Edit", "AccountDeveloper");
 
+        }
+
+        [Route("[action]")]
+        [Authorize(Roles = "Developer")]
+        public async Task<IActionResult> Applications()
+        {
+            var userId = _manager.GetUserId(HttpContext.User);
+            var jobList = await _manager.GetJobsByUserId(userId, s => s.DeveloperUser.UserId == userId);
+            var vm = _mapper.Map<List<ApplicationViewModel>>(jobList);
+
+            return View("Application", vm);
         }
     }
 }

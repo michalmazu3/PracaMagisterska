@@ -289,3 +289,7 @@ table, th, td {
 	border-bottom: groove;
 	padding-bottom: 20;
 }
+
+#header-container{
+	margin-top: 50px;
+}

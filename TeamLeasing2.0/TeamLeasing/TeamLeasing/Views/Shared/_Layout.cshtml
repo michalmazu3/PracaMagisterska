@@ -44,7 +44,7 @@
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">Moje Konto Programista <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a asp-controller="AccountDeveloper" asp-action="Edit">Edycja konta</a></li>
-                                <li><a href="developer-applications.html">Aplikacje</a></li>
+                                <li><a asp-controller="AccountDeveloper" asp-action="Applications">Aplikacje</a></li>
                                 <li><a href="developer-offers.html">Przychodzące oderty</a></li>
                             </ul>
                         </li>
@@ -54,7 +54,7 @@
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">Moje Konto Pracodawca <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="employee-account.html">Edycja konta</a></li>
+                                <li><a asp-controller="AccountEmployee" asp-action="Edit">Edycja konta</a></li>
                                 <li><a href="employee-job-offers.html">Twoje oferty</a></li>
                                 <li><a href="#">Utwórz oferte</a></li>
                                 <li><a href="employee-send-offers.html">Wysłane propozycje</a></li>

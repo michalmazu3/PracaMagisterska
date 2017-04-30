@@ -1,0 +1,32 @@
+﻿@using TeamLeasing.Infrastructure.Extension
+@model List<TeamLeasing.ViewModels.Developer.Account.ApplicationViewModel>
+
+<div id="application">
+    <h2>Aktualnie aplikujesz</h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Oferta</th>
+            <th>Technologia</th>
+
+            <th>Firma</th>
+            <th>Wynagrodzenie</th>
+            <th>Status</th>
+            <th></th>
+        </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td><a asp-controller="SearchJob" asp-action="Job" asp-route-jobId="@item.Id">@item.Title</a></td>
+                <td>@item.Technology</td>
+                <td>@item.Company</td>
+                <td>@item.Price zł</td>
+                <td>@item.StatusForDeveloper.GetAttribute().Name</td>
+                <td><button class="btn-danger">Wycofaj aplikacje</button></td>
+            </tr>
+        }
+      
+
+    </table>
+</div>

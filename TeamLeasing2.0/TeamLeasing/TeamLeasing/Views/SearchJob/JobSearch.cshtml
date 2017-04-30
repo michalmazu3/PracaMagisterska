@@ -1,10 +1,7 @@
 ﻿@model List<TeamLeasing.ViewModels.Job.SearchJob.JobViewModel>
-
 @section scripts{
-
     @*<script src="~/script/switch-banner.js"></script>*@
 }
-
 
 @Html.Partial("_Banner")
 <div id="content">
@@ -17,7 +14,7 @@
             {
                 <tr>
                     <div id="job-item">
-                        <h2 id="title">@item.Title</h2>
+                        <h2 id="title"><a asp-controller="SearchJob" asp-action="Job" asp-route-jobId="@item.Id">@item.Title</a> </h2>
                         <h2 id="price">@item.Price zł</h2>
                         <p>
                             @item.Descritpion
@@ -32,7 +29,6 @@
                 </tr>
 
             }
-
         </table>
     </div>
 </div>

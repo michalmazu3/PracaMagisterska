@@ -8,6 +8,7 @@ using TeamLeasing.Models;
 using System.Collections;
 using Microsoft.EntityFrameworkCore;
 using Org.BouncyCastle.Crypto.Tls;
+using TeamLeasing.Infrastructure.Extension;
 using TeamLeasing.Infrastructure.Helper;
 using TeamLeasing.Services.AppConfigurationService;
 using TeamLeasing.ViewModels;
@@ -28,7 +29,8 @@ namespace TeamLeasing.ViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            SidebarEmployeeViewModel vm = await PrepareViewModel();
+            SidebarEmployeeViewModel vm = TempData.Get<SidebarEmployeeViewModel>("searchjobs")??
+                                           await PrepareViewModel();
             return View("Sidebar", vm);
         }
 

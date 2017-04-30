@@ -79,12 +79,16 @@ namespace TeamLeasing
       
             services.AddSingleton<TeamLeasingSeedData>();
             services.AddSingleton<SeedRoles>();
+            //service
             services.AddSingleton<IConfigurationService, ConfigurationService>();
             services.AddSingleton<IUserService, UserService>();
             services.AddScoped<IUploadService, UploadService>();
             services.AddScoped<IMessage, MessageModel>();
             services.AddScoped<ISendEmail, SendEmail>();
+            //helper
             services.AddScoped<ILoadingDataToSidebarHelper, LoadingDataToSidebarHelper>();
+            services.AddScoped<ISearchHelper, SearchHelper>();
+
              services.AddAutoMapper();
             services.AddLogging();
 

@@ -4,18 +4,32 @@ namespace TeamLeasing.Models
 {
     public static class Enums
     {
-        public enum JobStatus
+
+        public enum JobStatusForDeveloper
         {
-            NoApplications,
-            InProgress,
+            [Display(Name = "Aplikujesz")]
+            Applying,
+            [Display(Name = "Zrezygnowałeś")]
+            Resignation,
+            [Display(Name = "Odrzucono")]
             Rejected,
+            [Display(Name = "Zaakceptowao")]
             Accepted
+        }
+
+        public enum JobStatusForEmployee
+        {
+            [Display(Name = "W toku")]
+            InProgress,
+            [Display(Name = "Zakończono")]
+            Finished,
+            [Display(Name = "Zatwierdzono aplikacje")]
+            Approve
         }
         public enum Level
         {
             Junior,
             Regular,
-
             Senior
         }
          public enum IsFinishedUniversity
@@ -26,6 +40,20 @@ namespace TeamLeasing.Models
             InProgress,
             [Display(Name = "Brak")]
             NotFinished
+        }
+
+        public enum EmploymentType
+        {
+            [Display(Name = "Umowa o prace")]
+            UoP,
+            [Display(Name = "Umowa zlecenie")]
+            UZ,
+            [Display(Name = "Umowa o dzieło")]
+            UoD,
+            [Display(Name = "B2B")]
+            B2B,
+            [Display(Name = "Dowolna")]
+            Any,
         }
 
         public enum OfferStatus

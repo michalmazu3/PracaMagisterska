@@ -67,14 +67,6 @@ namespace TeamLeasing.ViewModels
         public string Photo { get; set; }
         public IFormFile PhotoFile { get; set; }
 
-        //[Display(Name = "Technologia")]
-        //public SelectList Technologies { get; set; }
-        //[Display(Name = "Poziom")]
-        //public SelectList Levels { get; set; }
-        //[Display(Name = "Czy ukończyłeś studia ?")]
-        //public SelectList IsFinishedUnivesity { get; set; }
-        //[Display(Name = "Województwo")]
-        //public SelectList Province { get; set; }
 
         [Required(ErrorMessage = "Wybierz technologie/język")]
         public string ChoosenTechnology { get; set; }

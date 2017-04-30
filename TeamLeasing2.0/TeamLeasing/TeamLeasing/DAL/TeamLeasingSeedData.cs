@@ -1,21 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using TeamLeasing.Infrastructure;
+using TeamLeasing.Infrastructure.Extension;
 using TeamLeasing.Models;
 
 namespace TeamLeasing.DAL
 {
     public class TeamLeasingSeedData
     {
-        private UserManager<User> _manager { get; set; }
+        private OptimizedDbManager _manager { get; set; }
         private TeamLeasingContext _context;
         private readonly RoleManager<IdentityRole> _roleManager;
 
-        public TeamLeasingSeedData(TeamLeasingContext context, UserManager<User> manager, RoleManager<IdentityRole> roleManager)
+        public TeamLeasingSeedData(TeamLeasingContext context, OptimizedDbManager manager, RoleManager<IdentityRole> roleManager)
         {
             _manager = manager;
             _context = context;
@@ -33,9 +37,52 @@ namespace TeamLeasing.DAL
             await Technologies().ContinueWith(async t =>
             {
                 await DeveloperUser();
-                await EmployeeUsers().ContinueWith(async tt => await Jobs());
+                await EmployeeUsers()
+                .ContinueWith(async tt => await Jobs())
+                .ContinueWith(async v=> await DeveloperUserJob());
 
             });
+        }
+
+        private async Task DeveloperUserJob()
+        {
+            if (!_context.DeveloperUserJob.Any())
+            {
+                List<DeveloperUserJob> developerUserJobs = new List<DeveloperUserJob>();
+                developerUserJobs.Add(new DeveloperUserJob()
+                {
+                    DeveloperUser =  _manager.GetDeveloperUser(w=>w.Id==25).Result.FirstOrDefault(),
+                    Job = _manager.GetJob(w=>w.Id==36).Result.FirstOrDefault(),
+                });
+                developerUserJobs.Add(new DeveloperUserJob()
+                {
+                    DeveloperUser = _manager.GetDeveloperUser(w => w.Id == 25).Result.FirstOrDefault(),
+                    Job = _manager.GetJob(w => w.Id == 37).Result.FirstOrDefault(),
+                });
+                developerUserJobs.Add(new DeveloperUserJob()
+                {
+                    DeveloperUser = _manager.GetDeveloperUser(w => w.Id == 25).Result.FirstOrDefault(),
+                    Job = _manager.GetJob(w => w.Id == 38).Result.FirstOrDefault(),
+                });
+                developerUserJobs.Add(new DeveloperUserJob()
+                {
+                    DeveloperUser = _manager.GetDeveloperUser(w => w.Id == 26).Result.FirstOrDefault(),
+                    Job = _manager.GetJob(w => w.Id == 36).Result.FirstOrDefault(),
+                });
+                developerUserJobs.Add(new DeveloperUserJob()
+                {
+                    DeveloperUser = _manager.GetDeveloperUser(w => w.Id == 26).Result.FirstOrDefault(),
+                    Job = _manager.GetJob(w => w.Id == 37).Result.FirstOrDefault(),
+                });
+                developerUserJobs.Add(new DeveloperUserJob()
+                {
+                    DeveloperUser = _manager.GetDeveloperUser(w => w.Id == 26).Result.FirstOrDefault(),
+                    Job = _manager.GetJob(w => w.Id == 38).Result.FirstOrDefault(),
+                });
+
+                await _context.DeveloperUserJob.AddRangeAsync(developerUserJobs);
+                await _context.SaveChangesAsync();
+            }
         }
 
         private async Task DeveloperUser()
@@ -65,6 +112,7 @@ namespace TeamLeasing.DAL
                         Technology = await _context.Technologies.FindAsync(2),
                         Photo = "/image/photo/profil-large.jpg",
                         UserId = _context.Users.Find(user.Id).Id,
+                         
 
                     };
 
@@ -412,9 +460,11 @@ namespace TeamLeasing.DAL
                         Technology = _context.Technologies.Where(t => t.Name.ToLower() == "javascript")
                             .ToList()
                             .FirstOrDefault(),
-                        EmployeeUserId =11
+                        EmployeeUserId =11,
+                        EmploymentType =Enums.EmploymentType.UoP.GetAttribute().Name,
+                        Level = Enums.Level.Regular,
 
-                    },
+            },
                     new Job()
                     {
                         Title = "Administracja znajomość sql",
@@ -425,7 +475,8 @@ namespace TeamLeasing.DAL
                         Technology = _context.Technologies.Where(t => t.Name.ToLower() == "sql")
                             .ToList()
                             .FirstOrDefault(),
-                        EmployeeUserId =11
+                        EmployeeUserId =11,
+                        EmploymentType =Enums.EmploymentType.UoP.GetAttribute().Name
 
 
                     },
@@ -439,7 +490,9 @@ namespace TeamLeasing.DAL
                         Technology = _context.Technologies.Where(t => t.Name.ToLower() == "sql")
                             .ToList()
                             .FirstOrDefault(),
-                        EmployeeUserId =12
+                        EmployeeUserId =12,
+                        EmploymentType =Enums.EmploymentType.B2B.GetAttribute().Name,
+                        Level = Enums.Level.Junior
 
                     },
                     new Job()
@@ -452,7 +505,9 @@ namespace TeamLeasing.DAL
                         Technology = _context.Technologies.Where(t => t.Name.ToLower() == "c#")
                             .ToList()
                             .FirstOrDefault(),
-                        EmployeeUserId = 12
+                        EmployeeUserId = 12,
+                        EmploymentType =Enums.EmploymentType.Any.GetAttribute().Name,
+
 
                     },
                 };

@@ -1,0 +1,60 @@
+﻿@model TeamLeasing.ViewModels.Job.SearchJob.JobViewModel
+
+@{
+    ViewData["Title"] = "Oferta pracy";
+}
+
+<div class="content">
+    <div id="header-container">
+        <h2 id="title">@Model.Title</h2>
+        <h2 id="price">@Model.Price zł</h2>            
+    </div>
+   
+
+    <div id="container-job-offer">
+      
+        <div id="job-description">
+            <p class="lead" ><b><br/>@Html.LabelFor(t=>t.Descritpion)</b></p>
+            <p>
+                @Model.Descritpion
+            </p>
+        
+        </div>
+        <div id="job-detail">
+            <p class="lead"><b>Szczegóły oferty</b></p>
+            <table>
+                <tr>
+                    <td><span>@Html.LabelFor(t=>t.Company)</span> </td>
+                    <td><span>@Model.Company</span> </td>
+                </tr>
+                <tr>
+                    <td><span>@Html.LabelFor(f=>f.City)</span></td>
+                    <td><span>@Model.City</span>  </td>
+                </tr>
+                <tr>
+                    <td><span>@Html.LabelFor(f=>f.Province)</span>  </td>
+                    <td> <span>@Model.Province</span></td>
+                </tr>
+                <tr>
+                    <td><span>@Html.LabelFor(f=>f.Level)</span></td>
+                    <td> <span>@Model.Level</span> </td>
+                </tr>
+                <tr>
+                    <td><span>@Html.LabelFor(f=>f.Technology)</span>  </td>
+                    <td><span>@Model.Technology</span> </td>
+                </tr>
+                <tr>
+                    <td><span>@Html.LabelFor(p=>p.Price)</span></td>
+                    <td> <span>@Model.Price zł</span>  </td>
+                </tr>
+                <tr>
+                    <td><span>@Html.LabelFor(t=>t.EmploymentType)</span> </td>
+                    <td><span>@Model.EmploymentType</span> </td>
+                </tr>
+            </table>             
+        </div> 
+        <div id="aplly-button">
+            <button class="btn-primary btn-lg">Aplikuj</button>  
+        </div>             
+    </div>
+</div>
