@@ -1,0 +1,125 @@
+﻿@using TeamLeasing.Services.AppConfigurationService
+@model TeamLeasing.ViewModels.Employee.Account.CreateJobViewModel
+
+@inject IConfigurationService ConfigurationService
+
+@section Scripts
+{<script src="~/lib/jquery-validation/src/core.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js"></script>
+<script src="~/script/switch-registration.js"></script>
+<script src="~/script/validation-bootstrap.js"></script>
+    <script>
+    tinymce.init({
+        selector: "textarea",
+        height: 500,
+        plugins: [
+            "advlist autolink autosave link image lists charmap print preview hr anchor pagebreak",
+            "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+            "table contextmenu directionality emoticons template textcolor paste fullpage textcolor colorpicker textpattern"
+        ],
+
+        toolbar1: "newdocument fullpage | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | styleselect formatselect fontselect fontsizeselect",
+        toolbar2: "cut copy paste | searchreplace | bullist numlist | outdent indent blockquote | undo redo | link unlink anchor image media code | insertdatetime preview | forecolor backcolor",
+        toolbar3: "table | hr removeformat | subscript superscript | charmap emoticons | print fullscreen | ltr rtl | visualchars visualblocks nonbreaking template pagebreak restoredraft",
+
+        menubar: false,
+        toolbar_items_size: 'small',
+
+        style_formats: [{
+            title: 'Bold text',
+            inline: 'b'
+        }, {
+            title: 'Red text',
+            inline: 'span',
+            styles: {
+                color: '#ff0000'
+            }
+        }, {
+            title: 'Red header',
+            block: 'h1',
+            styles: {
+                color: '#ff0000'
+            }
+        }, {
+            title: 'Example 1',
+            inline: 'span',
+            classes: 'example1'
+        }, {
+            title: 'Example 2',
+            inline: 'span',
+            classes: 'example2'
+        }, {
+            title: 'Table styles'
+        }, {
+            title: 'Table row 1',
+            selector: 'tr',
+            classes: 'tablerow1'
+        }],
+
+        templates: [{
+            title: 'Test template 1',
+            content: 'Test 1'
+        }, {
+            title: 'Test template 2',
+            content: 'Test 2'
+        }],
+        content_css: [
+            '//fast.fonts.net/cssapi/e6dc9b99-64fe-4292-ad98-6974f93cd2a2.css',
+            '//www.tinymce.com/css/codepen.min.css'
+        ]
+    });</script>
+}
+<div id="content-contact">
+    <div id="login" class="account">
+        <h2>Edycja konta</h2>
+        <form class="form-horizontal" method="post" asp-action="CreateJob" asp-controller="AccountEmployee">
+
+            <div class="form-group">
+                <label for="exampleInputPassword1" asp-for="Title" class="col-sm-2"></label>
+                <div class="col-sm-10">
+                    <input type="text" asp-for="Title" class="form-control" id="exampleInputPassword1" placeholder="Telefon">
+                </div>
+                <span asp-validation-for="Title" class="help-block"></span>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1" asp-for="Price" class="col-sm-2"></label>
+                <div class="col-sm-10">
+                    <input type="text" asp-for="Price" class="form-control" id="exampleInputPassword1" placeholder="Miasto">
+                </div>
+                <span asp-validation-for="Price" class="help-block"></span>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1" asp-for="@ConfigurationService.TechnologyService" class="col-sm-2"></label>
+                <div class="col-sm-10">
+                    <select asp-for="ChoosenTechnology" asp-items="@await ConfigurationService.TechnologyService.GetSelectListTechnology()" class="form-control" id="exampleInputPassword1"></select>
+                </div>
+                <span asp-validation-for="ChoosenTechnology" class="help-block"></span>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1" asp-for="ChoosenLevel" class="col-sm-2"></label>
+                <div class="col-sm-10">
+                    <select asp-for="ChoosenLevel" asp-items="@ConfigurationService.LevelSerice.GetSelectListLevel()" class="form-control" id="exampleInputPassword1"></select>
+                </div>
+                <span asp-validation-for="ChoosenLevel" class="help-block"></span>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1" asp-for="@ConfigurationService.EmploymentType" class="col-sm-2"></label>
+                <div class="col-md-10">
+                    <select asp-for="ChoosenEmploymentType" asp-items="@ConfigurationService.EmploymentType.GetSelectListEmploymentType()" class="form-control" id="exampleInputPassword1"></select>
+                </div>
+                <span asp-validation-for="ChoosenEmploymentType" class="help-block"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputPassword1" asp-for="Descritpion" class="col-sm-2"> </label>
+                <div class="col-sm-10">
+                    <textarea class="form-control" asp-for="Descritpion" rows="5" id="comment"></textarea>
+                </div>
+                <span asp-validation-for="Descritpion" class="help-block"></span>
+            </div>
+
+            <button type="submit" class="btn btn-default">Utwórz oferte pracy</button>
+        </form>
+    </div>
+</div>
+

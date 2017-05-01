@@ -1,0 +1,62 @@
+﻿@using TeamLeasing.Infrastructure.Extension
+@using TeamLeasing.ViewModels.Employee.Account
+@model List<TeamLeasing.ViewModels.Employee.Account.JobWithApplicationsviewModel>
+<div id="application">
+    <h2>Twoje oferty</h2>
+    @foreach (var item in Model)
+    {
+        <div id="application-item">
+
+            <div id="application-left">
+                <h4>Szczegóły oferty</h4>
+                <table class="table">
+                    <thead>
+                    <th colspan="2"></th>
+                    </thead>
+                    <tr>
+                        <td>
+                            @Html.LabelFor(i => item.Title)
+                        </td>
+                        <td>
+                            <a asp-controller="SearchJob" asp-action="Job" asp-route-jobId="@item.JobId">
+                                @item.Title
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>@Html.LabelFor(g => item.Price)</td>
+                        <td>@item.Price zł</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.LabelFor(f => item.Status)</td>
+                        <td>@item.Status.GetAttribute().Name</td>
+                    </tr>
+                    <td colspan="2">
+                        <button class="btn-danger">Zamknij oferte</button>
+                    </td>
+                </table>
+
+            </div>
+            <div id="application-right">
+                <h4>Aplikacje do oferty</h4>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Oferta od</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    @foreach (var developer in item.ApplyingDevelopers)
+                {
+                        <tr>
+                            <td><a asp-action="Profile" asp-controller="SearchDeveloper" asp-route-developerId="@developer.Id">@developer.Name @developer.Surname</a>  </td>
+                            <td><button class="btn-success">Akceptuj</button></td>
+                            <td><button class="btn-danger">Odrzuć</button></td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    }
+</div>

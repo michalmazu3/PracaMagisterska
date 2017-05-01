@@ -55,8 +55,8 @@
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">Moje Konto Pracodawca <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a asp-controller="AccountEmployee" asp-action="Edit">Edycja konta</a></li>
-                                <li><a href="employee-job-offers.html">Twoje oferty</a></li>
-                                <li><a href="#">Utwórz oferte</a></li>
+                                <li><a asp-controller="AccountEmployee" asp-action="JobWithApplication">Twoje oferty</a></li>
+                                <li><a  asp-controller="AccountEmployee" asp-action="CreateJob">Utwórz oferte</a></li>
                                 <li><a href="employee-send-offers.html">Wysłane propozycje</a></li>
                             </ul>
                         </li>
@@ -73,8 +73,9 @@
     </div>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-<script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+  
     @RenderSection("scripts", false)
 </body>
 </html>

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TeamLeasing.DAL;
+using TeamLeasing.Services.AppConfigurationService.EmploymentTypeService;
 using TeamLeasing.ViewModels;
 using TeamLeasing.Services.AppConfigurationService.LevelService;
 using TeamLeasing.Services.AppConfigurationService.TechnologyService;
@@ -22,6 +23,7 @@ namespace TeamLeasing.Services.AppConfigurationService
         private ITechnology _technology;
         private IIsFinishedUniversity _isFinishedUniversity;
         private IProvince _province;
+        private IEmploymentType _employmentType;
 
         public ConfigurationService(TeamLeasingContext teamLeasingContext)
         {
@@ -60,6 +62,15 @@ namespace TeamLeasing.Services.AppConfigurationService
             {
                 _isFinishedUniversity = _isFinishedUniversity ?? new IsFinishedUniversity();
                 return _isFinishedUniversity;
+            }
+        }
+
+        public IEmploymentType EmploymentType
+        {
+            get
+            {
+               _employmentType = _employmentType ?? new EmploymentType();
+                return _employmentType;
             }
         }
     }

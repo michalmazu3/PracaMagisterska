@@ -1,5 +1,7 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using AutoMapper;
+using Microsoft.CodeAnalysis;
 using TeamLeasing.DAL;
 using TeamLeasing.Models;
 using TeamLeasing.ViewModels;
@@ -8,6 +10,8 @@ using TeamLeasing.ViewModels.Developer.Account;
 using TeamLeasing.ViewModels.Employee;
 using TeamLeasing.ViewModels.Employee.Account;
 using TeamLeasing.ViewModels.Job.SearchJob;
+using System.Collections.ObjectModel;
+using System.Web.UI.WebControls;
 
 namespace TeamLeasing.Services.Mapping
 {
@@ -64,6 +68,36 @@ namespace TeamLeasing.Services.Mapping
                 .ForMember(p => p.Technology, opt => opt.MapFrom(src => src.Technology.Name))
                 .ForMember(p => p.Company, opt => opt.MapFrom(src => src.EmployeeUser.Company));
 
+            CreateMap<DeveloperUserJob, ApplyingDeveloper>()
+                .ForMember(p=>p.Name, opt=>opt.MapFrom(src=>src.DeveloperUser.Name))
+                .ForMember(p => p.Id, opt => opt.MapFrom(src => src.DeveloperUser.Id))
+                .ForMember(p => p.Surname, opt => opt.MapFrom(src => src.DeveloperUser.Surname));
+
+            CreateMap<Job, JobWithApplicationsviewModel>()
+                .ForMember(p => p.JobId, opt => opt.MapFrom(src => src.Id))
+                .ForMember(p => p.Status, opt => opt.MapFrom(src => src.StatusForDeveloper))
+                .ForMember(p => p.Technology, opt => opt.MapFrom(src => src.Technology.Name))
+                .ForMember(p => p.ApplyingDevelopers, opt => opt.MapFrom(source => Convert(source.DeveloperUsers.ToList())));
+
+
+            CreateMap<CreateJobViewModel, Job>()
+                .ForMember(p=>p.EmploymentType, opt=>opt.MapFrom(src=>src.ChoosenEmploymentType));
+
+        }
+
+        private List<ApplyingDeveloper> Convert(List<DeveloperUserJob> source)
+        {
+            List<ApplyingDeveloper> list = new List<ApplyingDeveloper>();
+            foreach (var item in source)
+            {
+                list.Add(new ApplyingDeveloper()
+                {
+                    Name = item.DeveloperUser.Name,
+                    Surname = item.DeveloperUser.Surname,
+                    Id = item.DeveloperUser.Id
+                });
+            }
+            return list;
         }
     }
 }

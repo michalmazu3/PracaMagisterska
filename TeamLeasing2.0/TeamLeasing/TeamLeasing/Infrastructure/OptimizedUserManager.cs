@@ -37,13 +37,14 @@ namespace TeamLeasing.Infrastructure
         private readonly IHttpContextAccessor _contextAccessor;
         private readonly TeamLeasingContext _teamLeasingContext;
         private readonly IMapper _mapper;
+        private readonly IConfigurationService _configurationService;
 
 
         public OptimizedDbManager(IUserStore<User> store, IOptions<IdentityOptions> optionsAccessor,
             IPasswordHasher<User> passwordHasher, IEnumerable<IUserValidator<User>> userValidators,
             IEnumerable<IPasswordValidator<User>> passwordValidators, ILookupNormalizer keyNormalizer
             , IdentityErrorDescriber errors, IServiceProvider services, ILogger<UserManager<User>> logger,
-            IHttpContextAccessor contextAccessor, TeamLeasingContext teamLeasingContext, IMapper mapper
+            IHttpContextAccessor contextAccessor, TeamLeasingContext teamLeasingContext, IMapper mapper,IConfigurationService configurationService
         )
             : base(store, optionsAccessor, passwordHasher, userValidators,
                 passwordValidators, keyNormalizer, errors, services, logger)
@@ -51,7 +52,7 @@ namespace TeamLeasing.Infrastructure
             _contextAccessor = contextAccessor;
             _teamLeasingContext = teamLeasingContext;
             _mapper = mapper;
-
+            _configurationService = configurationService;
         }
 
         #region DeveloperUser
@@ -74,16 +75,28 @@ namespace TeamLeasing.Infrastructure
         }
         #endregion
 
-        #region DeveloperUser
+        #region EmployeeUser
 
         public async Task<User> FindEmployeeUserByIdAsync(string userId)
         {
             return await Users.Include(c => c.EmployeeUser)
                 .ThenInclude(t => t.Jobs)
+                .ThenInclude(o=>o.DeveloperUsers)
+                .ThenInclude(h=>h.DeveloperUser)
                 .Include(r => r.EmployeeUser)
                 .ThenInclude(h => h.Offers)
+                .Include(t => t.EmployeeUser)
+                .ThenInclude(g=>g.Jobs)
+                .ThenInclude(g=>g.Technology)
                 .FirstOrDefaultAsync(u => u.Id == userId);
         }
+
+        public async Task<List<Job>> GetJobsForEmployee(string userId)
+        {
+            var employee = await this.FindEmployeeUserByIdAsync(userId);
+            return employee.EmployeeUser.Jobs.ToList();
+        }
+
         public async Task<IdentityResult> UpdateEmployeeUser(EditEmployeeAccountViewModel model, string userId)
         {
 
@@ -167,6 +180,30 @@ namespace TeamLeasing.Infrastructure
                  .ToListAsync();
 
             return result.Select(s => s.Job).ToList();
+        }
+
+        public async Task<bool> CreateJob(CreateJobViewModel model, User user)
+        {
+            Job job = _mapper.Map<Job>(model);
+            job.IsHidden = false;
+            job.StatusForEmployee = Enums.JobStatusForEmployee.InProgress;
+            job.EmployeeUser = user.EmployeeUser;
+            var technology = await this.GetTechnology(w => w.Name == model.ChoosenTechnology);
+            job.Technology = technology.FirstOrDefault();
+
+            await _teamLeasingContext.Jobs.AddAsync(job);
+            var result = await _teamLeasingContext.SaveChangesAsync();
+
+            return Convert.ToBoolean(result);
+        }
+
+        #endregion
+
+        #region Technology
+
+        public async Task<List<Technology>> GetTechnology(Expression<Func<Technology, bool>> querry)
+        {
+            return  await _teamLeasingContext.Technologies.Where(querry).ToListAsync();
         }
 
         #endregion

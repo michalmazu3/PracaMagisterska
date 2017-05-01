@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using TeamLeasing.Models;
+using TeamLeasing.Services.AppConfigurationService.EmploymentTypeService;
 using TeamLeasing.Services.AppConfigurationService.IsFinishedUniversityService;
 using TeamLeasing.Services.AppConfigurationService.LevelService;
 using TeamLeasing.Services.AppConfigurationService.ProvinceService;
@@ -20,6 +21,7 @@ namespace TeamLeasing.Services.AppConfigurationService
         ILevel LevelSerice { get; }
         [Display(Name = "Studia")]
         IIsFinishedUniversity IsFinishedUniversityService { get; }
-
+        [Display(Name = "Rodzaj zatrudnienia")]
+        IEmploymentType EmploymentType { get; }
     }
 }

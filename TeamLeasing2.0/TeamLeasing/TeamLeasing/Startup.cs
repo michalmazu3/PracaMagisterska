@@ -19,6 +19,7 @@ using TeamLeasing.Infrastructure.Helper;
 using TeamLeasing.Models;
 using TeamLeasing.Services;
 using TeamLeasing.Services.AppConfigurationService;
+using TeamLeasing.Services.AppConfigurationService.EmploymentTypeService;
 using TeamLeasing.Services.Mail;
 using TeamLeasing.Services.MailService;
 using TeamLeasing.Services.UploadService;
@@ -85,6 +86,7 @@ namespace TeamLeasing
             services.AddScoped<IUploadService, UploadService>();
             services.AddScoped<IMessage, MessageModel>();
             services.AddScoped<ISendEmail, SendEmail>();
+            services.AddScoped<IEmploymentType, EmploymentType>();
             //helper
             services.AddScoped<ILoadingDataToSidebarHelper, LoadingDataToSidebarHelper>();
             services.AddScoped<ISearchHelper, SearchHelper>();
