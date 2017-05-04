@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Org.BouncyCastle.Bcpg;
 using TeamLeasing.DAL;
 using TeamLeasing.Infrastructure;
 using TeamLeasing.Infrastructure.Extension;
 using TeamLeasing.Infrastructure.Helper;
+using TeamLeasing.ViewModels;
 using TeamLeasing.ViewModels.Developer;
 using TeamLeasing.ViewModels.Job;
 using TeamLeasing.ViewModels.Job.SearchJob;
@@ -86,14 +89,44 @@ namespace TeamLeasing.Models
             });
 
         }
-
-        public async Task<IActionResult> Job(int jobId)
+        [Route("[action]/{jobId}")]
+        public async Task<IActionResult> Job(int jobId, bool withHidden = false)
         {
-            var job = await _manager.GetJob(w => w.Id == jobId);
+            var job = await _manager.GetJob(w => w.Id == jobId, withHidden);
             var vm = _mapper.Map<JobViewModel>(job.FirstOrDefault());
 
             return View("JobDetails", vm);
 
+        }
+
+        [Authorize(Roles = "Developer")]
+        [HttpPost]
+        [Route("[action]/{jobId}")]
+        public async Task<IActionResult> ApplyForJob(int jobId)
+        {
+            var userId = _manager.GetUserId(HttpContext.User);
+            var result = await _manager.ApplyForJob(userId, jobId);
+
+            if (result == 0)
+            {
+                return View("_Error", new ErrorViewModel()
+                {
+                    Message = "Aplikcja na tą oferte pracy nie powiodła się z przyczyn niewyjaśnionych",
+                    ReturnUrl = UrlHelperExtensions.Action(Url, "Jobs", "SearchJob"),
+                });
+              
+            }
+            else
+            {
+                ViewBag.ApplyForJob = result == 1
+                    ? "Gratulacje, wysłałeś aplikacje na to stanowisko!"
+                    : "Już wysłałes aplikacje na to stanowisko!";
+                var job = await _manager.GetJob(w => w.Id == jobId);
+                var vm = _mapper.Map<JobViewModel>(job.FirstOrDefault());
+
+                return View("JobDetails", vm);
+
+            }
         }
 
 

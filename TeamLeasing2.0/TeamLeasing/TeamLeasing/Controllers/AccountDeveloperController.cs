@@ -22,6 +22,7 @@ using TeamLeasing.Services.UploadService;
 using TeamLeasing.ViewModels;
 using TeamLeasing.ViewModels.Developer;
 using TeamLeasing.ViewModels.Developer.Account;
+using TeamLeasing.ViewModels.Job.SearchJob;
 
 namespace TeamLeasing.Controllers
 {
@@ -37,7 +38,7 @@ namespace TeamLeasing.Controllers
         private readonly IHostingEnvironment _environment;
 
         public AccountDeveloperController(TeamLeasingContext teamLeasingContext,
-            OptimizedDbManager manager,IHttpContextAccessor contextAccessor, IMapper mapper,
+            OptimizedDbManager manager, IHttpContextAccessor contextAccessor, IMapper mapper,
             IUploadService uploadService, IHostingEnvironment environment)
         {
             this._teamLeasingContext = teamLeasingContext;
@@ -52,22 +53,22 @@ namespace TeamLeasing.Controllers
         [Authorize(Roles = "Developer")]
         public async Task<IActionResult> Edit()
         {
-           EditDeveloperAccountViewModel vm = await GetCurrentUserFile();
+            EditDeveloperAccountViewModel vm = await GetCurrentUserFile();
 
             return View("EditProfile", vm);
         }
 
-      
+
         private async Task<EditDeveloperAccountViewModel> GetCurrentUserFile()
         {
             var userId = _manager.GetUserId(HttpContext.User);
             var user = await _manager.FindDeveloperUserByIdAsync(userId);
 
-        
+
             return new EditDeveloperAccountViewModel()
             {
-                Cv = new Cv(){CvPath = user.DeveloperUser.Cv },
-                Photo = new Photo(){PhotoPath = user.DeveloperUser.Photo},
+                Cv = new Cv() { CvPath = user.DeveloperUser.Cv },
+                Photo = new Photo() { PhotoPath = user.DeveloperUser.Photo },
 
             };
         }
@@ -121,8 +122,8 @@ namespace TeamLeasing.Controllers
 
             developerUser.Experience = informationm.Experience == null || informationm.Experience < 0 ? developerUser.Experience : (int)informationm.Experience;
             developerUser.City = informationm.City ?? developerUser.City;
-            developerUser.Province = string.IsNullOrWhiteSpace(informationm.ChoosenProvince)? developerUser.Province 
-                                                                                  : informationm.ChoosenProvince ;
+            developerUser.Province = string.IsNullOrWhiteSpace(informationm.ChoosenProvince) ? developerUser.Province
+                                                                                  : informationm.ChoosenProvince;
 
             developerUser.IsFinishedUniversity = string.IsNullOrEmpty(informationm.ChoosenIsFinishedUnivesity)
                                                         ? developerUser.IsFinishedUniversity
@@ -143,7 +144,6 @@ namespace TeamLeasing.Controllers
         [HttpPost]
         [Authorize(Roles = "Developer")]
         [Route("[action]")]
-
         public async Task<IActionResult> UploadCV(IFormFile cvFile)
         {
             if (ModelState.IsValid)
@@ -174,10 +174,11 @@ namespace TeamLeasing.Controllers
             return RedirectToAction("Edit", "AccountDeveloper");
 
         }
+
+
         [HttpPost]
         [Authorize(Roles = "Developer")]
         [Route("[action]")]
-
         public async Task<IActionResult> UploadPhoto(IFormFile photoFile)
         {
             if (ModelState.IsValid)
@@ -207,6 +208,8 @@ namespace TeamLeasing.Controllers
             return RedirectToAction("Edit", "AccountDeveloper");
 
         }
+
+
         [Authorize(Roles = "Developer")]
         [Route("[action]")]
         public async Task<IActionResult> DeletePhoto()
@@ -227,7 +230,7 @@ namespace TeamLeasing.Controllers
                 return View("_Error", new ErrorViewModel()
                 {
                     Message = e.Message,
-                    ReturnUrl = UrlHelperExtensions.Action(Url, "Edit","AccountDeveloper"),
+                    ReturnUrl = UrlHelperExtensions.Action(Url, "Edit", "AccountDeveloper"),
                 });
             }
 
@@ -240,10 +243,53 @@ namespace TeamLeasing.Controllers
         public async Task<IActionResult> Applications()
         {
             var userId = _manager.GetUserId(HttpContext.User);
-            var jobList = await _manager.GetJobsByUserId(userId, s => s.DeveloperUser.UserId == userId);
+            var jobList = await _manager.GetJobsForDeveloperByUserId(userId);
             var vm = _mapper.Map<List<ApplicationViewModel>>(jobList);
 
             return View("Application", vm);
         }
+
+        [Route("[action]/{jobId}")]
+        [Authorize(Roles = "Developer")]
+        public async Task<IActionResult> Resign(int jobId)
+        {
+            var userId = _manager.GetUserId(HttpContext.User);
+            var result = await _manager.ResignJobApplication(userId, jobId);
+            if (result != 0 )
+            {
+                return RedirectToAction("Applications", "AccountDeveloper");
+            }
+            else
+            {
+                return View("_Error", new ErrorViewModel()
+                {
+                    ReturnUrl = UrlHelperExtensions.Action(Url, "Applications", "AccountDeveloper"),
+                    Message = "Wycofanie aplikacji nie powiodło się z przyczyn niewyjaśnionych",
+                });
+            }
+
+        }
+
+        [Authorize(Roles = "Developer")]
+        [HttpPost]
+        [Route("[action]/{jobId}")]
+        public async Task<IActionResult> Apply(int jobId)
+        {
+            var userId = _manager.GetUserId(HttpContext.User);
+            var result = await _manager.ApplyForJob(userId, jobId);
+            if (result==1)
+            {
+                return RedirectToAction("Applications", "AccountDeveloper");
+            }
+            else
+            {
+                return View("_Error", new ErrorViewModel()
+                {
+                    Message = "Aplikcja na tą oferte pracy nie powiodła się z przyczyn niewyjaśnionych",
+                    ReturnUrl = UrlHelperExtensions.Action(Url, "Jobs", "SearchJob"),
+                });
+            }
+        }
+
     }
 }

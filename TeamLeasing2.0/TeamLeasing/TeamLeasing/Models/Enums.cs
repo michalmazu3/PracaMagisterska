@@ -14,7 +14,9 @@ namespace TeamLeasing.Models
             [Display(Name = "Odrzucono")]
             Rejected,
             [Display(Name = "Zaakceptowao")]
-            Accepted
+            Accepted,
+            [Display(Name = "Zakończono oferte")]
+            Finished
         }
 
         public enum JobStatusForEmployee

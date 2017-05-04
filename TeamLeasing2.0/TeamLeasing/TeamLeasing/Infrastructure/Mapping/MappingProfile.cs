@@ -12,6 +12,7 @@ using TeamLeasing.ViewModels.Employee.Account;
 using TeamLeasing.ViewModels.Job.SearchJob;
 using System.Collections.ObjectModel;
 using System.Web.UI.WebControls;
+using TeamLeasing.Infrastructure.Extension;
 
 namespace TeamLeasing.Services.Mapping
 {
@@ -64,9 +65,16 @@ namespace TeamLeasing.Services.Mapping
             CreateMap<EditEmployeeAccountViewModel, User>()
                 .ForMember(p => p.PhoneNumber, opt => opt.MapFrom(src => src.Phone));
 
-            CreateMap<Job, ApplicationViewModel>()
-                .ForMember(p => p.Technology, opt => opt.MapFrom(src => src.Technology.Name))
-                .ForMember(p => p.Company, opt => opt.MapFrom(src => src.EmployeeUser.Company));
+            CreateMap<DeveloperUserJob, ApplicationViewModel>()
+                .ForMember(p => p.Technology, opt => opt.MapFrom(src => src.Job.Technology.Name))
+                .ForMember(p => p.Company, opt => opt.MapFrom(src => src.Job.EmployeeUser.Company))
+                .ForMember(p => p.Price, opt => opt.MapFrom(src => src.Job.Price))
+                .ForMember(p => p.Title, opt => opt.MapFrom(src => src.Job.Title))
+                .ForMember(p => p.Id, opt => opt.MapFrom(src => src.JobId))
+                .ForMember(p => p.StatusForDeveloper, opt => opt.MapFrom(src => src.StatusForDeveloper));
+
+
+            //.ForMember(p=>p.StatusForDeveloper, opt=>opt.MapFrom(src=>src.DeveloperUsers.Where(w=>w.DeveloperUserId==src. )));
 
             CreateMap<DeveloperUserJob, ApplyingDeveloper>()
                 .ForMember(p=>p.Name, opt=>opt.MapFrom(src=>src.DeveloperUser.Name))
@@ -75,13 +83,14 @@ namespace TeamLeasing.Services.Mapping
 
             CreateMap<Job, JobWithApplicationsviewModel>()
                 .ForMember(p => p.JobId, opt => opt.MapFrom(src => src.Id))
-                .ForMember(p => p.Status, opt => opt.MapFrom(src => src.StatusForDeveloper))
+                .ForMember(p => p.Status, opt => opt.MapFrom(src => src.StatusForEmployee))
                 .ForMember(p => p.Technology, opt => opt.MapFrom(src => src.Technology.Name))
                 .ForMember(p => p.ApplyingDevelopers, opt => opt.MapFrom(source => Convert(source.DeveloperUsers.ToList())));
 
 
             CreateMap<CreateJobViewModel, Job>()
-                .ForMember(p=>p.EmploymentType, opt=>opt.MapFrom(src=>src.ChoosenEmploymentType));
+                .ForMember(p=>p.EmploymentType, opt=>opt.MapFrom(src=>src.ChoosenEmploymentType??""))
+                .ForMember(p=>p.Descritpion, opt=>opt.MapFrom(src=>src.Descritpion.Between("<body>","</body>")));
 
         }
 

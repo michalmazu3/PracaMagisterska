@@ -17,7 +17,7 @@
                         <h2 id="title"><a asp-controller="SearchJob" asp-action="Job" asp-route-jobId="@item.Id">@item.Title</a> </h2>
                         <h2 id="price">@item.Price zł</h2>
                         <p>
-                            @item.Descritpion
+                            @Html.Raw((item.Descritpion))
                         </p>
                         <p class="lead">
                             @item.Company

@@ -27,6 +27,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Org.BouncyCastle.Bcpg;
 using TeamLeasing.ViewModels.Employee;
 using TeamLeasing.ViewModels.Employee.Account;
 
@@ -44,7 +45,7 @@ namespace TeamLeasing.Infrastructure
             IPasswordHasher<User> passwordHasher, IEnumerable<IUserValidator<User>> userValidators,
             IEnumerable<IPasswordValidator<User>> passwordValidators, ILookupNormalizer keyNormalizer
             , IdentityErrorDescriber errors, IServiceProvider services, ILogger<UserManager<User>> logger,
-            IHttpContextAccessor contextAccessor, TeamLeasingContext teamLeasingContext, IMapper mapper,IConfigurationService configurationService
+            IHttpContextAccessor contextAccessor, TeamLeasingContext teamLeasingContext, IMapper mapper, IConfigurationService configurationService
         )
             : base(store, optionsAccessor, passwordHasher, userValidators,
                 passwordValidators, keyNormalizer, errors, services, logger)
@@ -56,7 +57,7 @@ namespace TeamLeasing.Infrastructure
         }
 
         #region DeveloperUser
-        
+
         public async Task<User> FindDeveloperUserByIdAsync(string userId)
         {
             return await Users.Include(c => c.DeveloperUser)
@@ -67,8 +68,8 @@ namespace TeamLeasing.Infrastructure
         {
             return await _teamLeasingContext.DeveloperUsers
                 .Include(t => t.Technology)
-                .Include(f=>f.Jobs)
-                .Include(f=>f.Jobs)
+                .Include(f => f.Jobs)
+                .Include(f => f.Jobs)
                 .Where(querry ?? (w => true))
                 .ToListAsync();
 
@@ -81,21 +82,17 @@ namespace TeamLeasing.Infrastructure
         {
             return await Users.Include(c => c.EmployeeUser)
                 .ThenInclude(t => t.Jobs)
-                .ThenInclude(o=>o.DeveloperUsers)
-                .ThenInclude(h=>h.DeveloperUser)
+                .ThenInclude(o => o.DeveloperUsers)
+                .ThenInclude(h => h.DeveloperUser)
                 .Include(r => r.EmployeeUser)
                 .ThenInclude(h => h.Offers)
                 .Include(t => t.EmployeeUser)
-                .ThenInclude(g=>g.Jobs)
-                .ThenInclude(g=>g.Technology)
+                .ThenInclude(g => g.Jobs)
+                .ThenInclude(g => g.Technology)
                 .FirstOrDefaultAsync(u => u.Id == userId);
         }
 
-        public async Task<List<Job>> GetJobsForEmployee(string userId)
-        {
-            var employee = await this.FindEmployeeUserByIdAsync(userId);
-            return employee.EmployeeUser.Jobs.ToList();
-        }
+
 
         public async Task<IdentityResult> UpdateEmployeeUser(EditEmployeeAccountViewModel model, string userId)
         {
@@ -158,28 +155,34 @@ namespace TeamLeasing.Infrastructure
         #endregion
 
         #region Job
-       
-        public async Task<List<Job>> GetJob(Expression<Func<Job, bool>> querry = null)
+
+        public async Task<List<Job>> GetJobsForEmployee(string userId)
+        {
+            var employee = await this.FindEmployeeUserByIdAsync(userId);
+            return employee.EmployeeUser.Jobs.ToList();
+        }
+
+        public async Task<List<Job>> GetJob(Expression<Func<Job, bool>> querry = null, bool isHidden = false)
         {
             return await _teamLeasingContext.Jobs
                 .Include(i => i.Technology)
                 .Include(j => j.EmployeeUser)
+                .Include(i => i.DeveloperUsers)
+                .ThenInclude(j => j.DeveloperUser)
+
+                .Where(w => isHidden ? w.IsHidden == false || w.IsHidden : w.IsHidden == false)
                 .Where(querry ?? (w => true))
                 .ToListAsync();
         }
 
-        public async Task<List<Job>> GetJobsByUserId(string userId, Expression<Func<DeveloperUserJob, bool>> querry)
+        public async Task<List<DeveloperUserJob>> GetJobsForDeveloperByUserId(string userId)
         {
-            var result = await _teamLeasingContext.DeveloperUserJob
-                .Include(i => i.Job)
-                .ThenInclude(j => j.EmployeeUser)
-                .Include(p => p.Job)
-                .ThenInclude(v => v.Technology)
-                .Where(f=>f.Job.IsHidden==false)
-                .Where(querry)
-                 .ToListAsync();
 
-            return result.Select(s => s.Job).ToList();
+            // var jobsDao = await this.GetJob(isHidden: true);
+            //return jobsDao.Where(w => w.DeveloperUsers.Any(f => f.DeveloperUser.UserId == userId)).ToList();
+            var developerUserJobDao = await this.GetDeveloperUsersJob(w => w.DeveloperUser.UserId == userId);
+            return developerUserJobDao;
+
         }
 
         public async Task<bool> CreateJob(CreateJobViewModel model, User user)
@@ -197,13 +200,68 @@ namespace TeamLeasing.Infrastructure
             return Convert.ToBoolean(result);
         }
 
+        public async Task<int> FinishJob(int id)
+        {
+            var jobDao = await this.GetJob(w => w.Id == id);
+            var job = jobDao.FirstOrDefault();
+
+            job.IsHidden = true;
+            job.StatusForEmployee = Enums.JobStatusForEmployee.Finished;
+            foreach (var item in job.DeveloperUsers)
+            {
+                item.StatusForDeveloper = Enums.JobStatusForDeveloper.Finished;
+            }
+
+            _teamLeasingContext.Update(job);
+            return await _teamLeasingContext.SaveChangesAsync();
+        }
+
+        public async Task<int> ResignJobApplication(string userId, int jobId)
+        {
+            var jobDao = await this.GetDeveloperUsersJob(w => w.DeveloperUser.UserId == userId && w.Job.Id == jobId);
+            var jobToResign = jobDao.FirstOrDefault();
+            jobToResign.StatusForDeveloper = Enums.JobStatusForDeveloper.Resignation;
+            var r = _teamLeasingContext.DeveloperUserJob.Update(jobToResign);
+            var result = await _teamLeasingContext.SaveChangesAsync();
+            return result;
+        }
+
+        public async Task<int> ApplyForJob(string userId, int jobId)
+        {
+            var developer = await this.GetDeveloperUser(w => w.UserId == userId)
+                                      .ContinueWith(t => t.Result.First());
+          
+            if (!developer.Jobs.Any(a => a.JobId == jobId &&
+                                        a.StatusForDeveloper == Enums.JobStatusForDeveloper.Applying))
+                if (!developer.Jobs.Any(a => a.JobId == jobId))
+                {
+                    DeveloperUserJob developerUserJob = new DeveloperUserJob()
+                    {
+                        DeveloperUserId = developer.Id,
+                        JobId = jobId,
+                        StatusForDeveloper = Enums.JobStatusForDeveloper.Applying
+                    };
+                    await _teamLeasingContext.DeveloperUserJob.AddAsync(developerUserJob);
+                    return await _teamLeasingContext.SaveChangesAsync();
+                }
+                else
+                {
+                    developer.Jobs.First(f => f.JobId == jobId).StatusForDeveloper =
+                        Enums.JobStatusForDeveloper.Applying;
+                    return await _teamLeasingContext.SaveChangesAsync();
+                }
+
+            return -1;
+            // return await _teamLeasingContext.SaveChangesAsync();
+        }
+
         #endregion
 
         #region Technology
 
         public async Task<List<Technology>> GetTechnology(Expression<Func<Technology, bool>> querry)
         {
-            return  await _teamLeasingContext.Technologies.Where(querry).ToListAsync();
+            return await _teamLeasingContext.Technologies.Where(querry).ToListAsync();
         }
 
         #endregion
@@ -218,8 +276,18 @@ namespace TeamLeasing.Infrastructure
 
             return result;
         }
-        
+
         #region private
+
+        private async Task<List<DeveloperUserJob>> GetDeveloperUsersJob(Expression<Func<DeveloperUserJob, bool>> querry)
+        {
+            return await _teamLeasingContext.DeveloperUserJob
+                .Include(i => i.DeveloperUser)
+                .Include(i => i.Job)
+                .ThenInclude(i => i.EmployeeUser)
+                .Where(querry ?? (w => true)).ToListAsync();
+        }
+
 
         private async Task<bool> AddEmployeeuserToDb(RegistrationEmployeeViewModel model, string id)
         {
@@ -244,6 +312,6 @@ namespace TeamLeasing.Infrastructure
         }
 
         #endregion
-        
+
     }
 }

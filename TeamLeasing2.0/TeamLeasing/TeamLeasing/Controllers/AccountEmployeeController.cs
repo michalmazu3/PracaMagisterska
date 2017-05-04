@@ -97,5 +97,24 @@ namespace TeamLeasing.Controllers
             }
         }
 
+        [HttpPost]
+        [Authorize(Roles = "Employee")]
+        public async Task<IActionResult> FinishJob(int jobId)
+        {
+           var result = await _manager.FinishJob(jobId);
+            if (result != 0)
+            {
+                return RedirectToAction("JobWithApplication", "AccountEmployee");
+            }
+            else
+            {
+                return View("_Error", new ErrorViewModel()
+                {
+                    Message = "Zakończenie oferty nz przyczyn niewyjaśnionych niepowiodło się",
+                    ReturnUrl = UrlHelperExtensions.Action(Url,"JobWithApplication","AccountEmployee"),
+                });
+            }
+        }
+
     }
 }

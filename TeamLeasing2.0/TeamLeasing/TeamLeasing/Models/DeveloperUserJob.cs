@@ -2,6 +2,8 @@
 {
     public class DeveloperUserJob
     {
+        public Enums.JobStatusForDeveloper StatusForDeveloper { get; set; }
+
         public int DeveloperUserId { get; set; }
         public virtual DeveloperUser DeveloperUser { get; set; }
 

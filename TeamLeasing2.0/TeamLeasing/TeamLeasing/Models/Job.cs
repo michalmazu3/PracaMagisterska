@@ -25,7 +25,7 @@ namespace TeamLeasing.Models
 
         public bool IsHidden { get; set; }
 
-        public Enums.JobStatusForDeveloper StatusForDeveloper { get; set; }
+        
         public Enums.JobStatusForEmployee StatusForEmployee { get; set; }
         public virtual Technology Technology { get; set; }
 

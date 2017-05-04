@@ -1,4 +1,5 @@
 ﻿@using TeamLeasing.Infrastructure.Extension
+@using TeamLeasing.Models
 @using TeamLeasing.ViewModels.Employee.Account
 @model List<TeamLeasing.ViewModels.Employee.Account.JobWithApplicationsviewModel>
 <div id="application">
@@ -18,7 +19,7 @@
                             @Html.LabelFor(i => item.Title)
                         </td>
                         <td>
-                            <a asp-controller="SearchJob" asp-action="Job" asp-route-jobId="@item.JobId">
+                            <a asp-controller="SearchJob" asp-action="Job" asp-route-jobId="@item.JobId" asp-route-withHidden="true">
                                 @item.Title
                             </a>
                         </td>
@@ -32,7 +33,13 @@
                         <td>@item.Status.GetAttribute().Name</td>
                     </tr>
                     <td colspan="2">
-                        <button class="btn-danger">Zamknij oferte</button>
+                        @if (item.Status == Enums.JobStatusForEmployee.InProgress)
+                        {
+                            <form asp-action="FinishJob" asp-controller="AccountEmployee"  asp-route-jobId="@item.JobId">
+                                <button   class="btn-danger">Zamknij oferte</button>
+                            </form>
+                        }
+
                     </td>
                 </table>
 
@@ -51,8 +58,8 @@
                 {
                         <tr>
                             <td><a asp-action="Profile" asp-controller="SearchDeveloper" asp-route-developerId="@developer.Id">@developer.Name @developer.Surname</a>  </td>
-                            <td><button class="btn-success">Akceptuj</button></td>
-                            <td><button class="btn-danger">Odrzuć</button></td>
+                            <td><button @if (item.Status != Enums.JobStatusForEmployee.InProgress) {<text>disabled class="btn"</text> }else{ <text>class="btn-success"</text> } >Akceptuj</button></td>
+                            <td><button  @if (item.Status != Enums.JobStatusForEmployee.InProgress) {<text>disabled class="btn"</text> }else{ <text>class="btn-danger"</text> } >Odrzuć</button></td>
                         </tr>
                     }
                 </table>

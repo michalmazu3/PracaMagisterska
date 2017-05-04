@@ -1,32 +1,44 @@
 ﻿@using TeamLeasing.Infrastructure.Extension
+@using TeamLeasing.Models
 @model List<TeamLeasing.ViewModels.Developer.Account.ApplicationViewModel>
 
 <div id="application">
     <h2>Aktualnie aplikujesz</h2>
     <table class="table">
         <thead>
-        <tr>
-            <th>Oferta</th>
-            <th>Technologia</th>
-
-            <th>Firma</th>
-            <th>Wynagrodzenie</th>
-            <th>Status</th>
-            <th></th>
-        </tr>
+            <tr>
+                <th>Oferta</th>
+                <th>Technologia</th>
+                <th>Firma</th>
+                <th>Wynagrodzenie</th>
+                <th>Status</th>
+                <th></th>
+            </tr>
         </thead>
         @foreach (var item in Model)
         {
             <tr>
-                <td><a asp-controller="SearchJob" asp-action="Job" asp-route-jobId="@item.Id">@item.Title</a></td>
+                <td><a asp-controller="SearchJob" asp-action="Job" asp-route-jobId="@item.Id" asp-route-withHidden="true">@item.Title</a></td>
                 <td>@item.Technology</td>
                 <td>@item.Company</td>
                 <td>@item.Price zł</td>
                 <td>@item.StatusForDeveloper.GetAttribute().Name</td>
-                <td><button class="btn-danger">Wycofaj aplikacje</button></td>
+                <td>
+                    @if (item.StatusForDeveloper == Enums.JobStatusForDeveloper.Resignation)
+                    {
+                        <form asp-controller="AccountDeveloper" asp-action="Apply" asp-route-jobId="@item.Id" method="post">
+                            <button class="btn-primary">Aplikuj ponownie</button>
+                        </form>
+                    }
+                    @if (item.StatusForDeveloper == Enums.JobStatusForDeveloper.Applying)
+                {
+                        <form asp-controller="AccountDeveloper" asp-action="Resign" asp-route-jobId="@item.Id" method="post">
+                            <button class="btn-danger">Wycofaj aplikacje</button>
+                        </form>
+                    }
+                </td>
             </tr>
         }
-      
 
     </table>
 </div>
