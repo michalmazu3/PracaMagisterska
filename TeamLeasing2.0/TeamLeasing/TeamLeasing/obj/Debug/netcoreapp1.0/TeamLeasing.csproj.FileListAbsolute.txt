@@ -2,3 +2,4 @@ D:\repozutorium\Praca Magisterska\TeamLeasing2.0\TeamLeasing\TeamLeasing\bin\Deb
 D:\repozutorium\Praca Magisterska\TeamLeasing2.0\TeamLeasing\TeamLeasing\bin\Debug\netcoreapp1.0\TeamLeasing.runtimeconfig.json
 D:\repozutorium\Praca Magisterska\TeamLeasing2.0\TeamLeasing\TeamLeasing\bin\Debug\netcoreapp1.0\TeamLeasing.runtimeconfig.dev.json
 D:\repozutorium\Praca Magisterska\TeamLeasing2.0\TeamLeasing\TeamLeasing\obj\Debug\netcoreapp1.0\TeamLeasing.AssemblyInfo.cs
+D:\repozutorium\Praca Magisterska\TeamLeasing2.0\TeamLeasing\TeamLeasing\obj\Debug\netcoreapp1.0\TeamLeasing.csprojResolveAssemblyReference.cache

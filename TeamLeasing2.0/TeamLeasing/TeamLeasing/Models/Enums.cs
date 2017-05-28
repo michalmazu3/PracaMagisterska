@@ -7,9 +7,9 @@ namespace TeamLeasing.Models
 
         public enum JobStatusForDeveloper
         {
-            [Display(Name = "Aplikujesz")]
+            [Display(Name = "Do rozpatrzenia")]
             Applying,
-            [Display(Name = "Zrezygnowałeś")]
+            [Display(Name = "Rezygnacja")]
             Resignation,
             [Display(Name = "Odrzucono")]
             Rejected,
@@ -18,7 +18,19 @@ namespace TeamLeasing.Models
             [Display(Name = "Zakończono oferte")]
             Finished
         }
-
+        public enum OfferStatusForDeveloper
+        {
+            [Display(Name = "Nowa")]
+            New,
+            [Display(Name = "Rezygnacja")]
+            Resignation,
+            [Display(Name = "Wycofano")]
+            Canceled,
+            [Display(Name = "Zaakceptowao")]
+            Accepted,
+            [Display(Name = "W trakcie negocjacji")]
+            Negotiations
+        }
         public enum JobStatusForEmployee
         {
             [Display(Name = "W toku")]
@@ -28,10 +40,27 @@ namespace TeamLeasing.Models
             [Display(Name = "Zatwierdzono aplikacje")]
             Approve
         }
+
+        public enum OfferStatusForEmployee
+        {
+            [Display(Name = "W toku")]
+            InProgress,
+            [Display(Name = "Zakończono")]
+            Finished,
+            [Display(Name = "Zaakceptowao")]
+            Accepted,
+            [Display(Name = "W trakcie negocjacji")]
+            Negotiations,
+           [Display(Name = "Odrzucono")]
+            Rejected
+        }
         public enum Level
         {
+            [Display(Name = "Junior")]
             Junior,
+            [Display (Name = "Regular")]
             Regular,
+            [Display(Name = "Senior")]
             Senior
         }
          public enum IsFinishedUniversity

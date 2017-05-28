@@ -1,0 +1,62 @@
+﻿@model List<TeamLeasing.ViewModels.Developer.RecivedOfferViewModel>
+<div id="application">
+    <h2>Przychodzące ofert</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>@Html.LabelFor(s => s.First().Company)</th>
+                <th>@Html.LabelFor(s => s.First().ConstSalary)</th>
+                <th>@Html.LabelFor(s => s.First().Technology)</th>
+                <th>@Html.LabelFor(s => s.First().Level)</th>
+                <th>@Html.LabelFor(s => s.First().EmploymentType)</th>
+                <th>Status</th>
+                <th></th>
+                <th></th>
+                <th></th>
+
+            </tr>
+        </thead>
+
+        @foreach (var item in Model)
+            {
+            <tr>
+
+                <td>@item.Company</td>
+                @if (item.ConstSalary != null)
+                {
+                    <td>@item.ConstSalary</td>
+                }
+                else
+                {
+                    <td>
+                        @Html.LabelFor(l => item.MinSalary) @item.MinSalary <br />
+                        @Html.LabelFor(l => item.MaxSalary) @item.MaxSalary
+                    </td>
+                }
+
+
+                <td>@item.Technology</td>
+                <td>@item.Level</td>
+                <td>@item.EmploymentType</td>
+                <td>@item.StatusForEmployee</td>
+                <td><button class="btn-danger">Odrzuć</button></td>
+                <td><button class="btn-success">Zaakceptuj</button></td>
+                <td><button class="btn-info">Negocjuj</button></td>
+
+            </tr>
+            if (!string.IsNullOrEmpty(item.AdditionalInformation))
+            {
+                <tr>
+                    <td>
+                      
+                    </td>
+                    <td colspan="7">
+                        @item.AdditionalInformation
+                    </td>
+                </tr>
+              
+            }
+        }
+
+    </table>
+</div>

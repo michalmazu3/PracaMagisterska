@@ -123,53 +123,6 @@ namespace TeamLeasing.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("TeamLeasing.Models.Developer", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<DateTime>("BirthDate");
-
-                    b.Property<string>("City")
-                        .IsRequired();
-
-                    b.Property<string>("Cv");
-
-                    b.Property<string>("Email")
-                        .IsRequired();
-
-                    b.Property<int>("Experience");
-
-                    b.Property<int>("IsFinishedUniversity");
-
-                    b.Property<int>("Level");
-
-                    b.Property<string>("Name")
-                        .IsRequired();
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasMaxLength(50);
-
-                    b.Property<string>("Photo");
-
-                    b.Property<string>("Province")
-                        .IsRequired();
-
-                    b.Property<string>("Surname")
-                        .IsRequired();
-
-                    b.Property<int?>("TechnologyId");
-
-                    b.Property<string>("University");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("TechnologyId");
-
-                    b.ToTable("Developers");
-                });
-
             modelBuilder.Entity("TeamLeasing.Models.DeveloperUser", b =>
                 {
                     b.Property<int>("Id")
@@ -320,31 +273,59 @@ namespace TeamLeasing.Migrations
                     b.ToTable("Messages");
                 });
 
+            modelBuilder.Entity("TeamLeasing.Models.Negotiation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("AdditionalInformation");
+
+                    b.Property<string>("EmploymentType");
+
+                    b.Property<int>("OfferId");
+
+                    b.Property<int>("Salary");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OfferId")
+                        .IsUnique();
+
+                    b.ToTable("Negotiation");
+                });
+
             modelBuilder.Entity("TeamLeasing.Models.Offer", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("DeveloperId");
+                    b.Property<string>("AdditionalInformation");
 
-                    b.Property<int?>("DeveloperUserId");
+                    b.Property<decimal?>("ConstSalary");
 
-                    b.Property<int?>("EmployeeUserId");
+                    b.Property<int>("DeveloperUserId");
+
+                    b.Property<int>("EmployeeUserId");
+
+                    b.Property<int>("EmploymentType");
 
                     b.Property<bool>("IsHidden");
 
                     b.Property<int>("Level");
 
-                    b.Property<string>("OfferStatus")
-                        .IsRequired();
+                    b.Property<decimal?>("MaxSalary");
 
-                    b.Property<decimal>("Price");
+                    b.Property<decimal?>("MinSalary");
+
+                    b.Property<string>("OfferStatus");
+
+                    b.Property<int>("StatusForDeveloper");
+
+                    b.Property<int>("StatusForEmployee");
 
                     b.Property<int>("TechnologyId");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("DeveloperId");
 
                     b.HasIndex("DeveloperUserId");
 
@@ -454,13 +435,6 @@ namespace TeamLeasing.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("TeamLeasing.Models.Developer", b =>
-                {
-                    b.HasOne("TeamLeasing.Models.Technology", "Technology")
-                        .WithMany("Developers")
-                        .HasForeignKey("TechnologyId");
-                });
-
             modelBuilder.Entity("TeamLeasing.Models.DeveloperUser", b =>
                 {
                     b.HasOne("TeamLeasing.Models.Technology", "Technology")
@@ -504,19 +478,25 @@ namespace TeamLeasing.Migrations
                         .HasForeignKey("TechnologyId");
                 });
 
+            modelBuilder.Entity("TeamLeasing.Models.Negotiation", b =>
+                {
+                    b.HasOne("TeamLeasing.Models.Offer", "Offer")
+                        .WithOne("Negotiation")
+                        .HasForeignKey("TeamLeasing.Models.Negotiation", "OfferId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("TeamLeasing.Models.Offer", b =>
                 {
-                    b.HasOne("TeamLeasing.Models.Developer")
+                    b.HasOne("TeamLeasing.Models.DeveloperUser", "DeveloperUser")
                         .WithMany("Offers")
-                        .HasForeignKey("DeveloperId");
+                        .HasForeignKey("DeveloperUserId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("TeamLeasing.Models.DeveloperUser")
+                    b.HasOne("TeamLeasing.Models.EmployeeUser", "EmployeeUser")
                         .WithMany("Offers")
-                        .HasForeignKey("DeveloperUserId");
-
-                    b.HasOne("TeamLeasing.Models.EmployeeUser")
-                        .WithMany("Offers")
-                        .HasForeignKey("EmployeeUserId");
+                        .HasForeignKey("EmployeeUserId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("TeamLeasing.Models.Technology", "Technology")
                         .WithMany()

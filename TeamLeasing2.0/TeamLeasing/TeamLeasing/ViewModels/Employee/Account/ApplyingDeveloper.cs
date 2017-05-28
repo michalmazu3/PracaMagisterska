@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using TeamLeasing.Models;
 
 namespace TeamLeasing.ViewModels.Employee.Account
 {
@@ -9,5 +10,7 @@ namespace TeamLeasing.ViewModels.Employee.Account
         public string Name { get; set; }
         [Display(Name = "Nazwisko")]
         public string Surname { get; set; }
+        [Display(Name = "Status aplikacji")]
+        public Enums.JobStatusForDeveloper Status { get; set; }
     }
 }

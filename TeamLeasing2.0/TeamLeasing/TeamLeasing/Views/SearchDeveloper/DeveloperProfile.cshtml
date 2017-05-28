@@ -1,5 +1,10 @@
-﻿@model TeamLeasing.Models.DeveloperUser
+﻿@using TeamLeasing.ViewModels
+@using TeamLeasing.ViewModels.Developer
+@model TeamLeasing.Models.DeveloperUser
+@section scripts
+{
 
+}
 <div id="container-developer">
 
     <img src=@Url.Content(Model.Photo) alt="">
@@ -41,8 +46,9 @@
         <p>@Model.About</p>
     </div>
     <div id="buttons">
-        <a class="btn-primary  btn-lg">Wyślij oferte pracy</a>
+        <a  asp-controller="SearchDeveloper" asp-action="Offer" asp-route-developerId="@Model.Id"  class="btn btn-primary  btn-lg">Wyślij oferte pracy</a>
         <a  asp-controller="SearchDeveloper" asp-action="Cv" asp-route-developerId="@Model.Id" class="btn btn-primary  btn-lg">Zobacz cv</a>
+        <h3>@ViewBag.SendOffer</h3>
     </div>
 
 </div>

@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
-using Microsoft.CodeAnalysis;
-using TeamLeasing.DAL;
+using TeamLeasing.Infrastructure.Extension;
 using TeamLeasing.Models;
 using TeamLeasing.ViewModels;
 using TeamLeasing.ViewModels.Developer;
@@ -10,14 +10,11 @@ using TeamLeasing.ViewModels.Developer.Account;
 using TeamLeasing.ViewModels.Employee;
 using TeamLeasing.ViewModels.Employee.Account;
 using TeamLeasing.ViewModels.Job.SearchJob;
-using System.Collections.ObjectModel;
-using System.Web.UI.WebControls;
-using TeamLeasing.Infrastructure.Extension;
 
 namespace TeamLeasing.Services.Mapping
 {
     public class MappingProfile : Profile
-    { 
+    {
         public MappingProfile()
         {
             CreateMap<RegistrationDeveloperViewModel, DeveloperUser>()
@@ -43,9 +40,9 @@ namespace TeamLeasing.Services.Mapping
             CreateMap<RegistrationEmployeeViewModel, EmployeeUser>()
                 .ForMember(f => f.Name, opt => opt.MapFrom(src => src.Name))
                 .ForMember(f => f.Surname, opt => opt.MapFrom(src => src.Surname))
-                  .ForMember(f => f.City, opt => opt.MapFrom(src => src.City))
+                .ForMember(f => f.City, opt => opt.MapFrom(src => src.City))
                 .ForMember(f => f.Province, opt => opt.MapFrom(src => src.ChoosenProvince))
-                 .ForMember(f => f.Company, opt => opt.MapFrom(src => src.Company))
+                .ForMember(f => f.Company, opt => opt.MapFrom(src => src.Company))
                 .ReverseMap();
 
             CreateMap<RegistrationEmployeeViewModel, User>()
@@ -61,7 +58,7 @@ namespace TeamLeasing.Services.Mapping
                 .ForMember(p => p.Company, opt => opt.MapFrom(src => src.EmployeeUser.Company)).ReverseMap();
 
             CreateMap<EditEmployeeAccountViewModel, EmployeeUser>()
-                .ForMember(p=>p.Province, opt=>opt.MapFrom(src=>src.ChoosenProvince));
+                .ForMember(p => p.Province, opt => opt.MapFrom(src => src.ChoosenProvince));
             CreateMap<EditEmployeeAccountViewModel, User>()
                 .ForMember(p => p.PhoneNumber, opt => opt.MapFrom(src => src.Phone));
 
@@ -77,7 +74,7 @@ namespace TeamLeasing.Services.Mapping
             //.ForMember(p=>p.StatusForDeveloper, opt=>opt.MapFrom(src=>src.DeveloperUsers.Where(w=>w.DeveloperUserId==src. )));
 
             CreateMap<DeveloperUserJob, ApplyingDeveloper>()
-                .ForMember(p=>p.Name, opt=>opt.MapFrom(src=>src.DeveloperUser.Name))
+                .ForMember(p => p.Name, opt => opt.MapFrom(src => src.DeveloperUser.Name))
                 .ForMember(p => p.Id, opt => opt.MapFrom(src => src.DeveloperUser.Id))
                 .ForMember(p => p.Surname, opt => opt.MapFrom(src => src.DeveloperUser.Surname));
 
@@ -85,27 +82,57 @@ namespace TeamLeasing.Services.Mapping
                 .ForMember(p => p.JobId, opt => opt.MapFrom(src => src.Id))
                 .ForMember(p => p.Status, opt => opt.MapFrom(src => src.StatusForEmployee))
                 .ForMember(p => p.Technology, opt => opt.MapFrom(src => src.Technology.Name))
-                .ForMember(p => p.ApplyingDevelopers, opt => opt.MapFrom(source => Convert(source.DeveloperUsers.ToList())));
+                .ForMember(p => p.ApplyingDevelopers,
+                    opt => opt.MapFrom(source => Convert(source.DeveloperUsers.ToList())));
 
 
             CreateMap<CreateJobViewModel, Job>()
-                .ForMember(p=>p.EmploymentType, opt=>opt.MapFrom(src=>src.ChoosenEmploymentType??""))
-                .ForMember(p=>p.Descritpion, opt=>opt.MapFrom(src=>src.Descritpion.Between("<body>","</body>")));
+                .ForMember(p => p.EmploymentType, opt => opt.MapFrom(src => src.ChoosenEmploymentType ?? ""))
+                .ForMember(p => p.Descritpion, opt => opt.MapFrom(src => src.Descritpion.Between("<body>", "</body>")));
 
+            CreateMap<SendingOfferViewModel, Offer>()
+                .ForMember(p => p.Level,
+                    opt => opt.MapFrom(
+                        src => (Enums.Level) Enum.Parse(typeof(Enums.Level),
+                            src.ChoosenLevel)))
+                .ForMember(p => p.EmploymentType, opt => opt.MapFrom(src => (Enums.EmploymentType) Enum.Parse(
+                    typeof(Enums.EmploymentType),
+                    src.ChoosenEmploymentType)));
+
+            CreateMap<Offer, RecivedOfferViewModel>()
+                .ForMember(p => p.Company, opt => opt.MapFrom(src => src.EmployeeUser.Company))
+                .ForMember(p => p.EmploymentType, opt => opt.MapFrom(src => src.EmploymentType.GetAttribute().Name))
+                .ForMember(p => p.Level, opt => opt.MapFrom(src => src.Level.GetAttribute().Name))
+                .ForMember(p => p.Technology, opt => opt.MapFrom(src => src.Technology.Name))
+                .ForMember(p => p.StatusForDeveloper,
+                    opt => opt.MapFrom(src => src.StatusForDeveloper.GetAttribute().Name));
+
+            CreateMap<Offer, SentOfferViewModel>()
+                .ForMember(p => p.Name, opt => opt.MapFrom(src => src.DeveloperUser.Name))
+                .ForMember(p => p.Surname, opt => opt.MapFrom(src => src.DeveloperUser.Surname))
+                .ForMember(p => p.DeveloperUserId, opt => opt.MapFrom(src => src.DeveloperUser.Id))
+                .ForMember(p => p.EmploymentType, opt => opt.MapFrom(src => src.EmploymentType.GetAttribute().Name))
+                .ForMember(p => p.Level, opt => opt.MapFrom(src => src.Level.GetAttribute().Name))
+                .ForMember(p => p.Technology, opt => opt.MapFrom(src => src.Technology.Name))
+                .ForMember(p => p.StatusForEmployee,
+                    opt => opt.MapFrom(src => src.StatusForEmployee.GetAttribute().Name))
+                .ForMember(p => p.OfferId, opt => opt.MapFrom(src => src.Id))
+                .ForMember(p => p.NegotiationViewModel, opt => opt.MapFrom(src => src.Negotiation));
+
+            CreateMap<Negotiation, NegotiationViewModel>().ReverseMap();
         }
 
         private List<ApplyingDeveloper> Convert(List<DeveloperUserJob> source)
         {
-            List<ApplyingDeveloper> list = new List<ApplyingDeveloper>();
+            var list = new List<ApplyingDeveloper>();
             foreach (var item in source)
-            {
-                list.Add(new ApplyingDeveloper()
+                list.Add(new ApplyingDeveloper
                 {
                     Name = item.DeveloperUser.Name,
                     Surname = item.DeveloperUser.Surname,
-                    Id = item.DeveloperUser.Id
+                    Id = item.DeveloperUser.Id,
+                    Status = item.StatusForDeveloper
                 });
-            }
             return list;
         }
     }

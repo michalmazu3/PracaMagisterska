@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using JetBrains.Annotations;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using TeamLeasing.Models;
@@ -16,36 +14,33 @@ namespace TeamLeasing.DAL
             _config = config;
         }
 
-        public DbSet<Developer> Developers { get; set; }
         public DbSet<DeveloperUser> DeveloperUsers { get; set; }
         public DbSet<EmployeeUser> EmployeeUsers { get; set; }
         public DbSet<Technology> Technologies { get; set; }
         public DbSet<Job> Jobs { get; set; }
         public DbSet<Offer> Offers { get; set; }
+        public DbSet<Negotiation> Negotiation { get; set; }
+
         public DbSet<Message> Messages { get; set; }
         public DbSet<DeveloperUserJob> DeveloperUserJob { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-
             base.OnConfiguring(optionsBuilder);
-            optionsBuilder.UseSqlServer(_config["ConnectionStrings:TeamLeasingConnectionString"]);
+            optionsBuilder.UseSqlServer(_config["ConnectionStrings:test"]);
         }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>().
-                HasOne(h => h.DeveloperUser).
-                WithOne(w => w.User).
-                HasForeignKey<DeveloperUser>(h => h.UserId);
+            modelBuilder.Entity<User>().HasOne(h => h.DeveloperUser).WithOne(w => w.User)
+                .HasForeignKey<DeveloperUser>(h => h.UserId);
 
-            modelBuilder.Entity<User>().
-                HasOne(h => h.EmployeeUser).
-                WithOne(w => w.User).
-                HasForeignKey<EmployeeUser>(h => h.UserId);
+            modelBuilder.Entity<User>().HasOne(h => h.EmployeeUser).WithOne(w => w.User)
+                .HasForeignKey<EmployeeUser>(h => h.UserId);
 
             modelBuilder.Entity<DeveloperUserJob>()
-               .HasKey(d => new {d.DeveloperUserId, d.JobId});
+                .HasKey(d => new {d.DeveloperUserId, d.JobId});
 
             modelBuilder.Entity<DeveloperUserJob>()
                 .HasOne(o => o.DeveloperUser)
@@ -57,8 +52,20 @@ namespace TeamLeasing.DAL
                 .WithMany(w => w.DeveloperUsers)
                 .HasForeignKey(f => f.JobId);
 
-            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Offer>()
+                .HasKey(d => d.Id);
 
+            modelBuilder.Entity<Offer>()
+                .HasOne(o => o.DeveloperUser)
+                .WithMany(m => m.Offers)
+                .HasForeignKey(f => f.DeveloperUserId);
+
+            modelBuilder.Entity<Offer>()
+                .HasOne(o => o.EmployeeUser)
+                .WithMany(m => m.Offers)
+                .HasForeignKey(f => f.EmployeeUserId);
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

@@ -13,7 +13,7 @@ namespace TeamLeasing.Models
 
         public ICollection<DeveloperUser> DeveloperUsers { get; set; }
 
-        public ICollection<Developer> Developers { get; set; }
+        
         public ICollection<Job> Jobs { get; set; }
 
     }

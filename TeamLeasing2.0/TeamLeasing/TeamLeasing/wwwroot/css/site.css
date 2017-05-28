@@ -236,15 +236,16 @@ table, th, td {
 	margin-left: 410px;
 }
 #container-developer #buttons {
-	padding-left: 340px;
 	height: 200px;
+	margin: 20px auto;
+	/*! padding-bottom: 420px; */
 }
 #container-developer #buttons a{
   margin: 40px 0 40px 100px;
   min-width: 150px;
 	
-	float:  left;
-	vertical-align: bottom;
+	/*! float:  left; */
+	/*! vertical-align: bottom; */
 	
 }
  
@@ -297,4 +298,32 @@ table, th, td {
 
 #header-container{
 	margin-top: 50px;
+}
+#send-offer{
+		background: whitesmoke;
+text-align: center;
+}
+#send-offer h3{
+	padding-top: 100px;
+	
+}
+#send-offer form {
+    padding: 40px 200px 100px 200px;
+}
+
+#send-offer form button{
+	margin: 0 auto;
+ }
+
+#buttons h3{
+	/*! padding-bottom: 540px; */
+	text-align: center;
+}
+#negotiation form{
+	text-align: center;
+	padding: 40px 200px 0px 200px;
+ }
+ 
+#negotiation h4{
+	padding-bottom: 60px;
 }

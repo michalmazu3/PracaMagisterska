@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using System.Web.Routing;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -129,16 +130,55 @@ namespace TeamLeasing.Controllers
 
         [Route("developer/{developerId}")]
         // [HttpGet("{developerId}")]
-        public async Task<IActionResult> Profile(int developerId)
+        public async Task<IActionResult> Profile(int developerId, string message = null)
         {
 
             var developer = await _teamLeasingContext.DeveloperUsers
                                                     .Include(i => i.Technology)
                                                     .FirstOrDefaultAsync(w => w.Id == developerId);
-
+            ViewBag.SendOffer = message ?? String.Empty;
             return View("DeveloperProfile", developer);
 
+          
+        }
+        [Authorize(Roles = "Employee")]
+        [Route("developer/{developerId}/[action]")]
+        public async Task<IActionResult> Offer(int developerId)
+        {
+           
+            return View("SendOffer", new SendingOfferViewModel() {DeveloperUserId = developerId});
+        }
 
+        [HttpPost]
+        [Authorize(Roles = "Employee")]
+        [Route("developer/{developerId}/[action]")]
+        public async Task<IActionResult> SendOffer(SendingOfferViewModel vm)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var userId = _manager.GetUserId(HttpContext.User);
+                    if (await _manager.SendOffer(userId, vm))
+                    {
+                        return RedirectToAction("Profile", new {developerId= vm.DeveloperUserId, message = "Wysłąłeś propozycje pracy do tego developera!" });
+                    }
+                    return View("_Error", new ErrorViewModel()
+                    {
+                        Message = "Wysłanie propozycji pracy nie powiodło się",
+                        ReturnUrl = UrlHelperExtensions.Action(Url, "Profile", "SearchDeveloper", new { developerId = vm.DeveloperUserId })
+                    });
+                }
+                catch (Exception e)
+                {
+                    return View("_Error", new ErrorViewModel()
+                    {
+                        Message = "Wystąpił błąd nieokreslony błąd w aplikajci",
+                        ReturnUrl = UrlHelperExtensions.Action(Url, "Profile", "SearchDeveloper", new { developerId = vm.DeveloperUserId })
+                    });
+                }
+            }
+            return View("SendOffer", vm);
         }
     }
 }

@@ -45,7 +45,7 @@
                             <ul class="dropdown-menu">
                                 <li><a asp-controller="AccountDeveloper" asp-action="Edit">Edycja konta</a></li>
                                 <li><a asp-controller="AccountDeveloper" asp-action="Applications">Aplikacje</a></li>
-                                <li><a href="developer-offers.html">Przychodzące oderty</a></li>
+                                <li><a asp-controller="AccountDeveloper" asp-action="RecivedOffers">Przychodzące oderty</a></li>
                             </ul>
                         </li>
                     }
@@ -57,7 +57,7 @@
                                 <li><a asp-controller="AccountEmployee" asp-action="Edit">Edycja konta</a></li>
                                 <li><a asp-controller="AccountEmployee" asp-action="JobWithApplication">Twoje oferty</a></li>
                                 <li><a  asp-controller="AccountEmployee" asp-action="CreateJob">Utwórz oferte</a></li>
-                                <li><a href="employee-send-offers.html">Wysłane propozycje</a></li>
+                                <li><a asp-controller="AccountEmployee"  asp-action="SentOffer">Wysłane propozycje</a></li>
                             </ul>
                         </li>
                     }

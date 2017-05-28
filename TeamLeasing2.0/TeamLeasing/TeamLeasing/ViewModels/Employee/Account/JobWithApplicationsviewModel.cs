@@ -15,6 +15,7 @@ namespace TeamLeasing.ViewModels.Employee.Account
         public string Technology { get; set; }
         [Display(Name = "Status")]
         public Enums.JobStatusForEmployee Status { get; set; }
+        [Display(Name = "Aplikacje od")]
         public List<ApplyingDeveloper> ApplyingDevelopers { get; set; }
     }
 }

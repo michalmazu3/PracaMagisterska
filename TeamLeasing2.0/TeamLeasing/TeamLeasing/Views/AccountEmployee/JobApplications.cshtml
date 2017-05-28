@@ -32,11 +32,20 @@
                         <td>@Html.LabelFor(f => item.Status)</td>
                         <td>@item.Status.GetAttribute().Name</td>
                     </tr>
+                    @if (item.ApplyingDevelopers.Any(a=>a.Status ==Enums.JobStatusForDeveloper.Accepted))
+                    {
+                        var developer = item.ApplyingDevelopers.FirstOrDefault(a => a.Status == Enums.JobStatusForDeveloper.Accepted);
+                        <tr>
+                            <td>@Html.LabelFor(l=>item.ApplyingDevelopers)</td>
+                            <td><a asp-action="Profile" asp-controller="SearchDeveloper" asp-route-developerId="@developer.Id">@developer.Name @developer.Surname</a>  </td>
+                        </tr>
+                    }
+
                     <td colspan="2">
                         @if (item.Status == Enums.JobStatusForEmployee.InProgress)
                         {
-                            <form asp-action="FinishJob" asp-controller="AccountEmployee"  asp-route-jobId="@item.JobId">
-                                <button   class="btn-danger">Zamknij oferte</button>
+                            <form asp-action="FinishJob" asp-controller="AccountEmployee" asp-route-jobId="@item.JobId">
+                                <button class="btn-danger">Zamknij oferte</button>
                             </form>
                         }
 
@@ -49,21 +58,66 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Oferta od</th>
-                            <th></th>
-                            <th></th>
+                            <th>@Html.LabelFor(l=>item.ApplyingDevelopers)</th>
+                            <th colspan="2"> Akceptuj/Odrzuć </th>
+                            <th>@Html.LabelFor(l => item.ApplyingDevelopers.First().Status)</th>
+
                         </tr>
                     </thead>
                     @foreach (var developer in item.ApplyingDevelopers)
                 {
                         <tr>
                             <td><a asp-action="Profile" asp-controller="SearchDeveloper" asp-route-developerId="@developer.Id">@developer.Name @developer.Surname</a>  </td>
-                            <td><button @if (item.Status != Enums.JobStatusForEmployee.InProgress) {<text>disabled class="btn"</text> }else{ <text>class="btn-success"</text> } >Akceptuj</button></td>
-                            <td><button  @if (item.Status != Enums.JobStatusForEmployee.InProgress) {<text>disabled class="btn"</text> }else{ <text>class="btn-danger"</text> } >Odrzuć</button></td>
+                            <td>
+                                <form asp-action="AcceptAppliaction" asp-controller="AccountEmployee" asp-route-jobId="@item.JobId" asp-route-developerId="@developer.Id">
+                                    <button
+                                         @if (item.Status == Enums.JobStatusForEmployee.InProgress && developer.Status == Enums.JobStatusForDeveloper.Applying)
+                                        {
+                                            <text> class="btn-success" </text>
+
+                                        }
+                                        else
+                                        {
+                                            <text> disabled class="btn" </text>
+
+                                        }>
+                                        Akceptuj
+                                    </button>
+                                </form>
+                            </td>
+                            <td>
+                                <form asp-action="RejectApplication" asp-controller="AccountEmployee" asp-route-jobId="@item.JobId" asp-route-developerId="@developer.Id">
+                                    <button
+                                        @if (item.Status == Enums.JobStatusForEmployee.InProgress&&developer.Status == Enums.JobStatusForDeveloper.Applying)
+                                        {
+                                            <text> class="btn-danger" </text>
+
+                                        }
+                                        else
+                                        {
+                                            <text> disabled class="btn" </text>
+
+                                        }>
+                                        Odrzuć
+                                    </button>
+                                </form>
+                            </td>
+                            <td><p
+                                    @if (developer.Status == Enums.JobStatusForDeveloper.Accepted)
+                                    {
+                                        <text> class="text-success" </text>
+                                    }
+                                    @if (developer.Status == Enums.JobStatusForDeveloper.Rejected)
+                                    {
+                                        <text> class="text-danger" </text>
+                                    }
+                                   >
+                                @developer.Status.GetAttribute().Name
+                            </p></td>
                         </tr>
-                    }
+}
                 </table>
             </div>
         </div>
-    }
+                    }
 </div>

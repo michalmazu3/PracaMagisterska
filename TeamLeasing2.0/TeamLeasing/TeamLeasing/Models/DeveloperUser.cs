@@ -25,10 +25,8 @@ namespace TeamLeasing.Models
         [DataType(DataType.Date, ErrorMessage = "Wprowadz date w formacie rok.miesiac.dzień")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime BirthDate { get; set; }
-
         [Required]
         public Enums.IsFinishedUniversity IsFinishedUniversity { get; set; }
-
         [Display(Name = "Studia")]
         public string University { get; set; }
         [Display(Name = "Doświadczenie")]
@@ -40,16 +38,10 @@ namespace TeamLeasing.Models
         public string Photo { get; set; }
         [Display(Name = "Cv")]
         public string Cv { get; set; }
-
         public string About { get; set; }
-
-        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        //public int TechnologyId { get; set; }
-         public virtual Technology Technology { get; set; }
-
-        public  ICollection<DeveloperUserJob> Jobs { get; set; }
+        public virtual Technology Technology { get; set; }
+        public ICollection<DeveloperUserJob> Jobs { get; set; }
         public ICollection<Offer> Offers { get; set; }
-
         public string UserId { get; set; }
         public virtual User User { get; set; }
     }
