@@ -9,8 +9,8 @@ using TeamLeasing.Models;
 namespace TeamLeasing.Migrations
 {
     [DbContext(typeof(TeamLeasingContext))]
-    [Migration("20170528202733_7")]
-    partial class _7
+    [Migration("20170603105826_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -276,21 +276,19 @@ namespace TeamLeasing.Migrations
 
             modelBuilder.Entity("TeamLeasing.Models.Negotiation", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("Id");
 
                     b.Property<string>("AdditionalInformation");
 
                     b.Property<string>("EmploymentType");
 
-                    b.Property<int>("OfferId");
-
                     b.Property<int>("Salary");
 
-                    b.HasKey("Id");
+                    b.Property<int>("StatusForDeveloper");
 
-                    b.HasIndex("OfferId")
-                        .IsUnique();
+                    b.Property<int>("StatusForEmployee");
+
+                    b.HasKey("Id");
 
                     b.ToTable("Negotiation");
                 });
@@ -317,8 +315,6 @@ namespace TeamLeasing.Migrations
                     b.Property<decimal?>("MaxSalary");
 
                     b.Property<decimal?>("MinSalary");
-
-                    b.Property<string>("OfferStatus");
 
                     b.Property<int>("StatusForDeveloper");
 
@@ -483,7 +479,7 @@ namespace TeamLeasing.Migrations
                 {
                     b.HasOne("TeamLeasing.Models.Offer", "Offer")
                         .WithOne("Negotiation")
-                        .HasForeignKey("TeamLeasing.Models.Negotiation", "OfferId")
+                        .HasForeignKey("TeamLeasing.Models.Negotiation", "Id")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

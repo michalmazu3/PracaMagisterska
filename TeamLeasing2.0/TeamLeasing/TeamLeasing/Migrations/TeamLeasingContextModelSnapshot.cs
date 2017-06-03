@@ -279,7 +279,7 @@ namespace TeamLeasing.Migrations
 
                     b.Property<string>("AdditionalInformation");
 
-                    b.Property<string>("EmploymentType");
+                    b.Property<int>("EmploymentType");
 
                     b.Property<int>("Salary");
 

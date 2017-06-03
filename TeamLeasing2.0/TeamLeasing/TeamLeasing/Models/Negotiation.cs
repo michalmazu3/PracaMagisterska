@@ -7,7 +7,7 @@ namespace TeamLeasing.Models
         public int Id { get; set; }
 
         public int Salary { get; set; }
-        public string EmploymentType { get; set; }
+        public Enums.EmploymentType EmploymentType { get; set; }
         public string AdditionalInformation { get; set; }
 
         [Display(Name = "Status")]

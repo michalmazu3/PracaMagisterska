@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using TeamLeasing.Infrastructure.Extension;
@@ -90,22 +89,36 @@ namespace TeamLeasing.Services.Mapping
                 .ForMember(p => p.EmploymentType, opt => opt.MapFrom(src => src.ChoosenEmploymentType ?? ""))
                 .ForMember(p => p.Descritpion, opt => opt.MapFrom(src => src.Descritpion.Between("<body>", "</body>")));
 
-            CreateMap<SendingOfferViewModel, Offer>()
-                .ForMember(p => p.Level,
-                    opt => opt.MapFrom(
-                        src => (Enums.Level) Enum.Parse(typeof(Enums.Level),
-                            src.ChoosenLevel)))
-                .ForMember(p => p.EmploymentType, opt => opt.MapFrom(src => (Enums.EmploymentType) Enum.Parse(
-                    typeof(Enums.EmploymentType),
-                    src.ChoosenEmploymentType)));
+            //CreateMap<SendingOfferViewModel, Offer>()
+            //    .ForMember(p => p.Level,
+            //        opt => opt.MapFrom(
+            //            src => (Enums.Level) Enum.Parse(typeof(Enums.Level),
+            //                src.ChoosenLevel)))
+            //    .ForMember(p => p.EmploymentType, opt => opt.MapFrom(src => (Enums.EmploymentType) Enum.Parse(
+            //        typeof(Enums.EmploymentType),
+            //        src.ChoosenEmploymentType)));
 
             CreateMap<Offer, RecivedOfferViewModel>()
+                .ForMember(p => p.OfferId, opt => opt.MapFrom(src => src.Id))
                 .ForMember(p => p.Company, opt => opt.MapFrom(src => src.EmployeeUser.Company))
                 .ForMember(p => p.EmploymentType, opt => opt.MapFrom(src => src.EmploymentType.GetAttribute().Name))
                 .ForMember(p => p.Level, opt => opt.MapFrom(src => src.Level.GetAttribute().Name))
                 .ForMember(p => p.Technology, opt => opt.MapFrom(src => src.Technology.Name))
                 .ForMember(p => p.StatusForDeveloper,
                     opt => opt.MapFrom(src => src.StatusForDeveloper.GetAttribute().Name));
+
+            CreateMap<SendingOfferViewModel, Offer>()
+                .ForMember(p => p.AdditionalInformation, opt => opt.MapFrom(src => src.AdditionalInformation))
+                .ForMember(p => p.EmploymentType, opt => opt
+                    .MapFrom(src => EnumExtansion.Values<Enums.EmploymentType>()
+                        .FirstOrDefault(w => w.GetAttribute().Name == src.ChoosenEmploymentType)))
+                .ForMember(p => p.Level, opt => opt
+                    .MapFrom(src => EnumExtansion.Values<Enums.Level>()
+                        .FirstOrDefault(w => w.GetAttribute().Name == src.ChoosenLevel)))
+                .ForMember(p => p.ConstSalary, opt => opt.MapFrom(src => src.ConstSalary))
+                .ForMember(p => p.MinSalary, opt => opt.MapFrom(src => src.MinSalary))
+                .ForMember(p => p.MaxSalary, opt => opt.MapFrom(src => src.MaxSalary));
+
 
             CreateMap<Offer, SentOfferViewModel>()
                 .ForMember(p => p.Name, opt => opt.MapFrom(src => src.DeveloperUser.Name))
@@ -119,7 +132,12 @@ namespace TeamLeasing.Services.Mapping
                 .ForMember(p => p.OfferId, opt => opt.MapFrom(src => src.Id))
                 .ForMember(p => p.NegotiationViewModel, opt => opt.MapFrom(src => src.Negotiation));
 
-            CreateMap<Negotiation, NegotiationViewModel>().ReverseMap();
+            CreateMap<Negotiation, NegotiationViewModel>()
+                .ForMember(p => p.EmploymentType, opt => opt.MapFrom(src => src.EmploymentType.GetAttribute().Name))
+                .ForMember(p => p.StatusForEmployee,
+                    opt => opt.MapFrom(src => src.StatusForEmployee.GetAttribute().Name))
+                .ForMember(p => p.StatusForDeveloper,
+                    opt => opt.MapFrom(src => src.StatusForDeveloper.GetAttribute().Name)).ReverseMap();
         }
 
         private List<ApplyingDeveloper> Convert(List<DeveloperUserJob> source)

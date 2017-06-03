@@ -104,9 +104,14 @@ namespace TeamLeasing.Controllers
                 .ToList()
                 .FirstOrDefault();
             developerUser.UserId = user.Id;
-
-            developerUser.Cv = await _userService.UploadService.UploadCvFile(vm.Name, vm.Surname, vm.CvFile);
-            developerUser.Photo = await _userService.UploadService.UploadPhotoFile(vm.Name, vm.Surname, vm.PhotoFile);
+            if (vm.CvFile!=null)
+            {
+                developerUser.Cv = await _userService.UploadService.UploadCvFile(vm.Name, vm.Surname, vm.CvFile);
+            }
+            if (vm.PhotoFile!=null)
+            {
+                developerUser.Photo = await _userService.UploadService.UploadPhotoFile(vm.Name, vm.Surname, vm.PhotoFile);
+            }
             return developerUser;
         }
         [Route("[controller]/[action]")]

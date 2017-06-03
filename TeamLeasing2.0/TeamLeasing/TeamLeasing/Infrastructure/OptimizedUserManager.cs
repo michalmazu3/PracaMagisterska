@@ -43,6 +43,12 @@ namespace TeamLeasing.Infrastructure
             _configurationService = configurationService;
         }
 
+        public async Task<User> GetUser(string id)
+        {
+            return await _teamLeasingContext.Users.Include(i => i.DeveloperUser)
+                .Include(i => i.EmployeeUser).FirstOrDefaultAsync(f => f.Id == id);
+        }
+
         #region Technology
 
         public async Task<List<Technology>> GetTechnology(Expression<Func<Technology, bool>> querry)
@@ -304,6 +310,65 @@ namespace TeamLeasing.Infrastructure
 
         #region Offer
 
+        public async Task<bool> RejectOfferByDeveloper(int developerId, int offerId)
+        {
+            var offer = await GetOffer(w => w.DeveloperUserId == developerId && w.Id == offerId)
+                .ContinueWith(t => t.Result.FirstOrDefault());
+            offer.StatusForEmployee = Enums.OfferStatus.Rejected;
+            offer.StatusForDeveloper = Enums.OfferStatus.Resignation;
+            if (offer.Negotiation != null)
+            {
+                offer.Negotiation.StatusForDeveloper = Enums.NegotiationStatus.Resignation;
+                offer.Negotiation.StatusForEmployee = Enums.NegotiationStatus.Rejected;
+            }
+            var result = await _teamLeasingContext.SaveChangesAsync();
+            return result == 0 ? false : true;
+        }
+
+        public async Task<bool> CancelOfferByEmployee(int employeeId, int offerId)
+        {
+            var offer = await GetOffer(w => w.EmployeeUserId == employeeId && w.Id == offerId)
+                .ContinueWith(t => t.Result.FirstOrDefault());
+            offer.StatusForEmployee = Enums.OfferStatus.Canceled;
+            offer.StatusForDeveloper = Enums.OfferStatus.Canceled;
+            if (offer.Negotiation != null)
+            {
+                offer.Negotiation.StatusForDeveloper = Enums.NegotiationStatus.Canceled;
+                offer.Negotiation.StatusForEmployee = Enums.NegotiationStatus.Canceled;
+            }
+            var result = await _teamLeasingContext.SaveChangesAsync();
+            return result == 0 ? false : true;
+        }
+
+
+        public async Task<bool> AcceptOfferByDeveloperUser(int developerId, int offerId)
+        {
+            var result = await AcceptOffer(w => w.DeveloperUserId == developerId && w.Id == offerId);
+            return result;
+        }
+
+        public async Task<bool> AcceptOfferByEmployeeUser(int employeeId, int offerId)
+        {
+            var result = await AcceptOffer(w => w.EmployeeUserId == employeeId && w.Id == offerId);
+            return result;
+        }
+
+        private async Task<bool> AcceptOffer(Expression<Func<Offer, bool>> querry)
+        {
+            var offer = await GetOffer(querry)
+                .ContinueWith(t => t.Result.FirstOrDefault());
+            offer.StatusForEmployee = Enums.OfferStatus.Accepted;
+            offer.StatusForDeveloper = Enums.OfferStatus.Accepted;
+            if (offer.Negotiation != null)
+            {
+                offer.Negotiation.StatusForDeveloper = Enums.NegotiationStatus.Accepted;
+                offer.Negotiation.StatusForEmployee = Enums.NegotiationStatus.Accepted;
+            }
+            var result = await _teamLeasingContext.SaveChangesAsync();
+            return result == 0 ? false : true;
+        }
+
+
         public async Task<List<Offer>> GetRecivedOfferByDeveloperUserId(int developerUserId)
         {
             var recivedOfferList = await GetOffer(w => w.DeveloperUserId == developerUserId);
@@ -334,8 +399,8 @@ namespace TeamLeasing.Infrastructure
             var user = await FindEmployeeUserByIdAsync(userId);
             var offer = _mapper.Map<Offer>(vm);
             offer.IsHidden = false;
-            offer.StatusForDeveloper = Enums.OfferStatusForDeveloper.New;
-            offer.StatusForEmployee = Enums.OfferStatusForEmployee.InProgress;
+            offer.StatusForDeveloper = Enums.OfferStatus.New;
+            offer.StatusForEmployee = Enums.OfferStatus.InProgress;
             offer.Technology = await GetTechnology(s => s.Name == vm.ChoosenTechnology)
                 .ContinueWith(t => t.Result.First());
             offer.EmployeeUserId = user.EmployeeUser.Id;
@@ -356,20 +421,6 @@ namespace TeamLeasing.Infrastructure
 
         #region Negotiation
 
-        public async Task<bool> RejectOffer(int developerId, int offerId)
-        {
-            var offer = await GetOffer(w => w.DeveloperUserId == developerId && w.Id == offerId)
-                .ContinueWith(t => t.Result.FirstOrDefault());
-            offer.StatusForEmployee = Enums.OfferStatusForEmployee.Rejected;
-            offer.StatusForDeveloper = Enums.OfferStatusForDeveloper.Resignation;
-
-          
-
-            var result = await _teamLeasingContext.SaveChangesAsync();
-            return result == 0 ? false : true;
-        }
-
-
         public async Task<int> AddOrUpdateNegotiation(Negotiation negotiation, Enums.NegotiationStatus developerStatus,
             Enums.NegotiationStatus employeeStatus)
         {
@@ -379,9 +430,9 @@ namespace TeamLeasing.Infrastructure
             if (result == null) await _teamLeasingContext.Negotiation.AddAsync(negotiation);
             else
                 _teamLeasingContext.Update(negotiation);
-           // var offer = await GetOffer(w => w.Id == negotiation.OfferId).ContinueWith(t => t.Result.FirstOrDefault());
-          //  offer.StatusForEmployee = Enums.OfferStatusForEmployee.Negotiation;
-          //  offer.StatusForDeveloper = Enums.OfferStatusForDeveloper.Negotiation;
+            var offer = await GetOffer(w => w.Id == negotiation.Id).ContinueWith(t => t.Result.FirstOrDefault());
+            offer.StatusForEmployee = Enums.OfferStatus.Negotiation;
+            offer.StatusForDeveloper = Enums.OfferStatus.Negotiation;
 
             var returnResult = await _teamLeasingContext.SaveChangesAsync();
             return returnResult;

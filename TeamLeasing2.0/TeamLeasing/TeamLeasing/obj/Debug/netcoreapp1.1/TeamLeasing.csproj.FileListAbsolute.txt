@@ -119,3 +119,4 @@ D:\repozutorium\Praca Magisterska\TeamLeasing2.0\TeamLeasing\TeamLeasing\bin\Deb
 D:\repozutorium\Praca Magisterska\TeamLeasing2.0\TeamLeasing\TeamLeasing\obj\Debug\netcoreapp1.1\TeamLeasing.AssemblyInfo.cs
 D:\repozutorium\Praca Magisterska\TeamLeasing2.0\TeamLeasing\TeamLeasing\obj\Debug\netcoreapp1.1\TeamLeasing.dll
 D:\repozutorium\Praca Magisterska\TeamLeasing2.0\TeamLeasing\TeamLeasing\obj\Debug\netcoreapp1.1\TeamLeasing.pdb
+D:\repozutorium\Praca Magisterska\TeamLeasing2.0\TeamLeasing\TeamLeasing\obj\Debug\netcoreapp1.1\TeamLeasing.csprojResolveAssemblyReference.cache

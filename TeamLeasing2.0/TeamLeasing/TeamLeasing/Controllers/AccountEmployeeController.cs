@@ -149,40 +149,58 @@ namespace TeamLeasing.Controllers
             }
         }
 
+
+
         [Authorize(Roles = "Employee")]
-        public async Task<IActionResult> Negotiate(int offerId)
+        [HttpPost]
+        public async Task<IActionResult> CanceldOffer(int offerId)
         {
-            return View("Negotation", new NegotiationViewModel {OfferId = offerId});
+            var user = await _manager.FindEmployeeUserByIdAsync(_manager.GetUserId(HttpContext.User));
+            try
+            {
+                var result = await _manager.CancelOfferByEmployee(user.EmployeeUser.Id, offerId);
+                if (result)
+                    return RedirectToAction("SentOffer");
+                return View("_Error", new ErrorViewModel
+                {
+                    Message = "Wystąpił nieoczekiwany błąd związany z wycofaniem propozycji",
+                    ReturnUrl = Url.Action("SentOffer", "AccountEmployee")
+                });
+            }
+            catch (Exception e)
+            {
+                return View("_Error", new ErrorViewModel
+                {
+                    Message = "Wystąpił niekoreślony błąd w aplikacji",
+                    ReturnUrl = Url.Action("SentOffer", "AccountEmployee")
+                });
+            }
         }
 
         [Authorize(Roles = "Employee")]
         [HttpPost]
-        public async Task<IActionResult> Negotiate(NegotiationViewModel vm)
+        public async Task<IActionResult> AcceptOffer(int offerId)
         {
-            if (ModelState.IsValid)
+            var user = await _manager.FindEmployeeUserByIdAsync(_manager.GetUserId(HttpContext.User));
+            try
             {
-                try
+                var result = await _manager.AcceptOfferByEmployeeUser(user.EmployeeUser.Id, offerId);
+                if (result)
+                    return RedirectToAction("SentOffer");
+                return View("_Error", new ErrorViewModel
                 {
-                    var negotation = _mapper.Map<Negotiation>(vm);
-                    var result = await _manager.AddOrUpdateNegotiation(negotation
-                        ,Enums.NegotiationStatus.Consider
-                        ,Enums.NegotiationStatus.WaitingForDeveloperResponse);
-                    if (result>0)
-                    {
-                        return RedirectToAction("SentOffer","AccountEmployee");
-                    }
-                    throw new Exception();
-                }
-                catch (Exception e)
-                {
-                    return View("_Error", new ErrorViewModel
-                    {
-                        Message = "Wystąpił nieoczekiwany związany z wysłaniem nowej propozycji",
-                        ReturnUrl = Url.Action("SentOffer", "AccountEmployee")
-                    });
-                }
+                    Message = "Wystąpił nieoczekiwany błąd związany z akceptowaniem propozycji",
+                    ReturnUrl = Url.Action("SentOffer", "AccountEmployee")
+                });
             }
-            return RedirectToAction("SentOffer");
+            catch (Exception e)
+            {
+                return View("_Error", new ErrorViewModel
+                {
+                    Message = "Wystąpił niekoreślony błąd w aplikacji",
+                    ReturnUrl = Url.Action("SentOffer", "AccountEmployee")
+                });
+            }
         }
     }
 }

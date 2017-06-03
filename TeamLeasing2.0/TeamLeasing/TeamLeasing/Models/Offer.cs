@@ -12,10 +12,10 @@ namespace TeamLeasing.Models
         public decimal? MaxSalary { get; set; }
 
         [Display(Name = "Status")]
-        public Enums.OfferStatusForDeveloper StatusForDeveloper { get; set; }
+        public Enums.OfferStatus StatusForDeveloper { get; set; }
 
         [Display(Name = "Status")]
-        public Enums.OfferStatusForEmployee StatusForEmployee { get; set; }
+        public Enums.OfferStatus StatusForEmployee { get; set; }
 
         [Display(Name = "Poziom")]
         public Enums.Level Level { get; set; }

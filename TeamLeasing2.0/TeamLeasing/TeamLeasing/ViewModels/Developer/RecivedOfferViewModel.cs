@@ -4,6 +4,8 @@ namespace TeamLeasing.ViewModels.Developer
 {
     public class RecivedOfferViewModel
     {
+        public int OfferId { get; set; }
+
         [Display(Name = "Wynagrodzenie")]
         public decimal? ConstSalary { get; set; }
 
@@ -30,5 +32,8 @@ namespace TeamLeasing.ViewModels.Developer
 
         [Display(Name = "Firma")]
         public string Company { get; set; }
+
+        [Display(Name = "Trwające negocjacje")]
+        public NegotiationViewModel NegotiationViewModel { get; set; }
     }
 }

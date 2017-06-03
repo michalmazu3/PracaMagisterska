@@ -277,21 +277,24 @@ namespace TeamLeasing.Migrations
                 name: "Offers",
                 columns: table => new
                 {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    AdditionalInformation = table.Column<string>(nullable: true),
+                    ConstSalary = table.Column<decimal>(nullable: true),
                     DeveloperUserId = table.Column<int>(nullable: false),
                     EmployeeUserId = table.Column<int>(nullable: false),
-                    ConstSalary = table.Column<decimal>(nullable: false),
+                    EmploymentType = table.Column<int>(nullable: false),
                     IsHidden = table.Column<bool>(nullable: false),
                     Level = table.Column<int>(nullable: false),
-                    MaxSalary = table.Column<decimal>(nullable: false),
-                    MinSalary = table.Column<decimal>(nullable: false),
-                    OfferStatus = table.Column<string>(nullable: true),
+                    MaxSalary = table.Column<decimal>(nullable: true),
+                    MinSalary = table.Column<decimal>(nullable: true),
                     StatusForDeveloper = table.Column<int>(nullable: false),
                     StatusForEmployee = table.Column<int>(nullable: false),
                     TechnologyId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Offers", x => new { x.DeveloperUserId, x.EmployeeUserId });
+                    table.PrimaryKey("PK_Offers", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Offers_DeveloperUsers_DeveloperUserId",
                         column: x => x.DeveloperUserId,
@@ -333,6 +336,28 @@ namespace TeamLeasing.Migrations
                         name: "FK_DeveloperUserJob_Jobs_JobId",
                         column: x => x.JobId,
                         principalTable: "Jobs",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Negotiation",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false),
+                    AdditionalInformation = table.Column<string>(nullable: true),
+                    EmploymentType = table.Column<string>(nullable: true),
+                    Salary = table.Column<int>(nullable: false),
+                    StatusForDeveloper = table.Column<int>(nullable: false),
+                    StatusForEmployee = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Negotiation", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Negotiation_Offers_Id",
+                        column: x => x.Id,
+                        principalTable: "Offers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -395,6 +420,11 @@ namespace TeamLeasing.Migrations
                 column: "TechnologyId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Offers_DeveloperUserId",
+                table: "Offers",
+                column: "DeveloperUserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Offers_EmployeeUserId",
                 table: "Offers",
                 column: "EmployeeUserId");
@@ -440,13 +470,16 @@ namespace TeamLeasing.Migrations
                 name: "Messages");
 
             migrationBuilder.DropTable(
-                name: "Offers");
+                name: "Negotiation");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "Jobs");
+
+            migrationBuilder.DropTable(
+                name: "Offers");
 
             migrationBuilder.DropTable(
                 name: "DeveloperUsers");

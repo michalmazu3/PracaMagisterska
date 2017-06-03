@@ -9,8 +9,8 @@ using TeamLeasing.Models;
 namespace TeamLeasing.Migrations
 {
     [DbContext(typeof(TeamLeasingContext))]
-    [Migration("20170527093831_init")]
-    partial class init
+    [Migration("20170603153545_1")]
+    partial class _1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -274,23 +274,47 @@ namespace TeamLeasing.Migrations
                     b.ToTable("Messages");
                 });
 
+            modelBuilder.Entity("TeamLeasing.Models.Negotiation", b =>
+                {
+                    b.Property<int>("Id");
+
+                    b.Property<string>("AdditionalInformation");
+
+                    b.Property<int>("EmploymentType");
+
+                    b.Property<int>("Salary");
+
+                    b.Property<int>("StatusForDeveloper");
+
+                    b.Property<int>("StatusForEmployee");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Negotiation");
+                });
+
             modelBuilder.Entity("TeamLeasing.Models.Offer", b =>
                 {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("AdditionalInformation");
+
+                    b.Property<decimal?>("ConstSalary");
+
                     b.Property<int>("DeveloperUserId");
 
                     b.Property<int>("EmployeeUserId");
 
-                    b.Property<decimal>("ConstSalary");
+                    b.Property<int>("EmploymentType");
 
                     b.Property<bool>("IsHidden");
 
                     b.Property<int>("Level");
 
-                    b.Property<decimal>("MaxSalary");
+                    b.Property<decimal?>("MaxSalary");
 
-                    b.Property<decimal>("MinSalary");
-
-                    b.Property<string>("OfferStatus");
+                    b.Property<decimal?>("MinSalary");
 
                     b.Property<int>("StatusForDeveloper");
 
@@ -298,7 +322,9 @@ namespace TeamLeasing.Migrations
 
                     b.Property<int>("TechnologyId");
 
-                    b.HasKey("DeveloperUserId", "EmployeeUserId");
+                    b.HasKey("Id");
+
+                    b.HasIndex("DeveloperUserId");
 
                     b.HasIndex("EmployeeUserId");
 
@@ -447,6 +473,14 @@ namespace TeamLeasing.Migrations
                     b.HasOne("TeamLeasing.Models.Technology", "Technology")
                         .WithMany("Jobs")
                         .HasForeignKey("TechnologyId");
+                });
+
+            modelBuilder.Entity("TeamLeasing.Models.Negotiation", b =>
+                {
+                    b.HasOne("TeamLeasing.Models.Offer", "Offer")
+                        .WithOne("Negotiation")
+                        .HasForeignKey("TeamLeasing.Models.Negotiation", "Id")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("TeamLeasing.Models.Offer", b =>

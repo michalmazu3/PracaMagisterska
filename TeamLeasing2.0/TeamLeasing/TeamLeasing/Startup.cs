@@ -1,24 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using TeamLeasing.DAL;
-using Microsoft.DotNet.Cli.Utils;
 using TeamLeasing.Infrastructure;
 using TeamLeasing.Infrastructure.Helper;
 using TeamLeasing.Models;
-using TeamLeasing.Services;
 using TeamLeasing.Services.AppConfigurationService;
+using TeamLeasing.Services.AppConfigurationService.CheckAccesToActionService;
 using TeamLeasing.Services.AppConfigurationService.EmploymentTypeService;
 using TeamLeasing.Services.Mail;
 using TeamLeasing.Services.MailService;
@@ -28,8 +22,8 @@ namespace TeamLeasing
 {
     public class Startup
     {
-        private IHostingEnvironment _env;
-        private IConfigurationRoot _configuration;
+        private readonly IConfigurationRoot _configuration;
+        private readonly IHostingEnvironment _env;
 
         public Startup(IHostingEnvironment env)
         {
@@ -38,7 +32,7 @@ namespace TeamLeasing
             builder.SetBasePath(_env.ContentRootPath).AddJsonFile("config.json").AddEnvironmentVariables();
             _configuration = builder.Build();
         }
-        
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSession(options =>
@@ -53,7 +47,6 @@ namespace TeamLeasing
             //    .AddUserManager<OptimizedUserManager>();
 
 
-
             services.AddIdentity<User, IdentityRole>(c =>
                 {
                     c.Password.RequiredLength = 4;
@@ -63,37 +56,37 @@ namespace TeamLeasing
                 })
                 .AddEntityFrameworkStores<TeamLeasingContext>()
                 .AddDefaultTokenProviders()
-                .AddUserManager<OptimizedDbManager>(); ;
-         
-       
+                .AddUserManager<OptimizedDbManager>();
+            ;
+
+
             services.AddMvc(config =>
             {
                 if (_env.IsProduction())
-                {
                     config.Filters.Add(new RequireHttpsAttribute());
-                }
             });
             services.AddSession();
             services.AddDbContext<TeamLeasingContext>(ServiceLifetime.Scoped);
             services.AddSingleton(_configuration);
             services.AddScoped<TeamLeasingSeedData>();
-      
+
             services.AddSingleton<TeamLeasingSeedData>();
             services.AddSingleton<SeedRoles>();
             //service
-            services.AddSingleton<IConfigurationService, ConfigurationService>();
-            services.AddSingleton<IUserService, UserService>();
+            services.AddScoped<IConfigurationService, ConfigurationService>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ICheckAccesToActionService, CheckAccesToActionService>();
             services.AddScoped<IUploadService, UploadService>();
             services.AddScoped<IMessage, MessageModel>();
             services.AddScoped<ISendEmail, SendEmail>();
             services.AddScoped<IEmploymentType, EmploymentType>();
+
             //helper
             services.AddScoped<ILoadingDataToSidebarHelper, LoadingDataToSidebarHelper>();
             services.AddScoped<ISearchHelper, SearchHelper>();
 
-             services.AddAutoMapper();
+            services.AddAutoMapper();
             services.AddLogging();
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -123,12 +116,11 @@ namespace TeamLeasing
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    "default",
+                    "{controller=Home}/{action=Index}/{id?}");
             });
             seedRoles.Seed().Wait();
-           seeder.Seed().Wait();
-
+            seeder.Seed().Wait();
         }
     }
 }

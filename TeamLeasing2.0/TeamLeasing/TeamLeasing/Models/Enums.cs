@@ -50,23 +50,18 @@ namespace TeamLeasing.Models
             [Display(Name = "Do rozpatrzenia")] Consider,
             [Display(Name = "Rezygnacja")] Resignation,
             [Display(Name = "Odrzucono")] Rejected,
-            [Display(Name = "Zaakceptowao")] Accepted
+            [Display(Name = "Zaakceptowao")] Accepted,
+            [Display(Name = "Wycofano")] Canceled,
+
         }
 
 
-        public enum OfferStatusForDeveloper
+        public enum OfferStatus
         {
             [Display(Name = "Nowa")] New,
             [Display(Name = "Rezygnacja")] Resignation,
             [Display(Name = "Wycofano")] Canceled,
-            [Display(Name = "Zaakceptowao")] Accepted,
-            [Display(Name = "W trakcie negocjacji")] Negotiation
-        }
-
-        public enum OfferStatusForEmployee
-        {
             [Display(Name = "W toku")] InProgress,
-            [Display(Name = "Zakończono")] Finished,
             [Display(Name = "Zaakceptowao")] Accepted,
             [Display(Name = "W trakcie negocjacji")] Negotiation,
             [Display(Name = "Odrzucono")] Rejected

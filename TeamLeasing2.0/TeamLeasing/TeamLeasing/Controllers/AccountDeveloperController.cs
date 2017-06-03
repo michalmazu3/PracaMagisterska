@@ -17,7 +17,7 @@ using TeamLeasing.ViewModels.Developer.Account;
 
 namespace TeamLeasing.Controllers
 {
-    [Route("account")]
+    [Route("account/developer/[action]")]
     public class AccountDeveloperController : Controller
     {
         private readonly IHttpContextAccessor _contextAccessor;
@@ -41,7 +41,6 @@ namespace TeamLeasing.Controllers
             _environment = environment;
         }
 
-        [Route("[action]")]
         [Authorize(Roles = "Developer")]
         public async Task<IActionResult> Edit()
         {
@@ -66,7 +65,6 @@ namespace TeamLeasing.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Developer")]
-        [Route("[action]")]
         public async Task<IActionResult> Edit(EditDeveloperAccountViewModel vm)
         {
             if (ModelState.IsValid)
@@ -134,7 +132,6 @@ namespace TeamLeasing.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Developer")]
-        [Route("[action]")]
         public async Task<IActionResult> UploadCV(IFormFile cvFile)
         {
             if (ModelState.IsValid)
@@ -168,7 +165,6 @@ namespace TeamLeasing.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Developer")]
-        [Route("[action]")]
         public async Task<IActionResult> UploadPhoto(IFormFile photoFile)
         {
             if (ModelState.IsValid)
@@ -200,7 +196,6 @@ namespace TeamLeasing.Controllers
 
 
         [Authorize(Roles = "Developer")]
-        [Route("[action]")]
         public async Task<IActionResult> DeletePhoto()
         {
             var userId = _manager.GetUserId(HttpContext.User);
@@ -237,7 +232,7 @@ namespace TeamLeasing.Controllers
             return View("Application", vm);
         }
 
-        [Route("[action]/{jobId}")]
+        [Route("/{jobId}")]
         [Authorize(Roles = "Developer")]
         public async Task<IActionResult> Resign(int jobId)
         {
@@ -254,7 +249,7 @@ namespace TeamLeasing.Controllers
 
         [Authorize(Roles = "Developer")]
         [HttpPost]
-        [Route("[action]/{jobId}")]
+        [Route("/{jobId}")]
         public async Task<IActionResult> Apply(int jobId)
         {
             var userId = _manager.GetUserId(HttpContext.User);
@@ -269,13 +264,62 @@ namespace TeamLeasing.Controllers
         }
 
         [Authorize(Roles = "Developer")]
-        [Route("[action]")]
         public async Task<IActionResult> RecivedOffers()
         {
             var user = await _manager.FindDeveloperUserByIdAsync(_manager.GetUserId(HttpContext.User));
             var offerList = await _manager.GetRecivedOfferByDeveloperUserId(user.DeveloperUser.Id);
             var vm = _mapper.Map<List<RecivedOfferViewModel>>(offerList);
             return View("RecivedOffers", vm);
+        }
+
+        [Authorize(Roles = "Developer")]
+        [HttpPost]
+        public async Task<IActionResult> AcceptOffer(int offerId)
+        {
+            var user = await _manager.FindDeveloperUserByIdAsync(_manager.GetUserId(HttpContext.User));
+            try
+            {
+                if (await _manager.AcceptOfferByDeveloperUser(user.DeveloperUser.Id, offerId))
+                    return RedirectToAction("RecivedOffers");
+                return View("_Error", new ErrorViewModel
+                {
+                    Message = "Zaakceptowanie oferty nie powodiło się",
+                    ReturnUrl = Url.Action("RecivedOffers", "AccountDeveloper")
+                });
+            }
+            catch (Exception e)
+            {
+                return View("_Error", new ErrorViewModel
+                {
+                    Message = "Wystąpił nieokreslony błąd w aplikacji",
+                    ReturnUrl = Url.Action("Index", "Home")
+                });
+            }
+        }
+
+        [Authorize(Roles = "Developer")]
+        [HttpPost]
+        public async Task<IActionResult> RejectOffer(int offerId)
+        {
+            var user = await _manager.FindDeveloperUserByIdAsync(_manager.GetUserId(HttpContext.User));
+            try
+            {
+                if (await _manager.RejectOfferByDeveloper(user.DeveloperUser.Id, offerId))
+                    return RedirectToAction("RecivedOffers");
+                return View("_Error", new ErrorViewModel
+                {
+                    Message = "Odrzucenie oferty nie powodiło się",
+                    ReturnUrl = Url.Action("RecivedOffers", "AccountDeveloper")
+                });
+            }
+            catch (Exception e)
+            {
+                return View("_Error", new ErrorViewModel
+                {
+                    Message = "Wystąpił nieokreslony błąd w aplikacji",
+                    ReturnUrl = Url.Action("Index", "Home")
+                });
+            }
         }
     }
 }

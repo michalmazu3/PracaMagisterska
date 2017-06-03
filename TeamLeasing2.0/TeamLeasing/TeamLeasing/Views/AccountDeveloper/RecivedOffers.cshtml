@@ -1,4 +1,6 @@
-﻿@model List<TeamLeasing.ViewModels.Developer.RecivedOfferViewModel>
+﻿@using TeamLeasing.Services.AppConfigurationService.CheckAccesToActionService
+@inject ICheckAccesToActionService CheckAccesToActionService
+@model List<TeamLeasing.ViewModels.Developer.RecivedOfferViewModel>
 <div id="application">
     <h2>Przychodzące ofert</h2>
     <table class="table">
@@ -38,10 +40,33 @@
                 <td>@item.Technology</td>
                 <td>@item.Level</td>
                 <td>@item.EmploymentType</td>
-                <td>@item.StatusForEmployee</td>
-                <td><button class="btn-danger">Odrzuć</button></td>
-                <td><button class="btn-success">Zaakceptuj</button></td>
-                <td><button class="btn-info">Negocjuj</button></td>
+                <td>@item.StatusForDeveloper</td>
+                <td>
+                    <form asp-controller="AccountDeveloper" asp-action="RejectOffer" asp-route-offerId="@item.OfferId">
+                        <button class="btn btn-danger" @if (!CheckAccesToActionService.RejectOfferByDeveloper(item.StatusForDeveloper))
+                                                       {
+                                                           <text> disabled class="btn" </text>
+                                                       }>Odrzuć</button>
+                    </form>
+                </td>
+                <td>
+                    <form asp-controller="AccountDeveloper" asp-action="AcceptOffer" asp-route-offerId="@item.OfferId">
+                        <button class="btn btn-success"  @if (!CheckAccesToActionService.AcceptOfferByDeveloper(item.StatusForDeveloper, item.NegotiationViewModel != null?item.NegotiationViewModel.StatusForDeveloper : null))
+                        {
+                                                             <text> disabled class="btn" </text>
+                                                         }>Zaakceptuj</button>
+                    </form>
+                </td>
+                <td>
+                   
+                        <button class="btn btn-info" @if (!CheckAccesToActionService.NegotiateOfferByDeveloper(item.StatusForDeveloper, item.NegotiationViewModel != null ? item.NegotiationViewModel.StatusForDeveloper : null))
+                                                     {
+                                                         <text> disabled class="btn" </text>
+                                                     } asp-controller="Negotation" asp-action="Negotiate" asp-route-offerId="@item.OfferId">Negocjuj</button>
+             
+                   
+                </td>
+         
 
             </tr>
             if (!string.IsNullOrEmpty(item.AdditionalInformation))

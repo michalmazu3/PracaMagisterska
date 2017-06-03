@@ -19,6 +19,7 @@ namespace TeamLeasing.Services.AppConfigurationService.EmploymentTypeService
 
         public SelectList GetSelectListEmploymentType()
         {
+            
             var selectList = GetListEmploymentType().Select(s => s.GetAttribute().Name.ToString())
                 .ToList();
             selectList.Insert(0, "");

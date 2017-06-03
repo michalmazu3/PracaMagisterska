@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TeamLeasing.Models
 {
-    public class DeveloperUser
+    public class DeveloperUser  
     {   
         public int Id { get; set; }
         [Required]
