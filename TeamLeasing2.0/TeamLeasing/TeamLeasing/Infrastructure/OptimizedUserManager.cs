@@ -210,7 +210,6 @@ namespace TeamLeasing.Infrastructure
             var jobDao = await GetDeveloperUsersJob(w => w.DeveloperUser.UserId == userId && w.Job.Id == jobId);
             var jobToResign = jobDao.FirstOrDefault();
             jobToResign.StatusForDeveloper = Enums.JobStatusForDeveloper.Resignation;
-            var r = _teamLeasingContext.DeveloperUserJob.Update(jobToResign);
             var result = await _teamLeasingContext.SaveChangesAsync();
             return result;
         }
@@ -357,16 +356,32 @@ namespace TeamLeasing.Infrastructure
 
         #region Negotiation
 
-        public async Task<int> AddOrUpdateNegotiation(Negotiation negotiation)
+        public async Task<bool> RejectOffer(int developerId, int offerId)
         {
+            var offer = await GetOffer(w => w.DeveloperUserId == developerId && w.Id == offerId)
+                .ContinueWith(t => t.Result.FirstOrDefault());
+            offer.StatusForEmployee = Enums.OfferStatusForEmployee.Rejected;
+            offer.StatusForDeveloper = Enums.OfferStatusForDeveloper.Resignation;
+
+          
+
+            var result = await _teamLeasingContext.SaveChangesAsync();
+            return result == 0 ? false : true;
+        }
+
+
+        public async Task<int> AddOrUpdateNegotiation(Negotiation negotiation, Enums.NegotiationStatus developerStatus,
+            Enums.NegotiationStatus employeeStatus)
+        {
+            negotiation.StatusForDeveloper = developerStatus;
+            negotiation.StatusForEmployee = employeeStatus;
             var result = await FindNegotiation(negotiation.Id);
-            if (result == null)
-                await _teamLeasingContext.Negotiation.AddAsync(negotiation);
+            if (result == null) await _teamLeasingContext.Negotiation.AddAsync(negotiation);
             else
                 _teamLeasingContext.Update(negotiation);
-            var offer = await GetOffer(w => w.Id == negotiation.OfferId).ContinueWith(t => t.Result.FirstOrDefault());
-            offer.StatusForEmployee = Enums.OfferStatusForEmployee.Negotiations;
-            offer.StatusForDeveloper = Enums.OfferStatusForDeveloper.Negotiations;
+           // var offer = await GetOffer(w => w.Id == negotiation.OfferId).ContinueWith(t => t.Result.FirstOrDefault());
+          //  offer.StatusForEmployee = Enums.OfferStatusForEmployee.Negotiation;
+          //  offer.StatusForDeveloper = Enums.OfferStatusForDeveloper.Negotiation;
 
             var returnResult = await _teamLeasingContext.SaveChangesAsync();
             return returnResult;

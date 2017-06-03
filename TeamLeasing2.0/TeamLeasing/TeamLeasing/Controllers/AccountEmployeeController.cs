@@ -164,7 +164,9 @@ namespace TeamLeasing.Controllers
                 try
                 {
                     var negotation = _mapper.Map<Negotiation>(vm);
-                    var result = await _manager.AddOrUpdateNegotiation(negotation);
+                    var result = await _manager.AddOrUpdateNegotiation(negotation
+                        ,Enums.NegotiationStatus.Consider
+                        ,Enums.NegotiationStatus.WaitingForDeveloperResponse);
                     if (result>0)
                     {
                         return RedirectToAction("SentOffer","AccountEmployee");

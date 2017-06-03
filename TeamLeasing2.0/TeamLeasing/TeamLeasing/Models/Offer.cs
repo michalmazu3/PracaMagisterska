@@ -8,28 +8,24 @@ namespace TeamLeasing.Models
 
         [Display(Name = "Wynagrodzenie")]
         public decimal? ConstSalary { get; set; }
-
         public decimal? MinSalary { get; set; }
         public decimal? MaxSalary { get; set; }
+
+        [Display(Name = "Status")]
         public Enums.OfferStatusForDeveloper StatusForDeveloper { get; set; }
+
+        [Display(Name = "Status")]
         public Enums.OfferStatusForEmployee StatusForEmployee { get; set; }
 
         [Display(Name = "Poziom")]
         public Enums.Level Level { get; set; }
-
         [Display(Name = "Rodzaj zatrudnienia")]
         public Enums.EmploymentType EmploymentType { get; set; }
-
         public string AdditionalInformation { get; set; }
         public bool IsHidden { get; set; }
-
-        [Display(Name = "Status")]
-        public string OfferStatus { get; set; }
-
         [Required]
         [Display(Name = "Technologia")]
         public virtual Technology Technology { get; set; }
-
         public int DeveloperUserId { get; set; }
         public virtual DeveloperUser DeveloperUser { get; set; }
         public int EmployeeUserId { get; set; }

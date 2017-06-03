@@ -9,9 +9,10 @@ using TeamLeasing.Models;
 namespace TeamLeasing.Migrations
 {
     [DbContext(typeof(TeamLeasingContext))]
-    partial class TeamLeasingContextModelSnapshot : ModelSnapshot
+    [Migration("20170603095115_8")]
+    partial class _8
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.1")
@@ -275,11 +276,14 @@ namespace TeamLeasing.Migrations
 
             modelBuilder.Entity("TeamLeasing.Models.Negotiation", b =>
                 {
-                    b.Property<int>("Id");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("AdditionalInformation");
 
                     b.Property<string>("EmploymentType");
+
+                    b.Property<int>("OfferId");
 
                     b.Property<int>("Salary");
 
@@ -288,6 +292,9 @@ namespace TeamLeasing.Migrations
                     b.Property<int>("StatusForEmployee");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("OfferId")
+                        .IsUnique();
 
                     b.ToTable("Negotiation");
                 });
@@ -478,7 +485,7 @@ namespace TeamLeasing.Migrations
                 {
                     b.HasOne("TeamLeasing.Models.Offer", "Offer")
                         .WithOne("Negotiation")
-                        .HasForeignKey("TeamLeasing.Models.Negotiation", "Id")
+                        .HasForeignKey("TeamLeasing.Models.Negotiation", "OfferId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

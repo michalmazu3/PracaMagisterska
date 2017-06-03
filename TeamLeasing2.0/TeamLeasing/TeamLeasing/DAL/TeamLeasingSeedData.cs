@@ -460,7 +460,7 @@ namespace TeamLeasing.DAL
                         Technology = _context.Technologies.Where(t => t.Name.ToLower() == "javascript")
                             .ToList()
                             .FirstOrDefault(),
-                        EmployeeUserId =11,
+                        EmployeeUserId =1,
                         EmploymentType =Enums.EmploymentType.UoP.GetAttribute().Name,
                         Level = Enums.Level.Regular,
 
@@ -475,7 +475,7 @@ namespace TeamLeasing.DAL
                         Technology = _context.Technologies.Where(t => t.Name.ToLower() == "sql")
                             .ToList()
                             .FirstOrDefault(),
-                        EmployeeUserId =11,
+                        EmployeeUserId =1,
                         EmploymentType =Enums.EmploymentType.UoP.GetAttribute().Name
 
 
@@ -490,7 +490,7 @@ namespace TeamLeasing.DAL
                         Technology = _context.Technologies.Where(t => t.Name.ToLower() == "sql")
                             .ToList()
                             .FirstOrDefault(),
-                        EmployeeUserId =12,
+                        EmployeeUserId =2,
                         EmploymentType =Enums.EmploymentType.B2B.GetAttribute().Name,
                         Level = Enums.Level.Junior
 
@@ -505,7 +505,7 @@ namespace TeamLeasing.DAL
                         Technology = _context.Technologies.Where(t => t.Name.ToLower() == "c#")
                             .ToList()
                             .FirstOrDefault(),
-                        EmployeeUserId = 12,
+                        EmployeeUserId = 2,
                         EmploymentType =Enums.EmploymentType.Any.GetAttribute().Name,
 
 

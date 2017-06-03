@@ -4,99 +4,77 @@ namespace TeamLeasing.Models
 {
     public static class Enums
     {
+        public enum EmploymentType
+        {
+            [Display(Name = "Umowa o prace")] UoP,
+            [Display(Name = "Umowa zlecenie")] UZ,
+            [Display(Name = "Umowa o dzieło")] UoD,
+            [Display(Name = "B2B")] B2B,
+            [Display(Name = "Dowolna")] Any
+        }
+
+        public enum IsFinishedUniversity
+        {
+            [Display(Name = "Ukończono")] Finished,
+            [Display(Name = "W trakcie")] InProgress,
+            [Display(Name = "Brak")] NotFinished
+        }
 
         public enum JobStatusForDeveloper
         {
-            [Display(Name = "Do rozpatrzenia")]
-            Applying,
-            [Display(Name = "Rezygnacja")]
-            Resignation,
-            [Display(Name = "Odrzucono")]
-            Rejected,
-            [Display(Name = "Zaakceptowao")]
-            Accepted,
-            [Display(Name = "Zakończono oferte")]
-            Finished
+            [Display(Name = "Do rozpatrzenia")] Applying,
+            [Display(Name = "Rezygnacja")] Resignation,
+            [Display(Name = "Odrzucono")] Rejected,
+            [Display(Name = "Zaakceptowao")] Accepted,
+            [Display(Name = "Zakończono oferte")] Finished
         }
-        public enum OfferStatusForDeveloper
-        {
-            [Display(Name = "Nowa")]
-            New,
-            [Display(Name = "Rezygnacja")]
-            Resignation,
-            [Display(Name = "Wycofano")]
-            Canceled,
-            [Display(Name = "Zaakceptowao")]
-            Accepted,
-            [Display(Name = "W trakcie negocjacji")]
-            Negotiations
-        }
+
         public enum JobStatusForEmployee
         {
-            [Display(Name = "W toku")]
-            InProgress,
-            [Display(Name = "Zakończono")]
-            Finished,
-            [Display(Name = "Zatwierdzono aplikacje")]
-            Approve
+            [Display(Name = "W toku")] InProgress,
+            [Display(Name = "Zakończono")] Finished,
+            [Display(Name = "Zatwierdzono aplikacje")] Approve
+        }
+
+        public enum Level
+        {
+            [Display(Name = "Junior")] Junior,
+            [Display(Name = "Regular")] Regular,
+            [Display(Name = "Senior")] Senior
+        }
+
+        public enum NegotiationStatus
+        {
+            [Display(Name = "Oczekiwanie na opowiedź programisty")] WaitingForDeveloperResponse,
+            [Display(Name = "Oczekiwanie na opowiedź pracodawcy")] WaitingForEmployeeResponse,
+            [Display(Name = "Do rozpatrzenia")] Consider,
+            [Display(Name = "Rezygnacja")] Resignation,
+            [Display(Name = "Odrzucono")] Rejected,
+            [Display(Name = "Zaakceptowao")] Accepted
+        }
+
+
+        public enum OfferStatusForDeveloper
+        {
+            [Display(Name = "Nowa")] New,
+            [Display(Name = "Rezygnacja")] Resignation,
+            [Display(Name = "Wycofano")] Canceled,
+            [Display(Name = "Zaakceptowao")] Accepted,
+            [Display(Name = "W trakcie negocjacji")] Negotiation
         }
 
         public enum OfferStatusForEmployee
         {
-            [Display(Name = "W toku")]
-            InProgress,
-            [Display(Name = "Zakończono")]
-            Finished,
-            [Display(Name = "Zaakceptowao")]
-            Accepted,
-            [Display(Name = "W trakcie negocjacji")]
-            Negotiations,
-           [Display(Name = "Odrzucono")]
-            Rejected
-        }
-        public enum Level
-        {
-            [Display(Name = "Junior")]
-            Junior,
-            [Display (Name = "Regular")]
-            Regular,
-            [Display(Name = "Senior")]
-            Senior
-        }
-         public enum IsFinishedUniversity
-        {
-            [Display(Name = "Ukończono")]
-            Finished,
-            [Display(Name = "W trakcie")]
-            InProgress,
-            [Display(Name = "Brak")]
-            NotFinished
+            [Display(Name = "W toku")] InProgress,
+            [Display(Name = "Zakończono")] Finished,
+            [Display(Name = "Zaakceptowao")] Accepted,
+            [Display(Name = "W trakcie negocjacji")] Negotiation,
+            [Display(Name = "Odrzucono")] Rejected
         }
 
-        public enum EmploymentType
-        {
-            [Display(Name = "Umowa o prace")]
-            UoP,
-            [Display(Name = "Umowa zlecenie")]
-            UZ,
-            [Display(Name = "Umowa o dzieło")]
-            UoD,
-            [Display(Name = "B2B")]
-            B2B,
-            [Display(Name = "Dowolna")]
-            Any,
-        }
-
-        public enum OfferStatus
-        {
-            InProgress,
-            Rejected,
-            Accepted
-        }
 
         public enum Province
         {
-
             Dolnoslaskie,
             KujawskoPomorskie,
             Lubelskie,
@@ -112,7 +90,7 @@ namespace TeamLeasing.Models
             Swietokrzyskie,
             WarminskoMazurskie,
             Wielkopolskie,
-            Zachodniopomorskie,
+            Zachodniopomorskie
         }
     }
 }
