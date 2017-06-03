@@ -23,7 +23,7 @@ namespace TeamLeasing.Controllers
         [Authorize]
         public async Task<IActionResult> Negotiate(int offerId)
         {
-            return View("_Negotation", new NegotiationViewModel { OfferId = offerId });
+            return View("_Negotation", new NegotiationViewModel {OfferId = offerId});
         }
 
         [Authorize]
@@ -33,21 +33,17 @@ namespace TeamLeasing.Controllers
             if (ModelState.IsValid)
                 try
                 {
-                    var user =await  _manager.GetUser(_manager.GetUserId(HttpContext.User));
+                    var user = await _manager.GetUser(_manager.GetUserId(HttpContext.User));
                     int result;
                     var negotation = _mapper.Map<Negotiation>(vm);
-                    if (user.DeveloperUser!=null)
-                    {
+                    if (user.DeveloperUser != null)
                         result = await _manager.AddOrUpdateNegotiation(negotation
                             , Enums.NegotiationStatus.WaitingForEmployeeResponse
                             , Enums.NegotiationStatus.Consider);
-                    }
                     else
-                    {
                         result = await _manager.AddOrUpdateNegotiation(negotation
                             , Enums.NegotiationStatus.Consider
                             , Enums.NegotiationStatus.WaitingForDeveloperResponse);
-                    }
                     if (result > 0)
                         return RedirectToAction("Negotiate", "Negotation");
                     return View("_Error", new ErrorViewModel
@@ -66,6 +62,5 @@ namespace TeamLeasing.Controllers
                 }
             return RedirectToAction("Negotiate");
         }
-
     }
 }
