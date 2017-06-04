@@ -20,15 +20,13 @@ namespace TeamLeasing.Controllers
             _mapper = mapper;
         }
 
-        [Authorize]
-        public async Task<IActionResult> Negotiate(int offerId)
+        public  IActionResult Negotiate(int offerId)
         {
             return View("_Negotation", new NegotiationViewModel {OfferId = offerId});
         }
 
-        [Authorize]
         [HttpPost]
-        public async Task<IActionResult> Negotiate(NegotiationViewModel vm)
+        public async Task<IActionResult> Negotiate(NegotiationViewModel vm, int offerId)
         {
             if (ModelState.IsValid)
                 try
@@ -37,11 +35,11 @@ namespace TeamLeasing.Controllers
                     int result;
                     var negotation = _mapper.Map<Negotiation>(vm);
                     if (user.DeveloperUser != null)
-                        result = await _manager.AddOrUpdateNegotiation(negotation
+                        result = await _manager.AddOrUpdateNegotiation(negotation, offerId
                             , Enums.NegotiationStatus.WaitingForEmployeeResponse
                             , Enums.NegotiationStatus.Consider);
                     else
-                        result = await _manager.AddOrUpdateNegotiation(negotation
+                        result = await _manager.AddOrUpdateNegotiation(negotation, offerId
                             , Enums.NegotiationStatus.Consider
                             , Enums.NegotiationStatus.WaitingForDeveloperResponse);
                     if (result > 0)

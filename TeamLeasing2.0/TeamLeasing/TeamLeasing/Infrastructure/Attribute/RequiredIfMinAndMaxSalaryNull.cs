@@ -8,7 +8,8 @@ namespace TeamLeasing.Infrastructure.Attribute
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
             var sendingOfferViewModel = (SendingOfferViewModel) validationContext.ObjectInstance;
-            if (sendingOfferViewModel.MinSalary == null || sendingOfferViewModel.MaxSalary == null)
+            if ((sendingOfferViewModel.MinSalary != null || sendingOfferViewModel.MaxSalary != null)
+                || (sendingOfferViewModel.MinSalary == null && sendingOfferViewModel.MaxSalary == null))
                 return ValidationResult.Success;
             var emailStr = value as string;
             return string.IsNullOrEmpty(emailStr)

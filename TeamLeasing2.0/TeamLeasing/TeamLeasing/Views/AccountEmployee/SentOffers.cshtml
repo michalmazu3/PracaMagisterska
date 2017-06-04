@@ -6,7 +6,39 @@
 @inject ICheckAccesToActionService CheckAccesToActionService
 @model List<TeamLeasing.ViewModels.Employee.SentOfferViewModel>
 
- 
+@section scripts
+{
+    
+    <script src="lib/jquery/src/jquery.js"></script>
+    
+    @*<script>
+        var statusOffer = $("#sent-offers-status").text();
+        var negotiateStatus = $("#negotation-status").text();
+      
+            console.log("1");
+            $("#sent-offers-negotiate").bind('click',
+                function(e) {
+                    e.preventDefault();
+                });
+            $("#sent-offers-negotiate").attr("disabled", true);
+       
+       
+        
+            if (negotiateStatus === "Do rozpatrzenia" && statusOffer !== "W trakcie negocjacji") {
+                console.log("2");
+                $("#sent-offers-negotiate").unbind('click', false);
+                $("#sent-offers-negotiate").attr("disabled", false);
+            } else {
+                console.log("3");
+                $('#sent-offers-negotiate').bind('click',
+                    function(e) {
+                        e.preventDefault();
+                    });
+                $("#sent-offers-negotiate").attr("disabled", true);
+            }
+         
+    </script>*@
+}
 <div id="application">
     <h2>Wysłane propozycje</h2>
     <table class="table">
@@ -47,7 +79,7 @@
                 <td>@item.EmploymentType</td>
                 <td>@item.Technology</td>
                 <td>@item.Level</td>
-                <td>@item.StatusForEmployee</td>
+                <td><p id="sent-offers-status">@item.StatusForEmployee</p></td>
                 <td>
                     <form asp-controller="AccountEmployee" asp-action="CanceldOffer" asp-route-offerId="@item.OfferId">
                         <button class="btn btn-danger" @if (!CheckAccesToActionService.ResignOfferByEmployee(item.StatusForEmployee))
@@ -64,10 +96,17 @@
                                                          }>Zaakceptuj</button>
                     </form>
                 </td>
-                <td><button class="btn btn-info"  @if (!CheckAccesToActionService.NegotiateOfferByEmployee(item.StatusForEmployee, item.NegotiationViewModel != null ? item.NegotiationViewModel.StatusForEmployee : null))
-                {
-                                                      <text> disabled class="btn" </text>
-                                                  } asp-controller="AccountEmployee" asp-action="Negotiate" asp-route-offerId="@item.OfferId">Negocjuj</button></td>
+                <td>
+                    <form asp-controller="Negotation" asp-action="Negotiate" method="get" asp-route-offerId="@item.OfferId">
+                        <input type="hidden" name="offerId" value="@item.OfferId"/>
+                        <button  class="btn btn-info" @if (!CheckAccesToActionService.NegotiateOfferByEmployee(item.StatusForEmployee, item.NegotiationViewModel != null?item.NegotiationViewModel.StatusForEmployee : null))
+                                                      {
+                                                          <text> disabled class="btn" </text>
+                                                      }>Negocjuj</button>
+
+                    </form>
+             
+                </td>
              </tr>
 
           
@@ -100,7 +139,7 @@
                         @item.NegotiationViewModel.AdditionalInformation
                     </td>
                     <td>
-                        @item.NegotiationViewModel.StatusForEmployee
+                        <p id="negotation-status">@item.NegotiationViewModel.StatusForEmployee</p>
                     </td>
                 </tr>
             }

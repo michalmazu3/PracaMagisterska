@@ -416,21 +416,37 @@ namespace TeamLeasing.Infrastructure
             return Convert.ToBoolean(await result);
         }
 
+        private async Task<Offer> FindOffer(int id)
+        {
+            return await _teamLeasingContext.Offers
+                .Include(i => i.Negotiation)
+                .Include(i => i.DeveloperUser)
+                .Include(i => i.EmployeeUser)
+                .FirstOrDefaultAsync(f => f.Id == id);
+        }
+
         #endregion
 
 
         #region Negotiation
 
-        public async Task<int> AddOrUpdateNegotiation(Negotiation negotiation, Enums.NegotiationStatus developerStatus,
+        public async Task<int> AddOrUpdateNegotiation(Negotiation negotiation, int offerId,
+            Enums.NegotiationStatus developerStatus,
             Enums.NegotiationStatus employeeStatus)
         {
             negotiation.StatusForDeveloper = developerStatus;
             negotiation.StatusForEmployee = employeeStatus;
-            var result = await FindNegotiation(negotiation.Id);
-            if (result == null) await _teamLeasingContext.Negotiation.AddAsync(negotiation);
+            var offer = await FindOffer(offerId);
+            if (offer.Negotiation == null)
+            {
+                await _teamLeasingContext.Negotiation.AddAsync(negotiation);
+            }
             else
-                _teamLeasingContext.Update(negotiation);
-            var offer = await GetOffer(w => w.Id == negotiation.Id).ContinueWith(t => t.Result.FirstOrDefault());
+            {
+                _teamLeasingContext.Negotiation.Remove(offer.Negotiation);
+                offer.Negotiation = negotiation;
+                await _teamLeasingContext.Negotiation.AddAsync(offer.Negotiation);
+            }
             offer.StatusForEmployee = Enums.OfferStatus.Negotiation;
             offer.StatusForDeveloper = Enums.OfferStatus.Negotiation;
 

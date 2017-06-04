@@ -1,6 +1,42 @@
 ﻿@using TeamLeasing.Services.AppConfigurationService.CheckAccesToActionService
 @inject ICheckAccesToActionService CheckAccesToActionService
 @model List<TeamLeasing.ViewModels.Developer.RecivedOfferViewModel>
+
+@section scripts
+{
+    
+    <script src="lib/jquery/src/jquery.js"></script>
+    
+    @*<script>
+           var statusOffer = $("#recived-offers-status").text();
+        var negotiateStatus = $("#negotation-status").text();
+        if (statusOffer === "Nowa")
+        {
+            console.log("1");
+            $("#recived-offers-negotiate").bind('click',
+                function(e) {
+                    e.preventDefault();
+                });
+            $("#recived-offers-negotiate").attr("disabled", true);
+        }
+        else
+        {
+            if (negotiateStatus === "Do rozpatrzenia" && statusOffer !== "W trakcie negocjacji") {
+                console.log("2");
+                $("#recived-offers-negotiate").unbind('click', false);
+                $("#recived-offers-negotiate").attr("disabled", false);
+            } else {
+                console.log("3");
+                $('#recived-offers-negotiate').bind('click',
+                    function(e) {
+                        e.preventDefault();
+                    });
+                $("#recived-offers-negotiate").attr("disabled", true);
+            }
+        }
+    </script>*@
+}
+
 <div id="application">
     <h2>Przychodzące ofert</h2>
     <table class="table">
@@ -40,7 +76,7 @@
                 <td>@item.Technology</td>
                 <td>@item.Level</td>
                 <td>@item.EmploymentType</td>
-                <td>@item.StatusForDeveloper</td>
+                <td><p id="recived-offers-status">@item.StatusForDeveloper</p></td>
                 <td>
                     <form asp-controller="AccountDeveloper" asp-action="RejectOffer" asp-route-offerId="@item.OfferId">
                         <button class="btn btn-danger" @if (!CheckAccesToActionService.RejectOfferByDeveloper(item.StatusForDeveloper))
@@ -58,11 +94,14 @@
                     </form>
                 </td>
                 <td>
-                   
-                        <button class="btn btn-info" @if (!CheckAccesToActionService.NegotiateOfferByDeveloper(item.StatusForDeveloper, item.NegotiationViewModel != null ? item.NegotiationViewModel.StatusForDeveloper : null))
-                                                     {
-                                                         <text> disabled class="btn" </text>
-                                                     } asp-controller="Negotation" asp-action="Negotiate" asp-route-offerId="@item.OfferId">Negocjuj</button>
+                    <form asp-controller="Negotation" asp-action="Negotiate" method="get" asp-route-offerId="@item.OfferId">
+                       <input type="hidden" name="offerId" value="@item.OfferId"/>
+                        <button  class="btn btn-info" @if (!CheckAccesToActionService.NegotiateOfferByDeveloper(item.StatusForDeveloper, item.NegotiationViewModel != null?item.NegotiationViewModel.StatusForDeveloper : null))
+                                                      {
+                                                          <text> disabled class="btn" </text>
+                                                      }>Negocjuj</button>
+
+                    </form>
              
                    
                 </td>
@@ -80,7 +119,28 @@
                     </td>
                 </tr>
               
+
             }
+                if (item.NegotiationViewModel!=null)
+                {
+                    <tr>
+                        <td>
+                            @Html.LabelFor(l=>item.NegotiationViewModel)
+                        </td>
+                        <td>
+                            @item.NegotiationViewModel.Salary
+                        </td>
+                        <td>
+                            @item.NegotiationViewModel.EmploymentType
+                        </td>
+                        <td colspan="2">
+                            @item.NegotiationViewModel.AdditionalInformation
+                        </td>
+                        <td>
+                            <p id="negotation-status"> @item.NegotiationViewModel.StatusForDeveloper</p>
+                        </td>
+                    </tr>
+                }
         }
 
     </table>

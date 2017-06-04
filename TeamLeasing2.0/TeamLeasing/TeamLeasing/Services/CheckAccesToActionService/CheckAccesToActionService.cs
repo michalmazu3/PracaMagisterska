@@ -7,7 +7,8 @@ namespace TeamLeasing.Services.AppConfigurationService.CheckAccesToActionService
     {
         public bool ResignOfferByEmployee(string status)
         {
-            if (status == Enums.OfferStatus.Canceled.GetAttribute().Name)
+            if (status == Enums.OfferStatus.Canceled.GetAttribute().Name 
+                || status == Enums.OfferStatus.Rejected.GetAttribute().Name)
                 return false;
             return true;
         }

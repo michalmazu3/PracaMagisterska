@@ -344,9 +344,11 @@ namespace TeamLeasing.Migrations
                 name: "Negotiation",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     AdditionalInformation = table.Column<string>(nullable: true),
-                    EmploymentType = table.Column<string>(nullable: true),
+                    EmploymentType = table.Column<int>(nullable: false),
+                    OfferId = table.Column<int>(nullable: false),
                     Salary = table.Column<int>(nullable: false),
                     StatusForDeveloper = table.Column<int>(nullable: false),
                     StatusForEmployee = table.Column<int>(nullable: false)
@@ -355,8 +357,8 @@ namespace TeamLeasing.Migrations
                 {
                     table.PrimaryKey("PK_Negotiation", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Negotiation_Offers_Id",
-                        column: x => x.Id,
+                        name: "FK_Negotiation_Offers_OfferId",
+                        column: x => x.OfferId,
                         principalTable: "Offers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -418,6 +420,12 @@ namespace TeamLeasing.Migrations
                 name: "IX_Jobs_TechnologyId",
                 table: "Jobs",
                 column: "TechnologyId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Negotiation_OfferId",
+                table: "Negotiation",
+                column: "OfferId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Offers_DeveloperUserId",

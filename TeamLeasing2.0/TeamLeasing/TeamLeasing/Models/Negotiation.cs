@@ -16,6 +16,7 @@ namespace TeamLeasing.Models
         [Display(Name = "Status")]
         public Enums.NegotiationStatus StatusForEmployee { get; set; }
 
+        public int OfferId { get; set; }
         public virtual Offer Offer { get; set; }
     }
 }

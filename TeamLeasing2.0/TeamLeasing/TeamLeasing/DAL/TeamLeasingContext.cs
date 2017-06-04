@@ -34,7 +34,7 @@ namespace TeamLeasing.DAL
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Offer>().HasOne(o => o.Negotiation)
-                .WithOne(w => w.Offer).HasForeignKey<Negotiation>(n => n.Id);
+                .WithOne(w => w.Offer).HasForeignKey<Negotiation>(n => n.OfferId);
 
             modelBuilder.Entity<User>().HasOne(h => h.DeveloperUser).WithOne(w => w.User)
                 .HasForeignKey<DeveloperUser>(h => h.UserId);

@@ -11,7 +11,7 @@
 } 
 <div  id="application" >
         <div id="negotiation" >
-            <form class="form-horizontal" method="post" asp-action="Negotiate" asp-controller="Negotation">
+            <form class="form-horizontal" method="post" asp-action="Negotiate" asp-controller="Negotation" asp-route-offerId="@Model.OfferId">
                 <h4 class="modal-title">Wpisz proponowane warunki zatrudnienia</h4>
                 <div class="form-group">
                     <label asp-for="Salary" class="col-sm-2"></label>
@@ -35,7 +35,7 @@
                     </div>
                     <span asp-validation-for="AdditionalInformation" class="help-block"></span>
                 </div>
-                @Html.HiddenFor(f=>f.OfferId)
+            
                 <input type="button" class="btn btn-default" onclick= "history.go(-1)" value="Powrót" />
                 <button type="submit" class="btn btn-default">Negocjuj</button>
 

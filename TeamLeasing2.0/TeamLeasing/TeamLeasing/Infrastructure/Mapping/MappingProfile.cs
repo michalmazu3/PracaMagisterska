@@ -104,6 +104,7 @@ namespace TeamLeasing.Services.Mapping
                 .ForMember(p => p.EmploymentType, opt => opt.MapFrom(src => src.EmploymentType.GetAttribute().Name))
                 .ForMember(p => p.Level, opt => opt.MapFrom(src => src.Level.GetAttribute().Name))
                 .ForMember(p => p.Technology, opt => opt.MapFrom(src => src.Technology.Name))
+                .ForMember(p => p.NegotiationViewModel, opt => opt.MapFrom(src => src.Negotiation))
                 .ForMember(p => p.StatusForDeveloper,
                     opt => opt.MapFrom(src => src.StatusForDeveloper.GetAttribute().Name));
 
@@ -137,7 +138,14 @@ namespace TeamLeasing.Services.Mapping
                 .ForMember(p => p.StatusForEmployee,
                     opt => opt.MapFrom(src => src.StatusForEmployee.GetAttribute().Name))
                 .ForMember(p => p.StatusForDeveloper,
-                    opt => opt.MapFrom(src => src.StatusForDeveloper.GetAttribute().Name)).ReverseMap();
+                    opt => opt.MapFrom(src => src.StatusForDeveloper.GetAttribute().Name));
+
+            CreateMap<NegotiationViewModel, Negotiation>()
+                .ForMember(p => p.EmploymentType,
+                    opt => opt.MapFrom(
+                        src => EnumExtansion.ValueByDisplayName<Enums.EmploymentType>(src.EmploymentType)));
+
+            CreateMap<Negotiation, Negotiation>().ReverseMap();
         }
 
         private List<ApplyingDeveloper> Convert(List<DeveloperUserJob> source)
