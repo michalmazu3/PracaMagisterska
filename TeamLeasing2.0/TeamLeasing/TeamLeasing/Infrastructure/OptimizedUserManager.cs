@@ -69,6 +69,37 @@ namespace TeamLeasing.Infrastructure
             return result;
         }
 
+
+        #region Project
+
+        public async Task<bool> CreateProject(CreateProjectViewModel model, User user)
+        {
+            var project = _mapper.Map<Project>(model);
+            project.VacanciesRemain = project.NumberOfDeveloperNeeded;
+            project.IsHidden = false;
+            project.Status = Enums.JobStatusForEmployee.InProgress;
+            project.EmployeeUser = user.EmployeeUser;
+            await _teamLeasingContext.Project.AddAsync(project);
+            var result = await _teamLeasingContext.SaveChangesAsync();
+            return Convert.ToBoolean(result);
+        }
+
+        public async Task<List<Project>> GetProject(Expression<Func<Project, bool>> querry = null,
+            bool isHidden = false)
+        {
+            return await _teamLeasingContext.Project
+                .Include(i => i.DeveloperInProject)
+                .ThenInclude(j => j.DeveloperUser)
+                .ThenInclude(j => j.Technology)
+                .Include(j => j.EmployeeUser)
+                .Where(w => isHidden ? w.IsHidden == false || w.IsHidden : w.IsHidden == false)
+                .Where(w => w.VacanciesRemain >= 1)
+                .Where(querry ?? (w => true))
+                .ToListAsync();
+        }
+
+        #endregion
+
         #region DeveloperUser
 
         public async Task<User> FindDeveloperUserByIdAsync(string userId)

@@ -6,10 +6,11 @@ namespace TeamLeasing.Infrastructure.Extension
     {
        public static string Between(this string source, string left, string right)
         {
-            return Regex.Match(
-                    source,
-                    string.Format("{0}(.*){1}", left, right))
-                .Groups[1].Value;
+            string FinalString;
+            int Pos1 = source.IndexOf(left) + left.Length;
+            int Pos2 = source.IndexOf(right);
+            FinalString = source.Substring(Pos1, Pos2 - Pos1);
+            return FinalString;
         }
     }
 }

@@ -24,6 +24,8 @@ namespace TeamLeasing.DAL
         public DbSet<Message> Messages { get; set; }
         public DbSet<DeveloperUserJob> DeveloperUserJob { get; set; }
 
+        public DbSet<DeveloperInProject> DeveloperInProject { get; set; }
+        public DbSet<Project> Project { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -67,6 +69,22 @@ namespace TeamLeasing.DAL
                 .HasOne(o => o.EmployeeUser)
                 .WithMany(m => m.Offers)
                 .HasForeignKey(f => f.EmployeeUserId);
+
+
+
+            modelBuilder.Entity<DeveloperInProject>()
+                .HasKey(d => new { d.DeveloperUserId, d.ProjectId});
+
+            modelBuilder.Entity<DeveloperInProject>()
+                .HasOne(o => o.DeveloperUser)
+                .WithMany(m => m.Projects)
+                .HasForeignKey(f => f.DeveloperUserId);
+
+            modelBuilder.Entity<DeveloperInProject>()
+                .HasOne(o => o.Project)
+                .WithMany(w => w.DeveloperInProject)
+                .HasForeignKey(f => f.ProjectId);
+
 
             base.OnModelCreating(modelBuilder);
         }

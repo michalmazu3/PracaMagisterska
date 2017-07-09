@@ -6,6 +6,7 @@ using TeamLeasing.Models;
 using TeamLeasing.Services.AppConfigurationService.EmploymentTypeService;
 using TeamLeasing.Services.AppConfigurationService.IsFinishedUniversityService;
 using TeamLeasing.Services.AppConfigurationService.LevelService;
+using TeamLeasing.Services.AppConfigurationService.ProjectTypeService;
 using TeamLeasing.Services.AppConfigurationService.ProvinceService;
 using TeamLeasing.Services.AppConfigurationService.TechnologyService;
 
@@ -23,5 +24,7 @@ namespace TeamLeasing.Services.AppConfigurationService
         IIsFinishedUniversity IsFinishedUniversityService { get; }
         [Display(Name = "Rodzaj zatrudnienia")]
         IEmploymentType EmploymentType { get; }
+        [Display(Name = "Rodzaj projektu")]
+        IProjectType ProjectType  { get; }
     }
 }

@@ -5,7 +5,6 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TeamLeasing.Infrastructure;
-using TeamLeasing.Models;
 using TeamLeasing.ViewModels;
 using TeamLeasing.ViewModels.Employee;
 using TeamLeasing.ViewModels.Employee.Account;
@@ -66,6 +65,12 @@ namespace TeamLeasing.Controllers
             return View("CreateJob", new CreateJobViewModel());
         }
 
+        [Authorize(Roles = "Employee")]
+        public IActionResult CreateProject()
+        {
+            return View("CreateProject", new CreateProjectViewModel());
+        }
+
         [HttpPost]
         [Authorize(Roles = "Employee")]
         public async Task<IActionResult> CreateJob(CreateJobViewModel vm)
@@ -86,6 +91,28 @@ namespace TeamLeasing.Controllers
             }
             return View("CreateJob", vm);
         }
+
+        [HttpPost]
+        [Authorize(Roles = "Employee")]
+        public async Task<IActionResult> CreateProject(CreateProjectViewModel vm)
+        {
+            if (ModelState.IsValid)
+            {
+                var userId = _manager.GetUserId(HttpContext.User);
+                var user = await _manager.FindEmployeeUserByIdAsync(userId);
+
+                var result = await _manager.CreateProject(vm, user);
+                if (result)
+                    return RedirectToAction("Index", "Home");
+                return View("_Error", new ErrorViewModel
+                {
+                    Message = "Utworzenie  projektu  nie powiodło się",
+                    ReturnUrl = Url.Action("CreateProject", "AccountEmployee")
+                });
+            }
+            return View("CreateProject", vm);
+        }
+
 
         [HttpPost]
         [Authorize(Roles = "Employee")]
@@ -148,7 +175,6 @@ namespace TeamLeasing.Controllers
                 });
             }
         }
-
 
 
         [Authorize(Roles = "Employee")]

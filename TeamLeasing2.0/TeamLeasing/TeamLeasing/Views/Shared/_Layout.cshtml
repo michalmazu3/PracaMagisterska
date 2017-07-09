@@ -24,12 +24,13 @@
             <div id="navbar" class="collapse navbar-collapse navbar-right">
                 <ul class="nav navbar-nav">
                     <li><a asp-controller="SearchJob" asp-action="Jobs">Oferty pracy</a></li>
+                    <li><a asp-controller="SearchProject" asp-action="Projects">Oferty projektów</a></li>
                     <li><a asp-controller="SearchDeveloper" asp-action="Developers">Profile programistów</a></li>
                     <li><a asp-controller="Contact" asp-action="Index">Kontact</a></li>
                  
                     @if (User.Identity.IsAuthenticated )
                     {
-                        <li><a asp-controller="Login" asp-action="Logout">@User.Identity.Name<br/>Wyloguj</a></li>
+                        <li><a asp-controller="Login" asp-action="Logout">Wyloguj</a></li>
                     }
                     else
                     {
@@ -41,7 +42,7 @@
                     @if (User.Identity.IsAuthenticated && User.IsInRole("Developer"))
                     {
                         <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Moje Konto Programista <span class="caret"></span></a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Moje Konto<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a asp-controller="AccountDeveloper" asp-action="Edit">Edycja konta</a></li>
                                 <li><a asp-controller="AccountDeveloper" asp-action="Applications">Aplikacje</a></li>
@@ -52,12 +53,15 @@
                     @if (User.Identity.IsAuthenticated && User.IsInRole("Employee"))
                     {
                         <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Moje Konto Pracodawca <span class="caret"></span></a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Moje Konto<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a asp-controller="AccountEmployee" asp-action="Edit">Edycja konta</a></li>
                                 <li><a asp-controller="AccountEmployee" asp-action="JobWithApplication">Twoje oferty</a></li>
-                                <li><a  asp-controller="AccountEmployee" asp-action="CreateJob">Utwórz oferte</a></li>
+                                <li><a  asp-controller="AccountEmployee" asp-action="CreateJob">Utwórz oferte pracy</a></li>
+                                <li><a  asp-controller="AccountEmployee" asp-action="CreateProject">Utwórz projekt</a></li>
+
                                 <li><a asp-controller="AccountEmployee"  asp-action="SentOffer">Wysłane propozycje</a></li>
+
                             </ul>
                         </li>
                     }

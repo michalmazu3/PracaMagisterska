@@ -9,6 +9,7 @@ using TeamLeasing.ViewModels.Developer.Account;
 using TeamLeasing.ViewModels.Employee;
 using TeamLeasing.ViewModels.Employee.Account;
 using TeamLeasing.ViewModels.Job.SearchJob;
+using TeamLeasing.ViewModels.Project.SearchProject;
 
 namespace TeamLeasing.Services.Mapping
 {
@@ -146,6 +147,15 @@ namespace TeamLeasing.Services.Mapping
                         src => EnumExtansion.ValueByDisplayName<Enums.EmploymentType>(src.EmploymentType)));
 
             CreateMap<Negotiation, Negotiation>().ReverseMap();
+            CreateMap<CreateProjectViewModel, Project>()
+                .ForMember(p => p.Descritpion, opt => opt.MapFrom(src => src.Descritpion.Between("<body>", "</body>")))
+                .ForMember(p => p.ProjectType, opt => opt.MapFrom(src => src.ChoosenProjectType));
+
+
+            CreateMap<Project, ProjectViewModel>()
+                .ForMember(p => p.City, opt => opt.MapFrom(src => src.EmployeeUser.City))
+                .ForMember(p => p.Province, opt => opt.MapFrom(src => src.EmployeeUser.Province))
+                .ForMember(p => p.Company, opt => opt.MapFrom(src => src.EmployeeUser.Company)).ReverseMap();
         }
 
         private List<ApplyingDeveloper> Convert(List<DeveloperUserJob> source)

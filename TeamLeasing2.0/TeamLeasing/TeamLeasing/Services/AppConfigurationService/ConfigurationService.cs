@@ -12,6 +12,7 @@ using TeamLeasing.ViewModels;
 using TeamLeasing.Services.AppConfigurationService.LevelService;
 using TeamLeasing.Services.AppConfigurationService.TechnologyService;
 using TeamLeasing.Services.AppConfigurationService.IsFinishedUniversityService;
+using TeamLeasing.Services.AppConfigurationService.ProjectTypeService;
 using TeamLeasing.Services.AppConfigurationService.ProvinceService;
 
 namespace TeamLeasing.Services.AppConfigurationService
@@ -24,7 +25,7 @@ namespace TeamLeasing.Services.AppConfigurationService
         private IIsFinishedUniversity _isFinishedUniversity;
         private IProvince _province;
         private IEmploymentType _employmentType;
-
+        private IProjectType _projectType;
         public ConfigurationService(TeamLeasingContext teamLeasingContext)
         {
             _teamLeasingContext = teamLeasingContext;
@@ -71,6 +72,15 @@ namespace TeamLeasing.Services.AppConfigurationService
             {
                _employmentType = _employmentType ?? new EmploymentType();
                 return _employmentType;
+            }
+        }
+
+        public IProjectType ProjectType
+        {
+            get
+            {
+                _projectType= _projectType ?? new ProjectType();
+                return _projectType;
             }
         }
     }

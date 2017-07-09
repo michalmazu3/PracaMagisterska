@@ -22,16 +22,13 @@ namespace TeamLeasing.Models
         public Enums.Level Level { get; set; }
         [Display(Name = "Rodzaj zatrudnienia")]
         public string EmploymentType { get; set; }
-
         public bool IsHidden { get; set; }
-
-        
         public Enums.JobStatusForEmployee StatusForEmployee { get; set; }
-        public virtual Technology Technology { get; set; }
 
+
+        public virtual Technology Technology { get; set; }
         public int EmployeeUserId { get; set; }
         public virtual EmployeeUser EmployeeUser { get; set; }
-
         public virtual ICollection<DeveloperUserJob> DeveloperUsers { get; set; }
     }
 

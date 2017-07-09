@@ -1,4 +1,4 @@
-﻿@model List<TeamLeasing.ViewModels.Job.SearchJob.JobViewModel>
+﻿@model List<TeamLeasing.ViewModels.Project.SearchProject.ProjectViewModel>
 @section scripts{
     @*<script src="~/script/switch-banner.js"></script>*@
     
@@ -17,7 +17,7 @@
 @Html.Partial("_Banner")
 <div id="content">
     <div id="sidebar">
-        @await Component.InvokeAsync("SearchJob")
+        @await Component.InvokeAsync("SearchProject")
     </div>
     <div id="container">
         <table>
@@ -25,16 +25,13 @@
             {
                 <tr>
                     <div id="job-item" class="ji">
-                        <div>
-                        <h2 id="title"><a asp-controller="SearchJob" asp-action="Job" asp-route-jobId="@item.Id">@item.Title</a>
-                        </h2>
-                        <h2 id="price">@item.Price zł</h2>
-                        </div>
-                            <p>
-                            <div style="background-color: inherit;">
-                                @Html.Raw((item.Descritpion))
+                        <h2 id="title"><a asp-controller="SearchProject" asp-action="Project" asp-route-projectId="@item.Id">@item.Title</a> </h2>
+                        <h2 id="price">@item.Budget zł</h2>
+                      
+                            <div>
+                            @Html.Raw((item.Descritpion))
                             </div>
-                        </p>
+                    
                         <p class="lead">
                             @item.Company
                         </p>

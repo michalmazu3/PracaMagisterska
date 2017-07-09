@@ -1,10 +1,9 @@
 ﻿@using System.Net
-@model TeamLeasing.ViewModels.Job.SearchJob.JobViewModel
+@model TeamLeasing.ViewModels.Project.SearchProject.ProjectViewModel
 
 @{
-    ViewData["Title"] = "Oferta pracy";
+    ViewData["Title"] = "Projekt";
 }
-
 @section scripts
 {
     <script>
@@ -17,10 +16,11 @@
         });
     </script>
 }
+
 <div class="content">
     <div id="header-container">
         <h2 id="title">@Model.Title</h2>
-        <h2 id="price">@Model.Price zł</h2>
+        <h2 id="price">@Model.Budget zł</h2>
     </div>
 
     <div id="container-job-offer" class="ji">
@@ -31,7 +31,7 @@
             @Html.Raw(Model.Descritpion)
 
         </div>
-        <div id="job-detail" >
+        <div id="job-detail">
             <p class="lead"><b>Szczegóły oferty</b></p>
             <table>
                 <tr>
@@ -47,26 +47,30 @@
                     <td> <span>@Model.Province</span></td>
                 </tr>
                 <tr>
-                    <td><span>@Html.LabelFor(f => f.Level)</span></td>
-                    <td> <span>@Model.Level</span> </td>
+                    <td><span>@Html.LabelFor(f => f.ExecutionTime)</span></td>
+                    <td> <span>@Model.ExecutionTime</span> </td>
                 </tr>
                 <tr>
-                    <td><span>@Html.LabelFor(f => f.Technology)</span>  </td>
-                    <td><span>@Model.Technology</span> </td>
+                    <td><span>@Html.LabelFor(f => f.ProjectType)</span>  </td>
+                    <td><span>@Model.ProjectType</span> </td>
                 </tr>
                 <tr>
-                    <td><span>@Html.LabelFor(p => p.Price)</span></td>
-                    <td> <span>@Model.Price zł</span>  </td>
+                    <td><span>@Html.LabelFor(p => p.Budget)</span></td>
+                    <td> <span>@Model.Budget zł</span>  </td>
                 </tr>
                 <tr>
-                    <td><span>@Html.LabelFor(t => t.EmploymentType)</span> </td>
-                    <td><span>@Model.EmploymentType</span> </td>
+                    <td><span>@Html.LabelFor(t => t.NumberOfDeveloperNeeded)</span> </td>
+                    <td><span>@Model.NumberOfDeveloperNeeded</span> </td>
+                </tr>
+                <tr>
+                    <td><span>@Html.LabelFor(t => t.VacanciesRemain)</span> </td>
+                    <td><span>@Model.VacanciesRemain</span> </td>
                 </tr>
             </table>
         </div>
         <div id="aplly-button">
             <form asp-controller="SearchJob" asp-action="ApplyForJob" asp-route-jobId="@Model.Id">
-                <button class="btn btn-primary btn-lg">Aplikuj</button>
+                <button  class="btn btn-primary btn-lg">Aplikuj</button>
             </form>
             @ViewBag.ApplyForJob
         </div>
