@@ -104,7 +104,7 @@ namespace TeamLeasing.Controllers
         private async Task<IActionResult> DownloadFile(string surname, string name, int id)
         {
 
-            var fileName = $"{surname}_{name}.pdf";
+            var fileName = $"{surname.Trim()}_{name.Trim()}.pdf";
             var filepath = $"wwwroot/UploadFIle/Cv/{fileName}";
 
             try

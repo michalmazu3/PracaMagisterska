@@ -30,7 +30,7 @@ namespace TeamLeasing.DAL
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
-            optionsBuilder.UseSqlServer(_config["ConnectionStrings:test"]);
+            optionsBuilder.UseSqlServer(_config["ConnectionStrings:TeamLeasingConnectionStringAzure"]);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

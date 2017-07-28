@@ -22,14 +22,14 @@ using TeamLeasing.ViewModels.Employee;
 
 namespace TeamLeasing.Controllers
 {
-     public class RegistrationController : Controller
+    public class RegistrationController : Controller
     {
         private readonly OptimizedDbManager _manager;
         private readonly SignInManager<User> _signInManager;
         private readonly IMapper _mapper;
         private readonly TeamLeasingContext _teamLeasingContext;
         private readonly IUserService _userService;
- 
+
 
         public RegistrationController(OptimizedDbManager manager, SignInManager<User> signInManager,
            IMapper mapper, TeamLeasingContext teamLeasingContext,
@@ -40,7 +40,7 @@ namespace TeamLeasing.Controllers
             _mapper = mapper;
             _teamLeasingContext = teamLeasingContext;
             _userService = userService;
-         }
+        }
 
         [Route("[controller]")]
         public IActionResult Index()
@@ -69,7 +69,7 @@ namespace TeamLeasing.Controllers
                 }
 
             }
-            return View("Registration", new RegistrationViewModel(){RegistrationDeveloperViewModel = vm});
+            return View("Registration", new RegistrationViewModel() { RegistrationDeveloperViewModel = vm });
 
         }
 
@@ -104,11 +104,11 @@ namespace TeamLeasing.Controllers
                 .ToList()
                 .FirstOrDefault();
             developerUser.UserId = user.Id;
-            if (vm.CvFile!=null)
+            if (vm.CvFile != null)
             {
                 developerUser.Cv = await _userService.UploadService.UploadCvFile(vm.Name, vm.Surname, vm.CvFile);
             }
-            if (vm.PhotoFile!=null)
+            if (vm.PhotoFile != null)
             {
                 developerUser.Photo = await _userService.UploadService.UploadPhotoFile(vm.Name, vm.Surname, vm.PhotoFile);
             }
@@ -123,7 +123,7 @@ namespace TeamLeasing.Controllers
                 try
                 {
                     var user = await _manager.CreateEmployeeUser(vm);
-                    if (user!=null)
+                    if (user != null)
                     {
                         await _signInManager.SignInAsync(user, true, null);
                         return RedirectToAction("Index", "Home");
@@ -139,7 +139,7 @@ namespace TeamLeasing.Controllers
                     });
                 }
             }
-            return View("Registration", new RegistrationViewModel(){RegistrationEmployeeViewModel = vm});
+            return View("Registration", new RegistrationViewModel() { RegistrationEmployeeViewModel = vm });
         }
     }
 }

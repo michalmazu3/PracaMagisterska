@@ -115,7 +115,6 @@ D:\repozutorium\Praca Magisterska\TeamLeasing2.0\TeamLeasing\TeamLeasing\bin\Deb
 D:\repozutorium\Praca Magisterska\TeamLeasing2.0\TeamLeasing\TeamLeasing\bin\Debug\netcoreapp1.1\System.Xaml.xml
 D:\repozutorium\Praca Magisterska\TeamLeasing2.0\TeamLeasing\TeamLeasing\bin\Debug\netcoreapp1.1\System.Deployment.xml
 D:\repozutorium\Praca Magisterska\TeamLeasing2.0\TeamLeasing\TeamLeasing\bin\Debug\netcoreapp1.1\System.Runtime.Serialization.xml
-D:\repozutorium\Praca Magisterska\TeamLeasing2.0\TeamLeasing\TeamLeasing\bin\Debug\netcoreapp1.1\System.EnterpriseServices.Wrapper.dll
 D:\repozutorium\Praca Magisterska\TeamLeasing2.0\TeamLeasing\TeamLeasing\obj\Debug\netcoreapp1.1\TeamLeasing.AssemblyInfo.cs
 D:\repozutorium\Praca Magisterska\TeamLeasing2.0\TeamLeasing\TeamLeasing\obj\Debug\netcoreapp1.1\TeamLeasing.dll
 D:\repozutorium\Praca Magisterska\TeamLeasing2.0\TeamLeasing\TeamLeasing\obj\Debug\netcoreapp1.1\TeamLeasing.pdb

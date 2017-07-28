@@ -1,0 +1,67 @@
+﻿@using TeamLeasing.Infrastructure.Extension
+@using TeamLeasing.Models
+@model List<TeamLeasing.ViewModels.Developer.Account.ProejctRequestViewModel>
+
+<div id="application">
+    <h2>Aktualnie prośby dołączanie do projektu</h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Oferta</th>
+            <th>Rodzaj projektu</th>
+            <th>Firma</th>
+            <th>Budżet</th>
+            <th>Status</th>
+            <th></th>
+        </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td><a asp-controller="SearchProject" asp-action="Project" asp-route-projectId="@item.Id" asp-route-withHidden="true">@item.Title</a></td>
+                <td>@item.ProjectType</td>
+                <td>@item.Company</td>
+                <td>@item.Budget zł</td>
+                <td>@item.StatusForDeveloper.GetAttribute().Name</td>
+            <td>
+                  
+                <form asp-controller="AccountDeveloper" asp-action="ApplyProject" asp-route-projectId="@item.Id" method="post">
+                    <button
+                        @if (item.StatusForDeveloper == Enums.JobStatusForDeveloper.Resignation)
+                        {
+                            <text> class="btn btn-success" </text>
+
+                        }
+                        else
+                        {
+                            <text> disabled class="btn" style="background-color: silver" </text>  
+
+                        }>
+                        Aplikuj
+                    </button>
+                </form>
+                    
+            </td>
+            <td>
+                        <form asp-controller="AccountDeveloper" asp-action="ResignProject" asp-route-projectId="@item.Id" method="post">
+                             <button
+                                @if (item.StatusForDeveloper == Enums.JobStatusForDeveloper.Applying || item.StatusForDeveloper == Enums.JobStatusForDeveloper.Accepted)
+                                {
+                                    <text> class="btn btn-danger" </text>
+
+                                }
+                                else
+                                {
+                                    <text> disabled class="btn" style="background-color: silver" </text>  
+
+                                }>
+                                Wycofaj aplikacje
+                            </button>
+                        </form>
+                   
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

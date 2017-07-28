@@ -60,6 +60,16 @@ namespace TeamLeasing.Controllers
         }
 
         [Authorize(Roles = "Employee")]
+        public async Task<IActionResult> ProjectWithApplication()
+        {
+            var userId = _manager.GetUserId(HttpContext.User);
+            var jobList = await _manager.GetProjectForEmployee(userId);
+            var vm = _mapper.Map<List<ProjectWithApplicationViewModel>>(jobList);
+
+            return View("ProjectApplication", vm);
+        }
+
+        [Authorize(Roles = "Employee")]
         public IActionResult CreateJob()
         {
             return View("CreateJob", new CreateJobViewModel());
@@ -130,6 +140,34 @@ namespace TeamLeasing.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Employee")]
+        public async Task<IActionResult> FinishProject(int projectId)
+        {
+            var result = await _manager.FinishProject(projectId);
+            if (result != 0)
+                return RedirectToAction("ProjectWithApplication", "AccountEmployee");
+            return View("_Error", new ErrorViewModel
+            {
+                Message = "Zakończenie projektu z przyczyn niewyjaśnionych niepowiodło się",
+                ReturnUrl = Url.Action("ProjectWithApplication", "AccountEmployee")
+            });
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Employee")]
+        public async Task<IActionResult> ApproveProject(int projectId)
+        {
+            var result = await _manager.ApproveProject(projectId);
+            if (result != 0)
+                return RedirectToAction("ProjectWithApplication", "AccountEmployee");
+            return View("_Error", new ErrorViewModel
+            {
+                Message = "Zatwierdzenie zespołu z przyczyn niewyjaśnionych niepowiodło się",
+                ReturnUrl = Url.Action("ProjectWithApplication", "AccountEmployee")
+            });
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Employee")]
         public async Task<IActionResult> RejectApplication(int jobId, int developerId)
         {
             var result = await _manager.RejectJobApplication(jobId, developerId);
@@ -153,6 +191,34 @@ namespace TeamLeasing.Controllers
             {
                 Message = "Odrzucenie aplikacji z przyczyn niewyjaśnionych niepowiodło się",
                 ReturnUrl = Url.Action("JobWithApplication", "AccountEmployee")
+            });
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Employee")]
+        public async Task<IActionResult> RejectRequest(int projectId, int developerId)
+        {
+            var result = await _manager.RejectProjectRequest(projectId, developerId);
+            if (result != 0)
+                return RedirectToAction("ProjectWithApplication", "AccountEmployee");
+            return View("_Error", new ErrorViewModel
+            {
+                Message = "Odrzucenie prośby dołączenia do zespołu z przyczyn niewyjaśnionych niepowiodło się",
+                ReturnUrl = Url.Action("ProjectWithApplication", "AccountEmployee")
+            });
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Employee")]
+        public async Task<IActionResult> AcceptRequest(int projectId, int developerId)
+        {
+            var result = await _manager.AcceptProjectRequest(projectId, developerId);
+            if (result != 0)
+                return RedirectToAction("ProjectWithApplication", "AccountEmployee");
+            return View("_Error", new ErrorViewModel
+            {
+                Message = "Akceptowanie prośby dołączenia do zespołu z przyczyn niewyjaśnionych niepowiodło się",
+                ReturnUrl = Url.Action("ProjectWithApplication", "AccountEmployee")
             });
         }
 

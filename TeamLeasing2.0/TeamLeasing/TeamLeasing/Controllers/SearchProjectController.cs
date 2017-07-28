@@ -96,24 +96,24 @@ namespace TeamLeasing.Controllers
 
         [Authorize(Roles = "Developer")]
         [HttpPost]
-        public async Task<IActionResult> ApplyForProject(int jobId)
+        public async Task<IActionResult> ApplyForProject(int projectId)
         {
             var userId = _manager.GetUserId(HttpContext.User);
-            var result = await _manager.ApplyForJob(userId, jobId);
+            var result = await _manager.ApplyForProject(userId, projectId);
 
             if (result == 0)
                 return View("_Error", new ErrorViewModel
                 {
-                    Message = "Aplikcja na tą oferte pracy nie powiodła się z przyczyn niewyjaśnionych",
-                    ReturnUrl = Url.Action("Jobs", "SearchJob")
+                    Message = "Wysłanie prośby o dołączenie do zespołu nie powiodła się z przyczyn niewyjaśnionych",
+                    ReturnUrl = Url.Action("Projects", "SearchProject")
                 });
-            ViewBag.ApplyForJob = result == 1
+            ViewBag.ApplyForProject = result == 1
                 ? "Gratulacje, wysłałeś aplikacje na to stanowisko!"
-                : "Już wysłałes aplikacje na to stanowisko!";
-            var job = await _manager.GetJob(w => w.Id == jobId);
-            var vm = _mapper.Map<JobViewModel>(job.FirstOrDefault());
+                : "Prośba o dołączenie do zespołu już została wysłana lub brak wolnych miejsc w zespole !";
+            var job = await _manager.GetProject(w => w.Id == projectId);
+            var vm = _mapper.Map<ProjectViewModel>(job.FirstOrDefault());
 
-            return View("ProjectDetails", null);
+            return View("ProjectDetails", vm);
         }
     }
 }

@@ -37,9 +37,9 @@ namespace TeamLeasing.DAL
             await Technologies().ContinueWith(async t =>
             {
                 await DeveloperUser();
-                await EmployeeUsers()
-                .ContinueWith(async tt => await Jobs())
-                .ContinueWith(async v=> await DeveloperUserJob());
+                await EmployeeUsers();
+                //.ContinueWith(async tt => await Jobs())
+                //.ContinueWith(async v => await DeveloperUserJob());
 
             });
         }
@@ -51,8 +51,8 @@ namespace TeamLeasing.DAL
                 List<DeveloperUserJob> developerUserJobs = new List<DeveloperUserJob>();
                 developerUserJobs.Add(new DeveloperUserJob()
                 {
-                    DeveloperUser =  _manager.GetDeveloperUser(w=>w.Id==25).Result.FirstOrDefault(),
-                    Job = _manager.GetJob(w=>w.Id==36).Result.FirstOrDefault(),
+                    DeveloperUser = _manager.GetDeveloperUser(w => w.Id == 25).Result.FirstOrDefault(),
+                    Job = _manager.GetJob(w => w.Id == 36).Result.FirstOrDefault(),
                 });
                 developerUserJobs.Add(new DeveloperUserJob()
                 {
@@ -85,43 +85,44 @@ namespace TeamLeasing.DAL
             }
         }
 
-        private async Task DeveloperUser()
+private async Task DeveloperUser()
+{
+    if (_manager.FindByEmailAsync("jaroslaw@gmail.com").Result == null)
+    {
+        User user = new User()
         {
-            if (_manager.FindByEmailAsync("jaroslaw@gmail.com").Result == null)
+            Email = "jaroslaw@gmail.com",
+            UserName = "jarekKow",
+            PhoneNumber = "2342342523",
+        };
+        var result = await _manager.CreateAsync(user, "Qazqaz12#");
+        if (result.Succeeded)
+        {
+            DeveloperUser dev = new DeveloperUser()
             {
-                User user = new User()
-                {
-                    Email = "jaroslaw@gmail.com",
-                    UserName = "jarekKox",
-                    PhoneNumber = "2342342523",
-                };
-                var result = await _manager.CreateAsync(user, "Qazqaz12#");
-                if (result.Succeeded)
-                {
-                    DeveloperUser dev = new DeveloperUser()
-                    {
-                        Name = "JAroslaw ",
-                        BirthDate = new DateTime(1942, 03, 05),
-                        City = "Lublin",
-                        Level = Enums.Level.Regular,
-                        Experience = 2,
-                        Province = Enums.Province.Lubelskie.ToString(),
-                        Surname = "Kowalski",
-                        University = "Politechnika świetokrzyska II stopien Informatyka",
-                        IsFinishedUniversity = Enums.IsFinishedUniversity.Finished,
-                        Technology = await _context.Technologies.FindAsync(2),
-                        Photo = "/image/photo/profil-large.jpg",
-                        UserId = _context.Users.Find(user.Id).Id,
-                         
+                Name = "Jaroslaw ",
+                BirthDate = new DateTime(1942, 03, 05),
+                City = "Lublin",
+                Level = Enums.Level.Regular,
+                Experience = 2,
+                Province = Enums.Province.Lubelskie.ToString(),
+                Surname = "Kowalski",
+                University = "Politechnika świetokrzyska II stopien Informatyka",
+                IsFinishedUniversity = Enums.IsFinishedUniversity.Finished,
+                Technology = await _context.Technologies.FindAsync(2),
+                Photo = "/uploadfile/photo/Kowalski_Jaroslaw.jpg",
+                UserId = _context.Users.Find(user.Id).Id,
+                Cv = "/uploadfile/cv/cv.pdf",
+                About = "Jestem z zawodu i z zamiłowania programistą. Czuję się pewnie pisząc w JavaScripcie i TypeScripcie (głównie Node.js, choć także po stronie przeglądarki), w Javie, a na wcześniejszych etapach kariery programowałem również w PHP. Chętnie uczę się nowych technik programowania, szybko przyzwyczajam się do nowości w światku technologii. Eksperymentuję z nowymi narzędziami i językami programowania. Od czasu do czasu prowadzę prelekcje na spotkaniach meet.js w Gdańsku, zdarzyło mi się też prowadzić kilka warsztatów dotyczących programowania sterowanego testami(TDD).Jak mam natchnienie i nadmiar czasu, to dzielę się doświadczeniami i przemyśleniami na niniejszym blogu lub na kanale YouTube."
 
-                    };
+            };
 
-                    await _context.DeveloperUsers.AddAsync(dev);
-                    await _context.SaveChangesAsync();
-                    await _manager.AddToRoleAsync(_context.Users.Find(user.Id), Roles.Developer.ToString());
-                }
-                ;
-            }
+            await _context.DeveloperUsers.AddAsync(dev);
+            await _context.SaveChangesAsync();
+            await _manager.AddToRoleAsync(_context.Users.Find(user.Id), Roles.Developer.ToString());
+        }
+        ;
+    }
             if (_manager.FindByEmailAsync("Janek@gmail.com").Result == null)
             {
                 User user = new User()
@@ -145,8 +146,11 @@ namespace TeamLeasing.DAL
                         University = "Politechnika świetokrzyska II stopien Informatyka",
                         IsFinishedUniversity = Enums.IsFinishedUniversity.Finished,
                         Technology = await _context.Technologies.FirstOrDefaultAsync(f => f.Name.ToLower() == "python"),
-                        Photo = "/image/photo/profil-large.jpg",
+                        Photo = "/uploadfile/photo/Kowlaski_Janek.jpg",
                         UserId = _context.Users.Find(user.Id).Id,
+                        Cv = "/uploadfile/cv/cv.pdf",
+
+                        About = "Jestem z zawodu i z zamiłowania programistą. Czuję się pewnie pisząc w JavaScripcie i TypeScripcie (głównie Node.js, choć także po stronie przeglądarki), w Javie, a na wcześniejszych etapach kariery programowałem również w PHP. Chętnie uczę się nowych technik programowania, szybko przyzwyczajam się do nowości w światku technologii. Eksperymentuję z nowymi narzędziami i językami programowania. Od czasu do czasu prowadzę prelekcje na spotkaniach meet.js w Gdańsku, zdarzyło mi się też prowadzić kilka warsztatów dotyczących programowania sterowanego testami(TDD).Jak mam natchnienie i nadmiar czasu, to dzielę się doświadczeniami i przemyśleniami na niniejszym blogu lub na kanale YouTube."
 
                     };
 
@@ -155,12 +159,12 @@ namespace TeamLeasing.DAL
                     await _manager.AddToRoleAsync(_context.Users.Find(user.Id), Roles.Developer.ToString());
                 }
             };
-            if (_manager.FindByEmailAsync("JanKowalski@gmail.com").Result == null)
+            if (_manager.FindByEmailAsync("ArkadiuszNowak@gmail.com").Result == null)
             {
                 User user = new User()
                 {
-                    Email = "JanKowalski@gmail.com",
-                    UserName = "janekKowalski123",
+                    Email = "ArkadiuszNowak@gmail.com",
+                    UserName = "ArkadiuszNow",
                     PhoneNumber = "2342342523",
                 };
                 var result = await _manager.CreateAsync(user, "Qazqaz12#");
@@ -168,18 +172,21 @@ namespace TeamLeasing.DAL
                 {
                     DeveloperUser dev = new DeveloperUser()
                     {
-                        Name = "Jan",
+                        Name = "Arkadiusz",
                         BirthDate = new DateTime(1992, 08, 05),
                         City = "Kielce",
                         Level = Enums.Level.Senior,
                         Experience = 2,
                         Province = Enums.Province.Mazowieckie.ToString(),
-                        Surname = "Kowalski",
+                        Surname = "Nowak",
                         University = "Politechnika świetokrzyska II stopien Informatyka",
                         IsFinishedUniversity = Enums.IsFinishedUniversity.NotFinished,
                         Technology = await _context.Technologies.FirstOrDefaultAsync(f => f.Name.ToLower() == "python"),
-                        Photo = "/image/photo/profil-large.jpg",
+                        Photo = "/uploadfile/photo/Arkadiusz_Nowak.jpg",
                         UserId = _context.Users.Find(user.Id).Id,
+                        Cv = "/uploadfile/cv/cv.pdf",
+
+                        About = "Jestem z zawodu i z zamiłowania programistą. Czuję się pewnie pisząc w JavaScripcie i TypeScripcie (głównie Node.js, choć także po stronie przeglądarki), w Javie, a na wcześniejszych etapach kariery programowałem również w PHP. Chętnie uczę się nowych technik programowania, szybko przyzwyczajam się do nowości w światku technologii. Eksperymentuję z nowymi narzędziami i językami programowania. Od czasu do czasu prowadzę prelekcje na spotkaniach meet.js w Gdańsku, zdarzyło mi się też prowadzić kilka warsztatów dotyczących programowania sterowanego testami(TDD).Jak mam natchnienie i nadmiar czasu, to dzielę się doświadczeniami i przemyśleniami na niniejszym blogu lub na kanale YouTube."
 
                     };
 
@@ -188,11 +195,11 @@ namespace TeamLeasing.DAL
                     await _manager.AddToRoleAsync(_context.Users.Find(user.Id), Roles.Developer.ToString());
                 }
             };
-            if (_manager.FindByEmailAsync("Paweł@gmail.com").Result == null)
+            if (_manager.FindByEmailAsync("Pawel@gmail.com").Result == null)
             {
                 User user = new User()
                 {
-                    Email = "Paweł@gmail.com",
+                    Email = "Pawel@gmail.com",
                     UserName = "Pawel123",
                     PhoneNumber = "2342342523",
                 };
@@ -211,8 +218,11 @@ namespace TeamLeasing.DAL
                         University = "Politechnika świetokrzyska II stopien Informatyka (w trakcie)",
                         IsFinishedUniversity = Enums.IsFinishedUniversity.InProgress,
                         Technology = await _context.Technologies.FirstOrDefaultAsync(f => f.Name.ToLower() == "sql"),
-                        Photo = "/image/photo/profil2.jpg",
+                        Photo = "/uploadfile/photo/Nowak_Pawel.jpg",
                         UserId = _context.Users.Find(user.Id).Id,
+                        Cv = "/uploadfile/cv/cv.pdf",
+
+                        About = "Jestem z zawodu i z zamiłowania programistą. Czuję się pewnie pisząc w JavaScripcie i TypeScripcie (głównie Node.js, choć także po stronie przeglądarki), w Javie, a na wcześniejszych etapach kariery programowałem również w PHP. Chętnie uczę się nowych technik programowania, szybko przyzwyczajam się do nowości w światku technologii. Eksperymentuję z nowymi narzędziami i językami programowania. Od czasu do czasu prowadzę prelekcje na spotkaniach meet.js w Gdańsku, zdarzyło mi się też prowadzić kilka warsztatów dotyczących programowania sterowanego testami(TDD).Jak mam natchnienie i nadmiar czasu, to dzielę się doświadczeniami i przemyśleniami na niniejszym blogu lub na kanale YouTube."
 
 
                     };
@@ -245,8 +255,11 @@ namespace TeamLeasing.DAL
                         University = "Politechnika świetokrzyska II stopien Informatyka (w trakcie)",
                         IsFinishedUniversity = Enums.IsFinishedUniversity.InProgress,
                         Technology = await _context.Technologies.FirstOrDefaultAsync(f => f.Name.ToLower() == "c#"),
-                        Photo = "/image/photo/profil3.jpg",
+                        Photo = "/uploadfile/photo/Turek_Marcin.jpg",
                         UserId = _context.Users.Find(user.Id).Id,
+                        Cv = "/uploadfile/cv/cv.pdf",
+
+                        About = "Jestem z zawodu i z zamiłowania programistą. Czuję się pewnie pisząc w JavaScripcie i TypeScripcie (głównie Node.js, choć także po stronie przeglądarki), w Javie, a na wcześniejszych etapach kariery programowałem również w PHP. Chętnie uczę się nowych technik programowania, szybko przyzwyczajam się do nowości w światku technologii. Eksperymentuję z nowymi narzędziami i językami programowania. Od czasu do czasu prowadzę prelekcje na spotkaniach meet.js w Gdańsku, zdarzyło mi się też prowadzić kilka warsztatów dotyczących programowania sterowanego testami(TDD).Jak mam natchnienie i nadmiar czasu, to dzielę się doświadczeniami i przemyśleniami na niniejszym blogu lub na kanale YouTube."
 
                     };
 
@@ -277,9 +290,12 @@ namespace TeamLeasing.DAL
                         Surname = "Biracz",
                         University = " ",
                         IsFinishedUniversity = Enums.IsFinishedUniversity.NotFinished,
-                        Photo = "/image/photo/profil4.jpg",
+                        Photo = "/uploadfile/photo/Biracz_Karol.jpg",
                         Technology = await _context.Technologies.FirstOrDefaultAsync(f => f.Name.ToLower() == "javascript"),
                         UserId = _context.Users.Find(user.Id).Id,
+                        Cv = "/uploadfile/cv/cv.pdf",
+
+                        About = "Jestem z zawodu i z zamiłowania programistą. Czuję się pewnie pisząc w JavaScripcie i TypeScripcie (głównie Node.js, choć także po stronie przeglądarki), w Javie, a na wcześniejszych etapach kariery programowałem również w PHP. Chętnie uczę się nowych technik programowania, szybko przyzwyczajam się do nowości w światku technologii. Eksperymentuję z nowymi narzędziami i językami programowania. Od czasu do czasu prowadzę prelekcje na spotkaniach meet.js w Gdańsku, zdarzyło mi się też prowadzić kilka warsztatów dotyczących programowania sterowanego testami(TDD).Jak mam natchnienie i nadmiar czasu, to dzielę się doświadczeniami i przemyśleniami na niniejszym blogu lub na kanale YouTube."
 
 
                     };
@@ -306,15 +322,17 @@ namespace TeamLeasing.DAL
                         BirthDate = new DateTime(1992, 08, 05),
                         City = "Opole",
                         Level = Enums.Level.Junior,
+                        Cv = "/uploadfile/cv/cv.pdf",
 
                         Experience = 4,
                         Province = Enums.Province.Slaskie.ToString(),
                         Surname = "Olak",
                         University = " ",
                         IsFinishedUniversity = Enums.IsFinishedUniversity.NotFinished,
-                        Photo = "/image/photo/profil4.jpg",
+                        Photo = "/uploadfile/photo/Olak_Piotrek.jpg",
                         Technology = await _context.Technologies.FirstOrDefaultAsync(f => f.Name.ToLower() == "html/css"),
                         UserId = _context.Users.Find(user.Id).Id,
+                        About = "Jestem z zawodu i z zamiłowania programistą. Czuję się pewnie pisząc w JavaScripcie i TypeScripcie (głównie Node.js, choć także po stronie przeglądarki), w Javie, a na wcześniejszych etapach kariery programowałem również w PHP. Chętnie uczę się nowych technik programowania, szybko przyzwyczajam się do nowości w światku technologii. Eksperymentuję z nowymi narzędziami i językami programowania. Od czasu do czasu prowadzę prelekcje na spotkaniach meet.js w Gdańsku, zdarzyło mi się też prowadzić kilka warsztatów dotyczących programowania sterowanego testami(TDD).Jak mam natchnienie i nadmiar czasu, to dzielę się doświadczeniami i przemyśleniami na niniejszym blogu lub na kanale YouTube."
 
                     };
 
@@ -343,11 +361,14 @@ namespace TeamLeasing.DAL
                         Experience = 4,
                         Province = Enums.Province.Dolnoslaskie.ToString(),
                         Surname = "Tomczak",
-                        University = " Univerek",
+                        University = " Uniwersystet Polsko-Japoński w Warszawie",
                         IsFinishedUniversity = Enums.IsFinishedUniversity.Finished,
-                        Photo = "/image/photo/profil4.jpg",
+                        Photo = "/uploadfile/photo/Tomczak_Heniek.jpg",
                         Technology = await _context.Technologies.FirstOrDefaultAsync(f => f.Name.ToLower() == "python"),
                         UserId = _context.Users.Find(user.Id).Id,
+                        Cv = "/uploadfile/cv/cv.pdf",
+
+                        About = "Jestem z zawodu i z zamiłowania programistą. Czuję się pewnie pisząc w JavaScripcie i TypeScripcie (głównie Node.js, choć także po stronie przeglądarki), w Javie, a na wcześniejszych etapach kariery programowałem również w PHP. Chętnie uczę się nowych technik programowania, szybko przyzwyczajam się do nowości w światku technologii. Eksperymentuję z nowymi narzędziami i językami programowania. Od czasu do czasu prowadzę prelekcje na spotkaniach meet.js w Gdańsku, zdarzyło mi się też prowadzić kilka warsztatów dotyczących programowania sterowanego testami(TDD).Jak mam natchnienie i nadmiar czasu, to dzielę się doświadczeniami i przemyśleniami na niniejszym blogu lub na kanale YouTube."
 
                     };
 
@@ -356,6 +377,80 @@ namespace TeamLeasing.DAL
                     await _manager.AddToRoleAsync(_context.Users.Find(user.Id), Roles.Developer.ToString());
                 }
             };
+            if (_manager.FindByEmailAsync("Bartosz@com.pl").Result == null)
+            {
+                User user = new User()
+                {
+                    Email = "Bartosz@com.pl",
+                    UserName = "Bartosz123",
+                    PhoneNumber = "2342342523",
+                };
+                var result = await _manager.CreateAsync(user, "Qazqaz12#");
+                if (result.Succeeded)
+                {
+                    DeveloperUser dev = new DeveloperUser()
+                    {
+                        Name = "Bartosz",
+                        BirthDate = new DateTime(1983, 02, 05),
+                        City = "Warszawa",
+                        Level = Enums.Level.Regular,
+                        Experience = 3,
+                        Province = Enums.Province.Mazowieckie.ToString(),
+                        Surname = "Nowicki",
+                        University = " Uniwersystet Polsko-Japoński w Warszawie",
+                        IsFinishedUniversity = Enums.IsFinishedUniversity.Finished,
+                        Photo = "/uploadfile/photo/Nowicki_Bartosz.jpg",
+                        Technology = await _context.Technologies.FirstOrDefaultAsync(f => f.Name.ToLower() == "java"),
+                        UserId = _context.Users.Find(user.Id).Id,
+                        Cv = "/uploadfile/cv/cv.pdf",
+
+                        About = "Jestem z zawodu i z zamiłowania programistą. Czuję się pewnie pisząc w JavaScripcie i TypeScripcie (głównie Node.js, choć także po stronie przeglądarki), w Javie, a na wcześniejszych etapach kariery programowałem również w PHP. Chętnie uczę się nowych technik programowania, szybko przyzwyczajam się do nowości w światku technologii. Eksperymentuję z nowymi narzędziami i językami programowania. Od czasu do czasu prowadzę prelekcje na spotkaniach meet.js w Gdańsku, zdarzyło mi się też prowadzić kilka warsztatów dotyczących programowania sterowanego testami(TDD).Jak mam natchnienie i nadmiar czasu, to dzielę się doświadczeniami i przemyśleniami na niniejszym blogu lub na kanale YouTube."
+
+                    };
+
+                    await _context.DeveloperUsers.AddAsync(dev);
+                    await _context.SaveChangesAsync();
+                    await _manager.AddToRoleAsync(_context.Users.Find(user.Id), Roles.Developer.ToString());
+                }
+            };
+            if (_manager.FindByEmailAsync("Ludwik@com.pl").Result == null)
+            {
+                User user = new User()
+                {
+                    Email = "Ludwik@com.pl",
+                    UserName = "Ludwik123",
+                    PhoneNumber = "2342342523",
+                };
+                var result = await _manager.CreateAsync(user, "Qazqaz12#");
+                if (result.Succeeded)
+                {
+                    DeveloperUser dev = new DeveloperUser()
+                    {
+                        Name = "Ludwik",
+                        BirthDate = new DateTime(1986, 08, 05),
+                        City = "Kraków",
+                        Level = Enums.Level.Senior,
+                        Experience = 7,
+                        Province = Enums.Province.Dolnoslaskie.ToString(),
+                        Surname = "Boski",
+                        University = "Akademia Górniczo Hutnicza",
+                        IsFinishedUniversity = Enums.IsFinishedUniversity.Finished,
+                        Photo = "/uploadfile/photo/Ludwik_Boski.jpg",
+                        Technology =
+                            await _context.Technologies.FirstOrDefaultAsync(f => f.Name.ToLower() == "javascript"),
+                        UserId = _context.Users.Find(user.Id).Id,
+                        Cv = "/uploadfile/cv/cv.pdf",
+
+                        About =
+                            "Jestem z zawodu i z zamiłowania programistą. Czuję się pewnie pisząc w JavaScripcie i TypeScripcie (głównie Node.js, choć także po stronie przeglądarki), w Javie, a na wcześniejszych etapach kariery programowałem również w PHP. Chętnie uczę się nowych technik programowania, szybko przyzwyczajam się do nowości w światku technologii. Eksperymentuję z nowymi narzędziami i językami programowania. Od czasu do czasu prowadzę prelekcje na spotkaniach meet.js w Gdańsku, zdarzyło mi się też prowadzić kilka warsztatów dotyczących programowania sterowanego testami(TDD).Jak mam natchnienie i nadmiar czasu, to dzielę się doświadczeniami i przemyśleniami na niniejszym blogu lub na kanale YouTube."
+
+                    };
+
+                    await _context.DeveloperUsers.AddAsync(dev);
+                    await _context.SaveChangesAsync();
+                    await _manager.AddToRoleAsync(_context.Users.Find(user.Id), Roles.Developer.ToString());
+                }
+            }
         }
 
 
@@ -384,12 +479,12 @@ namespace TeamLeasing.DAL
 
         private async Task EmployeeUsers()
         {
-            if (_manager.FindByEmailAsync("vive@gmail.com").Result == null)
+            if (_manager.FindByEmailAsync("komputerCompany@gmail.com").Result == null)
             {
                 User user = new User()
                 {
-                    Email = "vive@gmail.com",
-                    UserName = "ViveCompany",
+                    Email = "komputerCompany@gmail.com",
+                    UserName = "komputerCompany",
                     PhoneNumber = "66526323",
                 };
                 var result = await _manager.CreateAsync(user, "Qazqaz12#");
@@ -399,9 +494,9 @@ namespace TeamLeasing.DAL
                     {
                         Name = "Władysław",
                         City = "Kielce",
-                        Province = Enums.Province.Podkarpackie.ToString(),
+                        Province = Enums.Province.Swietokrzyskie.ToString(),
                         Surname = "Sołkiewicz",
-                        Company = "Vive",
+                        Company = "komputerCompany",
                         UserId = _context.Users.Find(user.Id).Id,
                     };
 
@@ -411,12 +506,12 @@ namespace TeamLeasing.DAL
                 }
                 ;
             }
-            if (_manager.FindByEmailAsync("infover@gmail.com").Result == null)
+            if (_manager.FindByEmailAsync("netDevelopment@gmail.com").Result == null)
             {
                 User user = new User()
                 {
-                    Email = "infover@gmail.com",
-                    UserName = "InfoverSa",
+                    Email = "netDevelopment@gmail.com",
+                    UserName = "netDevelopment",
                     PhoneNumber = "66526323",
                 };
                 var result = await _manager.CreateAsync(user, "Qazqaz12#");
@@ -428,7 +523,7 @@ namespace TeamLeasing.DAL
                         City = "Kraków",
                         Province = Enums.Province.Malopolskie.ToString(),
                         Surname = "Bińczak",
-                        Company = "infover",
+                        Company = "netDevelopment",
                         UserId = _context.Users.Find(user.Id).Id,
                     };
 

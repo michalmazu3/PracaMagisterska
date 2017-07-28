@@ -17,7 +17,6 @@ using TeamLeasing.ViewModels.Developer.Account;
 
 namespace TeamLeasing.Controllers
 {
-    [Route("account/developer/[action]")]
     public class AccountDeveloperController : Controller
     {
         private readonly IHttpContextAccessor _contextAccessor;
@@ -221,7 +220,6 @@ namespace TeamLeasing.Controllers
             return RedirectToAction("Edit", "AccountDeveloper");
         }
 
-        [Route("[action]")]
         [Authorize(Roles = "Developer")]
         public async Task<IActionResult> Applications()
         {
@@ -232,7 +230,16 @@ namespace TeamLeasing.Controllers
             return View("Application", vm);
         }
 
-        [Route("/{jobId}")]
+        [Authorize(Roles = "Developer")]
+        public async Task<IActionResult> ProjectRequest()
+        {
+            var userId = _manager.GetUserId(HttpContext.User);
+            var projectList = await _manager.GetDeveloperInProjectByUserId(userId);
+            var vm = _mapper.Map<List<ProejctRequestViewModel>>(projectList);
+
+            return View("ProjectRequest", vm);
+        }
+
         [Authorize(Roles = "Developer")]
         public async Task<IActionResult> Resign(int jobId)
         {
@@ -249,7 +256,6 @@ namespace TeamLeasing.Controllers
 
         [Authorize(Roles = "Developer")]
         [HttpPost]
-        [Route("/{jobId}")]
         public async Task<IActionResult> Apply(int jobId)
         {
             var userId = _manager.GetUserId(HttpContext.User);
@@ -262,6 +268,36 @@ namespace TeamLeasing.Controllers
                 ReturnUrl = Url.Action("Jobs", "SearchJob")
             });
         }
+
+        [Authorize(Roles = "Developer")]
+        public async Task<IActionResult> ResignProject(int projectId)
+        {
+            var userId = _manager.GetUserId(HttpContext.User);
+            var result = await _manager.ResignProjectRequest(userId, projectId);
+            if (result != 0)
+                return RedirectToAction("ProjectRequest", "AccountDeveloper");
+            return View("_Error", new ErrorViewModel
+            {
+                ReturnUrl = Url.Action("ProjectRequest", "AccountDeveloper"),
+                Message = "Wycofanie prośby o dołączenie do zespołu nie powiodło się z przyczyn niewyjaśnionych"
+            });
+        }
+
+        [Authorize(Roles = "Developer")]
+        [HttpPost]
+        public async Task<IActionResult> ApplyProject(int projectId)
+        {
+            var userId = _manager.GetUserId(HttpContext.User);
+            var result = await _manager.ApplyForProject(userId, projectId);
+            if (result == 1)
+                return RedirectToAction("ProjectRequest", "AccountDeveloper");
+            return View("_Error", new ErrorViewModel
+            {
+                Message = "Wysłanie prośby o dołączenie do zespołu nie powiodła się z przyczyn niewyjaśnionych",
+                ReturnUrl = Url.Action("ProjectRequest", "AccountDeveloper")
+            });
+        }
+
 
         [Authorize(Roles = "Developer")]
         public async Task<IActionResult> RecivedOffers()

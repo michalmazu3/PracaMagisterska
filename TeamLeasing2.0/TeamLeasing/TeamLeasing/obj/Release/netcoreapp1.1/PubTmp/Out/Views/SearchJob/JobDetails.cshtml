@@ -1,0 +1,74 @@
+﻿@using System.Net
+@model TeamLeasing.ViewModels.Job.SearchJob.JobViewModel
+
+@{
+    ViewData["Title"] = "Oferta pracy";
+}
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $('.ji').find('*').each(function () {
+                if ($(this).hasClass('btn')===false) {
+                    $(this).css('background-color', 'whitesmoke');
+                }
+            });
+        });
+    </script>
+}
+<div class="content">
+    <div id="header-container">
+        <h2 id="title">@Model.Title</h2>
+        <h2 id="price">@Model.Price zł</h2>
+    </div>
+
+    <div id="container-job-offer" class="ji">
+
+        <div id="job-description">
+            <p class="lead"><b><br />@Html.LabelFor(t => t.Descritpion)</b></p>
+
+            @Html.Raw(Model.Descritpion)
+
+        </div>
+        <div id="job-detail" >
+            <p class="lead"><b>Szczegóły oferty</b></p>
+            <table>
+                <tr>
+                    <td><span>@Html.LabelFor(t => t.Company)</span> </td>
+                    <td><span>@Model.Company</span> </td>
+                </tr>
+                <tr>
+                    <td><span>@Html.LabelFor(f => f.City)</span></td>
+                    <td><span>@Model.City</span>  </td>
+                </tr>
+                <tr>
+                    <td><span>@Html.LabelFor(f => f.Province)</span>  </td>
+                    <td> <span>@Model.Province</span></td>
+                </tr>
+                <tr>
+                    <td><span>@Html.LabelFor(f => f.Level)</span></td>
+                    <td> <span>@Model.Level</span> </td>
+                </tr>
+                <tr>
+                    <td><span>@Html.LabelFor(f => f.Technology)</span>  </td>
+                    <td><span>@Model.Technology</span> </td>
+                </tr>
+                <tr>
+                    <td><span>@Html.LabelFor(p => p.Price)</span></td>
+                    <td> <span>@Model.Price zł</span>  </td>
+                </tr>
+                <tr>
+                    <td><span>@Html.LabelFor(t => t.EmploymentType)</span> </td>
+                    <td><span>@Model.EmploymentType</span> </td>
+                </tr>
+            </table>
+        </div>
+        <div id="aplly-button">
+            <form asp-controller="SearchJob" asp-action="ApplyForJob" asp-route-jobId="@Model.Id">
+                <button class="btn btn-primary btn-lg">Aplikuj</button>
+            </form>
+            @ViewBag.ApplyForJob
+        </div>
+    </div>
+</div>

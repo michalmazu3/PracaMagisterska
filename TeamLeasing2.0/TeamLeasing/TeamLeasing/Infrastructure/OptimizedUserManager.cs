@@ -69,122 +69,6 @@ namespace TeamLeasing.Infrastructure
             return result;
         }
 
-
-        #region Project
-
-        public async Task<bool> CreateProject(CreateProjectViewModel model, User user)
-        {
-            var project = _mapper.Map<Project>(model);
-            project.VacanciesRemain = project.NumberOfDeveloperNeeded;
-            project.IsHidden = false;
-            project.Status = Enums.JobStatusForEmployee.InProgress;
-            project.EmployeeUser = user.EmployeeUser;
-            await _teamLeasingContext.Project.AddAsync(project);
-            var result = await _teamLeasingContext.SaveChangesAsync();
-            return Convert.ToBoolean(result);
-        }
-
-        public async Task<List<Project>> GetProject(Expression<Func<Project, bool>> querry = null,
-            bool isHidden = false)
-        {
-            return await _teamLeasingContext.Project
-                .Include(i => i.DeveloperInProject)
-                .ThenInclude(j => j.DeveloperUser)
-                .ThenInclude(j => j.Technology)
-                .Include(j => j.EmployeeUser)
-                .Where(w => isHidden ? w.IsHidden == false || w.IsHidden : w.IsHidden == false)
-                .Where(w => w.VacanciesRemain >= 1)
-                .Where(querry ?? (w => true))
-                .ToListAsync();
-        }
-
-        #endregion
-
-        #region DeveloperUser
-
-        public async Task<User> FindDeveloperUserByIdAsync(string userId)
-        {
-            return await Users.Include(c => c.DeveloperUser)
-                .ThenInclude(t => t.Technology)
-                .FirstOrDefaultAsync(u => u.Id == userId);
-        }
-
-        public async Task<List<DeveloperUser>> GetDeveloperUser(Expression<Func<DeveloperUser, bool>> querry = null)
-        {
-            return await _teamLeasingContext.DeveloperUsers
-                .Include(t => t.Technology)
-                .Include(f => f.Jobs)
-                .Include(f => f.Jobs)
-                .Where(querry ?? (w => true))
-                .ToListAsync();
-        }
-
-        #endregion
-
-        #region EmployeeUser
-
-        public async Task<User> FindEmployeeUserByIdAsync(string userId)
-        {
-            return await Users.Include(c => c.EmployeeUser)
-                .ThenInclude(t => t.Jobs)
-                .ThenInclude(o => o.DeveloperUsers)
-                .ThenInclude(h => h.DeveloperUser)
-                .Include(r => r.EmployeeUser)
-                .ThenInclude(h => h.Offers)
-                .Include(t => t.EmployeeUser)
-                .ThenInclude(g => g.Jobs)
-                .ThenInclude(g => g.Technology)
-                .FirstOrDefaultAsync(u => u.Id == userId);
-        }
-
-
-        public async Task<IdentityResult> UpdateEmployeeUser(EditEmployeeAccountViewModel model, string userId)
-        {
-            var user = await FindEmployeeUserByIdAsync(userId);
-
-            user.EmployeeUser.City = !string.IsNullOrEmpty(model.City) ? model.City : user.EmployeeUser.City;
-            user.EmployeeUser.Province = !string.IsNullOrEmpty(model.ChoosenProvince)
-                ? model.ChoosenProvince
-                : user.EmployeeUser.Province;
-            user.EmployeeUser.Company = !string.IsNullOrEmpty(model.Company)
-                ? model.Company
-                : user.EmployeeUser.Company;
-
-
-            var result = await ChangePasswordAsync(user, model.CurrentPassword, model.NewPassword);
-            if (result.Succeeded)
-            {
-                _teamLeasingContext.EmployeeUsers.Update(user.EmployeeUser);
-                await _teamLeasingContext.SaveChangesAsync();
-                user.PhoneNumber = !string.IsNullOrEmpty(model.Phone) ? model.Phone : user.PhoneNumber;
-                return await UpdateAsync(user);
-            }
-            return result;
-        }
-
-        public async Task<User> CreateEmployeeUser(RegistrationEmployeeViewModel model)
-        {
-            var user = _mapper.Map<User>(model);
-
-            var createUserResult = await CreateAsync(user, model.Password);
-            if (createUserResult.Succeeded)
-            {
-                var id = await GetUserIdAsync(user);
-                var resultAdd = await AddEmployeeuserToDb(model, id);
-                if (resultAdd != true)
-                    throw new Exception("Utworzenie użytkownka z przyczyn niewyjaśnionych nie powiodło się");
-
-                var resultAddRole = await AddRole(id, Roles.Employee);
-                if (resultAddRole)
-                    return await FindByIdAsync(id);
-                throw new Exception(
-                    "Nadanie uprawnień użytkownikowi z przyczyn niewyjaśnionych nie powiodło się");
-            }
-            throw new Exception("Utworzenie użytkownka z przyczyn niewyjaśnionych nie powiodło się");
-        }
-
-        #endregion
-
         #region Job
 
         public async Task<List<Job>> GetJobsForEmployee(string userId)
@@ -275,7 +159,6 @@ namespace TeamLeasing.Infrastructure
                         Enums.JobStatusForDeveloper.Applying;
                     return await _teamLeasingContext.SaveChangesAsync();
                 }
-
             return -1;
             // return await _teamLeasingContext.SaveChangesAsync();
         }
@@ -305,7 +188,251 @@ namespace TeamLeasing.Infrastructure
 
         #endregion
 
+        #region Project
+
+        public async Task<int> ResignProjectRequest(string userId, int projectId)
+        {
+            var projectDao =
+                await GetDeveloperInProject(w => w.DeveloperUser.UserId == userId && w.Project.Id == projectId);
+            var projectToResign = projectDao.FirstOrDefault();
+            projectToResign.StatusForDeveloper = Enums.JobStatusForDeveloper.Resignation;
+            var result = await _teamLeasingContext.SaveChangesAsync();
+            return result;
+        }
+
+
+        public async Task<List<DeveloperInProject>> GetDeveloperInProjectByUserId(string userId)
+        {
+            var developerUserJobDao = await GetDeveloperInProject(w => w.DeveloperUser.UserId == userId);
+            return developerUserJobDao;
+        }
+
+        public async Task<int> FinishProject(int id)
+        {
+            var projectDao = await GetProject(w => w.Id == id);
+            var project = projectDao.FirstOrDefault();
+
+            project.IsHidden = true;
+            project.StatusForEmployee = Enums.JobStatusForEmployee.Finished;
+            foreach (var item in project.DeveloperInProject)
+                item.StatusForDeveloper = Enums.JobStatusForDeveloper.Finished;
+
+            _teamLeasingContext.Update(project);
+            return await _teamLeasingContext.SaveChangesAsync();
+        }
+
+        public async Task<int> ApproveProject(int id)
+        {
+            var projectDao = await GetProject(w => w.Id == id);
+            var project = projectDao.FirstOrDefault();
+
+            project.IsHidden = true;
+            project.StatusForEmployee = Enums.JobStatusForEmployee.ApproveTeam;
+            foreach (var item in project.DeveloperInProject.Where(w=>w.StatusForDeveloper == Enums.JobStatusForDeveloper.Accepted))
+                item.StatusForDeveloper = Enums.JobStatusForDeveloper.ChoosenForTeam;
+
+            _teamLeasingContext.Update(project);
+            return await _teamLeasingContext.SaveChangesAsync();
+        }
+
+        public async Task<int> RejectProjectRequest(int projectId, int developerId)
+        {
+            var developerInProject = await GetDeveloperInProject(s => s.DeveloperUserId == developerId
+                                                                      && s.ProjectId == projectId)
+                .ContinueWith(t => t.Result.FirstOrDefault());
+            if (developerInProject.StatusForDeveloper == Enums.JobStatusForDeveloper.Accepted)
+                developerInProject.Project.VacanciesRemain += 1;
+
+            developerInProject.StatusForDeveloper = Enums.JobStatusForDeveloper.Rejected;
+            var result = await _teamLeasingContext.SaveChangesAsync();
+            return result;
+        }
+
+        public async Task<int> AcceptProjectRequest(int projectId, int developerId)
+        {
+            var developerInProject = await GetDeveloperInProject(s => s.DeveloperUserId == developerId
+                                                                      && s.ProjectId == projectId)
+                .ContinueWith(t => t.Result.FirstOrDefault());
+            developerInProject.StatusForDeveloper = Enums.JobStatusForDeveloper.Accepted;
+            developerInProject.Project.VacanciesRemain -= 1;
+            developerInProject.Project.IsHidden = developerInProject.Project.VacanciesRemain <= 0;
+
+            developerInProject.Project.StatusForEmployee = Enums.JobStatusForEmployee.InProgress;
+
+            var result = await _teamLeasingContext.SaveChangesAsync();
+            return result;
+        }
+
+
+        public async Task<List<Project>> GetProjectForEmployee(string userId)
+        {
+            var employee = await FindEmployeeUserByIdAsync(userId);
+            return employee.EmployeeUser.Projects.ToList();
+        }
+
+        public async Task<int> ApplyForProject(string userId, int projectId)
+        {
+            var developer = await GetDeveloperUser(w => w.UserId == userId)
+                .ContinueWith(t => t.Result.First());
+            var project = _teamLeasingContext.Project.FirstOrDefault(a => a.Id == projectId);
+            if (!developer.Projects.Any(a => a.ProjectId == projectId &&
+                                             a.StatusForDeveloper == Enums.JobStatusForDeveloper.Applying) &&
+                project.VacanciesRemain > 0)
+                if (!developer.Projects.Any(a => a.ProjectId == projectId))
+                {
+                    var developerInProject = new DeveloperInProject
+                    {
+                        DeveloperUserId = developer.Id,
+                        ProjectId = projectId,
+                        StatusForDeveloper = Enums.JobStatusForDeveloper.Applying
+                    };
+                    await _teamLeasingContext.DeveloperInProject.AddAsync(developerInProject);
+
+                    return await _teamLeasingContext.SaveChangesAsync();
+                }
+                else
+                {
+                    developer.Projects.First(f => f.ProjectId == projectId).StatusForDeveloper =
+                        Enums.JobStatusForDeveloper.Applying;
+                    return await _teamLeasingContext.SaveChangesAsync();
+                }
+            return -1;
+            // return await _teamLeasingContext.SaveChangesAsync();
+        }
+
+
+        public async Task<bool> CreateProject(CreateProjectViewModel model, User user)
+        {
+            var project = _mapper.Map<Project>(model);
+            project.VacanciesRemain = project.NumberOfDeveloperNeeded;
+            project.IsHidden = false;
+            project.StatusForEmployee = Enums.JobStatusForEmployee.InProgress;
+            project.EmployeeUser = user.EmployeeUser;
+            await _teamLeasingContext.Project.AddAsync(project);
+            var result = await _teamLeasingContext.SaveChangesAsync();
+            return Convert.ToBoolean(result);
+        }
+
+        public async Task<List<Project>> GetProject(Expression<Func<Project, bool>> querry = null,
+            bool isHidden = false)
+        {
+            return await _teamLeasingContext.Project
+                .Include(i => i.DeveloperInProject)
+                .ThenInclude(j => j.DeveloperUser)
+                .ThenInclude(j => j.Technology)
+                .Include(j => j.EmployeeUser)
+                .Where(w => isHidden ? w.IsHidden == false || w.IsHidden : w.IsHidden == false)
+                .Where(w => w.VacanciesRemain >= 1)
+                .Where(querry ?? (w => true))
+                .ToListAsync();
+        }
+
+        #endregion
+
+        #region DeveloperUser
+
+        public async Task<User> FindDeveloperUserByIdAsync(string userId)
+        {
+            return await Users.Include(c => c.DeveloperUser)
+                .ThenInclude(t => t.Technology)
+                .FirstOrDefaultAsync(u => u.Id == userId);
+        }
+
+        public async Task<List<DeveloperUser>> GetDeveloperUser(Expression<Func<DeveloperUser, bool>> querry = null)
+        {
+            return await _teamLeasingContext.DeveloperUsers
+                .Include(t => t.Technology)
+                .Include(f => f.Jobs)
+                .Include(f => f.Projects)
+                .Where(querry ?? (w => true))
+                .ToListAsync();
+        }
+
+        #endregion
+
+        #region EmployeeUser
+
+        public async Task<User> FindEmployeeUserByIdAsync(string userId)
+        {
+            return await Users.Include(c => c.EmployeeUser)
+                .ThenInclude(t => t.Jobs)
+                .ThenInclude(o => o.DeveloperUsers)
+                .ThenInclude(h => h.DeveloperUser)
+                .Include(r => r.EmployeeUser)
+                .ThenInclude(h => h.Offers)
+                .Include(t => t.EmployeeUser)
+                .ThenInclude(j => j.Projects)
+                .Include(t => t.EmployeeUser)
+                .ThenInclude(g => g.Jobs)
+                .ThenInclude(g => g.Technology)
+                .Include(i => i.EmployeeUser)
+                .ThenInclude(t => t.Projects)
+                .ThenInclude(t => t.DeveloperInProject)
+                .ThenInclude(t => t.DeveloperUser)
+                .FirstOrDefaultAsync(u => u.Id == userId);
+        }
+
+
+        public async Task<IdentityResult> UpdateEmployeeUser(EditEmployeeAccountViewModel model, string userId)
+        {
+            var user = await FindEmployeeUserByIdAsync(userId);
+
+            user.EmployeeUser.City = !string.IsNullOrEmpty(model.City) ? model.City : user.EmployeeUser.City;
+            user.EmployeeUser.Province = !string.IsNullOrEmpty(model.ChoosenProvince)
+                ? model.ChoosenProvince
+                : user.EmployeeUser.Province;
+            user.EmployeeUser.Company = !string.IsNullOrEmpty(model.Company)
+                ? model.Company
+                : user.EmployeeUser.Company;
+
+
+            var result = await ChangePasswordAsync(user, model.CurrentPassword, model.NewPassword);
+            if (result.Succeeded)
+            {
+                _teamLeasingContext.EmployeeUsers.Update(user.EmployeeUser);
+                await _teamLeasingContext.SaveChangesAsync();
+                user.PhoneNumber = !string.IsNullOrEmpty(model.Phone) ? model.Phone : user.PhoneNumber;
+                return await UpdateAsync(user);
+            }
+            return result;
+        }
+
+        public async Task<User> CreateEmployeeUser(RegistrationEmployeeViewModel model)
+        {
+            var user = _mapper.Map<User>(model);
+
+            var createUserResult = await CreateAsync(user, model.Password);
+            if (createUserResult.Succeeded)
+            {
+                var id = await GetUserIdAsync(user);
+                var resultAdd = await AddEmployeeuserToDb(model, id);
+                if (resultAdd != true)
+                    throw new Exception("Utworzenie użytkownka z przyczyn niewyjaśnionych nie powiodło się");
+
+                var resultAddRole = await AddRole(id, Roles.Employee);
+                if (resultAddRole)
+                    return await FindByIdAsync(id);
+                throw new Exception(
+                    "Nadanie uprawnień użytkownikowi z przyczyn niewyjaśnionych nie powiodło się");
+            }
+            throw new Exception("Utworzenie użytkownka z przyczyn niewyjaśnionych nie powiodło się");
+        }
+
+        #endregion
+
+
         #region private
+
+        private async Task<List<DeveloperInProject>> GetDeveloperInProject(
+            Expression<Func<DeveloperInProject, bool>> querry)
+        {
+            return await _teamLeasingContext.DeveloperInProject
+                .Include(i => i.DeveloperUser)
+                .Include(i => i.Project)
+                .Include(i => i.Project)
+                .ThenInclude(i => i.EmployeeUser)
+                .Where(querry ?? (w => true)).ToListAsync();
+        }
 
         private async Task<List<DeveloperUserJob>> GetDeveloperUsersJob(Expression<Func<DeveloperUserJob, bool>> querry)
         {

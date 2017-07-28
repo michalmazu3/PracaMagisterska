@@ -28,6 +28,7 @@ namespace TeamLeasing.Models
 
         public virtual ICollection<Offer> Offers { get; set; }
         public virtual ICollection<Job> Jobs { get; set; }
+        public virtual ICollection<Project> Projects { get; set; }
 
         public string UserId { get; set; }
         public virtual User User { get; set; }

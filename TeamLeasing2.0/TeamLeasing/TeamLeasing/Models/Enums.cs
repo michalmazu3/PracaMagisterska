@@ -26,14 +26,16 @@ namespace TeamLeasing.Models
             [Display(Name = "Rezygnacja")] Resignation,
             [Display(Name = "Odrzucono")] Rejected,
             [Display(Name = "Zaakceptowao")] Accepted,
-            [Display(Name = "Zakończono oferte")] Finished
+            [Display(Name = "Wybrano do zespołu")] ChoosenForTeam,
+            [Display(Name = "Zakończono")] Finished
         }
 
         public enum JobStatusForEmployee
         {
             [Display(Name = "W toku")] InProgress,
             [Display(Name = "Zakończono")] Finished,
-            [Display(Name = "Zatwierdzono aplikacje")] Approve
+            [Display(Name = "Zatwierdzono aplikacje")] Approve,
+            [Display(Name = "Zatwierdzono zespół")] ApproveTeam
         }
 
         public enum Level
@@ -51,8 +53,7 @@ namespace TeamLeasing.Models
             [Display(Name = "Rezygnacja")] Resignation,
             [Display(Name = "Odrzucono")] Rejected,
             [Display(Name = "Zaakceptowao")] Accepted,
-            [Display(Name = "Wycofano")] Canceled,
-
+            [Display(Name = "Wycofano")] Canceled
         }
 
 

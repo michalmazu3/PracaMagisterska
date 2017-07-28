@@ -1,0 +1,71 @@
+﻿@using TeamLeasing.Services.AppConfigurationService
+@model  TeamLeasing.ViewModels.Developer.Account.BasicInformation
+@inject IConfigurationService ConfigurationService
+<h2>Edycja konta</h2>
+<form class="form-horizontal" method="post" asp-action="Edit" asp-controller="AccountDeveloper" enctype="multipart/form-data">
+
+    <div class="form-group">
+        <label for="exampleInputPassword1" asp-for="Phone" class="col-sm-2"></label>
+        <div class="col-sm-10">
+            <input type="text" asp-for="Phone" class="form-control" id="exampleInputPassword1" placeholder="Telefon">
+        </div>
+        <span asp-validation-for="Phone" class="help-block"></span>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1" asp-for="City" class="col-sm-2"></label>
+        <div class="col-sm-10">
+            <input type="text" asp-for="City" class="form-control" id="exampleInputPassword1" placeholder="Miasto">
+        </div>
+        <span asp-validation-for="City" class="help-block"></span>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1" asp-for="@ConfigurationService.ProvinceService" class="col-sm-2"></label>
+        <div class="col-sm-10">
+            <select asp-for="ChoosenProvince" asp-items="@ConfigurationService.ProvinceService.GetSelectListProvince()" class="form-control" id="exampleInputPassword1"></select>
+        </div>
+        <span asp-validation-for="ChoosenProvince" class="help-block"></span>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1" asp-for="Experience" class="col-sm-2"></label>
+        <div class="col-sm-10">
+            <input asp-for="Experience" type="number" class="form-control" id="exampleInputPassword1" placeholder="Doświadczenie">
+        </div>
+        <span asp-validation-for="Experience" class="help-block"></span>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1" asp-for="@ConfigurationService.TechnologyService" class="col-sm-2"></label>
+        <div class="col-md-10">
+            <select asp-for="ChoosenTechnology" asp-items="@await ConfigurationService.TechnologyService.GetSelectListTechnology()" class="form-control" id="exampleInputPassword1"></select>
+        </div>
+        <span asp-validation-for="ChoosenTechnology" class="help-block"></span>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1" asp-for="@ConfigurationService.LevelSerice" class="col-sm-2"></label>
+        <div class="col-md-10">
+            <select asp-for="ChoosenLevel" asp-items="@ConfigurationService.LevelSerice.GetSelectListLevel()" class="form-control" id="exampleInputPassword1"></select>
+        </div>
+        <span asp-validation-for="ChoosenLevel" class="help-block"></span>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1" asp-for="@ConfigurationService.IsFinishedUniversityService" class="col-sm-2"></label>
+        <div class="col-md-10">
+            <select asp-for="ChoosenIsFinishedUnivesity" asp-items="@ConfigurationService.IsFinishedUniversityService.GetSelectListIsFinishedUniversity()" class="form-control" id="select-menu"></select>
+        </div>
+        <span asp-validation-for="ChoosenIsFinishedUnivesity" class="help-block"></span>
+    </div>
+    <div class="form-group" id="university-box" style="display: none">
+        <label for="exampleInputPassword1" asp-for="University" class="col-sm-2"></label>
+        <div class="col-sm-10">
+            <input asp-for="University" type="text" class="form-control" id="exampleInputPassword1" placeholder="Szkoła wyższa">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1" asp-for="About" class="col-sm-2"> </label>
+        <div class="col-sm-10">
+            <textarea class="form-control" asp-for="About" rows="5" id="comment"></textarea>
+        </div>
+        <span asp-validation-for="About" class="help-block"></span>
+    </div>
+
+    <button type="submit" class="btn btn-default">Zapisz zmiany</button>
+</form>

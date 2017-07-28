@@ -71,6 +71,15 @@ namespace TeamLeasing.Services.Mapping
                 .ForMember(p => p.StatusForDeveloper, opt => opt.MapFrom(src => src.StatusForDeveloper));
 
 
+            CreateMap<DeveloperInProject, ProejctRequestViewModel>()
+                .ForMember(p => p.Company, opt => opt.MapFrom(src => src.Project.EmployeeUser.Company))
+                .ForMember(p => p.Budget, opt => opt.MapFrom(src => src.Project.Budget))
+                .ForMember(p => p.ProjectType, opt => opt.MapFrom(src => src.Project.ProjectType))
+                .ForMember(p => p.Title, opt => opt.MapFrom(src => src.Project.Title))
+                .ForMember(p => p.Id, opt => opt.MapFrom(src => src.ProjectId))
+                .ForMember(p => p.StatusForDeveloper, opt => opt.MapFrom(src => src.StatusForDeveloper));
+
+
             //.ForMember(p=>p.StatusForDeveloper, opt=>opt.MapFrom(src=>src.DeveloperUsers.Where(w=>w.DeveloperUserId==src. )));
 
             CreateMap<DeveloperUserJob, ApplyingDeveloper>()
@@ -84,6 +93,18 @@ namespace TeamLeasing.Services.Mapping
                 .ForMember(p => p.Technology, opt => opt.MapFrom(src => src.Technology.Name))
                 .ForMember(p => p.ApplyingDevelopers,
                     opt => opt.MapFrom(source => Convert(source.DeveloperUsers.ToList())));
+
+
+            CreateMap<DeveloperInProject, ApplyingDeveloper>()
+                .ForMember(p => p.Name, opt => opt.MapFrom(src => src.DeveloperUser.Name))
+                .ForMember(p => p.Id, opt => opt.MapFrom(src => src.DeveloperUser.Id))
+                .ForMember(p => p.Surname, opt => opt.MapFrom(src => src.DeveloperUser.Surname));
+
+            CreateMap<Project, ProjectWithApplicationViewModel>()
+                .ForMember(p => p.ProjectId, opt => opt.MapFrom(src => src.Id))
+                .ForMember(p => p.Status, opt => opt.MapFrom(src => src.StatusForEmployee))
+                .ForMember(p => p.ApplyingDevelopers,
+                    opt => opt.MapFrom(source => ConvertFromProject(source.DeveloperInProject.ToList())));
 
 
             CreateMap<CreateJobViewModel, Job>()
@@ -159,6 +180,20 @@ namespace TeamLeasing.Services.Mapping
         }
 
         private List<ApplyingDeveloper> Convert(List<DeveloperUserJob> source)
+        {
+            var list = new List<ApplyingDeveloper>();
+            foreach (var item in source)
+                list.Add(new ApplyingDeveloper
+                {
+                    Name = item.DeveloperUser.Name,
+                    Surname = item.DeveloperUser.Surname,
+                    Id = item.DeveloperUser.Id,
+                    Status = item.StatusForDeveloper
+                });
+            return list;
+        }
+
+        private List<ApplyingDeveloper> ConvertFromProject(List<DeveloperInProject> source)
         {
             var list = new List<ApplyingDeveloper>();
             foreach (var item in source)

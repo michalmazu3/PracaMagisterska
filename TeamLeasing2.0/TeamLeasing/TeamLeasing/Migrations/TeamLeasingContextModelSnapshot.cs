@@ -373,7 +373,7 @@ namespace TeamLeasing.Migrations
 
                     b.Property<string>("ProjectType");
 
-                    b.Property<int>("Status");
+                    b.Property<int>("StatusForEmployee");
 
                     b.Property<string>("Title")
                         .IsRequired();
@@ -571,7 +571,7 @@ namespace TeamLeasing.Migrations
             modelBuilder.Entity("TeamLeasing.Models.Project", b =>
                 {
                     b.HasOne("TeamLeasing.Models.EmployeeUser", "EmployeeUser")
-                        .WithMany()
+                        .WithMany("Projects")
                         .HasForeignKey("EmployeeUserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

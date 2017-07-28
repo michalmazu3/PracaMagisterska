@@ -1,0 +1,74 @@
+﻿@using TeamLeasing.Models
+@using TeamLeasing.Services.AppConfigurationService
+@using TeamLeasing.ViewModels.Developer
+@model  TeamLeasing.ViewModels.Developer.SendingOfferViewModel
+@inject IConfigurationService ConfigurationService
+@section scripts{
+    <script src="~/lib/jquery-validation/src/core.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js"></script>
+
+    <script src="~/script/validation-bootstrap.js"></script>
+    <script src="~/script/university-field.js"></script>
+}
+@{
+    ViewData["Title"] = "Propozycja";
+}
+<div id="send-offer">
+<h3>Wypełnij formularz i wyślij propozycje </h3>
+<form class="form-horizontal" method="post" asp-action="SendOffer" asp-controller="SearchDeveloper" enctype="multipart/form-data">
+    <div class="form-group">
+        <label asp-for="ConstSalary" class="col-sm-2"></label>
+        <div class="col-sm-10">
+            <input asp-for="ConstSalary" type="text" class="form-control" id="exampleInputEmail1" placeholder="wynagrodzenie ">
+        </div>
+        <span asp-validation-for="ConstSalary" class="help-block"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="MinSalary" class="col-sm-2"></label>
+        <div class="col-sm-10">
+            <input asp-for="MinSalary" type="text" class="form-control" id="exampleInputEmail1" placeholder="wynagrodzenie od">
+        </div>
+        <span asp-validation-for="MinSalary" class="help-block"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="MaxSalary" class="col-sm-2"></label>
+        <div class="col-sm-10">
+            <input asp-for="MaxSalary" type="text" class="form-control" id="exampleInputEmail1" placeholder="wynagrodzenie do">
+        </div>
+        <span asp-validation-for="MaxSalary" class="help-block"></span>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1" asp-for="AdditionalInformation" class="col-sm-2"> </label>
+        <div class="col-sm-10">
+            <textarea class="form-control" asp-for="AdditionalInformation" rows="5" id="comment"></textarea>
+        </div>
+        <span asp-validation-for="AdditionalInformation" class="help-block"></span>
+    </div>
+
+
+
+    <div class="form-group">
+        <label for="exampleInputPassword1" asp-for="@ConfigurationService.TechnologyService" class="col-sm-2"></label>
+        <div class="col-md-10">
+            <select asp-for="ChoosenTechnology" asp-items="@await ConfigurationService.TechnologyService.GetSelectListTechnology()" class="form-control" id="exampleInputPassword1"></select>
+        </div>
+        <span asp-validation-for="ChoosenTechnology" class="help-block"></span>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1" asp-for="@ConfigurationService.LevelSerice" class="col-sm-2"></label>
+        <div class="col-md-10">
+            <select asp-for="ChoosenLevel" asp-items="@ConfigurationService.LevelSerice.GetSelectListLevel()" class="form-control" id="exampleInputPassword1"></select>
+        </div>
+        <span asp-validation-for="ChoosenLevel" class="help-block"></span>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1" asp-for="@ConfigurationService.EmploymentType" class="col-sm-2"></label>
+        <div class="col-md-10">
+            <select asp-for="ChoosenEmploymentType" asp-items="@ConfigurationService.EmploymentType.GetSelectListEmploymentType()" class="form-control" id="select-menu"></select>
+        </div>
+        <span asp-validation-for="ChoosenEmploymentType" class="help-block"></span>
+    </div>
+    @Html.HiddenFor(f=>f.DeveloperUserId)
+    <button type="submit" class="btn btn-default">Wyślij propozycje</button>
+</form>
+</div>

@@ -23,7 +23,7 @@ namespace TeamLeasing.Models
         public string Descritpion { get; set; }
 
         public bool IsHidden { get; set; }
-        public Enums.JobStatusForEmployee Status { get; set; }
+        public Enums.JobStatusForEmployee StatusForEmployee { get; set; }
 
         [Display(Name = "Rodzaj projektu")]
         public string ProjectType { get; set; }

@@ -19,7 +19,6 @@ namespace TeamLeasing.Infrastructure.Helper
                 }
                 return paramsList[0];
             });
-
         }
 
         public List<T> Aplly<T>(Func<T, bool> querry, List<T> list)
