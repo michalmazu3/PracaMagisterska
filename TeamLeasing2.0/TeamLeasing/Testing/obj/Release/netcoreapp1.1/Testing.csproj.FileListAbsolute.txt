@@ -1,0 +1,9 @@
+D:\repozutorium\Praca Magisterska\TeamLeasing2.0\TeamLeasing\Testing\bin\Release\netcoreapp1.1\Testing.deps.json
+D:\repozutorium\Praca Magisterska\TeamLeasing2.0\TeamLeasing\Testing\bin\Release\netcoreapp1.1\Testing.runtimeconfig.json
+D:\repozutorium\Praca Magisterska\TeamLeasing2.0\TeamLeasing\Testing\bin\Release\netcoreapp1.1\Testing.runtimeconfig.dev.json
+D:\repozutorium\Praca Magisterska\TeamLeasing2.0\TeamLeasing\Testing\bin\Release\netcoreapp1.1\Testing.dll
+D:\repozutorium\Praca Magisterska\TeamLeasing2.0\TeamLeasing\Testing\bin\Release\netcoreapp1.1\Testing.pdb
+D:\repozutorium\Praca Magisterska\TeamLeasing2.0\TeamLeasing\Testing\obj\Release\netcoreapp1.1\Testing.csprojResolveAssemblyReference.cache
+D:\repozutorium\Praca Magisterska\TeamLeasing2.0\TeamLeasing\Testing\obj\Release\netcoreapp1.1\Testing.AssemblyInfo.cs
+D:\repozutorium\Praca Magisterska\TeamLeasing2.0\TeamLeasing\Testing\obj\Release\netcoreapp1.1\Testing.dll
+D:\repozutorium\Praca Magisterska\TeamLeasing2.0\TeamLeasing\Testing\obj\Release\netcoreapp1.1\Testing.pdb
