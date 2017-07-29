@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
@@ -28,6 +29,26 @@ namespace TeamLeasing.DAL
 
         public async Task Seed()
         {
+            try
+            {
+                var tasks = Enumerable.Range(0, 10000).Select(async p =>
+                {
+                    var result = await _context.DeveloperUsers.ToListAsync();
+                    Debug.WriteLine(result);
+
+                });
+                Task.WhenAll(tasks).Wait();
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
+
+
+
             // _context.Technologies.RemoveRange(_context.Technologies.ToArray());
             //_context.Developers.RemoveRange(_context.Developers.ToArray());
             //_context.Jobs.RemoveRange(_context.Jobs.ToArray());
@@ -43,7 +64,7 @@ namespace TeamLeasing.DAL
 
             });
         }
-
+      
         private async Task DeveloperUserJob()
         {
             if (!_context.DeveloperUserJob.Any())
